@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.875" name="Legatro">
+  <DataContextMoniker Name="/LegatroDataContext" />
+  <nestedChildShapes>
+    <classShape Id="07851e6c-cd96-4f69-8f72-8fe2412dfdbc" absoluteBounds="0.5, 0.5, 2, 3.3093082682291666">
+      <DataClassMoniker Name="/LegatroDataContext/ViewFlatTimes" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f007d851-c4d7-4d40-866c-5ada3a6fef82" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9df373b2-d218-4795-a0ec-3c56a5c59b0c" absoluteBounds="0.5, 4.125, 2, 4.4631168619791666">
+      <DataClassMoniker Name="/LegatroDataContext/ViewTimeLogNativeVerbatim" />
+      <nestedChildShapes>
+        <elementListCompartment Id="343e5d53-4b7c-4899-b3f3-4b5ecabed50e" absoluteBounds="0.51500000000000012, 4.585, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="11d6be89-b061-4c15-854e-8a58225dbd35" absoluteBounds="3.125, 0.5, 2, 5.2323225911458326">
+      <DataClassMoniker Name="/LegatroDataContext/WorksitesOrProjects" />
+      <nestedChildShapes>
+        <elementListCompartment Id="77852d10-652e-4be0-aa42-7405ec4698a5" absoluteBounds="3.1399999999999997, 0.96, 1.9700000000000002, 4.672322591145833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

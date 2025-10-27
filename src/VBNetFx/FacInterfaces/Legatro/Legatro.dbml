@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="Legatro" Class="LegatroDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=SBS-Server1\SQL2008EX;Initial Catalog=Legatro;User ID=sa" SettingsObjectName="Facesso.Interfaces.My.MySettings" SettingsPropertyName="LegatroConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ViewFlatTimes" Member="ViewFlatTimes">
+    <Type Name="ViewFlatTimes">
+      <Column Name="StartTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Duration" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonnelNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="WorkEntityName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="WorkEntityNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CostCenterNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CostCenterName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TimeLogEventName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IDTimeLogFlat" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ViewTimeLogNativeVerbatim" Member="ViewTimeLogNativeVerbatim">
+    <Type Name="ViewTimeLogNativeVerbatim">
+      <Column Name="IDTimeLogNative" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="PersonnelNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="MiddleName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Matchcode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CombinedName" Type="System.String" DbType="NVarChar(202) NOT NULL" CanBeNull="false" />
+      <Column Name="BookingType" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="TimeLogEventName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="WorkEntityName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="WorkEntityNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDTimeLogNativeEditable" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="IDTimeLogEventType" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="IDWorksiteOrProject" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="IDEmployee" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="IDOrder" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="IDTimeLogDevice" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="EventTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IDTimeLogFlat" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WorksitesOrProjects" Member="WorksitesOrProjects">
+    <Type Name="WorksitesOrProjects">
+      <Column Name="IDWorksiteOrProject" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDCostCenter" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="IDUserAsOwner" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="IDCustomer" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="IDContactForWorksiteOrProject" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="IDCostObjects" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="WorkEntityNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WorkEntityName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ShortWorkEntityName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="IsProject" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(3000)" CanBeNull="true" />
+      <Column Name="MonitorTimeCapacity" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MonthlyTargetTimeCapacity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MonitorStartdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MonitorEnddate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TotalTargetTimeCapacity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CollectProductionUnits" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CollectProductionUnitsDescription" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastEditDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CreationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="SyncGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

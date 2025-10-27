@@ -1,0 +1,751 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7350739F-7CD6-4303-819F-3A43624871CD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Facesso.Functions</RootNamespace>
+    <AssemblyName>Fac_Functions</AssemblyName>
+    <MyType>Windows</MyType>
+    <OptionStrict>On</OptionStrict>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Fac_Functions.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <RunFxCop>false</RunFxCop>
+    <FxCopRules>-Microsoft.Naming#CA1704;-Microsoft.Naming#CA1703</FxCopRules>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Fac_Functions.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>ActiveDev.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>Fac_Functions.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Fac_Functions.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>Fac_Functions.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Fac_Functions.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DocumentationFile>Fac_Functions.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Fac_Functions.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>Fac_Functions.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Fac_Functions.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="ActiveDevelop.EntitiesFormsLib, Version=2.1.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmForms.2.1.7-Beta3\lib\ActiveDevelop.EntitiesFormsLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveDevelop.MvvmBaseLib, Version=2.1.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmFormsBase.2.1.6-Beta\lib\net45\ActiveDevelop.MvvmBaseLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Utilities" />
+    <Reference Include="Microsoft.ReportViewer.Common" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmForms.2.1.7-Beta3\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Reactive, Version=6.1.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.6.1.0\lib\netstandard2.0\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Core, Version=3.0.6000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Core.6.1.0\lib\netstandard2.0\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=3.0.6000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Interfaces.6.1.0\lib\netstandard2.0\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=3.0.6000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Linq.6.1.0\lib\netstandard2.0\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.6.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessControls\Charts\frmWorkgroupChartParametersPicker.Designer.vb">
+      <DependentUpon>frmWorkgroupChartParametersPicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessControls\Charts\frmWorkgroupChartParametersPicker.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BusinessControls\Charts\ucConfigurableWorkgroupChart.Designer.vb">
+      <DependentUpon>ucConfigurableWorkgroupChart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessControls\Charts\ucConfigurableWorkgroupChart.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataSets\dsLabourValues.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsLabourValues.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\dsLabourValues.vb">
+      <DependentUpon>dsLabourValues.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\dsWorkgroupAssignments.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsWorkgroupAssignments.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\BaseForms\frmBaseFacesso.Designer.vb">
+      <DependentUpon>frmBaseFacesso.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\BaseForms\frmBaseFacesso.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\EmployeeInfoRelated\frmEmpoyeeHandicapAddEditView.Designer.vb">
+      <DependentUpon>frmEmpoyeeHandicapAddEditView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\EmployeeInfoRelated\frmEmpoyeeHandicapAddEditView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\EmployeeInfoRelated\frmHandicapRangeManager.Designer.vb">
+      <DependentUpon>frmHandicapRangeManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\EmployeeInfoRelated\frmHandicapRangeManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ProductionAmountAnalysisRelated\frmProductionAmountAnalysis.Designer.vb">
+      <DependentUpon>frmProductionAmountAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ProductionAmountAnalysisRelated\frmProductionAmountAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\BaseForms\frmInfoItemAddEditViewBase.Designer.vb">
+      <DependentUpon>frmInfoItemAddEditViewBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\BaseForms\frmInfoItemAddEditViewBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\BonusListRelated\frmBonusListMaintenance.Designer.vb">
+      <DependentUpon>frmBonusListMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\BonusListRelated\frmBonusListMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CostcenterInfoRelated\frmCostCenterSelector.Designer.vb">
+      <DependentUpon>frmCostCenterSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CostcenterInfoRelated\frmCostCenterSelector.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\BonusListRelated\GetFrmBonusListMaintenance.vb" />
+    <Compile Include="Dialogs\CostcenterInfoRelated\GetFrmCostcenterInfoEdit.vb" />
+    <Compile Include="Dialogs\CostcenterInfoRelated\frmCostcenterInfoAddEditView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CostcenterInfoRelated\GetFrmCostcenterInfoCenter.vb" />
+    <Compile Include="Dialogs\CostcenterInfoRelated\GetFrmCostcenterInfoAdd.vb" />
+    <Compile Include="Dialogs\AddressDetailsRelated\frmAddressInfoInfoAddEditView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CostcenterInfoRelated\GetFuncCostCenterDelete.vb" />
+    <Compile Include="Dialogs\EmployeeInfoRelated\frmEmployeeInfoAddEditView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\EmployeeInfoRelated\frmEmployeePicker.Designer.vb">
+      <DependentUpon>frmEmployeePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\EmployeeInfoRelated\frmEmployeePicker.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\EmployeeInfoRelated\GetFrmEmployeeInfoAdd.vb" />
+    <Compile Include="Dialogs\EmployeeInfoRelated\GetFrmEmployeeInfoCenter.vb" />
+    <Compile Include="Dialogs\EmployeeInfoRelated\GetFrmEmployeeInfoEdit.vb" />
+    <Compile Include="Dialogs\EmployeeInfoRelated\GetFuncEmployeeDelete.vb" />
+    <Compile Include="Dialogs\GenericFormSettings.vb" />
+    <Compile Include="Dialogs\IncentiveWageRelated\frmIncentiveWageCalc.Designer.vb">
+      <DependentUpon>frmIncentiveWageCalc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\IncentiveWageRelated\frmIncentiveWageCalc.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IncentiveWageRelated\frmIncentiveWageGroupResult.Designer.vb">
+      <DependentUpon>frmIncentiveWageGroupResult.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\IncentiveWageRelated\frmIncentiveWageGroupResult.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IncentiveWageRelated\GetFrmIncentiveWageCalc.vb" />
+    <Compile Include="Dialogs\LabourValueInfoRelated\GetFuncLabourValueDelete.vb" />
+    <Compile Include="Dialogs\LabourValueInfoRelated\frmLabourValueInfoAddEditView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\LabourValueInfoRelated\GetFrmLabourValueInfoAdd.vb" />
+    <Compile Include="Dialogs\LabourValueInfoRelated\GetFrmLabourValueInfoCenter.vb" />
+    <Compile Include="Dialogs\LabourValueInfoRelated\GetFrmLabourValueInfoEdit.vb" />
+    <Compile Include="Dialogs\OptionsRelated\frmOptions.Designer.vb">
+      <DependentUpon>frmOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\OptionsRelated\frmOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\OptionsRelated\GetFrmUserInfoAdd.vb" />
+    <Compile Include="Dialogs\ProductionDataRelated\frmProductionDataCollector.Designer.vb">
+      <DependentUpon>frmProductionDataCollector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ProductionDataRelated\frmProductionDataCollector.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ProductionDataRelated\frmTimeLogItemCollection.Designer.vb">
+      <DependentUpon>frmTimeLogItemCollection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ProductionDataRelated\frmTimeLogItemCollection.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ProductionDataRelated\GetFrmWageGroupInfoAdd.vb" />
+    <Compile Include="Dialogs\SubsidiaryRelated\GetFrmSubsidiaryInfoEdit.vb" />
+    <Compile Include="Dialogs\SubsidiaryRelated\GetFrmSubsidiaryManager.vb" />
+    <Compile Include="Dialogs\SubsidiaryRelated\frmSubsidiaryInfoAddEditView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SubsidiaryRelated\frmSubsidiaryManager.Designer.vb">
+      <DependentUpon>frmSubsidiaryManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SubsidiaryRelated\frmSubsidiaryManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SubsidiaryRelated\GetFrmSubsidiaryInfoAdd.vb" />
+    <Compile Include="Dialogs\TimeListRelated\frmEmployeeTimeList.Designer.vb">
+      <DependentUpon>frmEmployeeTimeList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\TimeListRelated\frmEmployeeTimeList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UserInfoRelated\frmUserInfoAddEditView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UserInfoRelated\GetFrmUserInfoEdit.vb" />
+    <Compile Include="Dialogs\UserInfoRelated\GetFrmUserInfoAdd.vb" />
+    <Compile Include="Dialogs\BaseForms\frmInfoItemsManagerGeneric.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\BaseForms\frmInfoItemsManagerBase.Designer.vb">
+      <DependentUpon>frmInfoItemsManagerBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\BaseForms\frmInfoItemsManagerBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UserInfoRelated\GetFrmUserInfoCenter.vb" />
+    <Compile Include="Dialogs\WageGroupRelated\frmWageGroupInfoAddEditView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WageGroupRelated\GetFrmWageGroupInfoAdd.vb" />
+    <Compile Include="Dialogs\WageGroupRelated\GetFrmWageGroupInfoCenter.vb" />
+    <Compile Include="Dialogs\WageGroupRelated\GetFrmWageGroupInfoEdit.vb" />
+    <Compile Include="Dialogs\WorkGroupAnalysisRelated\frmWorkGroupAnalysisManager.Designer.vb">
+      <DependentUpon>frmWorkGroupAnalysisManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WorkGroupAnalysisRelated\frmWorkGroupAnalysisManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WorkGroupAnalysisRelated\frmWorkGroupAnalysis.Designer.vb">
+      <DependentUpon>frmWorkGroupAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WorkGroupAnalysisRelated\frmWorkGroupAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WorkGroupRelated\frmWorkGroupPrintBaseData.Designer.vb">
+      <DependentUpon>frmWorkGroupPrintBaseData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WorkGroupRelated\frmWorkGroupPrintBaseData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WorkGroupAnalysisRelated\GetFrmLabourValueInfoCenter.vb" />
+    <Compile Include="Dialogs\WorkGroupAnalysisRelated\WorkGroupAnalysisPerformer.vb" />
+    <Compile Include="Dialogs\WorkGroupRelated\frmAssignTimeSettingsToWorkgroups.Designer.vb">
+      <DependentUpon>frmAssignTimeSettingsToWorkgroups.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WorkGroupRelated\frmAssignTimeSettingsToWorkgroups.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WorkGroupRelated\frmWorkGroupInfoAddEditView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WorkGroupRelated\frmWorkGroupManager.Designer.vb">
+      <DependentUpon>frmWorkGroupManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WorkGroupRelated\frmWorkGroupManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WorkGroupRelated\GetFrmWorkGroupInfoAdd.vb" />
+    <Compile Include="Dialogs\WorkGroupRelated\GetFrmWorkGroupManager.vb" />
+    <Compile Include="Dialogs\WorkGroupRelated\GetFrmWageGroupInfoEdit.vb" />
+    <Compile Include="Dialogs\WorkGroupRelated\GetFuncWorkGroupDelete.vb" />
+    <Compile Include="Fac_FunctionsInternal.vb" />
+    <Compile Include="frmTest.Designer.vb">
+      <DependentUpon>frmTest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTest.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FunctionBase.vb" />
+    <Compile Include="DataSets\MasterDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MasterDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PrintClasses\FacPrintWorkGroupListShiftWise.vb" />
+    <Compile Include="PrintClasses\FacPrintWorkGroupShiftDateBatch.vb" />
+    <Compile Include="PrintClasses\FacPrintWorkGroupAnalysisBatch.vb" />
+    <Compile Include="PrintClasses\FacPrintEmployeesWageStatements.vb" />
+    <Compile Include="PrintClasses\FacPrintWorkGroupListShiftCondensed.vb" />
+    <Compile Include="PrintClasses\FacPrintEmployeesWageList.vb" />
+    <Compile Include="PrintClasses\FacessoPrintBase.vb" />
+    <Compile Include="PrintClasses\FacPrintWorkGroupShiftDate.vb" />
+    <Compile Include="PrintClasses\FacPrintWorkGroupListShiftWiseCompressed.vb" />
+    <Compile Include="PrintClasses\FacPrintProductionAmountAnalysisBatch.vb" />
+    <Compile Include="PrintClasses\FacPrintEmployeesTimeList.vb" />
+    <Compile Include="PrintClasses\FacPrintWorkGroupListShiftWiseWorkLoad.vb" />
+    <Compile Include="PrintClasses\FacPrintWorkgroupBaseData.vb" />
+    <Compile Include="Reports\ReportEmployeeMasterData.Designer.vb">
+      <DependentUpon>ReportEmployeeMasterData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportEmployeeMasterData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BusinessControls\Charts\frmWorkgroupChartParametersPicker.resx">
+      <DependentUpon>frmWorkgroupChartParametersPicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BusinessControls\Charts\ucConfigurableWorkgroupChart.resx">
+      <DependentUpon>ucConfigurableWorkgroupChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BaseForms\frmBaseFacesso.resx">
+      <DependentUpon>frmBaseFacesso.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\EmployeeInfoRelated\frmEmpoyeeHandicapAddEditView.resx">
+      <DependentUpon>frmEmpoyeeHandicapAddEditView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\EmployeeInfoRelated\frmHandicapRangeManager.resx">
+      <DependentUpon>frmHandicapRangeManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\IncentiveWageRelated\frmIncentiveWageCalc.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmIncentiveWageCalc.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\IncentiveWageRelated\frmIncentiveWageGroupResult.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmIncentiveWageGroupResult.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ProductionAmountAnalysisRelated\frmProductionAmountAnalysis.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmProductionAmountAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BaseForms\frmInfoItemAddEditViewBase.resx">
+      <DependentUpon>frmInfoItemAddEditViewBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BonusListRelated\frmBonusListMaintenance.resx">
+      <DependentUpon>frmBonusListMaintenance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CostcenterInfoRelated\frmCostcenterInfoAddEditView.resx">
+      <DependentUpon>frmCostcenterInfoAddEditView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CostcenterInfoRelated\frmCostCenterSelector.resx">
+      <DependentUpon>frmCostCenterSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BaseForms\frmInfoItemsManagerBase.resx">
+      <DependentUpon>frmInfoItemsManagerBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AddressDetailsRelated\frmAddressInfoInfoAddEditView.resx">
+      <DependentUpon>frmAddressInfoInfoAddEditView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\EmployeeInfoRelated\frmEmployeeInfoAddEditView.resx">
+      <DependentUpon>frmEmployeeInfoAddEditView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\EmployeeInfoRelated\frmEmployeePicker.resx">
+      <DependentUpon>frmEmployeePicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\LabourValueInfoRelated\frmLabourValueInfoAddEditView.resx">
+      <DependentUpon>frmLabourValueInfoAddEditView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsRelated\frmOptions.resx">
+      <DependentUpon>frmOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ProductionDataRelated\frmProductionDataCollector.resx">
+      <DependentUpon>frmProductionDataCollector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ProductionDataRelated\frmTimeLogItemCollection.resx">
+      <DependentUpon>frmTimeLogItemCollection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SubsidiaryRelated\frmSubsidiaryInfoAddEditView.resx">
+      <DependentUpon>frmSubsidiaryInfoAddEditView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SubsidiaryRelated\frmSubsidiaryManager.resx">
+      <DependentUpon>frmSubsidiaryManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\TimeListRelated\frmEmployeeTimeList.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmEmployeeTimeList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UserInfoRelated\frmUserInfoAddEditView.resx">
+      <DependentUpon>frmUserInfoAddEditView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WageGroupRelated\frmWageGroupInfoAddEditView.resx">
+      <DependentUpon>frmWageGroupInfoAddEditView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WorkGroupAnalysisRelated\frmWorkGroupAnalysis.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmWorkGroupAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WorkGroupAnalysisRelated\frmWorkGroupAnalysisManager.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmWorkGroupAnalysisManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WorkGroupRelated\frmWorkGroupPrintBaseData.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmWorkGroupPrintBaseData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WorkGroupRelated\frmAssignTimeSettingsToWorkgroups.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmAssignTimeSettingsToWorkgroups.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WorkGroupRelated\frmWorkGroupInfoAddEditView.resx">
+      <DependentUpon>frmWorkGroupInfoAddEditView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WorkGroupRelated\frmWorkGroupManager.resx">
+      <DependentUpon>frmWorkGroupManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTest.resx">
+      <DependentUpon>frmTest.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportsEmployeeMasterData.rdlc" />
+    <EmbeddedResource Include="Reports\ReportEmployeeMasterData.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ReportEmployeeMasterData.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="DataSets\dsLabourValues.xsc">
+      <DependentUpon>dsLabourValues.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\dsLabourValues.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsLabourValues.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="DataSets\dsLabourValues.xss">
+      <DependentUpon>dsLabourValues.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\dsWorkgroupAssignments.xsc">
+      <DependentUpon>dsWorkgroupAssignments.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\dsWorkgroupAssignments.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsWorkgroupAssignments.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="DataSets\dsWorkgroupAssignments.xss">
+      <DependentUpon>dsWorkgroupAssignments.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\MasterDataSet.xsc">
+      <DependentUpon>MasterDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\MasterDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MasterDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSets\MasterDataSet.xss">
+      <DependentUpon>MasterDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="ActiveDev.pfx" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.vbproj">
+      <Project>{34ED87B7-58D7-4F66-B405-60D652F2A359}</Project>
+      <Name>ADDataTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADInfoItem\ADInfoItem.vbproj">
+      <Project>{5255F65B-E795-4F03-AA18-DEBD3CA167F0}</Project>
+      <Name>ADInfoItem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.vbproj">
+      <Project>{7c35d102-db13-4054-9aa3-5bf4dd5487ff}</Project>
+      <Name>ADLicenceManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADSimplePrintDocument\ADSimplePrintDocument.csproj">
+      <Project>{53BA3350-154C-4980-B890-BF2F76A0CE14}</Project>
+      <Name>ADSimplePrintDocument</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADSundries\ADSundries.vbproj">
+      <Project>{F0C0E701-A9CA-45D6-BEFF-B36CAEE4F14D}</Project>
+      <Name>ADSundries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Controls\ADNullableValueControls.vbproj">
+      <Project>{4cb83868-c23f-4c99-91db-91f40e2199a7}</Project>
+      <Name>ADNullableValueControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacessoData\Fac_Data.vbproj">
+      <Project>{BDC5E376-68EA-4028-9322-00F1D78C697A}</Project>
+      <Name>Fac_Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fac_EntityModel\Fac_EntityModel.vbproj">
+      <Project>{AF25A1A8-FA9A-4C50-AAB6-ABEEC9A9DB8B}</Project>
+      <Name>Fac_EntityModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacGenericControls\Fac_GenericControls.vbproj">
+      <Project>{72C37631-FBE4-42F4-A796-678861B0F698}</Project>
+      <Name>Fac_GenericControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FAC_Generic\FacGeneric.vbproj">
+      <Project>{F0F37798-9498-4B3B-B00D-44DC1AED8D8B}</Project>
+      <Name>FacGeneric</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bitmaps\AnalysisIncentiveWage.bmp" />
+    <Content Include="Bitmaps\AnalysisWorkGroups.bmp" />
+    <Content Include="Bitmaps\Assign.bmp" />
+    <Content Include="Bitmaps\Delete.bmp" />
+    <Content Include="Bitmaps\DeleteAssignment.bmp" />
+    <Content Include="Bitmaps\Edit_Redo.bmp" />
+    <Content Include="Bitmaps\Edit_Undo.bmp" />
+    <Content Include="Bitmaps\EditInformation.bmp" />
+    <Content Include="Bitmaps\Employee.bmp" />
+    <Content Include="Bitmaps\Find.bmp" />
+    <Content Include="Bitmaps\FindNext.bmp" />
+    <Content Include="Bitmaps\Group.bmp" />
+    <Content Include="Bitmaps\LabourValue.bmp" />
+    <Content Include="Bitmaps\LabourValues.bmp" />
+    <Content Include="Bitmaps\N0LetterIcon.bmp" />
+    <Content Include="Bitmaps\N1LetterIcon.bmp" />
+    <Content Include="Bitmaps\N2LetterIcon.bmp" />
+    <Content Include="Bitmaps\N3LetterIcon.bmp" />
+    <Content Include="Bitmaps\N4LetterIcon.bmp" />
+    <Content Include="Bitmaps\NewDocument.bmp" />
+    <Content Include="Bitmaps\NewWorkGroup.bmp" />
+    <Content Include="Bitmaps\NextWorkDay.bmp" />
+    <Content Include="Bitmaps\NextWorkgroup.bmp" />
+    <Content Include="Bitmaps\OneLetterIcon.bmp" />
+    <Content Include="Bitmaps\Options.bmp" />
+    <Content Include="Bitmaps\PreviousWorkDay.bmp" />
+    <Content Include="Bitmaps\PrevWorkgroup.bmp" />
+    <Content Include="Bitmaps\Print.bmp" />
+    <Content Include="Bitmaps\PrintPreview.bmp" />
+    <Content Include="Bitmaps\PrintPreviewDialog.bmp" />
+    <Content Include="Bitmaps\PrintSetup.bmp" />
+    <Content Include="Bitmaps\ProdDatCollection.bmp" />
+    <Content Include="Bitmaps\Properties.bmp" />
+    <Content Include="Bitmaps\Reminder.bmp" />
+    <Content Include="Bitmaps\Save.bmp" />
+    <Content Include="Bitmaps\SuspendDayData.bmp" />
+    <Content Include="Bitmaps\TimeCollection.bmp" />
+    <Content Include="Bitmaps\ToogleDetails.bmp" />
+    <Content Include="Bitmaps\UnAssign.bmp" />
+    <Content Include="Bitmaps\User.bmp" />
+    <Content Include="Bitmaps\Workgroups.bmp" />
+    <Content Include="Bitmaps\XMLFileExport.bmp" />
+    <Content Include="Bitmaps\XMLFileImport.bmp" />
+    <Content Include="Bitmaps\XMLFile.bmp" />
+    <Content Include="MvvmFormsBaseInfo.txt" />
+    <Content Include="MvvmFormsChangeLog.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="My Project\DataSources\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+</Project>

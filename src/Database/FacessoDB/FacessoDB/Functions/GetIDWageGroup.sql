@@ -1,0 +1,16 @@
+﻿CREATE FUNCTION dbo.GetIDWageGroup
+(@IDSubsidiary UNIQUEIDENTIFIER,
+@IDEmployee UNIQUEIDENTIFIER)
+	
+RETURNS UNIQUEIDENTIFIER
+
+AS
+	BEGIN
+		DECLARE @IDBonusLists UNIQUEIDENTIFIER,
+				@IDWageGroup UNIQUEIDENTIFIER
+		SELECT @IDWageGroup=IDWageGroup FROM Employees
+		WHERE IDSubsidiary=@IDSubsidiary AND IDEmployee=@IDEmployee
+		
+		RETURN(@IDWageGroup)
+		
+	END

@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[AddressDetails] (
+    [IDAddressDetail] UNIQUEIDENTIFIER   NOT NULL DEFAULT (NEWSEQUENTIALID()),
+    [IDSubsidiary]    UNIQUEIDENTIFIER            NOT NULL,
+    [PersonnelNo]     INT            NULL,
+    [LastName]        NVARCHAR (100) NOT NULL,
+    [MiddleName]      NVARCHAR (100) NULL,
+    [FirstName]       NVARCHAR (100) NULL,
+    [Title]           NVARCHAR (100) NULL,
+    [Street]          NVARCHAR (100) NULL,
+    [Zip]             NVARCHAR (10)  NULL,
+    [City]            NVARCHAR (100) NULL,
+    [CountryCode]     NVARCHAR (10)  NULL,
+    [Country]         NVARCHAR (100) NULL,
+    [CompanyPhone]    NVARCHAR (100) NULL,
+    [PrivatePhone]    NVARCHAR (100) NULL,
+    [CompanyEmail]    NVARCHAR (255) NULL,
+    [PrivateEmail]    NVARCHAR (255) NULL,
+    [CompanyMobile]   NVARCHAR (100) NULL,
+    [PrivateMobile]   NVARCHAR (100) NULL,
+    [URL]             NVARCHAR (255) NULL,
+    [LastEdited]      DATETIME       CONSTRAINT [DF_AddressDetails_LastEdited] DEFAULT (getdate()) NOT NULL,
+    CONSTRAINT [PK_AddressDetails] PRIMARY KEY CLUSTERED ([IDSubsidiary] ASC, [IDAddressDetail] ASC),
+    CONSTRAINT [FK_AddressDetails_Subsidiaries] FOREIGN KEY ([IDSubsidiary]) REFERENCES [dbo].[Subsidiaries] ([IDSubsidiary])
+);
+
