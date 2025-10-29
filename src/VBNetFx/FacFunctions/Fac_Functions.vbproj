@@ -21,7 +21,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -153,8 +153,6 @@
     <Reference Include="ActiveDevelop.MvvmBaseLib, Version=2.1.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmFormsBase.2.1.6-Beta\lib\net45\ActiveDevelop.MvvmBaseLib.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Build.Utilities" />
-    <Reference Include="Microsoft.ReportViewer.Common" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmForms.2.1.7-Beta3\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
       <Private>True</Private>
@@ -432,6 +430,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>

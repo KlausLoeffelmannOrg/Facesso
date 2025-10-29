@@ -355,68 +355,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ActiveDevelop.SqlTools\ActiveDevelop.SqlTools.vbproj">
-      <Project>{796d84da-6807-4b96-af98-f8dcdb64353f}</Project>
-      <Name>ActiveDevelop.SqlTools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ADDataTypes\ADDataTypes.vbproj">
-      <Project>{34ED87B7-58D7-4F66-B405-60D652F2A359}</Project>
-      <Name>ADDataTypes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ADInfoItem\ADInfoItem.vbproj">
-      <Project>{5255f65b-e795-4f03-aa18-debd3ca167f0}</Project>
-      <Name>ADInfoItem</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.vbproj">
-      <Project>{7C35D102-DB13-4054-9AA3-5BF4DD5487FF}</Project>
-      <Name>ADLicenceManager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ADSimplePrintDocument\ADSimplePrintDocument.csproj">
-      <Project>{53ba3350-154c-4980-b890-bf2f76a0ce14}</Project>
-      <Name>ADSimplePrintDocument</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.vbproj">
-      <Project>{c356450b-940a-4ae0-8ff3-51c57eef52c4}</Project>
-      <Name>ADSqlSupportComponents</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ADSundries\ADSundries.vbproj">
-      <Project>{F0C0E701-A9CA-45D6-BEFF-B36CAEE4F14D}</Project>
-      <Name>ADSundries</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Controls\ADNullableValueControls.vbproj">
-      <Project>{4cb83868-c23f-4c99-91db-91f40e2199a7}</Project>
-      <Name>ADNullableValueControls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FacessoConfig\FacessoConfig.vbproj">
-      <Project>{F1E2EA2D-050E-47D1-B687-6ABA20CBBF07}</Project>
-      <Name>FacessoConfig</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FacessoData\Fac_Data.vbproj">
-      <Project>{BDC5E376-68EA-4028-9322-00F1D78C697A}</Project>
-      <Name>Fac_Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FacFunctions\Fac_Functions.vbproj">
-      <Project>{7350739F-7CD6-4303-819F-3A43624871CD}</Project>
-      <Name>Fac_Functions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FacGenericControls\Fac_GenericControls.vbproj">
-      <Project>{72c37631-fbe4-42f4-a796-678861b0f698}</Project>
-      <Name>Fac_GenericControls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FAC_Generic\FacGeneric.vbproj">
-      <Project>{F0F37798-9498-4B3B-B00D-44DC1AED8D8B}</Project>
-      <Name>FacGeneric</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FacInterfaces\FacInterfaces.vbproj">
-      <Project>{2D9139D8-9C5F-405D-B26F-94903E073D1B}</Project>
-      <Name>FacInterfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fac_EntityModel\Fac_EntityModel.vbproj">
-      <Project>{AF25A1A8-FA9A-4C50-AAB6-ABEEC9A9DB8B}</Project>
-      <Name>Fac_EntityModel</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
     <None Include="Resources\FacessoLogo.png" />
     <Content Include="MvvmFormsBaseInfo.txt" />
@@ -582,6 +520,64 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ActiveDevelop.SqlTools\ActiveDevelop.SqlTools.vbproj">
+      <Project>{796d84da-6807-4b96-af98-f8dcdb64353f}</Project>
+      <Name>ActiveDevelop.SqlTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.vbproj">
+      <Project>{34ed87b7-58d7-4f66-b405-60d652f2a359}</Project>
+      <Name>ADDataTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADInfoItem\ADInfoItem.vbproj">
+      <Project>{5255f65b-e795-4f03-aa18-debd3ca167f0}</Project>
+      <Name>ADInfoItem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.vbproj">
+      <Project>{7c35d102-db13-4054-9aa3-5bf4dd5487ff}</Project>
+      <Name>ADLicenceManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.vbproj">
+      <Project>{c356450b-940a-4ae0-8ff3-51c57eef52c4}</Project>
+      <Name>ADSqlSupportComponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADSundries\ADSundries.vbproj">
+      <Project>{f0c0e701-a9ca-45d6-beff-b36caee4f14d}</Project>
+      <Name>ADSundries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Controls\ADNullableValueControls.vbproj">
+      <Project>{4cb83868-c23f-4c99-91db-91f40e2199a7}</Project>
+      <Name>ADNullableValueControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacessoConfig\FacessoConfig.vbproj">
+      <Project>{f1e2ea2d-050e-47d1-b687-6aba20cbbf07}</Project>
+      <Name>FacessoConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacessoData\Fac_Data.vbproj">
+      <Project>{bdc5e376-68ea-4028-9322-00f1d78c697a}</Project>
+      <Name>Fac_Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacFunctions\Fac_Functions.vbproj">
+      <Project>{7350739f-7cd6-4303-819f-3a43624871cd}</Project>
+      <Name>Fac_Functions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacGenericControls\Fac_GenericControls.vbproj">
+      <Project>{72c37631-fbe4-42f4-a796-678861b0f698}</Project>
+      <Name>Fac_GenericControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacInterfaces\FacInterfaces.vbproj">
+      <Project>{2d9139d8-9c5f-405d-b26f-94903e073d1b}</Project>
+      <Name>FacInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fac_EntityModel\Fac_EntityModel.vbproj">
+      <Project>{af25a1a8-fa9a-4c50-aab6-abeec9a9db8b}</Project>
+      <Name>Fac_EntityModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FAC_Generic\FacGeneric.vbproj">
+      <Project>{f0f37798-9498-4b3b-b00d-44dc1aed8d8b}</Project>
+      <Name>FacGeneric</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

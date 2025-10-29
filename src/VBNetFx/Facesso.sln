@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.3.11123.18 main
+VisualStudioVersion = 18.3.11123.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FacGeneric", "FAC_Generic\FacGeneric.vbproj", "{F0F37798-9498-4B3B-B00D-44DC1AED8D8B}"
 EndProject
@@ -30,6 +30,9 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Fac_EntityModel", "Fac_EntityModel\Fac_EntityModel.vbproj", "{AF25A1A8-FA9A-4C50-AAB6-ABEEC9A9DB8B}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Facesso", "Facesso\Facesso.vbproj", "{6D6D57AA-8D16-4B80-A32D-9D339A6B8093}"
+	ProjectSection(ProjectDependencies) = postProject
+		{53BA3350-154C-4980-B890-BF2F76A0CE14} = {53BA3350-154C-4980-B890-BF2F76A0CE14}
+	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ADNullableValueControls", "Controls\ADNullableValueControls.vbproj", "{4CB83868-C23F-4C99-91DB-91F40E2199A7}"
 EndProject
