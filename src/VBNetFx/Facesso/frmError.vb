@@ -1,7 +1,6 @@
-
 Public Class frmError
 
-    Sub HandleDialog(ByVal ex As Exception)
+    Public Sub HandleDialog(ByVal ex As Exception)
         Dim locExMessage As String
         locExMessage = ex.Message
         lblExceptionText.Text = locExMessage
