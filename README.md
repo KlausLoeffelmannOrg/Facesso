@@ -52,5 +52,5 @@ The goal is to provide something more realistic than a synthetic demo applicatio
 
 ## License
 
-Facesso is released under the MIT License.  
+Facesso is planned to be released under the MIT License.  
 See the `LICENSE` file for details.
