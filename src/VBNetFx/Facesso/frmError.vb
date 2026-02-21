@@ -5,24 +5,24 @@ Public Class frmError
         locExMessage = ex.Message
         lblExceptionText.Text = locExMessage
 
-        locExMessage = "Exception-Message:" & vbNewLine & _
-                       "------------------" & vbNewLine & _
+        locExMessage = "Exception-Message:" & vbNewLine &
+                       "------------------" & vbNewLine &
                        locExMessage & vbNewLine & vbNewLine
 
-        locExMessage &= "Source:" & vbNewLine & _
-                       "-------" & vbNewLine & _
+        locExMessage &= "Source:" & vbNewLine &
+                       "-------" & vbNewLine &
                        ex.Source & vbNewLine & vbNewLine
 
 
         If ex.InnerException IsNot Nothing Then
-            locExMessage &= "Inner Exception Message:" & vbNewLine & _
-                            "------------------------" & vbNewLine & _
+            locExMessage &= "Inner Exception Message:" & vbNewLine &
+                            "------------------------" & vbNewLine &
                             ex.InnerException.Message _
                             & vbNewLine & vbNewLine
         End If
 
-        locExMessage &= "Stack-Trace:" & vbNewLine & _
-                       "-------" & vbNewLine & _
+        locExMessage &= "Stack-Trace:" & vbNewLine &
+                       "-------" & vbNewLine &
                        ex.StackTrace & vbNewLine & vbNewLine
         txtExceptionMessage.Text = locExMessage
         Me.ShowDialog()
