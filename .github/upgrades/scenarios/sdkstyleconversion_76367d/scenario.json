@@ -3,7 +3,7 @@
   "operationId": "76367d41-c849-49fa-b3b2-f6241f9952be",
   "description": "Convert non-SDK-style projects to SDK-style projects.",
   "startTime": "2026-02-21T04:10:03.4019658Z",
-  "lastUpdateTime": "2026-02-21T04:48:19.7025514Z",
+  "lastUpdateTime": "2026-02-21T04:55:40.0885683Z",
   "stage": "Execution",
   "properties": {
     "SelectedScenarioStrategy": "AllAtOnce"
