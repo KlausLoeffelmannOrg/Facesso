@@ -1,28 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2D9139D8-9C5F-405D-B26F-94903E073D1B}</ProjectGuid>
+    <TargetFramework>net472</TargetFramework>
     <OutputType>Library</OutputType>
     <RootNamespace>Facesso.Interfaces</RootNamespace>
-    <AssemblyName>FacInterfaces</AssemblyName>
     <MyType>Windows</MyType>
     <OptionStrict>On</OptionStrict>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <OptionInfer>On</OptionInfer>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -37,359 +24,192 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>FacInterfaces.xml</DocumentationFile>
     <NoWarn>42353,42354,42355</NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
     <DefineDebug>false</DefineDebug>
-    <DefineTrace>true</DefineTrace>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>FacInterfaces.xml</DocumentationFile>
     <NoWarn>42353,42354,42355</NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>ActiveDev.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DocumentationFile>FacInterfaces.xml</DocumentationFile>
     <NoWarn>42353,42354,42355</NoWarn>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
     <CodeAnalysisLogFile>bin\Debug\FacInterfaces.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x86\Release\</OutputPath>
     <DocumentationFile>FacInterfaces.xml</DocumentationFile>
-    <Optimize>true</Optimize>
     <NoWarn>42353,42354,42355</NoWarn>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
     <CodeAnalysisLogFile>bin\Release\FacInterfaces.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Debug\</OutputPath>
     <DocumentationFile>FacInterfaces.xml</DocumentationFile>
     <NoWarn>42353,42354,42355</NoWarn>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
     <CodeAnalysisLogFile>bin\Debug\FacInterfaces.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Release\</OutputPath>
     <DocumentationFile>FacInterfaces.xml</DocumentationFile>
-    <Optimize>true</Optimize>
     <NoWarn>42353,42354,42355</NoWarn>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
     <CodeAnalysisLogFile>bin\Release\FacInterfaces.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmForms.2.1.7-Beta3\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core">
+    <Reference Update="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Import Include="Microsoft.VisualBasic" />
-    <Import Include="System" />
-    <Import Include="System.Collections" />
-    <Import Include="System.Collections.Generic" />
-    <Import Include="System.Data" />
-    <Import Include="System.Diagnostics" />
-    <Import Include="System.Linq" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="BaseClasses\ConversionItem.vb" />
-    <Compile Include="BaseClasses\ProductionDataTableBase.vb">
+    <Compile Update="BaseClasses\ProductionDataTableBase.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="BaseClasses\TimeDataTableBase.vb">
+    <Compile Update="BaseClasses\TimeDataTableBase.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="BaseClasses\BaseInterfaces.vb" />
-    <Compile Include="BaseClasses\TimeDataImportBase.vb" />
-    <Compile Include="frmNewImportTask.Designer.vb">
+    <Compile Update="frmNewImportTask.Designer.vb">
       <DependentUpon>frmNewImportTask.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmNewImportTask.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ImportFormsAndHelper\frmImport.Designer.vb">
+    <Compile Update="ImportFormsAndHelper\frmImport.Designer.vb">
       <DependentUpon>frmImport.vb</DependentUpon>
     </Compile>
-    <Compile Include="ImportFormsAndHelper\frmImport.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BaseClasses\TaskItem.vb" />
-    <Compile Include="ImportFormsAndHelper\frmImportShiftModel.Designer.vb">
+    <Compile Update="ImportFormsAndHelper\frmImportShiftModel.Designer.vb">
       <DependentUpon>frmImportShiftModel.vb</DependentUpon>
     </Compile>
-    <Compile Include="ImportFormsAndHelper\frmImportShiftModel.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ImportFormsAndHelper\frmImport_Helper.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ImportFormsAndHelper\frmTimeLogResultTable.Designer.vb">
+    <Compile Update="ImportFormsAndHelper\frmTimeLogResultTable.Designer.vb">
       <DependentUpon>frmTimeLogResultTable.vb</DependentUpon>
     </Compile>
-    <Compile Include="ImportFormsAndHelper\frmTimeLogResultTable.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Jensen\frmJensenProdDataConfigDialog.Designer.vb">
+    <Compile Update="Jensen\frmJensenProdDataConfigDialog.Designer.vb">
       <DependentUpon>frmJensenProdDataConfigDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Jensen\frmJensenProdDataConfigDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Jensen\JensenProductionDataImportClasses.vb" />
-    <Compile Include="Jensen\JensenProductionDataImportClasses_Worker.vb" />
-    <Compile Include="Kannegiesser SQL\frmKannegiesserSQLProdDataConfigDialog.Designer.vb">
+    <Compile Update="Kannegiesser SQL\frmKannegiesserSQLProdDataConfigDialog.Designer.vb">
       <DependentUpon>frmKannegiesserSQLProdDataConfigDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Kannegiesser SQL\frmKannegiesserSQLProdDataConfigDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Kannegiesser SQL\Kannegiesser.dbml.partial.vb" />
-    <Compile Include="Kannegiesser SQL\Kannegiesser.designer.vb">
+    <Compile Update="Kannegiesser SQL\Kannegiesser.designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Kannegiesser.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Kannegiesser SQL\KannegiesserSQLProductionDataImportClasses.vb" />
-    <Compile Include="Kannegiesser SQL\KannegiesserSQLProductionDataImportClasses_Worker.vb" />
-    <Compile Include="Kannegiesser\frmKannegiesserProdDataConfigDialog.Designer.vb">
+    <Compile Update="Kannegiesser\frmKannegiesserProdDataConfigDialog.Designer.vb">
       <DependentUpon>frmKannegiesserProdDataConfigDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Kannegiesser\frmKannegiesserProdDataConfigDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Kannegiesser\KannegiesserProductionDataImportClasses.vb" />
-    <Compile Include="Kannegiesser\KannegiesserProductionDataImportClasses_Worker.vb" />
-    <Compile Include="Legatro\Facesso.designer.vb">
+    <Compile Update="Legatro\Facesso.designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Facesso.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Legatro\frmLegatroTimeDataConfigDialog.Designer.vb">
+    <Compile Update="Legatro\frmLegatroTimeDataConfigDialog.Designer.vb">
       <DependentUpon>frmLegatroTimeDataConfigDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Legatro\frmLegatroTimeDataConfigDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Legatro\Legatro.designer.vb">
+    <Compile Update="Legatro\Legatro.designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Legatro.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Legatro\Legatro.designer_partial.vb" />
-    <Compile Include="Legatro\LegatroTimeDataImport.vb" />
-    <Compile Include="Legatro\LegatroTimeDataTransformation.vb" />
-    <Compile Include="My Project\AssemblyInfo.vb" />
-    <Compile Include="My Project\Application.Designer.vb">
+    <Compile Update="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
+    <Compile Update="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="My Project\Settings.Designer.vb">
+    <Compile Update="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="frmProductionDataConfigureDialogBase.Designer.vb">
+    <Compile Update="frmProductionDataConfigureDialogBase.Designer.vb">
       <DependentUpon>frmProductionDataConfigureDialogBase.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmProductionDataConfigureDialogBase.vb">
-      <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ImportFormsAndHelper\frmImport.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmImport.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmProductionDataConfigureDialogBase.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmProductionDataConfigureDialogBase.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImportFormsAndHelper\frmImportShiftModel.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmImportShiftModel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImportFormsAndHelper\frmTimeLogResultTable.resx">
-      <DependentUpon>frmTimeLogResultTable.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Jensen\frmJensenProdDataConfigDialog.resx">
-      <DependentUpon>frmJensenProdDataConfigDialog.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Kannegiesser SQL\frmKannegiesserSQLProdDataConfigDialog.resx">
-      <DependentUpon>frmKannegiesserSQLProdDataConfigDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <None Include="Kannegiesser SQL\Kannegiesser.dbml.layout">
+    <None Update="Kannegiesser SQL\Kannegiesser.dbml.layout">
       <DependentUpon>Kannegiesser.dbml</DependentUpon>
     </None>
-    <EmbeddedResource Include="Kannegiesser\frmKannegiesserProdDataConfigDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmKannegiesserProdDataConfigDialog.vb</DependentUpon>
-    </EmbeddedResource>
     <None Include="ActiveDev.pfx" />
-    <None Include="Kannegiesser SQL\Kannegiesser.dbml">
+    <None Update="Kannegiesser SQL\Kannegiesser.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Kannegiesser.designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Legatro\Facesso.dbml.layout">
+    <None Update="Legatro\Facesso.dbml.layout">
       <DependentUpon>Facesso.dbml</DependentUpon>
     </None>
-    <EmbeddedResource Include="Legatro\frmLegatroTimeDataConfigDialog.resx">
-      <DependentUpon>frmLegatroTimeDataConfigDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <None Include="Legatro\Legatro.dbml.layout">
+    <None Update="Legatro\Legatro.dbml.layout">
       <DependentUpon>Legatro.dbml</DependentUpon>
     </None>
-    <EmbeddedResource Include="My Project\Resources.resx">
-      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="rptTimeLogImportResults.rdlc" />
     <EmbeddedResource Include="rptWorksiteTimeLogImportResult.rdlc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Legatro\Facesso.dbml">
+    <None Update="Legatro\Facesso.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Facesso.designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Legatro\Legatro.dbml">
+    <None Update="Legatro\Legatro.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Legatro.designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="My Project\Application.myapp">
+    <None Update="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
-    <None Include="My Project\DataSources\TimeDataRow.datasource" />
-    <None Include="My Project\DataSources\TimeDataTable.datasource" />
-    <None Include="My Project\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <CustomToolNamespace>My</CustomToolNamespace>
-      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ADDataTypes\ADDataTypes.vbproj">
-      <Project>{34ED87B7-58D7-4F66-B405-60D652F2A359}</Project>
-      <Name>ADDataTypes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ADInfoItem\ADInfoItem.vbproj">
-      <Project>{5255F65B-E795-4F03-AA18-DEBD3CA167F0}</Project>
-      <Name>ADInfoItem</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.vbproj">
-      <Project>{C356450B-940A-4AE0-8FF3-51C57EEF52C4}</Project>
-      <Name>ADSqlSupportComponents</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FacessoData\Fac_Data.vbproj">
-      <Project>{BDC5E376-68EA-4028-9322-00F1D78C697A}</Project>
-      <Name>Fac_Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FacGenericControls\Fac_GenericControls.vbproj">
-      <Project>{72C37631-FBE4-42F4-A796-678861B0F698}</Project>
-      <Name>Fac_GenericControls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FAC_Generic\FacGeneric.vbproj">
-      <Project>{F0F37798-9498-4B3B-B00D-44DC1AED8D8B}</Project>
-      <Name>FacGeneric</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.vbproj" />
+    <ProjectReference Include="..\ADInfoItem\ADInfoItem.vbproj" />
+    <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.vbproj" />
+    <ProjectReference Include="..\FacessoData\Fac_Data.vbproj" />
+    <ProjectReference Include="..\FacGenericControls\Fac_GenericControls.vbproj" />
+    <ProjectReference Include="..\FAC_Generic\FacGeneric.vbproj" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -429,12 +249,15 @@
     <Content Include="Kannegiesser SQL\SQL Scripte\CreateProc_GetArticles.SQL" />
     <Content Include="Kannegiesser SQL\SQL Scripte\CreateProc_GetMachines.SQL" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <PackageReference Include="MvvmForms" Version="2.1.7-Beta3" />
+  </ItemGroup>
+  <ItemGroup Label="Compile items now included by globbing that were not in the original project file">
+    <Compile Remove="Kannegiesser\KannegiesserConfig.vb" />
+    <Compile Remove="Kannegiesser SQL\KannegiesserConfig.vb" />
+    <Compile Remove="BaseClasses\BaseClasses_TimeLogTableBase.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
+  </ItemGroup>
 </Project>
