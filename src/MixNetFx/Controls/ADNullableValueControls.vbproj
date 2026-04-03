@@ -93,7 +93,7 @@
     <AppDesigner Include="My Project\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ActiveDevelop.SqlTools\ActiveDevelop.SqlTools.vbproj" />
+    <ProjectReference Include="..\ActiveDevelop.SqlTools\ActiveDevelop.SqlTools.csproj" />
     <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
   </ItemGroup>
 </Project>

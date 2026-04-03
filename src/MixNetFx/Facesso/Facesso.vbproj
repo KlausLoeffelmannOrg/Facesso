@@ -117,7 +117,7 @@
     <Content Include="wi0122-48.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ActiveDevelop.SqlTools\ActiveDevelop.SqlTools.vbproj" />
+    <ProjectReference Include="..\ActiveDevelop.SqlTools\ActiveDevelop.SqlTools.csproj" />
     <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
     <ProjectReference Include="..\ADInfoItem\ADInfoItem.vbproj" />
     <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.vbproj" />
