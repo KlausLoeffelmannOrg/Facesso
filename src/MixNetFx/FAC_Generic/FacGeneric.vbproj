@@ -90,7 +90,7 @@
     <ProjectReference Include="..\ADInfoItem\ADInfoItem.csproj" />
     <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.csproj" />
     <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.vbproj" />
-    <ProjectReference Include="..\ADSundries\ADSundries.vbproj" />
+    <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Keyboard Check.png" />

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <OutputType>Library</OutputType>
@@ -209,7 +209,7 @@
     <ProjectReference Include="..\ADInfoItem\ADInfoItem.csproj" />
     <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.csproj" />
     <ProjectReference Include="..\ADSimplePrintDocument\ADSimplePrintDocument.csproj" />
-    <ProjectReference Include="..\ADSundries\ADSundries.vbproj" />
+    <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
     <ProjectReference Include="..\Controls\ADNullableValueControls.vbproj" />
     <ProjectReference Include="..\FacessoData\Fac_Data.vbproj" />
     <ProjectReference Include="..\Fac_EntityModel\Fac_EntityModel.vbproj" />

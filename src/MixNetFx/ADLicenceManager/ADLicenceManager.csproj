@@ -39,7 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
-    <ProjectReference Include="..\ADSundries\ADSundries.vbproj" />
+    <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="My Project\Resources.resx">
