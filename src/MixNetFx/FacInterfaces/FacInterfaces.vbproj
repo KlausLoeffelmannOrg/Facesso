@@ -154,7 +154,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
     <ProjectReference Include="..\ADInfoItem\ADInfoItem.csproj" />
-    <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.vbproj" />
+    <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.csproj" />
     <ProjectReference Include="..\FacessoData\Fac_Data.vbproj" />
     <ProjectReference Include="..\FacGenericControls\Fac_GenericControls.vbproj" />
     <ProjectReference Include="..\FAC_Generic\FacGeneric.vbproj" />

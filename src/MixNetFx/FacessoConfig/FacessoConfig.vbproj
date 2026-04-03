@@ -88,7 +88,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ActiveDevelop.SqlTools\ActiveDevelop.SqlTools.csproj" />
     <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.csproj" />
-    <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.vbproj" />
+    <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.csproj" />
     <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
     <ProjectReference Include="..\FacGenericControls\Fac_GenericControls.vbproj" />
     <ProjectReference Include="..\FAC_Generic\FacGeneric.vbproj" />

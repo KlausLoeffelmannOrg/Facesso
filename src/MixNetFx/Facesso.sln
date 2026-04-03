@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADLicenceManager", "ADLicen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADSimplePrintDocument", "ADSimplePrintDocument\ADSimplePrintDocument.csproj", "{53BA3350-154C-4980-B890-BF2F76A0CE14}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ADSqlSupportComponents", "ADSqlSupportComponents\ADSqlSupportComponents.vbproj", "{C356450B-940A-4AE0-8FF3-51C57EEF52C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADSqlSupportComponents", "ADSqlSupportComponents\ADSqlSupportComponents.csproj", "{C356450B-940A-4AE0-8FF3-51C57EEF52C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADSundries", "ADSundries\ADSundries.csproj", "{42E4666A-6592-0A27-3CA7-7912CC73C5ED}"
 EndProject
