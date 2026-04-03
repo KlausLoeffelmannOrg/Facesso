@@ -78,6 +78,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ADDataTypes\ADDataTypes.vbproj" />
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
   </ItemGroup>
 </Project>

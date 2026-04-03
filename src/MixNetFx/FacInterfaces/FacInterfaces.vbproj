@@ -152,7 +152,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ADDataTypes\ADDataTypes.vbproj" />
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
     <ProjectReference Include="..\ADInfoItem\ADInfoItem.vbproj" />
     <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.vbproj" />
     <ProjectReference Include="..\FacessoData\Fac_Data.vbproj" />

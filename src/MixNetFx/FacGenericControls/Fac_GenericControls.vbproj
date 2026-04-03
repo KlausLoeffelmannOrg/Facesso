@@ -131,7 +131,7 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ADDataTypes\ADDataTypes.vbproj" />
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
     <ProjectReference Include="..\ADInfoItem\ADInfoItem.vbproj" />
     <ProjectReference Include="..\ADSundries\ADSundries.vbproj" />
     <ProjectReference Include="..\Controls\ADNullableValueControls.vbproj" />

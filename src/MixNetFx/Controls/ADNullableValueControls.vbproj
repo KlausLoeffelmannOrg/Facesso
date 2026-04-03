@@ -94,6 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ActiveDevelop.SqlTools\ActiveDevelop.SqlTools.vbproj" />
-    <ProjectReference Include="..\ADDataTypes\ADDataTypes.vbproj" />
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
   </ItemGroup>
 </Project>

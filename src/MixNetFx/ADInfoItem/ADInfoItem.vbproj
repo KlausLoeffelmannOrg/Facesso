@@ -63,7 +63,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ADDataTypes\ADDataTypes.vbproj" />
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
     <ProjectReference Include="..\ADSundries\ADSundries.vbproj" />
     <ProjectReference Include="..\Controls\ADNullableValueControls.vbproj" />
   </ItemGroup>

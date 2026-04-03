@@ -86,7 +86,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ADDataTypes\ADDataTypes.vbproj" />
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
     <ProjectReference Include="..\ADInfoItem\ADInfoItem.vbproj" />
     <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.vbproj" />
     <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.vbproj" />
