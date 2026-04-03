@@ -1,4 +1,4 @@
-Imports ActiveDev
+﻿Imports ActiveDev
 Imports Facesso.Data
 Imports System.Windows.Forms
 

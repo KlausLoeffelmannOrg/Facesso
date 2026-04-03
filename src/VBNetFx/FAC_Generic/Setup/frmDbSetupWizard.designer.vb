@@ -1,4 +1,4 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Ôªø<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Public Class frmDbSetupWizard
     Inherits System.Windows.Forms.Form
 
@@ -104,7 +104,7 @@ Partial Public Class frmDbSetupWizard
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(438, 32)
         Me.Label12.TabIndex = 8
-        Me.Label12.Text = "Klicken Sie jeweils auf die Schaltfl‰che [Weiter >], wenn Sie einen Schritt des A" & _
+        Me.Label12.Text = "Klicken Sie jeweils auf die Schaltfl√§che [Weiter >], wenn Sie einen Schritt des A" & _
             "ssistenten abgeschlossen haben."
         '
         'Label10
@@ -144,8 +144,8 @@ Partial Public Class frmDbSetupWizard
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(441, 51)
         Me.Label4.TabIndex = 2
-        Me.Label4.Text = "W‰hrend der n‰chsten Schritte, fragt Sie dieser Assistent bestimmte Informationen" & _
-            " ab, die Facesso als Mindestvoraussetzung zum Funktionieren benˆtigt. Dazu gehˆr" & _
+        Me.Label4.Text = "W√§hrend der n√§chsten Schritte, fragt Sie dieser Assistent bestimmte Informationen" & _
+            " ab, die Facesso als Mindestvoraussetzung zum Funktionieren ben√∂tigt. Dazu geh√∂r" & _
             "en:"
         '
         'Label3
@@ -155,7 +155,7 @@ Partial Public Class frmDbSetupWizard
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(438, 39)
         Me.Label3.TabIndex = 1
-        Me.Label3.Text = "Dieser Assistent hilft Ihnen, eine neue Facesso-Datenbank f¸r den ersten Gebrauch" & _
+        Me.Label3.Text = "Dieser Assistent hilft Ihnen, eine neue Facesso-Datenbank f√ºr den ersten Gebrauch" & _
             " vorzubereiten und das Datenbanksystem zu konfigurieren."
         '
         'Label2
@@ -209,7 +209,7 @@ Partial Public Class frmDbSetupWizard
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(155, 16)
         Me.Label6.TabIndex = 12
-        Me.Label6.Text = "Prim‰re Telefonnummer:"
+        Me.Label6.Text = "Prim√§re Telefonnummer:"
         '
         'btnTData
         '
@@ -245,7 +245,7 @@ Partial Public Class frmDbSetupWizard
         Me.Label42.Name = "Label42"
         Me.Label42.Size = New System.Drawing.Size(138, 16)
         Me.Label42.TabIndex = 9
-        Me.Label42.Text = "L‰nderkennung/Land:"
+        Me.Label42.Text = "L√§nderkennung/Land:"
         '
         'txtZip
         '
@@ -292,7 +292,7 @@ Partial Public Class frmDbSetupWizard
         Me.Label40.Name = "Label40"
         Me.Label40.Size = New System.Drawing.Size(51, 16)
         Me.Label40.TabIndex = 4
-        Me.Label40.Text = "Straﬂe:"
+        Me.Label40.Text = "Stra√üe:"
         '
         'txtSubsidiaryName
         '
@@ -445,8 +445,8 @@ Partial Public Class frmDbSetupWizard
         Me.Label34.Name = "Label34"
         Me.Label34.Size = New System.Drawing.Size(441, 37)
         Me.Label34.TabIndex = 1
-        Me.Label34.Text = "Der Assistent ist nun bereit, die geforderten Arbeiten durchzuf¸hren. Sie kˆnnen " & _
-            "anschlieﬂend beginnen, mit Facesso zu arbeiten."
+        Me.Label34.Text = "Der Assistent ist nun bereit, die geforderten Arbeiten durchzuf√ºhren. Sie k√∂nnen " & _
+            "anschlie√üend beginnen, mit Facesso zu arbeiten."
         '
         'Label33
         '
@@ -474,7 +474,7 @@ Partial Public Class frmDbSetupWizard
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(95, 27)
         Me.btnBack.TabIndex = 25
-        Me.btnBack.Text = "< Zur¸ck"
+        Me.btnBack.Text = "< Zur√ºck"
         '
         'btnNext
         '

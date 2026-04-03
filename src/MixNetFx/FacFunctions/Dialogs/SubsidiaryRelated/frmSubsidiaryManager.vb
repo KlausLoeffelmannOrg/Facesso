@@ -1,4 +1,4 @@
-Imports Facesso.Data
+﻿Imports Facesso.Data
 Imports System.Windows.Forms
 
 Friend Class frmSubsidiaryManager

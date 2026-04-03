@@ -1,4 +1,4 @@
-Imports System.Windows.Forms
+﻿Imports System.Windows.Forms
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Public Class frmOptions

@@ -1,4 +1,4 @@
-Imports Facesso
+﻿Imports Facesso
 Imports System.WIndows.Forms
 
 Public Class frmInfoItemsManagerBase

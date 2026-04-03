@@ -1,4 +1,4 @@
-Imports Facesso.Data
+﻿Imports Facesso.Data
 Imports System.Drawing
 
 Public Class FacPrintWorkGroupAnalysisBatch

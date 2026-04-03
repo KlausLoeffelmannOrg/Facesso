@@ -1,4 +1,4 @@
-Imports Activedev
+﻿Imports Activedev
 Imports System.Windows.Forms
 
 Public Enum InfoItemFormEditMode
