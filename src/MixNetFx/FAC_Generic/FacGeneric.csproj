@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Facesso</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+    <NoWarn>$(NoWarn);1591;0169;0414</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Data.Entity" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ucFacessoPathSettings.Designer.cs">
+      <DependentUpon>ucFacessoPathSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Setup\frmSetupWizard.Designer.cs">
+      <DependentUpon>frmSetupWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Setup\frmDbSetupWizard.Designer.cs">
+      <DependentUpon>frmDbSetupWizard.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="My Project\Resources.resx">
+      <ManifestResourceName>Facesso.Resources</ManifestResourceName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ucFacessoPathSettings.resx">
+      <DependentUpon>ucFacessoPathSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Setup\frmSetupWizard.resx">
+      <DependentUpon>frmSetupWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Setup\frmDbSetupWizard.resx">
+      <DependentUpon>frmDbSetupWizard.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ActiveDev.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
+    <ProjectReference Include="..\ADInfoItem\ADInfoItem.csproj" />
+    <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.csproj" />
+    <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.csproj" />
+    <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Keyboard Check.png" />
+    <Content Include="Resources\Keyboard Error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
+  </ItemGroup>
+</Project>

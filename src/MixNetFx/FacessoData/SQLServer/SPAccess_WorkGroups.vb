@@ -126,7 +126,7 @@ Partial Public NotInheritable Class SPAccess
             End With
             locCmd.ExecuteNonQuery()
 
-            'Workgroup löschen
+            'Workgroup lï¿½schen
             locCmd = New SqlCommand("WorkGroups_Delete", locConnection)
             locCmd.CommandType = CommandType.StoredProcedure
 
@@ -161,7 +161,7 @@ Partial Public NotInheritable Class SPAccess
                 .Add("@IsConceptional", SqlDbType.Bit).Value = wgi.IsConceptional
                 .Add("@TimeSettingDetails", SqlDbType.Xml).Value = wgi.TimeSettingDetails.XMLString
                 .Add("@LastEditedByIDUser", SqlDbType.Int).Value = LastEditedByIDUser
-                .Add("@ConsiderHistoryMaintenance", SqlDbType.Bit).Value = ConsiderHistoryMaintenance
+                .Add("@FacessoGeneric.ConsiderHistoryMaintenance", SqlDbType.Bit).Value = FacessoGeneric.ConsiderHistoryMaintenance
                 .Add("@IDWorkGroupNew", SqlDbType.Int)
                 .Item("@IDWorkGroupNew").Direction = ParameterDirection.Output
             End With

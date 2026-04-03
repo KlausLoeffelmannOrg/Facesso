@@ -1,4 +1,4 @@
-﻿Option Infer On
+Option Infer On
 
 Imports System.Windows.Forms
 Imports Facesso.Data
@@ -20,7 +20,7 @@ Public Class frmHandicapRangeManager
         lblEmployee.Text = e.DisplayName
 
         'Demo: Subsidary (Abteilung, Filliale, Mandant. etc.) ermitteln
-        Dim si = Facesso.LoginInfo.SubsidiaryInfo
+        Dim si = FacessoGeneric.LoginInfo.SubsidiaryInfo
         '(würd aber auch in EmployeeInfo stehen hahahahaha)
 
         ListView1.MultiSelect = False

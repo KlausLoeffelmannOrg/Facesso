@@ -214,7 +214,7 @@
     <ProjectReference Include="..\FacessoData\Fac_Data.vbproj" />
     <ProjectReference Include="..\Fac_EntityModel\Fac_EntityModel.vbproj" />
     <ProjectReference Include="..\FacGenericControls\Fac_GenericControls.vbproj" />
-    <ProjectReference Include="..\FAC_Generic\FacGeneric.vbproj" />
+    <ProjectReference Include="..\FAC_Generic\FacGeneric.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bitmaps\AnalysisIncentiveWage.bmp" />

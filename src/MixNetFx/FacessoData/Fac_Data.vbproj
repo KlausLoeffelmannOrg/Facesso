@@ -77,7 +77,7 @@
     <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.csproj" />
     <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.csproj" />
     <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
-    <ProjectReference Include="..\FAC_Generic\FacGeneric.vbproj" />
+    <ProjectReference Include="..\FAC_Generic\FacGeneric.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />

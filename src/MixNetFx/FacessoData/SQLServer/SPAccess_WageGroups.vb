@@ -77,7 +77,7 @@ Partial Public NotInheritable Class SPAccess
                 .Add("@Comment", SqlDbType.NVarChar, 4000).Value = wgi.Comment.Value
                 .Add("@HourlyRate", SqlDbType.Money).Value = wgi.HourlyRate
                 .Add("@LastEditedByIDUser", SqlDbType.Int).Value = LastEditedByIDUser
-                .Add("@ConsiderHistoryMaintenance", SqlDbType.Bit).Value = ConsiderHistoryMaintenance
+                .Add("@FacessoGeneric.ConsiderHistoryMaintenance", SqlDbType.Bit).Value = FacessoGeneric.ConsiderHistoryMaintenance
                 .Add("@IDWageGroupNew", SqlDbType.Int)
                 .Item("@IDWageGroupNew").Direction = ParameterDirection.Output
             End With

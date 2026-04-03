@@ -121,7 +121,7 @@ Partial Public NotInheritable Class SPAccess
                 .Add("@Dimension", SqlDbType.NVarChar, 100).Value = lvi.Dimension
                 .Add("@IsActive", SqlDbType.Bit).Value = lvi.IsActive
                 .Add("@LastEditedByIDUser", SqlDbType.Int).Value = LastEditedByIDUser
-                .Add("@ConsiderHistoryMaintenance", SqlDbType.Bit).Value = ConsiderHistoryMaintenance
+                .Add("@FacessoGeneric.ConsiderHistoryMaintenance", SqlDbType.Bit).Value = FacessoGeneric.ConsiderHistoryMaintenance
                 .Add("@IDLabourValueNew", SqlDbType.Int)
                 .Item("@IDLabourValueNew").Direction = ParameterDirection.Output
             End With

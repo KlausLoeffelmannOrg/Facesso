@@ -196,7 +196,7 @@ Partial Public NotInheritable Class SPAccess
                 .Add("@CompanyMobile", SqlDbType.NVarChar, 100).Value = addrDet.CompanyMobile.Value
                 .Add("@PrivateMobile", SqlDbType.NVarChar, 100).Value = addrDet.PrivateMobile.Value
                 .Add("@URL", SqlDbType.NVarChar, 100).Value = addrDet.URL.Value
-                .Add("@ConsiderHistoryMaintenance", SqlDbType.Bit).Value = ConsiderHistoryMaintenance
+                .Add("@FacessoGeneric.ConsiderHistoryMaintenance", SqlDbType.Bit).Value = FacessoGeneric.ConsiderHistoryMaintenance
                 .Add("@IDEmployeeNew", SqlDbType.Int)
                 .Item("@IDEmployeeNew").Direction = ParameterDirection.Output
             End With
@@ -272,9 +272,9 @@ Partial Public NotInheritable Class SPAccess
             Try
                 Employee.BaseWage = CDbl(locCmd.Parameters("@BaseWage").Value)
             Catch ex As Exception
-                MessageBox.Show("Basislohn für Mitarbeiter " & Employee.LastName & " (" & Employee.PersonnelNumber.ToString & _
+                MessageBox.Show("Basislohn fï¿½r Mitarbeiter " & Employee.LastName & " (" & Employee.PersonnelNumber.ToString & _
                 ") wurde nicht richtig zugeordnet." & vbNewLine & _
-                "Bitte überprüfen Sie daher die durchgeführten Berechnungen für die Facesso keine Richtigkeit garantieren kann!", _
+                "Bitte ï¿½berprï¿½fen Sie daher die durchgefï¿½hrten Berechnungen fï¿½r die Facesso keine Richtigkeit garantieren kann!", _
                 "Fehler in Mitarbeiterstammdaten", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
             End Try
             Employee.Percentage = CDbl(locCmd.Parameters("@Percentage").Value)

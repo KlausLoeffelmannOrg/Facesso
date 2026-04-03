@@ -7,7 +7,7 @@ Imports System.Data.Common
 Partial Public NotInheritable Class SPAccess
 
     ''' <summary>
-    ''' Überprüft, ob die angegebene Kostenstelle für die Subsidiary schon existiert.
+    ''' ï¿½berprï¿½ft, ob die angegebene Kostenstelle fï¿½r die Subsidiary schon existiert.
     ''' </summary>
     ''' <param name="IDSubsidiary">ID der verwendeten Subsidiary</param>
     ''' <param name="CostCenterNo">Kostenstellennr.</param>
@@ -39,11 +39,11 @@ Partial Public NotInheritable Class SPAccess
     End Function
 
     ''' <summary>
-    ''' Fügt die in CostcenterInfo gespeicherte Kostenstelle der Datenbank hinzu.
+    ''' Fï¿½gt die in CostcenterInfo gespeicherte Kostenstelle der Datenbank hinzu.
     ''' </summary>
-    ''' <param name="cci">CostcenterInfo mit den Daten für die Kostenstelle.</param>
+    ''' <param name="cci">CostcenterInfo mit den Daten fï¿½r die Kostenstelle.</param>
     ''' <returns>ErrCode von der Datenbank.</returns>
-    ''' <remarks>Die korrelierende Stored Procedure handelt die Versionskontrolle und schließt doppelte Kostenstellennr. aus.</remarks>
+    ''' <remarks>Die korrelierende Stored Procedure handelt die Versionskontrolle und schlieï¿½t doppelte Kostenstellennr. aus.</remarks>
     Public Function CostCenters_Add(ByVal cci As CostcenterInfo, ByVal CreatedByIDUser As Integer) As Integer
 
         Dim locConnection As SqlConnection = GetOpenedConnectionSafely()
@@ -105,7 +105,7 @@ Partial Public NotInheritable Class SPAccess
                 .Add("@BaseValuePrecision", SqlDbType.TinyInt).Value = cci.BaseValuePrecision
                 .Add("@BaseValueSynonym", SqlDbType.NVarChar, 50).Value = cci.BaseValueSynonym
                 .Add("@LastEditedByIDUser", SqlDbType.Int).Value = LastEditedByIDUser
-                .Add("@ConsiderHistoryMaintenance", SqlDbType.Bit).Value = ConsiderHistoryMaintenance
+                .Add("@FacessoGeneric.ConsiderHistoryMaintenance", SqlDbType.Bit).Value = FacessoGeneric.ConsiderHistoryMaintenance
                 .Add("@IDCostCenterNew", SqlDbType.Int)
                 .Item("@IDCostCenterNew").Direction = ParameterDirection.Output
             End With

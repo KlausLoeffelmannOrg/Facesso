@@ -6,7 +6,7 @@ Imports System.Data.Common
 Partial Public NotInheritable Class SPAccess
 
     ''' <summary>
-    ''' Überprüft, ob der angegebene Benutzername für die Subsidiary schon existiert.
+    ''' ï¿½berprï¿½ft, ob der angegebene Benutzername fï¿½r die Subsidiary schon existiert.
     ''' </summary>
     ''' <param name="IDSubsidiary">ID der verwendeten Subsidiary</param>
     ''' <param name="Username">Benutzername</param>
@@ -39,12 +39,12 @@ Partial Public NotInheritable Class SPAccess
     End Function
 
     ''' <summary>
-    ''' Fügt den in UserInfo und AddressDetails gespeicherten Benutzer der Datenbank hinzu.
+    ''' Fï¿½gt den in UserInfo und AddressDetails gespeicherten Benutzer der Datenbank hinzu.
     ''' </summary>
-    ''' <param name="ui">UserInfo mit den Hauptdaten für den Benutzer.</param>
-    ''' <param name="addrDet">AddressDetailsInfo mit den Adressendaten für den Benutzer.</param>
+    ''' <param name="ui">UserInfo mit den Hauptdaten fï¿½r den Benutzer.</param>
+    ''' <param name="addrDet">AddressDetailsInfo mit den Adressendaten fï¿½r den Benutzer.</param>
     ''' <returns>Neue ID des Users.</returns>
-    ''' <remarks>Die korrelierende Stored Procedure handelt die Versionskontrolle und schließt doppelte Benutzernamen aus.</remarks>
+    ''' <remarks>Die korrelierende Stored Procedure handelt die Versionskontrolle und schlieï¿½t doppelte Benutzernamen aus.</remarks>
     Public Function Users_Add(ByVal ui As UserInfo, ByVal CreatedByIDUser As Integer, ByVal addrDet As AddressDetailsInfo) As Integer
 
         Dim locConnection As SqlConnection = GetOpenedConnectionSafely()
@@ -100,10 +100,10 @@ Partial Public NotInheritable Class SPAccess
     ''' <summary>
     ''' Editiert den in UserInfo und AddressDetails gespeicherten Benutzer.
     ''' </summary>
-    ''' <param name="ui">UserInfo mit den Hauptdaten für den Benutzer.</param>
-    ''' <param name="addrDet">AddressDetailsInfo mit den Adressendaten für den Benutzer.</param>
+    ''' <param name="ui">UserInfo mit den Hauptdaten fï¿½r den Benutzer.</param>
+    ''' <param name="addrDet">AddressDetailsInfo mit den Adressendaten fï¿½r den Benutzer.</param>
     ''' <returns>Neue (bei Versionshandling) bzw. alte ID des Users.</returns>
-    ''' <remarks>Die korrelierende Stored Procedure handelt die Versionskontrolle und schließt doppelte Benutzernamen aus.</remarks>
+    ''' <remarks>Die korrelierende Stored Procedure handelt die Versionskontrolle und schlieï¿½t doppelte Benutzernamen aus.</remarks>
     Public Function Users_Edit(ByVal ui As UserInfo, ByVal LastEditedByIDUser As Integer, ByVal addrDet As AddressDetailsInfo) As Integer
 
         Dim locConnection As SqlConnection = GetOpenedConnectionSafely()
@@ -147,7 +147,7 @@ Partial Public NotInheritable Class SPAccess
                 .Add("@CompanyMobile", SqlDbType.NVarChar, 100).Value = addrDet.CompanyMobile.Value
                 .Add("@PrivateMobile", SqlDbType.NVarChar, 100).Value = addrDet.PrivateMobile.Value
                 .Add("@URL", SqlDbType.NVarChar, 100).Value = addrDet.URL.Value
-                .Add("@ConsiderHistoryMaintenance", SqlDbType.Bit).Value = ConsiderHistoryMaintenance
+                .Add("@FacessoGeneric.ConsiderHistoryMaintenance", SqlDbType.Bit).Value = FacessoGeneric.ConsiderHistoryMaintenance
                 .Add("@IDUserNew", SqlDbType.Int)
                 .Item("@IDUserNew").Direction = ParameterDirection.Output
             End With

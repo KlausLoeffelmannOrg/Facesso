@@ -87,6 +87,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FAC_Generic\FacGeneric.vbproj" />
+    <ProjectReference Include="..\FAC_Generic\FacGeneric.csproj" />
   </ItemGroup>
 </Project>
