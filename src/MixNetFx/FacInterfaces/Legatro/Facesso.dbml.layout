@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Facesso">
+  <DataContextMoniker Name="/FacessoDataContext" />
+  <nestedChildShapes>
+    <classShape Id="f1e519c0-9a6b-4dc4-b902-e589dd90877c" absoluteBounds="0.625, 0.625, 2, 6.7707340494791657">
+      <DataClassMoniker Name="/FacessoDataContext/TimeLog" />
+      <nestedChildShapes>
+        <elementListCompartment Id="57c04909-04a4-4137-a4da-faf906fc08bf" absoluteBounds="0.64000000000000012, 1.085, 1.9700000000000002, 6.2107340494791661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

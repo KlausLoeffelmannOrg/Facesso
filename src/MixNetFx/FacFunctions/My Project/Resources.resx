@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddressDetails_FirstNameNullMessage" xml:space="preserve">
+    <value>Bitte geben Sie den Vornamen ein!</value>
+  </data>
+  <data name="AddressDetails_LastNameNullMessage" xml:space="preserve">
+    <value>Bitte geben Sie den Nachnamen ein!</value>
+  </data>
+  <data name="BonusListMaintenance_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um die Lohntabelle zu bearbeiten!</value>
+  </data>
+  <data name="BonusListMaintenance_InputValueFormatError_MB_Body" xml:space="preserve">
+    <value>Der eingegebene Wert hat nicht das richtige Format. Bitte korrigieren Sie die Eingabe!</value>
+  </data>
+  <data name="BonusListMaintenance_InputValueFormatError_MB_Title" xml:space="preserve">
+    <value>Falsches Eingabeformat:</value>
+  </data>
+  <data name="CostCenterInfoAdd_CostCenterNoAlreadyExist_MB_Body" xml:space="preserve">
+    <value>Die Kostenstelle mit der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Kostenstellennr.</value>
+  </data>
+  <data name="CostCenterInfoAdd_CostCenterNoAlreadyExist_MB_Title" xml:space="preserve">
+    <value>Kostenstellennr. schon vorhanden:</value>
+  </data>
+  <data name="CostCenterInfoAdd_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um eine neue Kostenstelle hinzuzufügen!</value>
+  </data>
+  <data name="CostCenterInfoAdd_FormCaption" xml:space="preserve">
+    <value>Neue Kostenstelle anlegen</value>
+  </data>
+  <data name="CostCenterInfoCenter_LocalizedTypeName" xml:space="preserve">
+    <value>Kostenstelle</value>
+  </data>
+  <data name="CostCenterInfoCenter_NoSelectedCostCenter_MB_Body" xml:space="preserve">
+    <value>Bitte wählen Sie zunächst eine Kostenstelle aus, bevor Sie die Funktion verwenden!</value>
+  </data>
+  <data name="CostCenterInfoCenter_NoSelectedCostCenter_MB_Title" xml:space="preserve">
+    <value>Keine Kostenstelle ausgewählt!</value>
+  </data>
+  <data name="CostCenterInfoCollectionGet_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um die Liste der Kostenstellen einzusehen!</value>
+  </data>
+  <data name="CostCenterInfoDelete_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um eine Kostenstelle zu löschen!</value>
+  </data>
+  <data name="CostCenterInfoEdit_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um eine Kostenstelle zu bearbeiten!</value>
+  </data>
+  <data name="CostCenterInfoEdit_FormCaption" xml:space="preserve">
+    <value>Kostenstelle bearbeiten</value>
+  </data>
+  <data name="CostCenterInfoView_FormCaption" xml:space="preserve">
+    <value>Kostenstellendetails ansehen</value>
+  </data>
+  <data name="CostCenterSelection_NoSelection_MB_Body" xml:space="preserve">
+    <value>Sie haben keine Kostenstelle ausgewählt. Bitte wählen Sie eine Kostenstelle aus.</value>
+  </data>
+  <data name="CostCenterSelection_NoSelection_MB_Title" xml:space="preserve">
+    <value>Keine Kostenstelle selektiert:</value>
+  </data>
+  <data name="EmployeeInfoAdd_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um einen neuen Mitarbeiter hinzuzufügen!</value>
+  </data>
+  <data name="EmployeeInfoAdd_FormCaption" xml:space="preserve">
+    <value>Neuen Mitarbeiter anlegen</value>
+  </data>
+  <data name="EmployeeInfoAdd_PersonnelNoAlreadyExist_MB_Body" xml:space="preserve">
+    <value>Die Personalnummer mit der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Personalnr.</value>
+  </data>
+  <data name="EmployeeInfoAdd_PersonnelNoAlreadyExist_MB_Title" xml:space="preserve">
+    <value>Personalnr. schon vorhanden:</value>
+  </data>
+  <data name="EmployeeInfoAddEditView_Dialog_IncentiveSynonym" xml:space="preserve">
+    <value>Für {0} verwenden:</value>
+  </data>
+  <data name="EmployeeInfoCenter_LocalizedTypeName" xml:space="preserve">
+    <value>Mitarbeiter</value>
+  </data>
+  <data name="EmployeeInfoCenter_NoSelectedEmployee_MB_Body" xml:space="preserve">
+    <value>Bitte wählen Sie zunächst einen Mitarbeiter aus, bevor Sie die Funktion verwenden!</value>
+  </data>
+  <data name="EmployeeInfoCenter_NoSelectedEmployee_MB_Title" xml:space="preserve">
+    <value>Kein Mitarbeiter ausgewählt!</value>
+  </data>
+  <data name="EmployeeInfoCollectionGet_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um die Liste der Mitarbeiter einzusehen!</value>
+  </data>
+  <data name="EmployeeInfoDelete_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um einen Mitarbeiter zu löschen!</value>
+  </data>
+  <data name="EmployeeInfoEdit_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um Daten eines Mitarbeiters zu bearbeiten!</value>
+  </data>
+  <data name="EmployeeInfoEdit_FormCaption" xml:space="preserve">
+    <value>Mitarbeiter bearbeiten</value>
+  </data>
+  <data name="Incentive_Dimension" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="Incentive_Synonym" xml:space="preserve">
+    <value>Zeitgrad</value>
+  </data>
+  <data name="Incentive_WageCurrency" xml:space="preserve">
+    <value>€</value>
+  </data>
+  <data name="Incentive_WageSynonym" xml:space="preserve">
+    <value>Prämienlohn</value>
+  </data>
+  <data name="IncentiveWageCalculation_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um eine Prämienlohnberechnung durchzuführen!</value>
+  </data>
+  <data name="InfoItemBase_AddCommandButtonText" xml:space="preserve">
+    <value>&amp;Hinzufügen</value>
+  </data>
+  <data name="InfoItemBase_EditCommandButtonText" xml:space="preserve">
+    <value>Über&amp;nehmen</value>
+  </data>
+  <data name="InfoItemBase_NullsInFields_MB_BodyPrefix" xml:space="preserve">
+    <value>Bitte überprüfen Sie folgende Eingabefelder auf unvollständige Eingaben:</value>
+  </data>
+  <data name="InfoItemBase_NullsInFields_MB_Title" xml:space="preserve">
+    <value>Eingabe überprüfen:</value>
+  </data>
+  <data name="InfoItemBase_ViewCommandButtonText" xml:space="preserve">
+    <value>&amp;OK</value>
+  </data>
+  <data name="LabourValueInfoAdd_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um einen neuen REFA-Arbeitswert hinzuzufügen!</value>
+  </data>
+  <data name="LabourValueInfoAdd_FormCaption" xml:space="preserve">
+    <value>Neuen REFA-Arbeitswert anlegen</value>
+  </data>
+  <data name="LabourValueInfoAdd_NumberAlreadyExists_MB_Body" xml:space="preserve">
+    <value>Der REFA-Arbeitswert mit dem der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Bezeichnung.</value>
+  </data>
+  <data name="LabourValueInfoAdd_NumberAlreadyExists_MB_Title" xml:space="preserve">
+    <value>Arbeitswert schon vorhanden:</value>
+  </data>
+  <data name="LabourValueInfoCenter_LocalizedTypeName" xml:space="preserve">
+    <value>Arbeitswert</value>
+  </data>
+  <data name="LabourValueInfoCenter_NoSelectedLabourValue_MB_Body" xml:space="preserve">
+    <value>Bitte wählen Sie zunächst einen Arbeitswert aus, bevor Sie die Funktion verwenden!</value>
+  </data>
+  <data name="LabourValueInfoCenter_NoSelectedLabourValue_MB_Title" xml:space="preserve">
+    <value>Kein Arbeitswert ausgewählt!</value>
+  </data>
+  <data name="LabourValueInfoCollectionGet_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um die Liste der Arbeitswerte einzusehen!</value>
+  </data>
+  <data name="LabourValueInfoDelete_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um einen REFA-Arbeitswert zu löschen!</value>
+  </data>
+  <data name="LabourValueInfoEdit_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um einen Arbeitswert zu bearbeiten!</value>
+  </data>
+  <data name="LabourValueInfoEdit_FormCaption" xml:space="preserve">
+    <value>REFA-Arbeitswert bearbeiten</value>
+  </data>
+  <data name="LabourValueInfoView_FormCaption" xml:space="preserve">
+    <value>REFA-Arbeitswertdetails ansehen</value>
+  </data>
+  <data name="SubsidiaryInfoAdd_FormCaption" xml:space="preserve">
+    <value>Neue Kostenstelle anlegen</value>
+  </data>
+  <data name="SubsidiaryInfoAdd_SubsidiaryNameAlreadyExist_MB_Body" xml:space="preserve">
+    <value>Die Subsidiarität namens {0} existiert bereits. Bitte korrigieren Sie die Eingabe, und bestimmen Sie einen anderen Namen für die Subsidiarität.</value>
+  </data>
+  <data name="SubsidiaryInfoAdd_SubsidiaryNameAlreadyExist_MB_Title" xml:space="preserve">
+    <value>Kostenstellennr. schon vorhanden:</value>
+  </data>
+  <data name="SubsidiaryInfoAddEditDelete_DeniedDueToRole" xml:space="preserve">
+    <value>Nur Administratoren können neue Subsidiaritäten anlegen, vorhandene bearbeiten oder löschen</value>
+  </data>
+  <data name="SubsidiaryInfoEdit_FormCaption" xml:space="preserve">
+    <value>Subsidiaritäten bearbeiten</value>
+  </data>
+  <data name="SubsidiaryInfoManager_NoSelectedSubsidiary_MB_Body" xml:space="preserve">
+    <value>Bitte wählen Sie zunächst eine Subsidiarität aus, bevor Sie die Funktion verwenden!</value>
+  </data>
+  <data name="SubsidiaryInfoManager_NoSelectedSubsidiary_MB_Title" xml:space="preserve">
+    <value>Keine Subsidiarität ausgewählt!</value>
+  </data>
+  <data name="UserInfoAdd_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um einen neuen Benutzer hinzuzufügen!</value>
+  </data>
+  <data name="UserInfoAdd_FormCaption" xml:space="preserve">
+    <value>Neuen Benutzer anlegen</value>
+  </data>
+  <data name="UserInfoAdd_UsernameAlreadyExist_MB_Body" xml:space="preserve">
+    <value>Der Benutzername mit der Nummer {0} existiert bereits in {1} "{2}". Bitte wählen Sie einen anderen Benutzernamen!</value>
+  </data>
+  <data name="UserInfoAdd_UsernameAlreadyExist_MB_Title" xml:space="preserve">
+    <value>Benutzername schon vorhanden:</value>
+  </data>
+  <data name="UserInfoAddOrEdit_AddressDetailsDialogTitle" xml:space="preserve">
+    <value>Adressendetails für Benutzer erfassen:</value>
+  </data>
+  <data name="UserInfoAddOrEdit_NoPassword_MB_Body" xml:space="preserve">
+    <value>Sie haben kein Passwort eingegeben. Facesso erlaubt es aus Sicherheitsgründen nicht, dass Benutzer ohne Passwort angelegt sind.</value>
+  </data>
+  <data name="UserInfoAddOrEdit_NoPassword_MB_Title" xml:space="preserve">
+    <value>Kein Passwort eingegeben:</value>
+  </data>
+  <data name="UserInfoAddOrEdit_PasswordRepetitionFailed_MB_Body" xml:space="preserve">
+    <value>Die Passwort-Wiederholung stimmt nicht mit dem eingegebenen Passwort überein. Bitte führen Sie die Passworteingabe und die Passwortwiederholung als Bestätigung erneut durch.</value>
+  </data>
+  <data name="UserInfoAddOrEdit_PasswordRepetitionFailed_MB_Title" xml:space="preserve">
+    <value>Passwörter stimmen nicht überein:</value>
+  </data>
+  <data name="UserInfoCenter_LocalizedTypeName" xml:space="preserve">
+    <value>Benutzer</value>
+  </data>
+  <data name="UserInfoCenter_NoSelectedUser_MB_Body" xml:space="preserve">
+    <value>Bitte wählen Sie zunächst einen Benutzer aus, bevor Sie die Funktion verwenden!</value>
+  </data>
+  <data name="UserInfoCenter_NoSelectedUser_MB_Title" xml:space="preserve">
+    <value>Kein Benutzer ausgewählt:</value>
+  </data>
+  <data name="UserInfoCollectionGet_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um die Liste der Benutzer einzusehen!</value>
+  </data>
+  <data name="UserInfoEdit_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um die Daten eines Benutzers zu bearbeiten!</value>
+  </data>
+  <data name="UserInfoEdit_FormCaption" xml:space="preserve">
+    <value>Benutzerdaten bearbeiten</value>
+  </data>
+  <data name="UserInfoView_FormCaption" xml:space="preserve">
+    <value>Benutzerdatendetails ansehen</value>
+  </data>
+  <data name="WageGroupInfoAdd_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um eine neue Lohngruppe hinzuzufügen!</value>
+  </data>
+  <data name="WageGroupInfoAdd_FormCaption" xml:space="preserve">
+    <value>Neue Lohngruppe anlegen</value>
+  </data>
+  <data name="WageGroupInfoAdd_TokenAlreadyExists_MB_Body" xml:space="preserve">
+    <value>Die Lohngruppe mit dem Kürzel/der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Bezeichnung.</value>
+  </data>
+  <data name="WageGroupInfoAdd_TokenAlreadyExists_MB_Title" xml:space="preserve">
+    <value>Lohngruppe schon vorhanden:</value>
+  </data>
+  <data name="WageGroupInfoCenter_LocalizedTypeName" xml:space="preserve">
+    <value>Lohngruppe</value>
+  </data>
+  <data name="WageGroupInfoCenter_NoSelectedWageGroup_MB_Body" xml:space="preserve">
+    <value>Bitte wählen Sie zunächst eine Lohngruppe aus, bevor Sie die Funktion verwenden!</value>
+  </data>
+  <data name="WageGroupInfoCenter_NoSelectedWageGroup_MB_Title" xml:space="preserve">
+    <value>Keine Lohngruppe ausgewählt!</value>
+  </data>
+  <data name="WageGroupInfoCollectionGet_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um die Liste der Lohngruppen einzusehen!</value>
+  </data>
+  <data name="WageGroupInfoEdit_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um eine Lohngruppe zu bearbeiten!</value>
+  </data>
+  <data name="WageGroupInfoEdit_FormCaption" xml:space="preserve">
+    <value>Lohngruppendaten bearbeiten</value>
+  </data>
+  <data name="WageGroupInfoView_FormCaption" xml:space="preserve">
+    <value>Lohngruppendetails ansehen</value>
+  </data>
+  <data name="WorkGroupAnalysis_DeniedDueToRole" xml:space="preserve">
+    <value>Sie besitzen nicht die erforderlichen Rechte, um eine Produktiv-Site-Analyse durchzuführen!</value>
+  </data>
+  <data name="WorkGroupInfoAdd_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um eine neue Produktiv-Site anzulegen!</value>
+  </data>
+  <data name="WorkGroupInfoAdd_FormCaption" xml:space="preserve">
+    <value>Neue Produktiv-Site einrichten</value>
+  </data>
+  <data name="WorkGroupInfoAdd_WorkGroupNumberAlreadyExists_MB_Body" xml:space="preserve">
+    <value>Die Produktiv-Site mit der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Nummer.</value>
+  </data>
+  <data name="WorkGroupInfoAdd_WorkGroupNumberAlreadyExists_MB_Title" xml:space="preserve">
+    <value>Produktiv-Site schon vorhanden:</value>
+  </data>
+  <data name="WorkGroupInfoCenter_LocalizedTypeName" xml:space="preserve">
+    <value>Produktiv-Site</value>
+  </data>
+  <data name="WorkGroupInfoCenter_NoSelectedWorkGroup_MB_Body" xml:space="preserve">
+    <value>Bitte wählen Sie zunächst eine Produktiv-Site aus, bevor Sie die Funktion verwenden!</value>
+  </data>
+  <data name="WorkGroupInfoCenter_NoSelectedWorkGroup_MB_Title" xml:space="preserve">
+    <value>Keine Produktiv-Site ausgewählt!</value>
+  </data>
+  <data name="WorkGroupInfoDelete_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um eine Produktiv-Site zu löschen!</value>
+  </data>
+  <data name="WorkGroupInfoEdit_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um die Stammdaten einer Produktiv-Site zu bearbeiten!</value>
+  </data>
+  <data name="WorkGroupInfoEdit_FormCaption" xml:space="preserve">
+    <value>Produktiv-Site-Stammdaten bearbeiten</value>
+  </data>
+  <data name="WorkGroupManager_DeniedDueToRole" xml:space="preserve">
+    <value>Sie haben nicht die erforderlichen Rechte, um den Produktiv-Site-Manager zu verwenden!</value>
+  </data>
+</root>
