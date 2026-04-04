@@ -108,7 +108,7 @@ Public Class TimeSettingDetails
     ''' <param name="AlignedToCurrentDate">Bestimmt, ob die Schichtparameter (ShiftStart, End, ImportedShiftStart, End) an das 
     ''' workdate angepasst werden sollen (true) oder nicht.</param>
     ''' <returns></returns>
-    ''' <remarks>Die Schicht-Start und End-Werte werden relativ zum 1.1.2003 angegeben, wenn für AlignToCurrentDaten false übergeben wird.</remarks>
+    ''' <remarks>Die Schicht-Start und End-Werte werden relativ zum 1.1.2003 angegeben, wenn fÃ¼r AlignToCurrentDaten false Ã¼bergeben wird.</remarks>
     Public Function GetTimeSettingDetail(ByVal workdate As Date, ByVal Shift As Integer, ByVal AlignedToCurrentDate As Boolean) As TimeSettingDetail
         If Not AlignedToCurrentDate Then
             Return GetTimeSettingDetail(workdate, Shift)
@@ -157,15 +157,15 @@ Public Class TimeSettingDetails
     End Function
 
     Public Function FindShiftForPeriod(ByVal Proddate As Date, ByVal StartTime As Date, ByVal EndTime As Date) As ShiftTimeSpan
-        'Wir testen alle drei Schichtdefinitionen aus, und überprüfen, in welchem der Modelle
-        'a) die meiste Überlappung vorliegt
+        'Wir testen alle drei Schichtdefinitionen aus, und Ã¼berprÃ¼fen, in welchem der Modelle
+        'a) die meiste Ãœberlappung vorliegt
         Dim currentTsd As TimeSettingDetail
 
         Dim bookingRange As New TimePeriodComparer(StartTime, EndTime)
         Dim longestTimeInShift As New ShiftTimeSpan
 
         'Erste und letzte Schicht dieses Tages finden
-        'Erste und letzte Schicht ermitteln für diese Arbeitsgruppe ermitteln
+        'Erste und letzte Schicht ermitteln fÃ¼r diese Arbeitsgruppe ermitteln
         Dim firstShift = 0
         Dim lastShift = 0
 
@@ -208,7 +208,7 @@ Public Class TimeSettingDetails
                 GoTo SkipToReturnValue
             End If
 
-            'Den Schichtbereich finden, in der sich der Mitarbeiter überwiegend aufgehalten hat.
+            'Den Schichtbereich finden, in der sich der Mitarbeiter Ã¼berwiegend aufgehalten hat.
             If overlapInfo.OverlappingMinutes > longestTimeInShift.OverlappingTime Then
                 longestTimeInShift.OverlappingTime = CInt(overlapInfo.OverlappingMinutes)
                 longestTimeInShift.ShiftNo = shiftCount
@@ -226,11 +226,11 @@ SkipToReturnValue:
     End Function
 
     ''' <summary>
-    ''' Ermittelt iterativ die Schicht für eine bestimmte Zeit und berücksichtigt dabei Fallbackzeiten und Schwellzeit der 1. Schicht.
+    ''' Ermittelt iterativ die Schicht fÃ¼r eine bestimmte Zeit und berÃ¼cksichtigt dabei Fallbackzeiten und Schwellzeit der 1. Schicht.
     ''' </summary>
-    ''' <param name="ProdDate">Datum, für das gesucht werden soll.</param>
+    ''' <param name="ProdDate">Datum, fÃ¼r das gesucht werden soll.</param>
     ''' <param name="StartTime">Die Startzeit, die der Schicht zugeordnet werden soll.</param>
-    ''' <returns>ShiftTimeSpan-Objekt, das Info über die gefundene Schicht enthält.</returns>
+    ''' <returns>ShiftTimeSpan-Objekt, das Info Ã¼ber die gefundene Schicht enthÃ¤lt.</returns>
     ''' <remarks></remarks>
     Public Function FindShiftForStartTime(ByVal ProdDate As Date, ByVal StartTime As Date) As ShiftTimeSpan
         Dim locProductionDate As Date = StartTime.Date
@@ -242,11 +242,11 @@ SkipToReturnValue:
             locTimeSettingDetail = GetTimeSettingDetail(locProductionDate, locShift)
             Dim locThreshold As Integer
 
-            'Für den Fall, dass bestimmte Schichtzeiten NICHT definiert sind,
-            'muss es eine "nicht-nulle" Ausweichmöglichkeit geben, damit es bei
-            'einer Datenübername, die einen nicht-null-Zeitpunkt zur Schichtermittelung
+            'FÃ¼r den Fall, dass bestimmte Schichtzeiten NICHT definiert sind,
+            'muss es eine "nicht-nulle" AusweichmÃ¶glichkeit geben, damit es bei
+            'einer DatenÃ¼bername, die einen nicht-null-Zeitpunkt zur Schichtermittelung
             'erwartet, nicht knallt. Das ist entweder die nicht-nulle erste Schicht
-            'oder eine Fallback-Zeit, die dann in der lokalen Registry geändert 
+            'oder eine Fallback-Zeit, die dann in der lokalen Registry geÃ¤ndert 
             'werden kann!
             If locShift = 1 Then
                 Try
@@ -256,12 +256,12 @@ SkipToReturnValue:
                     myFallBackStartTime = FacessoGeneric.FallbackStartTime
                     myFallBackEndTime = FacessoGeneric.FallbackEndTime
                 End Try
-                'Für die erste Schicht: Schwellzeit nach unten, damit "frühe" Datenübernahmen
-                'nicht zu Datenverlust führen.
+                'FÃ¼r die erste Schicht: Schwellzeit nach unten, damit "frÃ¼he" DatenÃ¼bernahmen
+                'nicht zu Datenverlust fÃ¼hren.
                 myNextShiftStart = myFallBackStartTime.AddMinutes(-FacessoGeneric.FirstShiftThresholdInMin)
             End If
 
-            'Keine Angabe für Schwelle abfangen
+            'Keine Angabe fÃ¼r Schwelle abfangen
             If locTimeSettingDetail.Threshold.IsNull Then
                 locThreshold = 0
             Else
@@ -287,22 +287,22 @@ SkipToReturnValue:
                 locShiftEndUnaligned.AddHours(7)
             End If
 
-            'Rückgabewert
+            'RÃ¼ckgabewert
             Dim retShiftTimeSpan As ShiftTimeSpan = Nothing
 
             'Haben wir die Schicht schon gefunden?
             If StartTime >= locShiftStart And StartTime <= locShiftEnd Then
-                'Ja - das ist der Rückgabewert...
+                'Ja - das ist der RÃ¼ckgabewert...
                 retShiftTimeSpan = New ShiftTimeSpan(locProductionDate, locShift, locShiftStart, locShiftEnd)
             End If
             myNextShiftStart = locShiftEndUnaligned
             If retShiftTimeSpan IsNot Nothing Then
                 '...und wir steigen aus der "Schichtfindungsschleife" aus,
-                'wenn der Rückgabewert nicht Null ist.
+                'wenn der RÃ¼ckgabewert nicht Null ist.
                 Return retShiftTimeSpan
             End If
             'Anderenfalls schauen wir, ob wir die Schicht nicht
-            'doch noch ermitteln können.
+            'doch noch ermitteln kÃ¶nnen.
         Next
         Return Nothing
     End Function
@@ -312,7 +312,7 @@ End Class
 Public Class TimeSettingDetail
     Private myShiftStart As ADDBNullable(Of Date)
     Private myShiftEnd As ADDBNullable(Of Date)
-    'Geändert am 30.11.2005
+    'GeÃ¤ndert am 30.11.2005
     Private myImportShiftStart As ADDBNullable(Of Date)
     Private myImportShiftEnd As ADDBNullable(Of Date)
 
@@ -337,7 +337,7 @@ Public Class TimeSettingDetail
         myShiftStart = ShiftStart
         myShiftEnd = ShiftEnd
 
-        'Geändert am 30.11.2005
+        'GeÃ¤ndert am 30.11.2005
         myImportShiftStart = ShiftStart
         myImportShiftEnd = ShiftEnd
 
@@ -681,21 +681,21 @@ Public Class TimeSettingDetail
         If My.Application.Culture.Name.StartsWith("de") Then
             Select Case Me.ForWeekday
                 Case TimeSettingDetailsWeekdays.ForAll
-                    locWeekday = "Für alle Wochentage"
+                    locWeekday = "FÃ¼r alle Wochentage"
                 Case TimeSettingDetailsWeekdays.Friday
-                    locWeekday = "Für freitags"
+                    locWeekday = "FÃ¼r freitags"
                 Case TimeSettingDetailsWeekdays.Monday
-                    locWeekday = "Für montags"
+                    locWeekday = "FÃ¼r montags"
                 Case TimeSettingDetailsWeekdays.Saturday
-                    locWeekday = "Für samstags"
+                    locWeekday = "FÃ¼r samstags"
                 Case TimeSettingDetailsWeekdays.Sunday
-                    locWeekday = "Für sonntags"
+                    locWeekday = "FÃ¼r sonntags"
                 Case TimeSettingDetailsWeekdays.Thursday
-                    locWeekday = "Für donnerstags"
+                    locWeekday = "FÃ¼r donnerstags"
                 Case TimeSettingDetailsWeekdays.Tuesday
-                    locWeekday = "Für dienstags"
+                    locWeekday = "FÃ¼r dienstags"
                 Case TimeSettingDetailsWeekdays.Wednesday
-                    locWeekday = "Für mittwochs"
+                    locWeekday = "FÃ¼r mittwochs"
             End Select
         End If
         locString &= locWeekday
@@ -771,11 +771,11 @@ Public Class ShiftTimeSpan
     End Property
 
     ''' <summary>
-    ''' Ermittelt oder bestimmt die Anzahl von Minuten, die eine andere Zeitspanne diesen Schichtbereich überlappt.
+    ''' Ermittelt oder bestimmt die Anzahl von Minuten, die eine andere Zeitspanne diesen Schichtbereich Ã¼berlappt.
     ''' </summary>
     ''' <value></value>
     ''' <returns></returns>
-    ''' <remarks>Dient nur zum Zurückliefern von Vergleichszeiträumen beim Ermitteln einer Schicht von 
+    ''' <remarks>Dient nur zum ZurÃ¼ckliefern von VergleichszeitrÃ¤umen beim Ermitteln einer Schicht von 
     ''' einem beliebigen Zeitbereich und hat nur informativen und parameter-tragenden Wert.</remarks>
     Public Property OverlappingTime() As Integer
         Get
@@ -791,7 +791,7 @@ Public Class ShiftTimeSpan
     ''' </summary>
     ''' <value></value>
     ''' <returns></returns>
-    ''' <remarks>Dient nur zum Zurückliefern von Vergleichszeiträumen beim Ermitteln einer Schicht von 
+    ''' <remarks>Dient nur zum ZurÃ¼ckliefern von VergleichszeitrÃ¤umen beim Ermitteln einer Schicht von 
     ''' einem beliebigen Zeitbereich und hat nur informativen und parameter-tragenden Wert.</remarks>
     Public Property DistanceToAStartTime() As Integer
         Get

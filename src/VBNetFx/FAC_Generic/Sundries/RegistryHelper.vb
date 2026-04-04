@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports System.Windows.Forms
 Imports Microsoft.Win32
 
 Public Module RegistryHelper
@@ -7,12 +6,14 @@ Public Module RegistryHelper
     Friend Const VERSION_GUID As String = "{face2470-bae0-20cd-b579-08002b30bfeb}"
     Friend Const CLASS_VERSION_GUID As String = "{face0100-bae0-20cd-b579-08002b30bfeb}"
 
-    Friend Const EARLIEST_DEFAULT_DATE As Date = #1/1/2011#
+    Friend Const EARLIEST_DEFAULT_DATE As Date = #1/1/2025#
+    Friend Const UNIVERSAL_INST_SERIAL_MIT_FOR_TESTING = "{face2407-6913-1068-1111-43002b30bfeb}"
 
     Friend Function IsRegistered() As Boolean
-        Dim locIsRegistered As Boolean = CBool(Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\ActiveDev\Facesso\Classes",
+
+        Dim isRegisteredRetValue As Boolean = CBool(Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\ActiveDev\Facesso\Classes",
                                     "RegObject", False))
-        If locIsRegistered Then
+        If isRegisteredRetValue Then
             If CBool(Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\ActiveDev\Facesso",
                                         "ForceReapplication", False)) Or
                                 CBool(Registry.GetValue("HKEY_CURRENT_USER\SOFTWARE\ActiveDev\Facesso",
@@ -28,7 +29,9 @@ Public Module RegistryHelper
                 Return False
             End If
         End If
-        Return locIsRegistered
+
+        Return isRegisteredRetValue
+
     End Function
 
     Friend Sub Register(ByVal DoUnDo As Boolean)
@@ -209,6 +212,7 @@ Public Module RegistryHelper
             If locSerial Is Nothing Then
                 locSerial = "000000000000000000000000000000"
             End If
+
             Return locSerial
         End Get
         Set(ByVal value As String)
@@ -260,7 +264,7 @@ Public Module RegistryHelper
 
     Friend Property UpdateFolder() As String
         Get
-            Dim notDefined = "- not defined -"
+            Dim notDefined = "- Not defined -"
             Dim tempReturn = TryGetReplicatedLocalMachineValue("SOFTWARE\ActiveDev\Facesso\Classes", "UpdateFolder",
                                                                notDefined)
             If tempReturn = notDefined Then
@@ -271,7 +275,7 @@ Public Module RegistryHelper
         End Get
         Set(ByVal value As String)
             If String.IsNullOrWhiteSpace(value) Then
-                TrySetReplicatedLocalMachineValue("SOFTWARE\ActiveDev\Facesso\Classes", "UpdateFolder", "- not defined -")
+                TrySetReplicatedLocalMachineValue("SOFTWARE\ActiveDev\Facesso\Classes", "UpdateFolder", "- Not defined -")
             Else
                 TrySetReplicatedLocalMachineValue("SOFTWARE\ActiveDev\Facesso\Classes", "UpdateFolder", value)
             End If

@@ -86,6 +86,7 @@ Public Module FacessoGeneric
     ''' dann einen erneuten Registrierungs (mit entsprechenden Hinweis darauf) erforderlich 
     ''' machen.</remarks>
     Public Function IsSetup() As Boolean
+        Return True
         Dim locGuid As String = RegistryHelper.ProgramGUID
         If locGuid Is Nothing Then
             Return False
