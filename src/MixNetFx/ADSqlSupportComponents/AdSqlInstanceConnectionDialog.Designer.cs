@@ -90,9 +90,9 @@ namespace ActiveDev.Data.SqlClient
 
             // Wire events
             this.SqlServerConnector.ParametersChanged += new System.EventHandler(this.SqlServerConnector_ParametersChanges);
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            this.btnTestConnection.Click += new System.EventHandler(this.btnTestConnection_Click);
+            this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            this.btnTestConnection.Click += new System.EventHandler(this.BtnTestConnection_Click);
         }
 
         internal AdSqlServerConnector SqlServerConnector;

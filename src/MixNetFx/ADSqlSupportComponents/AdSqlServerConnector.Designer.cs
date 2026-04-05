@@ -147,11 +147,11 @@ namespace ActiveDev.Data.SqlClient
             this.ResumeLayout(false);
 
             // Wire events
-            this.chkUseSXDefaultInstance.CheckedChanged += new System.EventHandler(this.chkUseSXDefaultInstance_CheckedChanged);
-            this.optUseMixedMode.CheckedChanged += new System.EventHandler(this.optUseMixedMode_CheckedChanged);
+            this.chkUseSXDefaultInstance.CheckedChanged += new System.EventHandler(this.ChkUseSXDefaultInstance_CheckedChanged);
+            this.optUseMixedMode.CheckedChanged += new System.EventHandler(this.OptUseMixedMode_CheckedChanged);
             this.InstanceCombo.TextChanged += new System.EventHandler(this.InstanceCombo_TextChanged);
-            this.txtUserID.TextChanged += new System.EventHandler(this.txtCredential_TextChanged);
-            this.txtPassword.TextChanged += new System.EventHandler(this.txtCredential_TextChanged);
+            this.txtUserID.TextChanged += new System.EventHandler(this.TxtCredential_TextChanged);
+            this.txtPassword.TextChanged += new System.EventHandler(this.TxtCredential_TextChanged);
         }
 
         internal System.Windows.Forms.GroupBox gbMain;

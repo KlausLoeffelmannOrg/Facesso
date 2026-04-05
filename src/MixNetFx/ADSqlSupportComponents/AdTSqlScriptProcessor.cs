@@ -12,7 +12,7 @@ namespace ActiveDev.Data.SqlClient
     [Serializable]
     public class AdTSqlScriptProcessor : System.Collections.ObjectModel.Collection<AdTSqlScriptChunk>
     {
-        private SqlConnection _connection;
+        private readonly SqlConnection _connection;
 
         public AdTSqlScriptProcessor() : base()
         {

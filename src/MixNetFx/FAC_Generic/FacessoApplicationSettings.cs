@@ -23,7 +23,7 @@ namespace Facesso
         [UserScopedSetting]
         public int LastSubsidiaryID
         {
-            get { return (int)this["LastSubsidiaryID"]; }
+            get { return (int?) this["LastSubsidiaryID"] ?? 0; }
             set { this["LastSubsidiaryID"] = value; }
         }
     }

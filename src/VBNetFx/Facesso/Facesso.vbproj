@@ -103,8 +103,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ActiveDev.pfx" />
-    <None Include="Facesso_TemporaryKey.pfx" />
     <None Update="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

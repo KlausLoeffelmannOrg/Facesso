@@ -1,3 +1,4 @@
+using System;
 using System.Data.SqlClient;
 using ActiveDev;
 
@@ -15,6 +16,7 @@ namespace Facesso.Data
         private string myWageGroupToken;
         private double myHourlyRate;
         private string myCurrencyToken;
+        public DateTime myWasCurrentTo;
 
         public WageGroupInfo() { }
 
@@ -36,6 +38,7 @@ namespace Facesso.Data
             IsTemplate = dr.GetBoolean(dr.GetOrdinal("IsTemplate"));
             WageGroupToken = dr.GetString(dr.GetOrdinal("WageGroupToken"));
             HourlyRate = dr.GetDouble(dr.GetOrdinal("HourlyRate"));
+
             if (joinedWithCurrency)
                 CurrencyToken = dr.GetString(dr.GetOrdinal("CurrencyToken"));
         }
@@ -94,9 +97,17 @@ namespace Facesso.Data
             set { myCurrencyToken = value; }
         }
 
-        public override int DataID => myIDWageGroup;
+        public override int DataID 
+            => myIDWageGroup;
 
-        public override string DisplayName => WageGroupName;
+        public override string DisplayName 
+            => WageGroupName;
+
+        public DateTime WasCurrentTo
+        {
+            get { return myWasCurrentTo; }
+            set { myWasCurrentTo = value; }
+        }
     }
 
     [System.CLSCompliant(true)]

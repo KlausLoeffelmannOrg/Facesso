@@ -10,7 +10,7 @@ namespace ActiveDev.Printing
 {
 	public struct ADFieldString
 	{
-		string myText;
+        readonly string myText;
 		internal static string myPage="";
 		internal static DateTime myPrintingStartDate;
 		private static string myPrintingDate;

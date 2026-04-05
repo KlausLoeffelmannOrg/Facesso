@@ -21,14 +21,16 @@ namespace ActiveDevelop.SqlTools
 
         public bool CheckTableExists(string tablename)
         {
-            var sel = "SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'" + tablename + "') AND type in (N'U') ";
-            var reti = -1;
-            using (var cmd = myConnection.CreateCommand())
+            string sel = "SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'" + tablename + "') AND type in (N'U') ";
+            int reti;
+
+            using (SqlCommand cmd = myConnection.CreateCommand())
             {
                 cmd.Transaction = myTransaction;
                 cmd.CommandText = sel;
                 cmd.CommandType = CommandType.Text;
-                reti = Convert.ToInt32(cmd.ExecuteScalar());
+
+                reti = (int)(cmd.ExecuteScalar() ?? -1);
             }
 
             return reti == 1;
@@ -69,9 +71,10 @@ namespace ActiveDevelop.SqlTools
 
         public void DeleteTable(string tablename)
         {
-            var sel = "IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'" + tablename + "') AND type in (N'U')) " +
+            string sel = "IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'" + tablename + "') AND type in (N'U')) " +
                       "   DROP TABLE " + tablename;
-            using (var cmd = myConnection.CreateCommand())
+
+            using (SqlCommand cmd = myConnection.CreateCommand())
             {
                 cmd.Transaction = myTransaction;
                 cmd.CommandText = sel;
@@ -82,7 +85,7 @@ namespace ActiveDevelop.SqlTools
 
         public void ExecDDLStmt(string ddlCmd)
         {
-            using (var cmd = myConnection.CreateCommand())
+            using (SqlCommand cmd = myConnection.CreateCommand())
             {
                 cmd.Transaction = myTransaction;
                 cmd.CommandText = ddlCmd;
@@ -93,15 +96,17 @@ namespace ActiveDevelop.SqlTools
 
         public bool CheckConstraintExists(string tablename, string constraintName)
         {
-            var sel = "select distinct 1 FROM INFORMATION_SCHEMA.CONSTRAINT_TABLE_USAGE " +
+            string sel = "select distinct 1 FROM INFORMATION_SCHEMA.CONSTRAINT_TABLE_USAGE " +
                       "where table_name ='" + tablename + "' AND CONSTRAINT_NAME = '" + constraintName + "'";
-            var reti = -1;
+ 
+            int reti;
+
             using (var cmd = myConnection.CreateCommand())
             {
                 cmd.Transaction = myTransaction;
                 cmd.CommandText = sel;
                 cmd.CommandType = CommandType.Text;
-                reti = Convert.ToInt32(cmd.ExecuteScalar());
+                reti = (int)(cmd.ExecuteScalar() ?? -1);
             }
 
             return reti == 1;
@@ -117,15 +122,16 @@ namespace ActiveDevelop.SqlTools
 
         public bool CheckColumnExists(string tablename, string columnName)
         {
-            var sel = "SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS " +
+            string sel = "SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS " +
                       "WHERE TABLE_NAME = '" + tablename + "' AND COLUMN_NAME = '" + columnName + "'";
-            var reti = -1;
-            using (var cmd = myConnection.CreateCommand())
+            int reti;
+
+            using (SqlCommand cmd = myConnection.CreateCommand())
             {
                 cmd.Transaction = myTransaction;
                 cmd.CommandText = sel;
                 cmd.CommandType = CommandType.Text;
-                reti = Convert.ToInt32(cmd.ExecuteScalar());
+                reti = (int) (cmd.ExecuteScalar() ?? -1);
             }
 
             return reti == 1;
@@ -136,6 +142,7 @@ namespace ActiveDevelop.SqlTools
             if (!CheckColumnExists(tablename, columnName))
             {
                 ExecDDLStmt("alter table " + tablename + " add " + columnName + " " + datatype);
+
                 if (notNull)
                 {
                     using (var updateCmd = myConnection.CreateCommand())

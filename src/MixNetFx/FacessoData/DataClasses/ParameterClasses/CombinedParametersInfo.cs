@@ -43,11 +43,13 @@ namespace Facesso.Data
             set { myProductionDate = value; }
         }
 
-        public string CurrentShiftText => ShiftText(Shift);
+        public string ShiftText() => ShiftText(Shift);
 
         public string ShiftText(bool includeShiftNr)
         {
-            return includeShiftNr ? Shift.ToString() + ": " + ShiftText(Shift) : ShiftText(Shift);
+            return includeShiftNr 
+                ? Shift.ToString() + ": " + ShiftText(Shift) 
+                : ShiftText(Shift);
         }
 
         public string ShiftText(byte shiftNr)
@@ -55,7 +57,9 @@ namespace Facesso.Data
             string locString = "(";
             if (WorkGroup == null)
                 return "(-- : --  -  -- : --)";
+
             TimeSettingDetail locTSD = WorkGroup.TimeSettingDetails.GetTimeSettingDetail(ProductionDate, shiftNr);
+
             if (locTSD.ShiftStart.HasValue)
             {
                 locString += locTSD.ShiftStart.TypedValue.ToShortTimeString() + "  -  ";
@@ -65,6 +69,7 @@ namespace Facesso.Data
             {
                 locString += "-- : --  -  -- : --)";
             }
+
             return locString;
         }
     }

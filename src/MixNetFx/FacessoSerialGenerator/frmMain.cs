@@ -57,7 +57,7 @@ namespace ActiveDev
             mySerialPart = locMACTripleDES.ComputeHash(ADCryptography.ToByteArray(locPreSerial));
 
             string locComSerial = (new ADNumberSystems(BitConverter.ToUInt64(mySerialPart, 0), 20)).ToString(15);
-            locULongLI = locULongLI ^ 0xFFEEDDCCBBAA9988UL;
+            locULongLI ^= 0xFFEEDDCCBBAA9988UL;
             locComSerial += new ADNumberSystems(locULongLI, 20).ToString(15);
             string locFormattedSerial = "";
             int locCount = 0;
@@ -79,8 +79,8 @@ namespace ActiveDev
 
     internal class ProgramIDItem
     {
-        private string myEntryText;
-        private byte myID;
+        private readonly string myEntryText;
+        private readonly byte myID;
 
         public ProgramIDItem(string entryText, byte id)
         {
@@ -90,9 +90,7 @@ namespace ActiveDev
 
         public byte ID => myID;
 
-        public override string ToString()
-        {
-            return string.Format("{0}: {1}", myID, myEntryText);
-        }
+        public override string ToString() =>
+            string.Format("{0}: {1}", myID, myEntryText);
     }
 }

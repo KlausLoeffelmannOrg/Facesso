@@ -30,9 +30,11 @@ namespace ActiveDev
             foreach (IADNullableValueControl c in controls)
             {
                 var locDatafieldName = c.IndependentDatafieldName;
+
                 if (!string.IsNullOrEmpty(locDatafieldName))
                 {
                     var locCurrentProperty = GetType().GetProperty(c.IndependentDatafieldName);
+
                     if (locCurrentProperty.PropertyType.IsGenericType)
                     {
                         c.Value = (IADDBNullableValue)locCurrentProperty.GetValue(this, null);
@@ -107,6 +109,7 @@ namespace ActiveDev
         public string NumFormatString(byte precision)
         {
             var locret = "#,##0";
+
             if (precision > 0)
             {
                 locret += "." + new string('0', precision);
@@ -121,17 +124,15 @@ namespace ActiveDev
     public class InfoItems<InfoItemType> : KeyedCollection<IntKey, InfoItemType>
         where InfoItemType : IInfoItem
     {
-        protected override IntKey GetKeyForItem(InfoItemType item)
-        {
-            return new IntKey(item.DataID);
-        }
+        protected override IntKey GetKeyForItem(InfoItemType item) 
+            => new IntKey(item.DataID);
     }
 
     public class InfoItemInfo : Attribute
     {
-        private string myTitel;
-        private bool mySortable;
-        private int myOrderID;
+        private readonly string myTitel;
+        private readonly bool mySortable;
+        private readonly int myOrderID;
     }
 
     public struct IntKey

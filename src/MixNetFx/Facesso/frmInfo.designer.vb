@@ -132,7 +132,7 @@ Partial Public Class frmInfo
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(78, 13)
         Me.Label5.TabIndex = 10
-        Me.Label5.Text = "Läuft ab am:"
+        Me.Label5.Text = "LÃ¤uft ab am:"
         '
         'lblVersion
         '

@@ -44,9 +44,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ActiveDev.pfx" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
     <ProjectReference Include="..\ADInfoItem\ADInfoItem.csproj" />
     <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.csproj" />

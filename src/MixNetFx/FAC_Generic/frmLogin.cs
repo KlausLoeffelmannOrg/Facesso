@@ -7,6 +7,11 @@ namespace Facesso
     {
         private UserInfo myLoginInfo;
 
+        public frmLogin()
+        {
+            InitializeComponent();
+        }
+
         public UserInfo Login(SubsidiaryInfoCollection subsidiaries, int preselectSSID, LoginHistory locLoginHistory)
         {
             using (this)
@@ -20,6 +25,7 @@ namespace Facesso
                         if (locSubsidiary.IDSubsidiary == preselectSSID)
                             locPreselectIndex = locCount;
                     }
+
                     cmbSubsidiary.Items.Add(locSubsidiary);
                     locCount++;
                 }
@@ -31,6 +37,7 @@ namespace Facesso
 
                 cmbUsernames.Text = locLoginHistory.LastLoginName;
                 ShowDialog();
+
                 if (DialogResult == System.Windows.Forms.DialogResult.OK)
                     return myLoginInfo;
                 else

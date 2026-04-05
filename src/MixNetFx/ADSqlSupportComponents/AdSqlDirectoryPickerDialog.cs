@@ -6,6 +6,11 @@ namespace ActiveDev.Data.SqlClient
     {
         private string _sqlPathFilename;
 
+        public ADSqlDirectoryPickerDialog()
+        {
+            InitializeComponent();
+        }
+
         public DialogResult ShowDialog(string serverConnection, string extensionFilter)
         {
             DirectoryPicker.BeginUpdate();

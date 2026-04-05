@@ -16,6 +16,11 @@ namespace Facesso
 
         private ADWizardController myWizardController;
 
+        public frmDbSetupWizard()
+        {
+            InitializeComponent();
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);

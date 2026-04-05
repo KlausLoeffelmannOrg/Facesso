@@ -1,4 +1,4 @@
-ï»¿Imports Facesso
+Imports Facesso
 Imports Facesso.Data
 Imports Facesso.Functions
 Imports System.Windows.Forms
@@ -15,10 +15,10 @@ Public Class frmWorkGroupManager
         End If
 
         If locError <> "" Then
-            MessageBox.Show("Datenerfassung ist noch nicht möglich:" & vbNewLine & vbNewLine & _
+            MessageBox.Show("Datenerfassung ist noch nicht mï¿½glich:" & vbNewLine & vbNewLine & _
                             locError & vbNewLine & _
-                            "Bitte führen Sie zunächst die Stammdaten erfassung durch!", _
-            "Datenerfassung nicht möglich", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            "Bitte fï¿½hren Sie zunï¿½chst die Stammdaten erfassung durch!", _
+            "Datenerfassung nicht mï¿½glich", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
         Me.ShowDialog()
@@ -26,7 +26,7 @@ Public Class frmWorkGroupManager
 
     Protected Overrides Sub OnLoad(ByVal e As System.EventArgs)
         MyBase.OnLoad(e)
-        myLabourValueList = SPAccess.GetInstance.LabourValueInfoCollection()
+        myLabourValueList = SPAccess.GetInstance.GetLabourValueInfoCollection()
         BuildLabourValuesForAssignment()
         Me.wglSetup.WorkGroupInfoItems = New WorkGroupInfoItems(True)
         Me.wglSetup.MultiSelect = False
@@ -172,7 +172,7 @@ Public Class frmWorkGroupManager
     Private Sub DeleteWorkGroup()
         Dim locWorkGroup As WorkGroupInfo = wglSetup.FirstSelectedWorkGroup
         If locWorkGroup Is Nothing Then
-            MessageBox.Show("Bitte wählen Sie zunächst eine Produktiv-Site aus der unteren, linken Liste aus", "Fehlende Auswahl!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            MessageBox.Show("Bitte wï¿½hlen Sie zunï¿½chst eine Produktiv-Site aus der unteren, linken Liste aus", "Fehlende Auswahl!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
         Dim locFH As GetFuncWorkGroupDelete = FunctionHandler(Of GetFuncWorkGroupDelete).GetFunctionInstance

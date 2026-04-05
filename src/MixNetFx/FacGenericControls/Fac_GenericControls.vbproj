@@ -135,6 +135,7 @@
     <ProjectReference Include="..\ADInfoItem\ADInfoItem.csproj" />
     <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
     <ProjectReference Include="..\Controls\ADNullableValueControls.vbproj" />
+    <ProjectReference Include="..\FacessoData\Fac_Data.csproj" />
     <ProjectReference Include="..\FacessoData\Fac_Data.vbproj" />
     <ProjectReference Include="..\FAC_Generic\FacGeneric.csproj" />
   </ItemGroup>

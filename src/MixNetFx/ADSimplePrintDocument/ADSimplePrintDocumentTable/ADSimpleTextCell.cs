@@ -27,7 +27,7 @@ namespace ActiveDev.Printing
 
 	public class ADSimpleTextCell : ADSimpleFrameCell
 	{
-		static string[] alignmentControlChars=new string[] 
+		static readonly string[] alignmentControlChars=new string[] 
 				{
 					"{%^<%}", "{%^>%}", "{%^|%}",
 					"{%=<%}", "{%=>%}", "{%=|%}",
@@ -36,11 +36,11 @@ namespace ActiveDev.Printing
 					"{%^:%}", "{%=:%}", "{%_:%}"
 				};
 
-		string myText;
-		Brush myBrush;
-		ADTextCellAlignment myAlignment;
-		StringFormat myStringFormat;
-		bool myWrap;
+        readonly string myText;
+        readonly Brush myBrush;
+        readonly ADTextCellAlignment myAlignment;
+        readonly StringFormat myStringFormat;
+        readonly bool myWrap;
 		ADCellMargins myCellMargins;
 
 		public ADSimpleTextCell(string text, ADFrameCellBorderStyle borderstyle, ADCellMargins cellMargins,

@@ -127,8 +127,8 @@ Public Class WageGroupInfo
         End Set
     End Property
 
-    <ADAutoReportColumn("Stundengrundlohn:", -2, 2)> _
-    Public Overridable Property HourlyRate() As Decimal
+    <ADAutoReportColumn("Stundengrundlohn:", -2, 2)>
+    Public Overridable Property HourlyRate As Decimal
         Get
             Return Me.myHourlyRate
         End Get
@@ -137,8 +137,8 @@ Public Class WageGroupInfo
         End Set
     End Property
 
-    <ADAutoReportColumn("Währung", -2, 3)> _
-    Public Overridable Property CurrencyToken() As String
+    <ADAutoReportColumn("Währung", -2, 3)>
+    Public Overridable Property CurrencyToken As String
         Get
             Return myCurrencyToken
         End Get
@@ -147,7 +147,7 @@ Public Class WageGroupInfo
         End Set
     End Property
 
-    Public Overridable Property WasCurrentFrom() As Date
+    Public Overridable Property WasCurrentFrom As Date
         Get
             Return Me.myWasCurrentFrom
         End Get
@@ -156,7 +156,7 @@ Public Class WageGroupInfo
         End Set
     End Property
 
-    Public Overridable Property WasCurrentTo() As Date
+    Public Overridable Property WasCurrentTo As Date
         Get
             Return Me.myWasCurrentTo
         End Get
@@ -165,19 +165,19 @@ Public Class WageGroupInfo
         End Set
     End Property
 
-    Public Overrides ReadOnly Property DataID() As Integer
+    Public Overrides ReadOnly Property DataID As Integer
         Get
             Return myIDWageGroup
         End Get
     End Property
 
-    Public Overrides ReadOnly Property DisplayName() As String
+    Public Overrides ReadOnly Property DisplayName As String
         Get
             Return WageGroupToken
         End Get
     End Property
 
-    Public ReadOnly Property ListItemText() As String
+    Public ReadOnly Property ListItemText As String
         Get
             Return WageGroupToken
         End Get

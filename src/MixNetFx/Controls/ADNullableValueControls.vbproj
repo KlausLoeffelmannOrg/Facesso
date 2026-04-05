@@ -83,7 +83,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ActiveDev.pfx" />
     <None Update="My Project\MyApplication.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>MyApplication.Designer.vb</LastGenOutput>

@@ -331,7 +331,7 @@ Public Class frmTSImport
                 Dim locShift As Byte
                 Dim locProductionDate As Date
                 Dim locCurrentOrdinalNo As Integer
-                locLabourValues = SPAccess.GetInstance.LabourValueInfoCollection()
+                locLabourValues = SPAccess.GetInstance().GetLabourValueInfoCollection()
 
                 Do While locReader.Read
                     locShift = CByte(locReader.GetInt32(locReader.GetOrdinal("Schicht")))

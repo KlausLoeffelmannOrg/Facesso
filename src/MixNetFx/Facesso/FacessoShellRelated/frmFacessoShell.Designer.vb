@@ -500,7 +500,7 @@ Partial Public Class frmFacessoShell
         Me.TabPage2.Size = New System.Drawing.Size(1118, 669)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Tag = "SYSTEM"
-        Me.TabPage2.Text = "Überblick"
+        Me.TabPage2.Text = "Ãœberblick"
         '
         'SplitContainer1
         '
@@ -785,14 +785,14 @@ Partial Public Class frmFacessoShell
         Me.tsmAnalyses_AnalysisWizard.Name = "tsmAnalyses_AnalysisWizard"
         Me.tsmAnalyses_AnalysisWizard.ShortcutKeys = System.Windows.Forms.Keys.F8
         Me.tsmAnalyses_AnalysisWizard.Size = New System.Drawing.Size(334, 22)
-        Me.tsmAnalyses_AnalysisWizard.Text = "Assistent für &Produktiv-Site-Analysen..."
+        Me.tsmAnalyses_AnalysisWizard.Text = "Assistent fÃ¼r &Produktiv-Site-Analysen..."
         '
         'tsmAnalyses_AnalysisManager
         '
         Me.tsmAnalyses_AnalysisManager.Name = "tsmAnalyses_AnalysisManager"
         Me.tsmAnalyses_AnalysisManager.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F8), System.Windows.Forms.Keys)
         Me.tsmAnalyses_AnalysisManager.Size = New System.Drawing.Size(334, 22)
-        Me.tsmAnalyses_AnalysisManager.Text = "Analysen-Manager für Produktiv-Sites..."
+        Me.tsmAnalyses_AnalysisManager.Text = "Analysen-Manager fÃ¼r Produktiv-Sites..."
         '
         'ToolStripMenuItem9
         '
@@ -828,7 +828,7 @@ Partial Public Class frmFacessoShell
         Me.tsmCostCalculation_IncentiveWageCalculation.Name = "tsmCostCalculation_IncentiveWageCalculation"
         Me.tsmCostCalculation_IncentiveWageCalculation.ShortcutKeys = System.Windows.Forms.Keys.F9
         Me.tsmCostCalculation_IncentiveWageCalculation.Size = New System.Drawing.Size(237, 22)
-        Me.tsmCostCalculation_IncentiveWageCalculation.Text = "&Prämienlohnabrechnung..."
+        Me.tsmCostCalculation_IncentiveWageCalculation.Text = "&PrÃ¤mienlohnabrechnung..."
         '
         'ToolStripSeparator4
         '
@@ -953,7 +953,7 @@ Partial Public Class frmFacessoShell
         '
         Me.SupportToolStripMenuItem.Name = "SupportToolStripMenuItem"
         Me.SupportToolStripMenuItem.Size = New System.Drawing.Size(286, 22)
-        Me.SupportToolStripMenuItem.Text = "Support-Zugang (nur für AD-Support!)"
+        Me.SupportToolStripMenuItem.Text = "Support-Zugang (nur fÃ¼r AD-Support!)"
         '
         'ToolStripSeparator16
         '
@@ -988,7 +988,7 @@ Partial Public Class frmFacessoShell
         '
         Me.tsmHelpAbout.Name = "tsmHelpAbout"
         Me.tsmHelpAbout.Size = New System.Drawing.Size(200, 22)
-        Me.tsmHelpAbout.Text = "&Info über Faceso..."
+        Me.tsmHelpAbout.Text = "&Info Ã¼ber Faceso..."
         '
         'ToolStripMain
         '
@@ -1053,7 +1053,7 @@ Partial Public Class frmFacessoShell
         Me.tsbNextWorkgroup.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbNextWorkgroup.Name = "tsbNextWorkgroup"
         Me.tsbNextWorkgroup.Size = New System.Drawing.Size(23, 22)
-        Me.tsbNextWorkgroup.Text = "Nächste Produktiv-Site"
+        Me.tsbNextWorkgroup.Text = "NÃ¤chste Produktiv-Site"
         '
         'ToolStripSeparator12
         '
@@ -1085,7 +1085,7 @@ Partial Public Class frmFacessoShell
         Me.tsbNextWorkDay.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbNextWorkDay.Name = "tsbNextWorkDay"
         Me.tsbNextWorkDay.Size = New System.Drawing.Size(23, 22)
-        Me.tsbNextWorkDay.Text = "nächster Arbeitstag"
+        Me.tsbNextWorkDay.Text = "nÃ¤chster Arbeitstag"
         '
         'ToolStripSeparator13
         '

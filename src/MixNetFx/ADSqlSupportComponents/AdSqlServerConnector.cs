@@ -16,7 +16,7 @@ namespace ActiveDev.Data.SqlClient
             AssignCheckedStates();
         }
 
-        private void chkUseSXDefaultInstance_CheckedChanged(object sender, EventArgs e)
+        private void ChkUseSXDefaultInstance_CheckedChanged(object sender, EventArgs e)
         {
             if (_skipEvent)
             {
@@ -25,9 +25,11 @@ namespace ActiveDev.Data.SqlClient
             }
 
             _skipEvent = true;
+
             if (chkUseSXDefaultInstance.Checked)
             {
                 _oldInstance = InstanceCombo.Text;
+
                 if (InstanceCombo.Text == "")
                 {
                     InstanceCombo.Text = ".\\SQLEXPRESS";
@@ -52,10 +54,11 @@ namespace ActiveDev.Data.SqlClient
                 else
                     _skipEvent = false;
             }
+
             OnParametersChanged();
         }
 
-        private void optUseMixedMode_CheckedChanged(object sender, EventArgs e)
+        private void OptUseMixedMode_CheckedChanged(object sender, EventArgs e)
         {
             AssignCheckedStates();
             OnParametersChanged();
@@ -87,7 +90,8 @@ namespace ActiveDev.Data.SqlClient
             OnParametersChanged();
         }
 
-        public SqlInstanceItem SqlInstance => InstanceCombo.SqlInstance;
+        public SqlInstanceItem SqlInstance 
+            => InstanceCombo.SqlInstance;
 
         public override string Text
         {
@@ -131,7 +135,7 @@ namespace ActiveDev.Data.SqlClient
             }
         }
 
-        private void txtCredential_TextChanged(object sender, EventArgs e)
+        private void TxtCredential_TextChanged(object sender, EventArgs e)
         {
             OnParametersChanged();
         }

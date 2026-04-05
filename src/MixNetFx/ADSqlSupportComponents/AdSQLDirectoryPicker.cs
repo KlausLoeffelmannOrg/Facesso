@@ -9,7 +9,7 @@ namespace ActiveDev.Data.SqlClient
     {
         private string _connectionString;
         private Collection<DBDriveItem> _drives;
-        private ImageList _imageList;
+        private readonly ImageList _imageList;
         private string _extensionFilter;
         private bool _updateBlocked;
         private bool _updateOnUpdateUnblocked;

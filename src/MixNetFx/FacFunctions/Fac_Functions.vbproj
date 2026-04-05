@@ -211,6 +211,7 @@
     <ProjectReference Include="..\ADSimplePrintDocument\ADSimplePrintDocument.csproj" />
     <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
     <ProjectReference Include="..\Controls\ADNullableValueControls.vbproj" />
+    <ProjectReference Include="..\FacessoData\Fac_Data.csproj" />
     <ProjectReference Include="..\FacessoData\Fac_Data.vbproj" />
     <ProjectReference Include="..\Fac_EntityModel\Fac_EntityModel.vbproj" />
     <ProjectReference Include="..\FacGenericControls\Fac_GenericControls.vbproj" />

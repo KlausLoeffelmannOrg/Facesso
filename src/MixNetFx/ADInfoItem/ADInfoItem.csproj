@@ -37,7 +37,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="ActiveDev.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />

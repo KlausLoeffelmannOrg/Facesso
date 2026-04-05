@@ -1,4 +1,4 @@
-ï»¿Imports System.Windows.Forms
+Imports System.Windows.Forms
 Imports Facesso.Data
 Imports System.Data.SqlClient
 
@@ -21,51 +21,52 @@ Public Class GetFrmLabourValueInfoCenter
     End Property
 
     ''' <summary>
-    ''' Liefert - nach Rollenprüfung - eine Instanz eines UserInfoManagers-Formulars zurück,
-    ''' das als Ausgangspunkt und Funktionsanbieter für die Pflege von Benutzerkonten dient.
+    ''' Liefert - nach Rollenprï¿½fung - eine Instanz eines UserInfoManagers-Formulars zurï¿½ck,
+    ''' das als Ausgangspunkt und Funktionsanbieter fï¿½r die Pflege von Benutzerkonten dient.
     ''' </summary>
-    ''' <remarks>Rückgabewert ist vom Typ (frmInfoItemsManagerGenric'UserInfo)</remarks>
+    ''' <remarks>Rï¿½ckgabewert ist vom Typ (frmInfoItemsManagerGenric'UserInfo)</remarks>
     Public Sub ShowDialog()
-        Dim locLabourValueInfoCollection As LabourValueInfoCollection = SPAccess.GetInstance.LabourValueInfoCollection
+        Dim locLabourValueInfoCollection As LabourValueInfoCollection = SPAccess.GetInstance.GetLabourValueInfoCollection
 
         myFrmInfoItemsManagerGeneric = New frmInfoItemsManagerGeneric(Of LabourValueInfo) _
-                                       (My.Resources.LabourValueInfoCenter_LocalizedTypeName)
+                                       (My.Resources.LabourValueInfoCenter_LocalizedTypeName) With
+        {
+            .InfoItems = locLabourValueInfoCollection,
+            .InfoItemAddDelegate = AddressOf LabourValueInfoAdd,
+            .InfoItemEditDelegate = AddressOf LabourValueInfoEdit,
+            .RefreshItemsDelegate = AddressOf RefreshItems,
+            .InfoItemDeleteDelegate = AddressOf LabourValueInfoDelete,
+            .InfoItemColumnClickDelegate = AddressOf ColumnClick,
+            .Costcenters = SPAccess.GetInstance.CostCenterInfoItems,
+            .AssignCostcenterDelegate = AddressOf AssignCostCenter
+        }
 
-        myFrmInfoItemsManagerGeneric.InfoItems = locLabourValueInfoCollection
-
-        myFrmInfoItemsManagerGeneric.InfoItemAddDelegate = AddressOf LabourValueInfoAdd
-        myFrmInfoItemsManagerGeneric.InfoItemEditDelegate = AddressOf LabourValueInfoEdit
-        myFrmInfoItemsManagerGeneric.RefreshItemsDelegate = AddressOf RefreshItems
-        myFrmInfoItemsManagerGeneric.InfoItemDeleteDelegate = AddressOf LabourValueInfoDelete
-        myFrmInfoItemsManagerGeneric.InfoItemColumnClickDelegate = AddressOf ColumnClick
-        myFrmInfoItemsManagerGeneric.Costcenters = SPAccess.GetInstance.CostCenterInfoItems
-        myFrmInfoItemsManagerGeneric.AssignCostcenterDelegate = AddressOf AssignCostcenter
         myFrmInfoItemsManagerGeneric.ShowDialog()
     End Sub
 
     Friend Sub AssignCostCenter(ByVal Costcenter As CostcenterInfo)
 
         If Costcenter Is Nothing Then
-            MessageBox.Show("Bitte wählen Sie zunächst eine Kostenstelle aus der Liste aus!", _
-                            "Kostenstelle auswählen:", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            MessageBox.Show("Bitte wï¿½hlen Sie zunï¿½chst eine Kostenstelle aus der Liste aus!",
+                            "Kostenstelle auswï¿½hlen:", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
         End If
 
         Dim locSelectedItems As List(Of LabourValueInfo)
         locSelectedItems = myFrmInfoItemsManagerGeneric.SelectedInfoItems
         If locSelectedItems IsNot Nothing Then
-            Dim locDr As DialogResult = MessageBox.Show("Sind Sie sicher, dass Sie die Kostenstellen der markierten Arbeitswerte neu zuordnen wollen?", _
+            Dim locDr As DialogResult = MessageBox.Show("Sind Sie sicher, dass Sie die Kostenstellen der markierten Arbeitswerte neu zuordnen wollen?",
                             "Kostenstellen neu zuordnen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             If locDr = DialogResult.Yes Then
                 For Each locLabourValue As LabourValueInfo In locSelectedItems
                     locLabourValue.IDCostCenter = Costcenter.IDCostCenter
-                    SPAccess.GetInstance.LabourValues_Edit(locLabourValue, _
+                    SPAccess.GetInstance.LabourValues_Edit(locLabourValue,
                             FacessoGeneric.LoginInfo.IDUser)
                 Next
             End If
         Else
-            MessageBox.Show("Bitte wählen Sie die Arbeitswerte aus, denen Sie eine neue Kostenstelle zuordnen wollen!", _
-                            "Kostenstelle auswählen:", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            MessageBox.Show("Bitte wï¿½hlen Sie die Arbeitswerte aus, denen Sie eine neue Kostenstelle zuordnen wollen!",
+                            "Kostenstelle auswï¿½hlen:", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
         RefreshItems()
     End Sub
@@ -80,8 +81,8 @@ Public Class GetFrmLabourValueInfoCenter
         Dim locFH As GetFrmLabourValueInfoEdit = FunctionHandler(Of GetFrmLabourValueInfoEdit).GetFunctionInstance
         If locFH Is Nothing Then Return
         If myFrmInfoItemsManagerGeneric.SelectedInfoItem Is Nothing Then
-            MessageBox.Show(My.Resources.LabourValueInfoCenter_NoSelectedLabourValue_MB_Body, _
-                            My.Resources.LabourValueInfoCenter_NoSelectedLabourValue_MB_Title, _
+            MessageBox.Show(My.Resources.LabourValueInfoCenter_NoSelectedLabourValue_MB_Body,
+                            My.Resources.LabourValueInfoCenter_NoSelectedLabourValue_MB_Title,
                             MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
         End If
@@ -92,8 +93,8 @@ Public Class GetFrmLabourValueInfoCenter
         Dim locFH As GetFuncLabourValueDelete = FunctionHandler(Of GetFuncLabourValueDelete).GetFunctionInstance
         If locFH Is Nothing Then Return
         If myFrmInfoItemsManagerGeneric.SelectedInfoItem Is Nothing Then
-            MessageBox.Show(My.Resources.LabourValueInfoCenter_NoSelectedLabourValue_MB_Body, _
-                            My.Resources.LabourValueInfoCenter_NoSelectedLabourValue_MB_Title, _
+            MessageBox.Show(My.Resources.LabourValueInfoCenter_NoSelectedLabourValue_MB_Body,
+                            My.Resources.LabourValueInfoCenter_NoSelectedLabourValue_MB_Title,
                             MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
         End If
@@ -101,7 +102,7 @@ Public Class GetFrmLabourValueInfoCenter
     End Sub
 
     Friend Sub RefreshItems()
-        Dim locLabourValueInfoCollection As LabourValueInfoCollection = SPAccess.GetInstance.LabourValueInfoCollection(myCurrentSortOrderString)
+        Dim locLabourValueInfoCollection As LabourValueInfoCollection = SPAccess.GetInstance.GetLabourValueInfoCollection(myCurrentSortOrderString)
         myFrmInfoItemsManagerGeneric.InfoItems = locLabourValueInfoCollection
     End Sub
 

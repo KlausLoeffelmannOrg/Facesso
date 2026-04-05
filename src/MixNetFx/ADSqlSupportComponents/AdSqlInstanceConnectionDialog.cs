@@ -7,10 +7,16 @@ namespace ActiveDev.Data.SqlClient
     {
         protected SqlConnectionStringBuilder myConnectionBuilder;
 
+        public ADSqlInstanceConnectionDialog()
+        {
+            InitializeComponent();
+        }
+
         public System.Data.SqlClient.SqlConnectionStringBuilder GetConnectionBuilder()
         {
             myConnectionBuilder = null;
             this.ShowDialog();
+
             if (this.DialogResult == DialogResult.OK)
                 return myConnectionBuilder;
             else
@@ -25,8 +31,11 @@ namespace ActiveDev.Data.SqlClient
 
         protected virtual System.Data.SqlClient.SqlConnectionStringBuilder BuildConnectionBuilder()
         {
-            var builder = new SqlConnectionStringBuilder();
-            builder.DataSource = SqlServerConnector.Text;
+            var builder = new SqlConnectionStringBuilder
+            {
+                DataSource = SqlServerConnector.Text
+            };
+
             if (SqlServerConnector.CredentialMethod == SqlCredentialMethods.WindowsIntegratedSecurity)
             {
                 builder.IntegratedSecurity = true;
@@ -37,6 +46,7 @@ namespace ActiveDev.Data.SqlClient
                 builder.UserID = SqlServerConnector.CredentialParameters.UserID;
                 builder.Password = SqlServerConnector.CredentialParameters.Password;
             }
+
             return builder;
         }
 
@@ -47,6 +57,7 @@ namespace ActiveDev.Data.SqlClient
                 myConnectionBuilder = null;
                 return;
             }
+
             myConnectionBuilder = BuildConnectionBuilder();
             txtLoginString.Text = myConnectionBuilder.ToString();
         }
@@ -56,22 +67,23 @@ namespace ActiveDev.Data.SqlClient
             OnParametersChanged();
         }
 
-        private void btnOK_Click(object sender, System.EventArgs e)
+        private void BtnOK_Click(object sender, System.EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
         }
 
-        private void btnCancel_Click(object sender, System.EventArgs e)
+        private void BtnCancel_Click(object sender, System.EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }
 
-        private void btnTestConnection_Click(object sender, System.EventArgs e)
+        private void BtnTestConnection_Click(object sender, System.EventArgs e)
         {
             using (var connection = new System.Data.SqlClient.SqlConnection(myConnectionBuilder.ToString()))
             {
                 string msg = "Die Verbindung konnte erfolgreich hergestellt werden!";
                 var icon = MessageBoxIcon.Exclamation;
+
                 try
                 {
                     connection.Open();
@@ -82,6 +94,7 @@ namespace ActiveDev.Data.SqlClient
                         "\r\n\r\n" + ex.Message + "\r\n\r\n" + ex.StackTrace;
                     icon = MessageBoxIcon.Error;
                 }
+
                 MessageBox.Show(msg, "Verbindungstest:", MessageBoxButtons.OK, icon);
             }
         }

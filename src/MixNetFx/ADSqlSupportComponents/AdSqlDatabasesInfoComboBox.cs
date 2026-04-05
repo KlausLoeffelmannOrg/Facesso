@@ -71,8 +71,11 @@ namespace ActiveDev.Data.SqlClient
                 if (CredentialMethod == SqlCredentialMethods.MixedMode && CredentialParameters == null)
                     throw new ADSqlConnectionBuilderException("Connection-String benötigt bei MixedMode-Authentifizierung ein instanziertes SqlMixedModeCredentialParameters-Objekt.");
 
-                var builder = new SqlConnectionStringBuilder();
-                builder.DataSource = SqlInstance.ToString();
+                var builder = new SqlConnectionStringBuilder
+                {
+                    DataSource = SqlInstance.ToString()
+                };
+
                 if (CredentialMethod == SqlCredentialMethods.WindowsIntegratedSecurity)
                 {
                     builder.IntegratedSecurity = true;
@@ -174,9 +177,9 @@ namespace ActiveDev.Data.SqlClient
 
     public class SqlDatabaseItem
     {
-        private string _database;
-        private int _dbId;
-        private DateTime _createDate;
+        private readonly string _database;
+        private readonly int _dbId;
+        private readonly DateTime _createDate;
 
         internal SqlDatabaseItem(string databaseName, int dbId, DateTime createDate)
         {

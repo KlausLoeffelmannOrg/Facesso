@@ -13,7 +13,7 @@ namespace ActiveDev.Printing
 	public class ADAlignableLine : ADPrintableObjectBase
 	{
 		float myRestWidthToLineEnd;
-		Collection<IADPrintableObjectPart> myPrintableObjectParts = new Collection<IADPrintableObjectPart>();
+        readonly Collection<IADPrintableObjectPart> myPrintableObjectParts = new Collection<IADPrintableObjectPart>();
 		ADTextAlignment myAlignment;
 		float myCurrentWidth;
 
@@ -126,7 +126,7 @@ namespace ActiveDev.Printing
 	public class ADPrintableTextBlock : ADPrintableObjectBase
 	{
 		Collection<ADAlignableLine> myAlignableLines;
-		Collection<IADPrintableObjectPart> myObjectParts = new Collection<IADPrintableObjectPart>();
+        readonly Collection<IADPrintableObjectPart> myObjectParts = new Collection<IADPrintableObjectPart>();
 		ADTextAlignment myAlignment=ADTextAlignment.Left;
 
 		public ADPrintableTextBlock(ADTextAlignment alignment)
@@ -225,7 +225,7 @@ namespace ActiveDev.Printing
 
 	public class ADPrintableSpaceLine : ADPrintableObjectBase
 	{
-		Font myFont;
+        readonly Font myFont;
 
 		public ADPrintableSpaceLine(Font font)
 		{

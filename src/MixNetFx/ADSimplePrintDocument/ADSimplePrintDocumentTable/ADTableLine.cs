@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using System.Drawing;
 
 namespace ActiveDev.Printing
 {
 	class ADTableLine : ADPrintableObjectBase
 	{
-		Collection<IADTableCell> myTableLine;
+        readonly Collection<IADTableCell> myTableLine;
 
-		bool myOnPageWidthExceededThrowException;
+        readonly bool myOnPageWidthExceededThrowException;
 
 		public ADTableLine()
 		{

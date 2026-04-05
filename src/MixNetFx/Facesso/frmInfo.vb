@@ -20,7 +20,7 @@ Public Class frmInfo
         lblSerial.Text = FacessoGeneric.SerialNumber
         Dim locExpires As String
         If FacessoGeneric.FacessoLicenseInfo.LicenseInfo.MonthsLimited = 0 Then
-            locExpires = "Lizensiert für unbegrenzte Dauer"
+            locExpires = "Lizensiert fÃ¼r unbegrenzte Dauer"
         Else
             locExpires = FacessoGeneric.FacessoLicenseInfo.BestBefore.AddMonths(FacessoGeneric.FacessoLicenseInfo.LicenseInfo.MonthsLimited).ToLongDateString
         End If

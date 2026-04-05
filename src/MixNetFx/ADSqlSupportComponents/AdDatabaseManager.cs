@@ -5,8 +5,8 @@ namespace ActiveDev.Data.SqlClient
 {
     public class ADSqlDatabaseManager
     {
-        private string _sqlInstanceConnString;
-        private string _databaseName;
+        private readonly string _sqlInstanceConnString;
+        private readonly string _databaseName;
         private string _filenameOnSqlServer;
         private bool _databaseExists;
         private bool _lastSqlResult;

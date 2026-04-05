@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <OutputType>WinExe</OutputType>
@@ -10,7 +10,6 @@
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
-    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DocumentationFile>Facesso.xml</DocumentationFile>
@@ -22,9 +21,6 @@
     <DocumentationFile>Facesso.xml</DocumentationFile>
     <NoWarn>42353,42354,42355</NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>ActiveDev.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <OutputPath>bin\x86\Debug\</OutputPath>
@@ -103,8 +99,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ActiveDev.pfx" />
-    <None Include="Facesso_TemporaryKey.pfx" />
     <None Update="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -124,8 +118,7 @@
     <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.csproj" />
     <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
     <ProjectReference Include="..\Controls\ADNullableValueControls.vbproj" />
-    <ProjectReference Include="..\FacessoConfig\FacessoConfig.vbproj" />
-    <ProjectReference Include="..\FacessoData\Fac_Data.vbproj" />
+    <ProjectReference Include="..\FacessoData\Fac_Data.csproj" />
     <ProjectReference Include="..\FacFunctions\Fac_Functions.vbproj" />
     <ProjectReference Include="..\FacGenericControls\Fac_GenericControls.vbproj" />
     <ProjectReference Include="..\FacInterfaces\FacInterfaces.vbproj" />
@@ -142,13 +135,6 @@
     <PackageReference Include="System.Reactive.Linq" Version="6.1.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
-  </ItemGroup>
-  <ItemGroup Label="Compile items now included by globbing that were not in the original project file">
-    <Compile Remove="frmLegatroBase.vb" />
-    <Compile Remove="frmLegatroBase.Designer.vb" />
-  </ItemGroup>
-  <ItemGroup Label="EmbeddedResource items now included by globbing that were not in the original project file">
-    <EmbeddedResource Remove="frmLegatroBase.resx" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />

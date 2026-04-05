@@ -2,14 +2,13 @@ using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.Common;
-using System.Windows.Forms;
 
 namespace ActiveDev.Data.SqlClient
 {
     public class ADSqlInstanceInfoComboBox : ADSqlInfoComboBase
     {
         private SqlInstanceItems _sqlInstances;
-        private SqlInstanceItem _sqlInstance;
+        private readonly SqlInstanceItem _sqlInstance;
 
         public ADSqlInstanceInfoComboBox() : base()
         {
@@ -67,10 +66,10 @@ namespace ActiveDev.Data.SqlClient
 
     public class SqlInstanceItem
     {
-        private string _serverName;
-        private string _instanceName;
-        private bool _isClustered;
-        private string _version;
+        private readonly string _serverName;
+        private readonly string _instanceName;
+        private readonly bool _isClustered;
+        private readonly string _version;
 
         internal SqlInstanceItem(string serverName, string instanceName, bool isClustered, string version)
         {

@@ -240,9 +240,9 @@ namespace Facesso
             }
 
             var locLoginForm = new frmLogin();
-            UserInfo locLoginInfo = locLoginForm.Login(Subsidiaries, AppSettings.LastSubsidiaryID, locLoginHistory);
-            if (locLoginInfo == null)
-                throw new FacessoLoginException("Login-Abbruch führte zu Ausnahme (kein kritischer Fehler).", null);
+
+            UserInfo locLoginInfo = locLoginForm.Login(Subsidiaries, AppSettings.LastSubsidiaryID, locLoginHistory) 
+                ?? throw new FacessoLoginException("Login-Abbruch führte zu Ausnahme (kein kritischer Fehler).", null);
 
             myLoginInfo = locLoginInfo;
             FacessoUserSettings = XmlFacessoApplicationSettings.FromFacessoDatabase(LoginInfo.IDUser, LoginInfo.IDSubsidiary);
@@ -252,7 +252,8 @@ namespace Facesso
             AppSettings.LastSubsidiaryID = myLoginInfo.IDSubsidiary;
         }
 
-        public static string RoleList => global::Facesso.My.Resources.Resources.RolesList;
+        public static string RoleList 
+            => global::Facesso.My.Resources.Resources.RolesList;
     }
 
     [Serializable]

@@ -46,8 +46,7 @@ namespace ActiveDev.Data.SqlClient
 
         protected virtual void PopulateItemsInternal()
         {
-            if (this.Items != null)
-                this.Items.Clear();
+            this.Items?.Clear();
         }
 
         public void PopulateInfoItemsManually()

@@ -4,6 +4,11 @@ namespace Facesso
 {
     public partial class ucFacessoPathSettings : UserControl
     {
+        public ucFacessoPathSettings()
+        {
+            InitializeComponent();
+        }
+
         public string InstallationFolder
         {
             get { return txtInstallationDirectory.Text; }

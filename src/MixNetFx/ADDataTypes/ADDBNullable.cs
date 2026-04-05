@@ -17,6 +17,7 @@ namespace ActiveDev
             where PrimType : IComparable
         {
             var locNullable = new ADDBNullable<PrimType>();
+
             if (value == null || value is DBNull)
             {
                 return locNullable;
@@ -26,6 +27,7 @@ namespace ActiveDev
             {
                 locNullable.myValue = typedValue;
                 locNullable.myNotNull = true;
+
                 return locNullable;
             }
 
@@ -33,6 +35,7 @@ namespace ActiveDev
             {
                 locNullable.myValue = (PrimType)Convert.ChangeType(value, typeof(PrimType));
                 locNullable.myNotNull = true;
+
                 return locNullable;
             }
             catch (Exception)
@@ -70,133 +73,87 @@ namespace ActiveDev
                 return;
             }
 
-            myNotNull = !ReferenceEquals(value, null);
+            myNotNull = value is object;
             myValue = value;
         }
 
-        public bool IsNull
-        {
-            get { return !myNotNull; }
-        }
+        public bool IsNull 
+            => !myNotNull;
 
-        public bool HasValue
-        {
-            get { return myNotNull; }
-        }
+        public bool HasValue 
+            => myNotNull;
 
         [XmlIgnore]
-        public object Value
-        {
-            get { return IsNull ? (object)DBNull.Value : myValue; }
-        }
+        public object Value 
+            => IsNull 
+                ? (object)DBNull.Value 
+                : myValue;
 
-        public PrimType TypedValue
-        {
-            get
-            {
-                if (IsNull)
-                {
-                    throw new InvalidCastException("Can't cast DBNull to its native type");
-                }
+        public PrimType TypedValue 
+            => IsNull ? throw new InvalidCastException("Can't cast DBNull to its native type") : myValue;
 
-                return myValue;
-            }
-        }
-
-        public static implicit operator ADDBNullable<PrimType>(PrimType value)
-        {
-            return new ADDBNullable<PrimType>(value);
-        }
+        public static implicit operator ADDBNullable<PrimType>(PrimType value) 
+            => new ADDBNullable<PrimType>(value);
 
         public static implicit operator ADDBNullable<PrimType>(DBNull value)
-        {
-            return new ADDBNullable<PrimType>();
-        }
+            => new ADDBNullable<PrimType>();
 
-        public static implicit operator PrimType(ADDBNullable<PrimType> value)
-        {
-            if (value.IsNull)
-            {
-                return default(PrimType);
-            }
+        public static implicit operator PrimType(ADDBNullable<PrimType> value) 
+            => value.IsNull 
+                ? default(PrimType) 
+                : value.myValue;
 
-            return value.myValue;
-        }
-
-        public static bool operator ==(ADDBNullable<PrimType> value1, PrimType value2)
-        {
-            return value1.CompareTo(value2) == 0;
-        }
+        public static bool operator ==(ADDBNullable<PrimType> value1, PrimType value2) 
+            => value1.CompareTo(value2) == 0;
 
         public static bool operator ==(ADDBNullable<PrimType> value1, ADDBNullable<PrimType> value2)
-        {
-            return value1.CompareTo(value2.Value) == 0;
-        }
+            => value1.CompareTo(value2.Value) == 0;
 
         public static bool operator !=(ADDBNullable<PrimType> value1, PrimType value2)
-        {
-            return value1.CompareTo(value2) != 0;
-        }
+            => value1.CompareTo(value2) != 0;
 
         public static bool operator !=(ADDBNullable<PrimType> value1, ADDBNullable<PrimType> value2)
-        {
-            return value1.CompareTo(value2.Value) != 0;
-        }
+            => value1.CompareTo(value2.Value) != 0;
 
         public static bool operator >(ADDBNullable<PrimType> value1, PrimType value2)
-        {
-            return value1.CompareTo(value2) == 1;
-        }
+            => value1.CompareTo(value2) == 1;
 
         public static bool operator >(ADDBNullable<PrimType> value1, ADDBNullable<PrimType> value2)
-        {
-            return value1.CompareTo(value2.Value) == 1;
-        }
+            => value1.CompareTo(value2.Value) == 1;
 
         public static bool operator <(ADDBNullable<PrimType> value1, PrimType value2)
-        {
-            return value1.CompareTo(value2) == -1;
-        }
+            => value1.CompareTo(value2) == -1;
 
         public static bool operator <(ADDBNullable<PrimType> value1, ADDBNullable<PrimType> value2)
-        {
-            return value1.CompareTo(value2.Value) == -1;
-        }
+            => value1.CompareTo(value2.Value) == -1;
 
-        public int CompareTo(object obj)
-        {
-            if (obj.GetType() == typeof(DBNull))
-            {
-                return IsNull ? 0 : 1;
-            }
-
-            return myValue.CompareTo(obj);
-        }
+        public int CompareTo(object obj) 
+            => obj.GetType() == typeof(DBNull)
+                ? IsNull ? 0 : 1
+                : myValue.CompareTo(obj);
 
         public override bool Equals(object obj)
         {
-            if (obj is ADDBNullable<PrimType> nullableValue)
+            switch (obj)
             {
-                return this == nullableValue;
+                case ADDBNullable<PrimType> nullableValue:
+                    return this == nullableValue;
+                case PrimType typedValue:
+                    return this == typedValue;
+                default:
+                    return false;
             }
-
-            if (obj is PrimType typedValue)
-            {
-                return this == typedValue;
-            }
-
-            return false;
         }
 
-        public override int GetHashCode()
-        {
-            return IsNull ? 0 : myValue.GetHashCode();
-        }
+        public override int GetHashCode() 
+            => IsNull 
+                ? 0 
+                : myValue.GetHashCode();
 
-        public override string ToString()
-        {
-            return IsNull ? string.Empty : myValue.ToString();
-        }
+        public override string ToString() 
+            => IsNull 
+                ? string.Empty 
+            : myValue.ToString();
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {

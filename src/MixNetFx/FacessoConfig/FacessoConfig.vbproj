@@ -47,9 +47,6 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\FacessoData\DatenModelUpdater.vb">
-      <Link>DatenModelUpdater.vb</Link>
-    </Compile>
     <Compile Include="..\Facesso\frmError.designer.vb">
       <Link>frmError.designer.vb</Link>
       <DependentUpon>frmError.vb</DependentUpon>
@@ -90,6 +87,7 @@
     <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.csproj" />
     <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.csproj" />
     <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
+    <ProjectReference Include="..\FacessoData\Fac_Data.csproj" />
     <ProjectReference Include="..\FacGenericControls\Fac_GenericControls.vbproj" />
     <ProjectReference Include="..\FAC_Generic\FacGeneric.csproj" />
   </ItemGroup>

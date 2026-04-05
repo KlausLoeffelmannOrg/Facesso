@@ -76,8 +76,8 @@ namespace ActiveDev.Printing
 	public class ADPrintableTextPart : ADPrintableObjectPartBase
 	{
 		ADFieldString myText;
-		Font myFont;
-		Brush myBrush;
+        readonly Font myFont;
+        readonly Brush myBrush;
 
 		public ADPrintableTextPart(ADFieldString text, Font font, Brush brush)
 		{
