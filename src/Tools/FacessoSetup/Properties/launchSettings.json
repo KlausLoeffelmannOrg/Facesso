@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Default": {
+      "commandName": "Project",
+      "commandLineArgs": "--setup --instance \".\\SQLEXPRESS\" --db-name \"Facesso\" --admin-user \"klauslo\""
+    }
+  }
+}
