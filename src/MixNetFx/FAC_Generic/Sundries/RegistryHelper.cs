@@ -10,7 +10,14 @@ namespace Facesso
         internal const string VERSION_GUID = "{face2470-bae0-20cd-b579-08002b30bfeb}";
         internal const string CLASS_VERSION_GUID = "{face0100-bae0-20cd-b579-08002b30bfeb}";
 
-        internal static readonly DateTime EARLIEST_DEFAULT_DATE = new DateTime(2011, 1, 1);
+        /// <summary>
+        /// Universal installation serial for testing purposes.
+        /// When this value is stored as the SerialNumber in the registry, the hardware
+        /// component check is skipped and the license is always considered valid.
+        /// </summary>
+        internal const string UNIVERSAL_INST_SERIAL_MIT_FOR_TESTING = "{face2407-6913-1068-1111-43002b30bfeb}";
+
+        internal static readonly DateTime EARLIEST_DEFAULT_DATE = new DateTime(2026, 1, 1);
 
         internal static bool IsRegistered()
         {

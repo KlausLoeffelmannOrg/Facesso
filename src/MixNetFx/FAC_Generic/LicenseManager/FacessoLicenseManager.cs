@@ -15,8 +15,34 @@ namespace Facesso
                 myLicenseInfo.Fallback(1, 2);
         }
 
+        /// <summary>
+        /// Returns true when the registry SerialNumber matches the universal test serial
+        /// <see cref="RegistryHelper.UNIVERSAL_INST_SERIAL_MIT_FOR_TESTING"/>.
+        /// In that case all hardware-based and expiry checks are bypassed.
+        /// </summary>
+        private static bool IsUniversalTestSerial()
+        {
+            string serial = RegistryHelper.SerialNumber;
+            if (serial == null) return false;
+            string normalized = serial
+                .Replace("-", "").Replace("{", "").Replace("}", "")
+                .Trim().ToLowerInvariant();
+            string universal = RegistryHelper.UNIVERSAL_INST_SERIAL_MIT_FOR_TESTING
+                .Replace("-", "").Replace("{", "").Replace("}", "")
+                .Trim().ToLowerInvariant();
+            return normalized == universal;
+        }
+
+        protected override bool HasValidSerialNo()
+        {
+            if (IsUniversalTestSerial()) return true;
+            return base.HasValidSerialNo();
+        }
+
         public override bool IsLicensed()
         {
+            if (IsUniversalTestSerial()) return true;
+
             if (DateTime.Now < myInstallDate)
             {
                 try
