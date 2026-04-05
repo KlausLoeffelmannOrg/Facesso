@@ -9,6 +9,12 @@ Public Module RegistryHelper
     Friend Const EARLIEST_DEFAULT_DATE As Date = #1/1/2025#
     Friend Const UNIVERSAL_INST_SERIAL_MIT_FOR_TESTING = "{face2407-6913-1068-1111-43002b30bfeb}"
 
+    Friend Function IsUniversalTestingSerial(ByVal serialNumber As String) As Boolean
+        Return String.Equals(If(serialNumber, String.Empty).Trim(),
+                             UNIVERSAL_INST_SERIAL_MIT_FOR_TESTING,
+                             StringComparison.OrdinalIgnoreCase)
+    End Function
+
     Friend Function IsRegistered() As Boolean
 
         Dim isRegisteredRetValue As Boolean = CBool(Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\ActiveDev\Facesso\Classes",

@@ -28,6 +28,7 @@ Public Class ADLicenseManager
     Private myCalcSerialNumber As Byte()
     Protected myInstallDate As Date
     Protected myLastRunDate As Date
+    Protected ReadOnly myOriginalSerialNumber As String
 
     ''' <summary>
     ''' Erstellt eine neue Instanz dieser Klasse.
@@ -42,13 +43,15 @@ Public Class ADLicenseManager
     Sub New(ByVal prgGUID As Guid, ByVal InstallationDate As Date, ByVal LastRunDate As Date, _
             ByVal LastRegisteredDate As Date, ByVal SerialNumber As String)
 
-        'Falls wir noch Leerzeichen darin haben, diese mit Nummern ersetzen.
-        SerialNumber = SerialNumber.Replace(" "c, "0"c)
-        SerialNumber = SerialNumber.Replace("-", "")
+        'Originale Seriennummer für Universal-Testing-Bypass merken.
+        myOriginalSerialNumber = SerialNumber
 
         If SerialNumber Is Nothing Then
             SerialNumber = New String("A"c, 30)
         Else
+            'Falls wir noch Leerzeichen darin haben, diese mit Nummern ersetzen.
+            SerialNumber = SerialNumber.Replace(" "c, "0"c)
+            SerialNumber = SerialNumber.Replace("-", "")
             If SerialNumber.Length < 30 Then
                 SerialNumber = New String("0"c, 30 - SerialNumber.Length) + SerialNumber
             End If
