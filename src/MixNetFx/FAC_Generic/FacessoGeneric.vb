@@ -317,6 +317,15 @@ Public Module FacessoGeneric
     End Function
 
     Public Sub Login()
+
+        ' Check for silent admin logon command line switch
+        For Each arg As String In Environment.GetCommandLineArgs()
+            If String.Equals(arg, "/silentAdminLogon", StringComparison.OrdinalIgnoreCase) Then
+                PerformSilentLogin("Admin", "P@$$w0rd")
+                Return
+            End If
+        Next
+
         Dim locLoginHistory As LoginHistory = AppSettings.LoginHistory
 
         If locLoginHistory Is Nothing Then
@@ -336,6 +345,34 @@ Public Module FacessoGeneric
             Throw up
         End If
         myLoginInfo = locLoginInfo
+        FacessoUserSettings = XmlFacessoApplicationSettings.FromFacessoDatabase(LoginInfo.IDUser, LoginInfo.IDSubsidiary)
+        AppSettings.LoginHistory.LastLoginDate = DateTime.Now()
+        AppSettings.LoginHistory.Add(myLoginInfo.Username)
+        AppSettings.LastLoginName = myLoginInfo.Username
+        AppSettings.LastSubsidiaryID = myLoginInfo.IDSubsidiary
+    End Sub
+
+    ''' <summary>
+    ''' Performs a silent login without showing the login dialog.
+    ''' Used when the /silentAdminLogon command line switch is provided.
+    ''' </summary>
+    Private Sub PerformSilentLogin(ByVal Username As String, ByVal Password As String)
+        ' Use the first available subsidiary
+        Dim locSubsidiaryId As Integer = 0
+        For Each locSub As SubsidiaryInfo In Subsidiaries
+            locSubsidiaryId = locSub.IDSubsidiary
+            Exit For
+        Next
+
+        myLoginInfo = New UserInfo(locSubsidiaryId, Username, Password, SQLConnectionString)
+        If Not myLoginInfo.Authenticated Then
+            Dim reason As String = "Unknown"
+            If myLoginInfo.LoggedInFailedReason.HasValue Then
+                reason = myLoginInfo.LoggedInFailedReason.ToString()
+            End If
+            Throw New FacessoLoginException("Silent admin login failed: " & reason, Nothing)
+        End If
+
         FacessoUserSettings = XmlFacessoApplicationSettings.FromFacessoDatabase(LoginInfo.IDUser, LoginInfo.IDSubsidiary)
         AppSettings.LoginHistory.LastLoginDate = DateTime.Now()
         AppSettings.LoginHistory.Add(myLoginInfo.Username)

@@ -39,6 +39,13 @@ AS
 	[IDWorkGroupInternal]=@IDWorkGroupInternal AND
 	[ProductionDate]=@ProductionDate AND [Shift]=@Shift
 
+	IF @TotalReferenceIWT IS NULL
+		BEGIN
+			SET @TotalReferenceIWT=-1
+			SET @DegreeOfTime=-2
+			SET @DegreeOfTimeAdj=-2
+		END
+	ELSE
 	IF @TotalEffectiveIWT IS NULL 
 		BEGIN
 			SET @TotalAttendanceTime=-1
@@ -60,7 +67,13 @@ AS
 		ELSE
 			BEGIN
 				SET @DegreeOfTime=(@TotalReferenceIWT/@TotalEffectiveIWT)*100
-				SET @DegreeOfTimeAdj=(@TotalReferenceIWT/@TotalEffectiveAdjIWT)*100
+				IF @TotalEffectiveAdjIWT IS NULL
+					SET @DegreeOfTimeAdj=-2
+				ELSE
+					IF @TotalEffectiveAdjIWT=0
+						SET @DegreeOfTimeAdj=-1
+					ELSE
+						SET @DegreeOfTimeAdj=(@TotalReferenceIWT/@TotalEffectiveAdjIWT)*100
 			END
 		
 	-- UPDATE ProductionData
