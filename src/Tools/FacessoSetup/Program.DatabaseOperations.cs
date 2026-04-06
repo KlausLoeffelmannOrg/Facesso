@@ -150,14 +150,18 @@ namespace FacessoSetup
             return 0;
         }
 
-        static int RunAddAdmin(string connStr, string adminUser)
+        static int RunAddAdmin(string connStr, string adminUser, string adminPassword)
         {
             Console.WriteLine();
             Console.WriteLine("FacessoSetup - Add Administrator");
             Console.WriteLine("================================");
 
-            if (!TryPromptNewPassword($"Enter password for '{adminUser}'", "Add-admin", out string password))
-                return 1;
+            string password = adminPassword;
+            if (password == null)
+            {
+                if (!TryPromptNewPassword($"Enter password for '{adminUser}'", "Add-admin", out password))
+                    return 1;
+            }
 
             try
             {

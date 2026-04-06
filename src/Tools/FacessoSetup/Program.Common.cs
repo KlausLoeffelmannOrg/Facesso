@@ -559,6 +559,8 @@ namespace FacessoSetup
             Console.WriteLine("  --conn-str, -c <cs>          Full ADO.NET connection string");
             Console.WriteLine("                               (overrides --instance + --db-name for --setup)");
             Console.WriteLine("  --admin-user <name>          Admin username for --setup  (default: Administrator)");
+            Console.WriteLine("  --admin-password <pwd>       Admin password for --setup / --add-admin");
+            Console.WriteLine("                               (skips interactive prompt)");
             Console.WriteLine("  --demo-time-offset <+/-h:mm> Override the demo conversion time offset");
             Console.WriteLine("  --demo-jitter-seconds <n>    Override the demo conversion jitter in seconds");
             Console.WriteLine("  --demo-target-date <date>    Override the target last booking day (yyyy-mm-dd)");
