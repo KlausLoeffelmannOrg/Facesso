@@ -1,4 +1,5 @@
 using System;
+using System.Data.SqlClient;
 
 namespace FacessoSetup
 {
@@ -168,6 +169,11 @@ namespace FacessoSetup
                         if (!TryReadOptionValue(args, ref i, args[i], out addAdminUser)) return 1;
                         break;
 
+                    case "--add-default-admin":
+                        addAdminUser = "Admin";
+                        adminPassword = "P@$$w0rd";
+                        break;
+
                     default:
                         // Positional argument: treat as backup file for backward compatibility.
                         if (!args[i].StartsWith("-") && backupFile == null)
@@ -267,8 +273,14 @@ namespace FacessoSetup
             string databaseConnStr = null;
             if (hasDbOperation)
             {
-                databaseConnStr = connStr;
-                if (databaseConnStr == null)
+                if (connStr != null)
+                {
+                    var builder = new SqlConnectionStringBuilder(connStr);
+                    if (string.IsNullOrEmpty(builder.InitialCatalog))
+                        builder.InitialCatalog = dbName;
+                    databaseConnStr = builder.ConnectionString;
+                }
+                else
                 {
                     if (dbName == null)
                     {

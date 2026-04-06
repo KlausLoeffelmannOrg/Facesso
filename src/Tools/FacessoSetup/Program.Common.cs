@@ -550,6 +550,7 @@ namespace FacessoSetup
             Console.WriteLine("                               the current Facesso DB into demo data");
             Console.WriteLine("  --add-admin <name>           Prompt for a password and add/promote");
             Console.WriteLine("                               a database administrator user");
+            Console.WriteLine("  --add-default-admin          Add 'Admin' user with default password");
             Console.WriteLine("  --silent                     Do not prompt during --convert-to-demo;");
             Console.WriteLine("                               use CLI values or built-in defaults");
             Console.WriteLine();
