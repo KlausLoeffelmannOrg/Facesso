@@ -11,12 +11,21 @@ Public NotInheritable Class FacessoLicenseManager
 
     Sub New(ByVal prgGuid As Guid, ByVal InstallDate As Date, ByVal LastRunDate As Date, ByVal LastRegisteredDate As Date, ByVal SerialNumber As String)
         MyBase.New(prgGuid, InstallDate, LastRunDate, LastRegisteredDate, SerialNumber)
+        If UsesUniversalTestingSerial() Then
+            myLicenseInfo = New ADLicenseInfo(CByte(FacessoVersion.FacessoEnterprise), 0, Byte.MaxValue, Byte.MaxValue, UShort.MaxValue, UShort.MaxValue)
+            Exit Sub
+        End If
+
         If Not HasValidSerialNo() Then
             myLicenseInfo.Fallback(1, 2)
         End If
     End Sub
 
     Public Overrides Function IsLicensed() As Boolean
+        If UsesUniversalTestingSerial() Then
+            Return True
+        End If
+
         If Date.Now < myInstallDate Then
             Try
                 'Wir müssen auf CURRENT_USER auf jeden Fall setzen, und...
@@ -85,6 +94,18 @@ Public NotInheritable Class FacessoLicenseManager
         Else
             Return MyBase.IsLicensed
         End If
+    End Function
+
+    Protected Overrides Function HasValidSerialNo() As Boolean
+        If UsesUniversalTestingSerial() Then
+            Return True
+        End If
+
+        Return MyBase.HasValidSerialNo()
+    End Function
+
+    Private Function UsesUniversalTestingSerial() As Boolean
+        Return RegistryHelper.IsUniversalTestingSerial(myOriginalSerialNumber)
     End Function
 
     Public ReadOnly Property VersionPermissionInfo() As FacessoVersionPermissionInfo

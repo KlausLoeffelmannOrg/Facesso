@@ -23,20 +23,20 @@ namespace ActiveDev.Printing
 		private Queue<IADPrintableObject> locQueuedObjects;
 		private PrintDocumentEx myPrintDocument;
 		private frmPreview myPrintPreviewDialog;
-		private String myDocumentName;
+		private readonly String myDocumentName;
 		private Graphics myGraphics;
-		private ADSimplePrintDocumentDefaultPages myDefaultPages;
+		private readonly ADSimplePrintDocumentDefaultPages myDefaultPages;
 		private ADSimplePrintDocumentDefaultPage myCurrentDefaultPage;
-		private String myPrinterName;
+		private readonly String myPrinterName;
 		private float myPageWidth;
 		private float myPageHeight;
 		private bool myFirstPageFlag;
 		private int myCurrentPageNo;
-		private char[] mySeparator ={ ' ', '-' };
+		private readonly char[] mySeparator ={ ' ', '-' };
 
 		private bool myTableHeaderBuildInProgress;
 		private bool myTableBodyPrintInProgress;
-		private bool myCurrentTableHeaderToLarge;
+		private readonly bool myCurrentTableHeaderToLarge;
 		private ADPrintableObjects myTableHeaderLinesToRepeat;
 
 		public ADSimplePrintDocument(String documentName) 

@@ -47,6 +47,11 @@
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="ZI\**" />
+    <EmbeddedResource Remove="ZI\**" />
+    <None Remove="ZI\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -122,7 +127,6 @@
     <None Update="Kannegiesser SQL\Kannegiesser.dbml.layout">
       <DependentUpon>Kannegiesser.dbml</DependentUpon>
     </None>
-    <None Include="ActiveDev.pfx" />
     <None Update="Kannegiesser SQL\Kannegiesser.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Kannegiesser.designer.vb</LastGenOutput>
@@ -161,9 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ZI\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Kannegiesser SQL\SQL Scripte\CreateProc_GetArtHist.SQL" />

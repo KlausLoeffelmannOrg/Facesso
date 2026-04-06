@@ -83,7 +83,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ActiveDev.pfx" />
     <None Update="My Project\MyApplication.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>MyApplication.Designer.vb</LastGenOutput>
@@ -93,7 +92,7 @@
     <AppDesigner Include="My Project\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ActiveDevelop.SqlTools\ActiveDevelop.SqlTools.vbproj" />
-    <ProjectReference Include="..\ADDataTypes\ADDataTypes.vbproj" />
+    <ProjectReference Include="..\ActiveDevelop.SqlTools\ActiveDevelop.SqlTools.csproj" />
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
   </ItemGroup>
 </Project>

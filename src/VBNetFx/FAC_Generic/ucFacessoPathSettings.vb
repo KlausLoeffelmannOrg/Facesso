@@ -45,8 +45,8 @@ Public Class ucFacessoPathSettings
         If locDR = Windows.Forms.DialogResult.OK Then
             Return locFB.SelectedPath
         Else
-            Dim locDr2 As DialogResult = MessageBox.Show("Soll der Pfad zurückgesetzt werden?", _
-                 "Pfad zurücksetzen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Dim locDr2 As DialogResult = MessageBox.Show("Soll der Pfad zurÃ¼ckgesetzt werden?", _
+                 "Pfad zurÃ¼cksetzen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             If locDr2 = DialogResult.Yes Then
                 Return ""
             End If
@@ -55,7 +55,7 @@ Public Class ucFacessoPathSettings
     End Function
 
     Private Sub btnChooseUpdateDirectory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChooseUpdateDirectory.Click
-        Dim locPath As String = GetPath("Wählen Sie das Verzeichnis, in dem Facesso-Updates zentral abgelegt werden sollen.")
+        Dim locPath As String = GetPath("WÃ¤hlen Sie das Verzeichnis, in dem Facesso-Updates zentral abgelegt werden sollen.")
         If locPath Is Nothing Then
             Return
         End If
@@ -63,7 +63,7 @@ Public Class ucFacessoPathSettings
     End Sub
 
     Private Sub btnChooseSharedFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChooseSharedFolder.Click
-        Dim locPath As String = GetPath("Wählen Sie das Verzeichnis, in dem verteilte Daten wie beispielsweise Schnittstellen-Definitionen abgelegt werden sollen.")
+        Dim locPath As String = GetPath("WÃ¤hlen Sie das Verzeichnis, in dem verteilte Daten wie beispielsweise Schnittstellen-Definitionen abgelegt werden sollen.")
         If locPath Is Nothing Then
             Return
         End If

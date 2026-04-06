@@ -15,9 +15,9 @@ namespace ActiveDev.Printing
 		ADFieldString myRightText;
 		ADFieldString myCenterText;
 		float myTextHeight;
-		Font myFont;
-		Brush myBrush;
-		float myLineWidth;
+        readonly Font myFont;
+        readonly Brush myBrush;
+        readonly float myLineWidth;
 		bool myIsHeader;
 
 		public ADFooterHeaderLine(ADFieldString leftText, ADFieldString rightText, ADFieldString centerText, Font font, Brush brush, float lineWidth)

@@ -25,14 +25,14 @@ Namespace My
             'Queue-Process zum Anzeigen.
             Me.DoEvents()
 
-            'Ist Setup ordnungsgemäß durchgeführt?
+            'Ist Setup ordnungsgemÃ¤ÃŸ durchgefÃ¼hrt?
             If Not FacessoGeneric.IsSetup Then
-                MessageBox.Show("Facesso kann keinen Hinweis darauf finden, dass die Software bereits mit FacessoConfig konfiguriert wurde." & vbNewLine & "Bitte starten Sie FacessoConfig aus dem Start-Menü (ActiveDevelop/Facesso). Sie benötigen für die Konfiguration lokale Administratorrechte.",
+                MessageBox.Show("Facesso kann keinen Hinweis darauf finden, dass die Software bereits mit FacessoConfig konfiguriert wurde." & vbNewLine & "Bitte starten Sie FacessoConfig aus dem Start-MenÃ¼ (ActiveDevelop/Facesso). Sie benÃ¶tigen fÃ¼r die Konfiguration lokale Administratorrechte.",
                                 "Facesso-Konfigurations:", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 e.Cancel = True
             Else
 
-                'Ist Datenbank-Setup ordnungsgemäß durchgeführt?
+                'Ist Datenbank-Setup ordnungsgemÃ¤ÃŸ durchgefÃ¼hrt?
                 FacessoGeneric.InitializeComponent()
                 If Not FacessoGeneric.IsDatabaseSetup Then
                     Dim locDbSetupWizard As New frmDbSetupWizard
@@ -44,7 +44,7 @@ Namespace My
                     Dim dmUpdater As New Facesso.Data.DatenModelUpdater(FacessoGeneric.SQLConnectionString, True)
                     If dmUpdater.CheckIfUpdateRequired Then
                         'TODO: An Facesso-Meldungen anpassen
-                        MessageBox.Show("Es müssen Änderungen an der Datenbank vorgenommen werden. Alle Facesso-Programme müssen - mit Ausnahme Ihres Programms - beendet werden. Klicken sie auf OK, wenn dieses erfolgt ist.", "WICHTIGER HINWEIS")
+                        MessageBox.Show("Es mÃ¼ssen Ã„nderungen an der Datenbank vorgenommen werden. Alle Facesso-Programme mÃ¼ssen - mit Ausnahme Ihres Programms - beendet werden. Klicken sie auf OK, wenn dieses erfolgt ist.", "WICHTIGER HINWEIS")
                         Try
                             dmUpdater.PerformSchemaUpdate()
                         Catch ex As Exception
@@ -56,10 +56,10 @@ Namespace My
 
                     'Wenn wir hier landen, ist alles gut!
                     If Not e.Cancel Then
-                        'Checken, ob die Lizenz gültig ist und nur dann das Login durchführen.
+                        'Checken, ob die Lizenz gÃ¼ltig ist und nur dann das Login durchfÃ¼hren.
                         'Facesso-Generic ist eine Singleton-Klasse, die die Lizenzinformation ermittelt,
-                        'überprüft, speichert, die Info hält, welche Benutzer was machen darf,
-                        'das Login-durchführt und den angemeldeten Benutzer gegen die Lizenzinfo abgleicht.
+                        'Ã¼berprÃ¼ft, speichert, die Info hÃ¤lt, welche Benutzer was machen darf,
+                        'das Login-durchfÃ¼hrt und den angemeldeten Benutzer gegen die Lizenzinfo abgleicht.
                         FacessoGeneric.SetupLicenseInfoAndLogin()
                     End If
                 End If

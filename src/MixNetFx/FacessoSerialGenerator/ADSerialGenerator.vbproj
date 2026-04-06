@@ -62,8 +62,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ADDataTypes\ADDataTypes.vbproj" />
-    <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.vbproj" />
-    <ProjectReference Include="..\ADSundries\ADSundries.vbproj" />
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
+    <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.csproj" />
+    <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
   </ItemGroup>
 </Project>
