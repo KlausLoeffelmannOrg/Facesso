@@ -11,12 +11,8 @@ namespace FacessoSetup
     {
         static int RunRestore(string backupFile, string instance, ref string dbName, string connStr)
         {
-            if (!File.Exists(backupFile))
-            {
-                WriteError($"Backup file not found: {backupFile}");
-                return 1;
-            }
-
+            // Don't validate the file locally — the path is from SQL Server's perspective,
+            // which may be inside a Docker container or on a remote machine.
             backupFile = Path.GetFullPath(backupFile);
 
             Console.WriteLine("FacessoSetup - Restore");

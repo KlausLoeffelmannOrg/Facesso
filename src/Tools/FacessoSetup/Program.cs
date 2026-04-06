@@ -22,6 +22,7 @@ namespace FacessoSetup
             string dbName = "Facesso";
             string connStr = null;
             string adminUser = "Administrator";
+            string adminPassword = null;
             bool listUsers = false;
             bool deleteUsers = false;
             bool removeExistingUserAdmins = false;
@@ -76,6 +77,10 @@ namespace FacessoSetup
 
                     case "--admin-user":
                         if (!TryReadOptionValue(args, ref i, args[i], out adminUser)) return 1;
+                        break;
+
+                    case "--admin-password":
+                        if (!TryReadOptionValue(args, ref i, args[i], out adminPassword)) return 1;
                         break;
 
                     case "--remove-existing-user-admins":
@@ -187,6 +192,12 @@ namespace FacessoSetup
                 return 1;
             }
 
+            if (adminPassword != null && adminPassword.Length < 6)
+            {
+                WriteError("--admin-password must be at least 6 characters.");
+                return 1;
+            }
+
             if (subsidiaryName != null && subsidiaryName.Length == 0)
             {
                 WriteError("--change-subsidiary-name requires a non-empty value.");
@@ -277,8 +288,12 @@ namespace FacessoSetup
 
             if (doSetup)
             {
-                if (!TryPromptNewPassword($"Enter new password for '{adminUser}'", "Setup", out string password))
-                    return 1;
+                string password = adminPassword;
+                if (password == null)
+                {
+                    if (!TryPromptNewPassword($"Enter new password for '{adminUser}'", "Setup", out password))
+                        return 1;
+                }
 
                 int rc = RunSetup(databaseConnStr, adminUser, password);
                 if (rc != 0) return rc;
@@ -286,7 +301,7 @@ namespace FacessoSetup
 
             if (addAdminUser != null)
             {
-                int rc = RunAddAdmin(databaseConnStr, addAdminUser);
+                int rc = RunAddAdmin(databaseConnStr, addAdminUser, adminPassword);
                 if (rc != 0) return rc;
             }
 
