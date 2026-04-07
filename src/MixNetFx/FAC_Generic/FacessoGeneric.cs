@@ -224,6 +224,16 @@ namespace Facesso
 
         public static void Login()
         {
+            // Check for silent admin logon command line switch
+            foreach (string arg in Environment.GetCommandLineArgs())
+            {
+                if (string.Equals(arg, "/silentAdminLogon", StringComparison.OrdinalIgnoreCase))
+                {
+                    PerformSilentLogin("Admin", "P@$$w0rd");
+                    return;
+                }
+            }
+
             LoginHistory locLoginHistory = AppSettings.LoginHistory;
 
             if (locLoginHistory == null)
@@ -245,6 +255,36 @@ namespace Facesso
                 ?? throw new FacessoLoginException("Login-Abbruch führte zu Ausnahme (kein kritischer Fehler).", null);
 
             myLoginInfo = locLoginInfo;
+            FacessoUserSettings = XmlFacessoApplicationSettings.FromFacessoDatabase(LoginInfo.IDUser, LoginInfo.IDSubsidiary);
+            AppSettings.LoginHistory.LastLoginDate = DateTime.Now;
+            AppSettings.LoginHistory.Add(myLoginInfo.Username);
+            AppSettings.LastLoginName = myLoginInfo.Username;
+            AppSettings.LastSubsidiaryID = myLoginInfo.IDSubsidiary;
+        }
+
+        /// <summary>
+        /// Performs a silent login without showing the login dialog.
+        /// Used when the /silentAdminLogon command line switch is provided.
+        /// </summary>
+        private static void PerformSilentLogin(string username, string password)
+        {
+            // Use the first available subsidiary
+            int locSubsidiaryId = 0;
+            foreach (SubsidiaryInfo locSub in Subsidiaries)
+            {
+                locSubsidiaryId = locSub.IDSubsidiary;
+                break;
+            }
+
+            myLoginInfo = new UserInfo(locSubsidiaryId, username, password, SQLConnectionString);
+            if (!myLoginInfo.Authenticated)
+            {
+                string reason = myLoginInfo.LoggedInFailedReason.HasValue
+                    ? myLoginInfo.LoggedInFailedReason.ToString()
+                    : "Unknown";
+                throw new FacessoLoginException("Silent admin login failed: " + reason, null);
+            }
+
             FacessoUserSettings = XmlFacessoApplicationSettings.FromFacessoDatabase(LoginInfo.IDUser, LoginInfo.IDSubsidiary);
             AppSettings.LoginHistory.LastLoginDate = DateTime.Now;
             AppSettings.LoginHistory.Add(myLoginInfo.Username);
