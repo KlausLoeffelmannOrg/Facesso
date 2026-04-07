@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Facesso\Facesso.vbproj" />
-    <ProjectReference Include="..\FAC_Generic\FacGeneric.vbproj" />
   </ItemGroup>
 
   <ItemGroup>
