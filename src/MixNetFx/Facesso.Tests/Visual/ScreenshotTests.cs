@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Xunit;
 
-namespace Facesso.Tests
+namespace Facesso.Tests.Visual
 {
     /// <summary>
     /// Starts the Facesso application with /silentAdminLogon,

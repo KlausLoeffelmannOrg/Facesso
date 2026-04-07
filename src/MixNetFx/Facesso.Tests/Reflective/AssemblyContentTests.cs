@@ -1,30 +1,33 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using Xunit;
 
-namespace Facesso.Tests
+namespace Facesso.Tests.Reflective
 {
     /// <summary>
-    /// Loads the FacGeneric assembly via reflection, enumerates all types and members,
+    /// Loads the Faccesso assembly via reflection, enumerates all types and members,
     /// and compares the result against a baseline text file.
     /// If no baseline exists yet, it creates one for future comparison.
     /// </summary>
     public class AssemblyContentTests
     {
-        private static readonly string BaselineFolder =
-            Path.Combine(Path.GetDirectoryName(typeof(AssemblyContentTests).Assembly.Location)!, "Baselines");
+        private static readonly string BaselineFolder = GetBaselineDirectory();
+        private static readonly string BaselineFileName = "Facesso_AssemblyContent.txt";
 
-        private static readonly string BaselineFileName = "FacGeneric_AssemblyContent.txt";
+        private static string GetBaselineDirectory([CallerFilePath] string callerFilePath = "") 
+            => Path.Combine(
+                Path.GetDirectoryName(callerFilePath)!,
+                "Baselines");
 
         [Fact]
-        public void FacGeneric_AssemblyContent_MatchesBaseline()
+        public void Facesso_AssemblyContent_MatchesBaseline()
         {
-            // Load the FacGeneric assembly through a well-known type it contains.
-            var assembly = typeof(FacessoGeneric).Assembly;
+            // Load the Facesso Application assembly through a well-known type it contains.
+            var assembly = typeof(frmFacessoShell).Assembly;
             var currentContent = BuildAssemblyContentTable(assembly);
 
             Directory.CreateDirectory(BaselineFolder);

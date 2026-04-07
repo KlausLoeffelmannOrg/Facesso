@@ -124,7 +124,7 @@ Public Class frmLabourValueInfoAddEditView
         Me.ndbTe.MinValue = 0
         Me.ndbTe.Name = "ndbTe"
         Me.ndbTe.NullString = "* --- *"
-        Me.ndbTe.NullValueMessage = "Bitte bestimmen Sie den nach REFA berechneten te-Wert für diesen Arbeitswert!"
+        Me.ndbTe.NullValueMessage = "Bitte bestimmen Sie den nach REFA berechneten te-Wert fï¿½r diesen Arbeitswert!"
         Me.ndbTe.Size = New System.Drawing.Size(429, 23)
         Me.ndbTe.TabIndex = 4
         Me.ndbTe.Text = "te: "
@@ -166,10 +166,10 @@ Public Class frmLabourValueInfoAddEditView
         Me.ntbDimension.Multiline = False
         Me.ntbDimension.Name = "ntbDimension"
         Me.ntbDimension.NullString = "* --- *"
-        Me.ntbDimension.NullValueMessage = "Bitte bestimmen Sie die Maßeinheit für diesen te-Wert!"
+        Me.ntbDimension.NullValueMessage = "Bitte bestimmen Sie die Maï¿½einheit fï¿½r diesen te-Wert!"
         Me.ntbDimension.Size = New System.Drawing.Size(429, 23)
         Me.ntbDimension.TabIndex = 5
-        Me.ntbDimension.Text = "Maßeinheit: "
+        Me.ntbDimension.Text = "Maï¿½einheit: "
         Me.ntbDimension.ValueAreaLength = 257
         '
         'ncbIsActive

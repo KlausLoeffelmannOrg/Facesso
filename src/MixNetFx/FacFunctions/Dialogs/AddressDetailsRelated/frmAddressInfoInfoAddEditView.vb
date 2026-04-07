@@ -287,7 +287,7 @@ Friend Class frmAddressDetailsInfoAddEditView
         Me.ntbCountryCode.NullValueMessage = Nothing
         Me.ntbCountryCode.Size = New System.Drawing.Size(266, 23)
         Me.ntbCountryCode.TabIndex = 8
-        Me.ntbCountryCode.Text = "Länderkennung/Land: "
+        Me.ntbCountryCode.Text = "Lï¿½nderkennung/Land: "
         Me.ntbCountryCode.ValueAreaLength = 79
         '
         'ntbCity
@@ -350,7 +350,7 @@ Friend Class frmAddressDetailsInfoAddEditView
         Me.ntbStreet.NullValueMessage = Nothing
         Me.ntbStreet.Size = New System.Drawing.Size(544, 23)
         Me.ntbStreet.TabIndex = 5
-        Me.ntbStreet.Text = "Straße: "
+        Me.ntbStreet.Text = "Straï¿½e: "
         Me.ntbStreet.ValueAreaLength = 357
         '
         'ntbTitel
