@@ -98,13 +98,17 @@ namespace Facesso.Tests.Visual
 
             TestRunLogger.Trace($"Starting Facesso.exe from: {exePath}");
 
-            _facessoProcess = Process.Start(new ProcessStartInfo
+            var diagLogPath = Path.Combine(OutputFolder, "FacessoDiag.log");
+            var startInfo = new ProcessStartInfo
             {
                 FileName = exePath,
                 Arguments = "/silentAdminLogon",
                 UseShellExecute = false,
                 RedirectStandardError = true
-            });
+            };
+            startInfo.EnvironmentVariables["FACESSO_DIAG_LOG"] = diagLogPath;
+
+            _facessoProcess = Process.Start(startInfo);
             Assert.NotNull(_facessoProcess);
 
             TestRunLogger.Trace($"{_facessoProcess.ProcessName} is now running.");
@@ -114,6 +118,37 @@ namespace Facesso.Tests.Visual
 
             if (mainWindowHandle == IntPtr.Zero)
             {
+                if (_facessoProcess.HasExited)
+                {
+                    string stderr = "";
+                    try { stderr = _facessoProcess.StandardError.ReadToEnd(); }
+                    catch { }
+
+                    string diagLog = "";
+                    try
+                    {
+                        if (File.Exists(diagLogPath))
+                            diagLog = File.ReadAllText(diagLogPath);
+                    }
+                    catch { }
+
+                    TestRunLogger.Info($"Facesso.exe exited with code {_facessoProcess.ExitCode}.");
+                    if (!string.IsNullOrEmpty(stderr))
+                        TestRunLogger.Info($"stderr: {stderr}");
+                    if (!string.IsNullOrEmpty(diagLog))
+                        TestRunLogger.Info($"Diagnostic log:\n{diagLog}");
+
+                    var msg = $"Facesso.exe crashed on startup (exit code {_facessoProcess.ExitCode}).";
+                    if (!string.IsNullOrEmpty(stderr))
+                        msg += $"\n\nStandard Error:\n{stderr}";
+                    if (!string.IsNullOrEmpty(diagLog))
+                        msg += $"\n\nDiagnostic Log ({diagLogPath}):\n{diagLog}";
+                    if (string.IsNullOrEmpty(stderr) && string.IsNullOrEmpty(diagLog))
+                        msg += " No diagnostic output captured.";
+
+                    Assert.Fail(msg);
+                }
+
                 TestRunLogger.Trace("mainWindowHandle was invalid — looking for dialogs.");
                 HandleMissingMainWindow();
                 return;
@@ -584,11 +619,18 @@ namespace Facesso.Tests.Visual
             {
                 process.Refresh();
 
-                if (process.MainWindowHandle != IntPtr.Zero && IsWindow(process.MainWindowHandle))
-                    return process.MainWindowHandle;
-
                 if (process.HasExited)
                     break;
+
+                try
+                {
+                    if (process.MainWindowHandle != IntPtr.Zero && IsWindow(process.MainWindowHandle))
+                        return process.MainWindowHandle;
+                }
+                catch (InvalidOperationException)
+                {
+                    break; // Process exited between HasExited check and MainWindowHandle access
+                }
 
                 Thread.Sleep(250);
             }

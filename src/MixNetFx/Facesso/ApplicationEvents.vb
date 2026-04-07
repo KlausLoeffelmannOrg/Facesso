@@ -14,6 +14,21 @@ Namespace My
         End Sub
 
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
+            'Enable diagnostic file logging when FACESSO_DIAG_LOG is set (e.g. in containers)
+            Dim diagLogPath = Environment.GetEnvironmentVariable("FACESSO_DIAG_LOG")
+            If Not String.IsNullOrEmpty(diagLogPath) Then
+                Try
+                    IO.Directory.CreateDirectory(IO.Path.GetDirectoryName(diagLogPath))
+                    Diagnostics.Trace.Listeners.Add(New Diagnostics.TextWriterTraceListener(diagLogPath))
+                    Diagnostics.Trace.AutoFlush = True
+                Catch
+                End Try
+            End If
+
+            Diagnostics.Trace.TraceInformation("Facesso startup beginning.")
+            Diagnostics.Trace.TraceInformation("UserInteractive={0}, CommandLine={1}",
+                Environment.UserInteractive, Environment.CommandLine)
+
             'Deutsche Kultur erzwingen im Bedarfsfall
             Globalization.CultureInfo.DefaultThreadCurrentCulture = New Globalization.CultureInfo("de-DE")
             Globalization.CultureInfo.DefaultThreadCurrentUICulture = New Globalization.CultureInfo("de-DE")
@@ -27,7 +42,9 @@ Namespace My
             End If
 
             'Ist Setup ordnungsgemäß durchgeführt?
+            Diagnostics.Trace.TraceInformation("Checking FacessoGeneric.IsSetup...")
             If Not FacessoGeneric.IsSetup Then
+                Diagnostics.Trace.TraceWarning("Facesso is not configured.")
                 If Environment.UserInteractive Then
                     MessageBox.Show("Facesso kann keinen Hinweis darauf finden, dass die Software bereits mit FacessoConfig konfiguriert wurde." & vbNewLine & "Bitte starten Sie FacessoConfig aus dem Start-Menü (ActiveDevelop/Facesso). Sie benötigen für die Konfiguration lokale Administratorrechte.",
                                     "Facesso-Konfigurations:", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -38,8 +55,11 @@ Namespace My
             Else
 
                 'Ist Datenbank-Setup ordnungsgemäß durchgeführt?
+                Diagnostics.Trace.TraceInformation("Initializing FacessoGeneric...")
                 FacessoGeneric.InitializeComponent()
+                Diagnostics.Trace.TraceInformation("Checking IsDatabaseSetup...")
                 If Not FacessoGeneric.IsDatabaseSetup Then
+                    Diagnostics.Trace.TraceWarning("Database is not configured.")
                     If Environment.UserInteractive Then
                         Dim locDbSetupWizard As New frmDbSetupWizard
                         locDbSetupWizard.ShowDialog()
@@ -50,15 +70,19 @@ Namespace My
                 Else
 
                     'Schema-Update im Bedarfsfall.
+                    Diagnostics.Trace.TraceInformation("Checking schema update...")
                     Dim dmUpdater As New Facesso.Data.DatenModelUpdater(FacessoGeneric.SQLConnectionString, True)
                     If dmUpdater.CheckIfUpdateRequired Then
+                        Diagnostics.Trace.TraceInformation("Schema update required, performing...")
                         If Environment.UserInteractive Then
                             'TODO: An Facesso-Meldungen anpassen
                             MessageBox.Show("Es müssen Änderungen an der Datenbank vorgenommen werden. Alle Facesso-Programme müssen - mit Ausnahme Ihres Programms - beendet werden. Klicken sie auf OK, wenn dieses erfolgt ist.", "WICHTIGER HINWEIS")
                         End If
                         Try
                             dmUpdater.PerformSchemaUpdate()
+                            Diagnostics.Trace.TraceInformation("Schema update completed.")
                         Catch ex As Exception
+                            Diagnostics.Trace.TraceError("Schema update failed: " & ex.ToString())
                             If Environment.UserInteractive Then
                                 MessageBox.Show("Das Datenmodell konnte nicht angepasst werden.Grund:" & ex.Message, "Hinweis")
                             Else
@@ -71,22 +95,22 @@ Namespace My
 
                     'Wenn wir hier landen, ist alles gut!
                     If Not e.Cancel Then
-                        'Checken, ob die Lizenz gültig ist und nur dann das Login durchführen.
-                        'Facesso-Generic ist eine Singleton-Klasse, die die Lizenzinformation ermittelt,
-                        'überprüft, speichert, die Info hält, welche Benutzer was machen darf,
-                        'das Login-durchführt und den angemeldeten Benutzer gegen die Lizenzinfo abgleicht.
+                        Diagnostics.Trace.TraceInformation("Setup OK. Performing login...")
                         FacessoGeneric.SetupLicenseInfoAndLogin()
+                        Diagnostics.Trace.TraceInformation("Login completed successfully.")
                     End If
                 End If
             End If
 
             'Entsorgen ohne Wenn und Aber!
             If locSplash IsNot Nothing Then locSplash.Dispose()
+            Diagnostics.Trace.TraceInformation("Facesso startup finished. Cancel={0}", e.Cancel)
         End Sub
 
         Private Sub MyApplication_UnhandledException(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.UnhandledExceptionEventArgs) Handles Me.UnhandledException
 
             If Not Environment.UserInteractive Then
+                Diagnostics.Trace.TraceError("Unhandled exception (non-interactive): " & e.Exception.ToString())
                 Console.Error.WriteLine("Unhandled exception: " & e.Exception.ToString())
                 Environment.ExitCode = 1
                 Exit Sub
