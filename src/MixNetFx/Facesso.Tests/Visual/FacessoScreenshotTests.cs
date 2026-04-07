@@ -579,23 +579,22 @@ namespace Facesso.Tests.Visual
                 {
                     EnumThreadWindows(thread.Id, (hWnd, _) =>
                     {
-                        if (!IsWindowVisible(hWnd))
-                            return true;
-
+                        // Skip IsWindowVisible check — in containers, windows
+                        // exist but are never marked visible (no desktop session).
                         var titleBuf = new StringBuilder(512);
                         GetWindowText(hWnd, titleBuf, titleBuf.Capacity);
+                        string title = titleBuf.ToString();
+
+                        if (string.IsNullOrEmpty(title))
+                            return true;
 
                         var classBuf = new StringBuilder(256);
                         GetClassName(hWnd, classBuf, classBuf.Capacity);
 
-                        GetWindowRect(hWnd, out var r);
-                        if (r.Width <= 0 || r.Height <= 0)
-                            return true;
-
                         windows.Add(new WindowInfo
                         {
                             Handle = hWnd,
-                            Title = titleBuf.ToString(),
+                            Title = title,
                             ClassName = classBuf.ToString()
                         });
 
@@ -624,18 +623,65 @@ namespace Facesso.Tests.Visual
 
                 try
                 {
+                    // Try the standard .NET API first (works on interactive desktops)
                     if (process.MainWindowHandle != IntPtr.Zero && IsWindow(process.MainWindowHandle))
                         return process.MainWindowHandle;
                 }
                 catch (InvalidOperationException)
                 {
-                    break; // Process exited between HasExited check and MainWindowHandle access
+                    break;
                 }
+
+                // Fallback: enumerate thread windows directly (works in non-interactive
+                // containers where MainWindowHandle stays 0 even though windows exist)
+                var hWnd = FindMainWindowViaThreads(process);
+                if (hWnd != IntPtr.Zero)
+                    return hWnd;
 
                 Thread.Sleep(250);
             }
 
             return IntPtr.Zero;
+        }
+
+        /// <summary>
+        /// Walks every thread of the given process looking for a top-level WinForms
+        /// window whose title contains "Facesso". Returns the first match.
+        /// </summary>
+        private static IntPtr FindMainWindowViaThreads(Process process)
+        {
+            IntPtr found = IntPtr.Zero;
+
+            try
+            {
+                foreach (ProcessThread thread in process.Threads)
+                {
+                    EnumThreadWindows(thread.Id, (hWnd, _) =>
+                    {
+                        var titleBuf = new StringBuilder(512);
+                        GetWindowText(hWnd, titleBuf, titleBuf.Capacity);
+                        string title = titleBuf.ToString();
+
+                        if (title.IndexOf("Facesso", StringComparison.OrdinalIgnoreCase) >= 0
+                            && IsWindow(hWnd))
+                        {
+                            found = hWnd;
+                            return false; // stop enumeration
+                        }
+
+                        return true;
+                    }, IntPtr.Zero);
+
+                    if (found != IntPtr.Zero)
+                        break;
+                }
+            }
+            catch
+            {
+                // Process may have exited during enumeration
+            }
+
+            return found;
         }
 
         private static string FindFacessoExe()
