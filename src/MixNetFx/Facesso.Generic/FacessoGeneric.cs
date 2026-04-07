@@ -303,13 +303,22 @@ namespace Facesso
             }
 
             FacessoUserSettings = XmlFacessoApplicationSettings.FromFacessoDatabase(LoginInfo.IDUser, LoginInfo.IDSubsidiary);
+
+            // Ensure LoginHistory exists (first-ever login won't have one yet)
+            if (AppSettings.LoginHistory == null)
+            {
+                var loginHistory = new LoginHistory();
+                FacessoGlobalSettings.Settings.SetItem("LoginHistory", loginHistory);
+                AppSettings.LoginHistory = loginHistory;
+            }
+
             AppSettings.LoginHistory.LastLoginDate = DateTime.Now;
             AppSettings.LoginHistory.Add(myLoginInfo.Username);
             AppSettings.LastLoginName = myLoginInfo.Username;
             AppSettings.LastSubsidiaryID = myLoginInfo.IDSubsidiary;
         }
 
-        public static string RoleList 
+        public static string RoleList
             => global::Facesso.My.Resources.Resources.RolesList;
     }
 
