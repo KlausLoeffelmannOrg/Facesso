@@ -6,6 +6,11 @@ namespace ActiveDev.Data.SqlClient
     {
         private bool _thisControlChangedParameters;
 
+        public ADDatabaseConnectionDialog()
+        {
+            InitializeComponent();
+        }
+
         public string Title
         {
             get => this.Text;

@@ -32,10 +32,11 @@
     <Compile Update="ADSimplePrintDocumentClasses\PrintDocumentEx.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="UserInterface\frmPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UserInterface\frmPreview.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>frmPreview.resx</DependentUpon>
+      <DependentUpon>frmPreview.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -43,8 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="UserInterface\frmPreview.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>frmPreview.Designer.cs</LastGenOutput>
+      <DependentUpon>frmPreview.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

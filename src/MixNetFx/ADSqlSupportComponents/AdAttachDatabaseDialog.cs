@@ -8,6 +8,11 @@ namespace ActiveDev.Data.SqlClient
         private string _connectionString;
         private string _currentlySelectedFile;
 
+        public ADAttachDatabaseDialog()
+        {
+            InitializeComponent();
+        }
+
         public string GetSqlDatabaseFile()
         {
             this.ShowDialog();

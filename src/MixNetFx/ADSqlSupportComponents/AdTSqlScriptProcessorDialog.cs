@@ -8,6 +8,11 @@ namespace ActiveDev.Data.SqlClient
     {
         private AdTSqlScriptProcessor _scriptProcessor;
 
+        public ADTsqlScriptProcessorDialog()
+        {
+            InitializeComponent();
+        }
+
         public void HandleDialog(AdTSqlScriptProcessor scriptProcessor)
         {
             _scriptProcessor = scriptProcessor;
