@@ -86,28 +86,32 @@ namespace Facesso
     {
         public SubsidiaryInfoCollection(string connectionString) : base()
         {
-            var locConnection = new SqlConnection(FacessoGeneric.SQLConnectionString);
-            using (locConnection)
+            var connection = new SqlConnection(FacessoGeneric.SQLConnectionString);
+
+            using (connection)
             {
-                locConnection.Open();
-                var locCommand = new SqlCommand("SELECT * FROM [Subsidiaries] ORDER by [SubsidiaryName]", locConnection);
-                SqlDataReader locDR = locCommand.ExecuteReader();
-                while (locDR.Read())
+                connection.Open();
+                var command = new SqlCommand("SELECT * FROM [Subsidiaries] ORDER by [SubsidiaryName]", connection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    var locSi = new SubsidiaryInfo();
-                    locSi.IDSubsidiary = locDR.GetInt32(locDR.GetOrdinal("IDSubsidiary"));
-                    locSi.SubsidiaryName = locDR.GetString(locDR.GetOrdinal("SubsidiaryName"));
-                    locSi.Street = locDR.GetString(locDR.GetOrdinal("Street"));
-                    locSi.Zip = locDR.GetString(locDR.GetOrdinal("Zip"));
-                    locSi.City = locDR.GetString(locDR.GetOrdinal("City"));
-                    locSi.CountryCode = locDR.GetString(locDR.GetOrdinal("CountryCode"));
-                    locSi.Country = locDR.GetString(locDR.GetOrdinal("Country"));
-                    locSi.PrimaryPhone = locDR.GetString(locDR.GetOrdinal("PrimaryPhone"));
+                    var locSi = new SubsidiaryInfo
+                    {
+                        IDSubsidiary = reader.GetInt32(reader.GetOrdinal("IDSubsidiary")),
+                        SubsidiaryName = reader.GetString(reader.GetOrdinal("SubsidiaryName")),
+                        Street = reader.GetString(reader.GetOrdinal("Street")),
+                        Zip = reader.GetString(reader.GetOrdinal("Zip")),
+                        City = reader.GetString(reader.GetOrdinal("City")),
+                        CountryCode = reader.GetString(reader.GetOrdinal("CountryCode")),
+                        Country = reader.GetString(reader.GetOrdinal("Country")),
+                        PrimaryPhone = reader.GetString(reader.GetOrdinal("PrimaryPhone"))
+                    };
+
                     Add(locSi);
                 }
             }
         }
 
         protected override int GetKeyForItem(SubsidiaryInfo item) => item.IDSubsidiary;
-    }
-}
+    }}

@@ -13,10 +13,13 @@ namespace Facesso
     {
         private const string ENTITY_CONNSTRING_METADATA =
             "res://*/FacessoModel.csdl|res://*/FacessoModel.ssdl|res://*/FacessoModel.msl";
-
+        
+        private const string SuperUser = "Admin";
+        private const string SuperUserPasswordForLoginTestingPurposesOnlyNoThreat = "P@$$w0rd";
+        
         private static FacessoLicenseManager myFacessoLicense;
         private static string mySqlConnectionString;
-        private static string myEntityConnectionString;
+        private static readonly string myEntityConnectionString;
         private static UserInfo myLoginInfo;
         private static SubsidiaryInfoCollection mySubsidiaries;
         private static FacessoApplicationSettings mySettings;
@@ -56,41 +59,45 @@ namespace Facesso
 
         private static void SaveXMLSettingsToDB(XmlFacessoApplicationSettings settings)
         {
-            var locConnection = new SqlConnection(FacessoGeneric.SQLConnectionString);
-            locConnection.Open();
-            using (locConnection)
+            var connection = new SqlConnection(FacessoGeneric.SQLConnectionString);
+            connection.Open();
+            using (connection)
             {
-                var locCmd = new SqlCommand();
-                locCmd.Connection = locConnection;
-                locCmd.CommandType = CommandType.StoredProcedure;
-                locCmd.CommandText = "ApplicationSettings_Set";
+                var command = new SqlCommand
+                {
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "ApplicationSettings_Set"
+                };
 
-                locCmd.Parameters.Add("@IDApplicationSettings", SqlDbType.Int).Value = settings.IDApplicationSettings;
+                command.Parameters.Add("@IDApplicationSettings", SqlDbType.Int).Value = settings.IDApplicationSettings;
                 if (settings.IsGlobal == true)
                 {
-                    locCmd.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = 0;
-                    locCmd.Parameters.Add("@IDUser", SqlDbType.Int).Value = 0;
+                    command.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = 0;
+                    command.Parameters.Add("@IDUser", SqlDbType.Int).Value = 0;
                 }
                 else
                 {
-                    locCmd.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = LoginInfo.IDSubsidiary;
-                    locCmd.Parameters.Add("@IDUser", SqlDbType.Int).Value = LoginInfo.IDUser;
+                    command.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = LoginInfo.IDSubsidiary;
+                    command.Parameters.Add("@IDUser", SqlDbType.Int).Value = LoginInfo.IDUser;
                 }
-                locCmd.Parameters.Add("@IsGlobal", SqlDbType.Bit).Value = settings.IsGlobal;
-                locCmd.Parameters.Add("@Settings", SqlDbType.Xml).Value =
+                command.Parameters.Add("@IsGlobal", SqlDbType.Bit).Value = settings.IsGlobal;
+                command.Parameters.Add("@Settings", SqlDbType.Xml).Value =
                     settings.ToXml(typeof(XmlFacessoApplicationSettings));
-                locCmd.Parameters.Add("@IDAppSettingsNew", SqlDbType.Int);
-                locCmd.Parameters["@IDAppSettingsNew"].Direction = ParameterDirection.Output;
-                locCmd.ExecuteNonQuery();
-                settings.IDApplicationSettings = (int)locCmd.Parameters["@IDAppSettingsNew"].Value;
+                command.Parameters.Add("@IDAppSettingsNew", SqlDbType.Int);
+                command.Parameters["@IDAppSettingsNew"].Direction = ParameterDirection.Output;
+                command.ExecuteNonQuery();
+
+                settings.IDApplicationSettings = (int)command.Parameters["@IDAppSettingsNew"].Value;
             }
         }
 
         public static bool IsSetup()
         {
-            string locGuid = RegistryHelper.ProgramGUID;
-            if (locGuid == null)
+            string guid = RegistryHelper.ProgramGUID;
+            if (guid == null)
                 return false;
+
             return RegistryHelper.IsRegistered();
         }
 
@@ -133,8 +140,9 @@ namespace Facesso
         {
             get
             {
-                if (myFacessoLicense == null)
+                if (myFacessoLicense is null)
                     SetupLicenseInfoAndLogin();
+
                 return myFacessoLicense;
             }
         }
@@ -145,10 +153,13 @@ namespace Facesso
         {
             get
             {
-                var entityConn = new EntityConnectionStringBuilder();
-                entityConn.ProviderConnectionString = SQLConnectionString;
-                entityConn.Metadata = ENTITY_CONNSTRING_METADATA;
-                entityConn.Provider = "System.Data.SqlClient";
+                var entityConn = new EntityConnectionStringBuilder
+                {
+                    ProviderConnectionString = SQLConnectionString,
+                    Metadata = ENTITY_CONNSTRING_METADATA,
+                    Provider = "System.Data.SqlClient"
+                };
+
                 return entityConn.ConnectionString;
             }
         }
@@ -189,6 +200,7 @@ namespace Facesso
                     "SubsidiarySynonym",
                     global::Facesso.My.Resources.Resources.SubsidiaryDefaultSynonym).ToString();
             }
+
             set { FacessoGlobalSettings.Settings.SetItem("SubsidiarySynonym", value); }
         }
 
@@ -229,7 +241,10 @@ namespace Facesso
             {
                 if (string.Equals(arg, "/silentAdminLogon", StringComparison.OrdinalIgnoreCase))
                 {
-                    PerformSilentLogin("Admin", "P@$$w0rd");
+                    PerformSilentLogin(
+                        SuperUser, 
+                        SuperUserPasswordForLoginTestingPurposesOnlyNoThreat);
+
                     return;
                 }
             }
@@ -255,6 +270,7 @@ namespace Facesso
                 ?? throw new FacessoLoginException("Login-Abbruch führte zu Ausnahme (kein kritischer Fehler).", null);
 
             myLoginInfo = locLoginInfo;
+
             FacessoUserSettings = XmlFacessoApplicationSettings.FromFacessoDatabase(LoginInfo.IDUser, LoginInfo.IDSubsidiary);
             AppSettings.LoginHistory.LastLoginDate = DateTime.Now;
             AppSettings.LoginHistory.Add(myLoginInfo.Username);
@@ -270,6 +286,7 @@ namespace Facesso
         {
             // Use the first available subsidiary
             int locSubsidiaryId = 0;
+
             foreach (SubsidiaryInfo locSub in Subsidiaries)
             {
                 locSubsidiaryId = locSub.IDSubsidiary;
@@ -397,6 +414,7 @@ namespace Facesso
             var locXml = new XmlSerializer(xmlType);
             var locSw = new StringWriter();
             locXml.Serialize(locSw, this);
+
             return locSw.ToString();
         }
     }
