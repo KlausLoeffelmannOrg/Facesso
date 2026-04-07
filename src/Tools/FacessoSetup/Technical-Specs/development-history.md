@@ -208,3 +208,78 @@ The only remaining build errors are **3 instances of MSB3823** (`Non-string reso
 - `Tools\FacessoSetup\Program.Restore.cs`
 - `Tools\FacessoSetup\Program.Models.cs`
 - `.github\skills\vb-to-csharp-conversion\SKILL.md`
+
+## Container screenshot testing and silent login (2026-04-07)
+
+This section documents a substantial session that added container-based screenshot testing to the Facesso application, culminating in an instructive debugging episode about human vs. AI problem-solving.
+
+### Goals
+
+1. Make the Facesso WinForms application run inside a Windows Server Core container for automated visual testing.
+2. Capture a fullscreen screenshot of frmFacessoShell via PrintWindow, OCR every UI region with Tesseract (eng+deu), and produce a Markdown report.
+3. Fix any startup issues that prevent the app from launching in a non-interactive environment.
+
+### Work performed
+
+| Phase | Change | Files |
+| --- | --- | --- |
+| Non-interactive mode | Guarded all `ShowDialog()` and `MessageBox.Show()` with `Environment.UserInteractive` checks. When non-interactive, errors go to `Console.Error` instead. | `Facesso\frmError.vb`, `Facesso\ApplicationEvents.vb` |
+| VB App Framework retry prevention | Added `e.ExitApplication = True` in the non-interactive unhandled exception handler so the framework doesn't loop after a crash. | `Facesso\ApplicationEvents.vb` |
+| xUnit v3 alignment | Updated `WinForms.Analyzers.Tests` from xUnit v2 to v3 (`xunit.v3` 3.2.2, `xunit.runner.visualstudio` 3.1.5, `OutputType=Exe`, removed `Microsoft.NET.Test.Sdk`). | `WinForms.Analyzers.Tests.csproj` |
+| vstest adapter | Added `xunit.runner.visualstudio` 3.1.5 to `Facesso.Tests` for optional VSTest/TRX support. | `Facesso.Tests.csproj` |
+| Test runner simplification | Replaced `msbuild /t:Test` with direct xUnit v3 exe execution (`-trx` flag) in `run-tests.ps1`. Removed post-test log scraping. | `run-tests.ps1` |
+| Central test run logger | Created `TestRunLogger` (writes `C:\output\testrun_{timestamp}.txt`), `TestRunLogAttribute` (xUnit v3 `BeforeAfterTestAttribute`), applied globally via `[assembly: TestRunLog]`. Pass/fail detection via `TestContext.Current.TestState.Result`. | `Infrastructure\TestRunLogger.cs`, `Infrastructure\TestRunLogAttribute.cs`, `AssemblyAttributes.cs` |
+| Unified screenshot test | Merged `ScreenshotTests.cs` and `OcrScreenshotTests.cs` into one `FacessoScreenshotTests.cs` with a single `[Fact]`. Avoids `SingleInstance=true` conflicts. | `Visual\FacessoScreenshotTests.cs` |
+| Diagnostic logger for Facesso.exe | Environment variable `FACESSO_DIAG_LOG` enables `System.Diagnostics.Trace` file logging. Added trace calls at every startup step. | `Facesso\ApplicationEvents.vb` |
+| WaitForMainWindow race fix | Moved `HasExited` check before `MainWindowHandle` access; added try/catch for the remaining race window. | `Visual\FacessoScreenshotTests.cs` |
+| Crash diagnostics in test | Test captures stderr, exit code, and diag log from spawned Facesso.exe. `run-tests.ps1` shows `FacessoDiag.log` and Application Event Log on failure. | `Visual\FacessoScreenshotTests.cs`, `run-tests.ps1` |
+| Silent login NullRef fix | Moved `LoginHistory` initialization above the `/silentAdminLogon` check in `Login()`. | `Facesso.Generic\FacessoGeneric.cs` |
+
+### The silent login bug — a case study in human vs. AI debugging
+
+**The symptom:** `Facesso.exe` crashed on first-ever startup with `/silentAdminLogon` in the container. `NullReferenceException` at `PerformSilentLogin` line 297. On the second startup (VB framework retry), it succeeded.
+
+**The AI approach (Copilot):** Exhaustive bottom-up analysis — checked every variable that could be null at line 297 (`SQLConnectionString`, `Subsidiaries`, `myLoginInfo`, `Authenticated` property internals, `UserInfo` constructor, `ADCryptedPassword`, resource strings). Reflected on xUnit package assemblies for API signatures. Examined release-build PDB line-number drift. Over multiple rounds, added tracing, fixed a race condition in `WaitForMainWindow`, added the `LoginHistory` null-check inside `PerformSilentLogin` — all valid improvements, but none addressed the root cause.
+
+**The human approach (Klaus):** Looked at the `Login()` method once and immediately saw it:
+
+```csharp
+// The /silentAdminLogon check was HERE — line 240
+// It called PerformSilentLogin() and returned BEFORE this ran:
+
+LoginHistory locLoginHistory = AppSettings.LoginHistory;
+if (locLoginHistory == null)
+{
+    locLoginHistory = new LoginHistory();
+    // ... initialization ...
+    AppSettings.LoginHistory = locLoginHistory;
+}
+```
+
+The silent login bailed out at line 248 (`return`) before `LoginHistory` was ever created. The fix: move the `LoginHistory` initialization above the `/silentAdminLogon` check.
+
+**Why the human saw it instantly:**
+
+- **Domain context** — knowing that "first manual login makes it work" means the manual path initializes something the silent path skips.
+- **Flow-level pattern matching** — seeing *"this setup code runs after the early return"* rather than analyzing individual null values.
+- **Abstraction zoom** — jumping straight to the structural/sequencing issue instead of examining every variable at the same depth.
+
+**Why the AI struggled:**
+
+- Approached the problem as *"what value is null?"* rather than *"what initialization hasn't run yet?"*
+- Performed thorough but flat analysis — checking every possible null at the crash site instead of tracing the code flow that leads TO the crash site.
+- Each round of investigation was technically correct but operated at the wrong abstraction level for this class of bug.
+
+**The lesson for AI-assisted development:** Sequencing/initialization-order bugs are best diagnosed by reframing from *"what's null?"* to *"what hasn't run yet, and why?"*. When a human collaborator can point the AI at the **flow** rather than the **symptom**, the fix becomes obvious. The most valuable human input in this session was a single sentence: *"Why aren't we calling the auto login AFTER we did this?"*
+
+### Commits (session 2026-04-07)
+
+- `bb622f6` — Non-interactive mode guards (frmError, ApplicationEvents)
+- `568cd0b` — xunit.runner.visualstudio adapter for Facesso.Tests
+- `59d4eab` — Central test run logger infrastructure
+- `8e7b8fe` — Align WinForms.Analyzers.Tests with xUnit v3
+- `7d8c1dd` — Unified screenshot + OCR test
+- `e6e14e4` — Diagnostic logging, WaitForMainWindow race fix, stderr capture
+- `e8a85aa` — LoginHistory null-check in PerformSilentLogin
+- `2c15974` — ExitApplication=True for non-interactive unhandled exceptions
+- `d47cd29` — **Root fix**: Move LoginHistory init above /silentAdminLogon check
