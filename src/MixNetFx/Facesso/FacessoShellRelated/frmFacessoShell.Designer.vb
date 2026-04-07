@@ -1,6 +1,6 @@
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Public Class frmFacessoShell
-    Inherits Facesso.FrontEnd.frmBaseFacesso
+    Inherits Facesso.GenericControls.frmBaseFacesso
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -36,11 +36,11 @@ Partial Public Class frmFacessoShell
         Me.SplitEmployeesWorkGroups = New System.Windows.Forms.SplitContainer()
         Me.splitWorkGroups = New System.Windows.Forms.SplitContainer()
         Me.gbWorkGroups = New System.Windows.Forms.GroupBox()
-        Me.wglWorkGroups = New Facesso.FrontEnd.ucWorkGroupListView()
+        Me.wglWorkGroups = New Facesso.GenericControls.ucWorkGroupListView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.dgvWorkGroupResults = New Facesso.FrontEnd.ucWorkGroupItemDetailsView()
+        Me.dgvWorkGroupResults = New Facesso.GenericControls.ucWorkGroupItemDetailsView()
         Me.gbEmployees = New System.Windows.Forms.GroupBox()
-        Me.elvEmployees = New Facesso.FrontEnd.ucEmployeeListView()
+        Me.elvEmployees = New Facesso.GenericControls.ucEmployeeListView()
         Me.TopLineLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
         Me.lblCurrentShift = New System.Windows.Forms.Label()
         Me.lblCurrentWorkgroup = New System.Windows.Forms.Label()
@@ -366,7 +366,7 @@ Partial Public Class frmFacessoShell
         Me.wglWorkGroups.UseCompatibleStateImageBehavior = False
         Me.wglWorkGroups.View = System.Windows.Forms.View.Details
         Me.wglWorkGroups.WorkGroupInfoItems = Nothing
-        Me.wglWorkGroups.WorkGroupSortOrder = Facesso.FrontEnd.WorkGroupSortOrder.WorkGroupNumber
+        Me.wglWorkGroups.WorkGroupSortOrder = Facesso.GenericControls.WorkGroupSortOrder.WorkGroupNumber
         '
         'GroupBox1
         '
@@ -408,7 +408,7 @@ Partial Public Class frmFacessoShell
         Me.elvEmployees.AutoGroup = True
         Me.elvEmployees.Dock = System.Windows.Forms.DockStyle.Fill
         Me.elvEmployees.EmployeeInfoCollection = Nothing
-        Me.elvEmployees.EmployeeSortOrder = Facesso.FrontEnd.EmployeeSortOrder.PersonnelNumber
+        Me.elvEmployees.EmployeeSortOrder = Facesso.GenericControls.EmployeeSortOrder.PersonnelNumber
         Me.elvEmployees.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.elvEmployees.FullRowSelect = True
         Me.elvEmployees.HideSelection = False
@@ -1309,11 +1309,11 @@ Partial Public Class frmFacessoShell
     Friend WithEvents SplitEmployeesWorkGroups As System.Windows.Forms.SplitContainer
     Friend WithEvents splitWorkGroups As System.Windows.Forms.SplitContainer
     Friend WithEvents gbWorkGroups As System.Windows.Forms.GroupBox
-    Friend WithEvents wglWorkGroups As Facesso.FrontEnd.ucWorkGroupListView
+    Friend WithEvents wglWorkGroups As Facesso.GenericControls.ucWorkGroupListView
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents dgvWorkGroupResults As Facesso.FrontEnd.ucWorkGroupItemDetailsView
+    Friend WithEvents dgvWorkGroupResults As Facesso.GenericControls.ucWorkGroupItemDetailsView
     Friend WithEvents gbEmployees As System.Windows.Forms.GroupBox
-    Friend WithEvents elvEmployees As Facesso.FrontEnd.ucEmployeeListView
+    Friend WithEvents elvEmployees As Facesso.GenericControls.ucEmployeeListView
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
     Friend WithEvents SplitContainer2 As System.Windows.Forms.SplitContainer

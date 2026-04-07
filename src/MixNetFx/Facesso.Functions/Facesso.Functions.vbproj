@@ -1,0 +1,284 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Facesso.Functions</RootNamespace>
+    <MyType>Windows</MyType>
+    <OptionStrict>On</OptionStrict>
+    <AssemblyOriginatorKeyFile>ActiveDev.pfx</AssemblyOriginatorKeyFile>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DocumentationFile>Facesso.Functions.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineDebug>false</DefineDebug>
+    <DocumentationFile>Facesso.Functions.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>Facesso.Functions.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>Facesso.Functions.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DocumentationFile>Facesso.Functions.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>Facesso.Functions.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="BusinessControls\Charts\frmWorkgroupChartParametersPicker.Designer.vb">
+      <DependentUpon>frmWorkgroupChartParametersPicker.vb</DependentUpon>
+    </Compile>
+    <Compile Update="BusinessControls\Charts\ucConfigurableWorkgroupChart.Designer.vb">
+      <DependentUpon>ucConfigurableWorkgroupChart.vb</DependentUpon>
+    </Compile>
+    <Compile Update="BusinessControls\Charts\ucConfigurableWorkgroupChart.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="DataSets\dsLabourValues.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsLabourValues.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="DataSets\dsLabourValues.vb">
+      <DependentUpon>dsLabourValues.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="DataSets\dsWorkgroupAssignments.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsWorkgroupAssignments.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\BaseForms\frmBaseFacesso.Designer.vb">
+      <DependentUpon>frmBaseFacesso.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\EmployeeInfoRelated\frmEmpoyeeHandicapAddEditView.Designer.vb">
+      <DependentUpon>frmEmpoyeeHandicapAddEditView.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\EmployeeInfoRelated\frmHandicapRangeManager.Designer.vb">
+      <DependentUpon>frmHandicapRangeManager.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\ProductionAmountAnalysisRelated\frmProductionAmountAnalysis.Designer.vb">
+      <DependentUpon>frmProductionAmountAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\BaseForms\frmInfoItemAddEditViewBase.Designer.vb">
+      <DependentUpon>frmInfoItemAddEditViewBase.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\BonusListRelated\frmBonusListMaintenance.Designer.vb">
+      <DependentUpon>frmBonusListMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\CostcenterInfoRelated\frmCostCenterSelector.Designer.vb">
+      <DependentUpon>frmCostCenterSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\EmployeeInfoRelated\frmEmployeePicker.Designer.vb">
+      <DependentUpon>frmEmployeePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\IncentiveWageRelated\frmIncentiveWageCalc.Designer.vb">
+      <DependentUpon>frmIncentiveWageCalc.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\IncentiveWageRelated\frmIncentiveWageGroupResult.Designer.vb">
+      <DependentUpon>frmIncentiveWageGroupResult.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\OptionsRelated\frmOptions.Designer.vb">
+      <DependentUpon>frmOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\ProductionDataRelated\frmProductionDataCollector.Designer.vb">
+      <DependentUpon>frmProductionDataCollector.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\ProductionDataRelated\frmTimeLogItemCollection.Designer.vb">
+      <DependentUpon>frmTimeLogItemCollection.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\SubsidiaryRelated\frmSubsidiaryManager.Designer.vb">
+      <DependentUpon>frmSubsidiaryManager.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\TimeListRelated\frmEmployeeTimeList.Designer.vb">
+      <DependentUpon>frmEmployeeTimeList.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\BaseForms\frmInfoItemsManagerBase.Designer.vb">
+      <DependentUpon>frmInfoItemsManagerBase.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\WorkGroupAnalysisRelated\frmWorkGroupAnalysisManager.Designer.vb">
+      <DependentUpon>frmWorkGroupAnalysisManager.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\WorkGroupAnalysisRelated\frmWorkGroupAnalysis.Designer.vb">
+      <DependentUpon>frmWorkGroupAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\WorkGroupRelated\frmWorkGroupPrintBaseData.Designer.vb">
+      <DependentUpon>frmWorkGroupPrintBaseData.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\WorkGroupRelated\frmAssignTimeSettingsToWorkgroups.Designer.vb">
+      <DependentUpon>frmAssignTimeSettingsToWorkgroups.vb</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\WorkGroupRelated\frmWorkGroupManager.Designer.vb">
+      <DependentUpon>frmWorkGroupManager.vb</DependentUpon>
+    </Compile>
+    <Compile Update="frmTest.Designer.vb">
+      <DependentUpon>frmTest.vb</DependentUpon>
+    </Compile>
+    <Compile Update="DataSets\MasterDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MasterDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Update="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Update="Reports\ReportEmployeeMasterData.Designer.vb">
+      <DependentUpon>ReportEmployeeMasterData.vb</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\ReportsEmployeeMasterData.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="DataSets\dsLabourValues.xsc">
+      <DependentUpon>dsLabourValues.xsd</DependentUpon>
+    </None>
+    <None Update="DataSets\dsLabourValues.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsLabourValues.Designer.vb</LastGenOutput>
+    </None>
+    <None Update="DataSets\dsLabourValues.xss">
+      <DependentUpon>dsLabourValues.xsd</DependentUpon>
+    </None>
+    <None Update="DataSets\dsWorkgroupAssignments.xsc">
+      <DependentUpon>dsWorkgroupAssignments.xsd</DependentUpon>
+    </None>
+    <None Update="DataSets\dsWorkgroupAssignments.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsWorkgroupAssignments.Designer.vb</LastGenOutput>
+    </None>
+    <None Update="DataSets\dsWorkgroupAssignments.xss">
+      <DependentUpon>dsWorkgroupAssignments.xsd</DependentUpon>
+    </None>
+    <None Update="DataSets\MasterDataSet.xsc">
+      <DependentUpon>MasterDataSet.xsd</DependentUpon>
+    </None>
+    <None Update="DataSets\MasterDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MasterDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="DataSets\MasterDataSet.xss">
+      <DependentUpon>MasterDataSet.xsd</DependentUpon>
+    </None>
+    <None Update="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="ActiveDev.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
+    <ProjectReference Include="..\ADInfoItem\ADInfoItem.csproj" />
+    <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.csproj" />
+    <ProjectReference Include="..\ADSimplePrintDocument\ADSimplePrintDocument.csproj" />
+    <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
+    <ProjectReference Include="..\Controls\ADNullableValueControls.vbproj" />
+    <ProjectReference Include="..\Facesso.Data\Facesso.Data.csproj" />
+    <ProjectReference Include="..\Facesso.EntityModel\Facesso.EntityModel.vbproj" />
+    <ProjectReference Include="..\Facesso.GenericControls\Facesso.GenericControls.vbproj" />
+    <ProjectReference Include="..\Facesso.Generic\Facesso.Generic.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bitmaps\AnalysisIncentiveWage.bmp" />
+    <Content Include="Bitmaps\AnalysisWorkGroups.bmp" />
+    <Content Include="Bitmaps\Assign.bmp" />
+    <Content Include="Bitmaps\Delete.bmp" />
+    <Content Include="Bitmaps\DeleteAssignment.bmp" />
+    <Content Include="Bitmaps\Edit_Redo.bmp" />
+    <Content Include="Bitmaps\Edit_Undo.bmp" />
+    <Content Include="Bitmaps\EditInformation.bmp" />
+    <Content Include="Bitmaps\Employee.bmp" />
+    <Content Include="Bitmaps\Find.bmp" />
+    <Content Include="Bitmaps\FindNext.bmp" />
+    <Content Include="Bitmaps\Group.bmp" />
+    <Content Include="Bitmaps\LabourValue.bmp" />
+    <Content Include="Bitmaps\LabourValues.bmp" />
+    <Content Include="Bitmaps\N0LetterIcon.bmp" />
+    <Content Include="Bitmaps\N1LetterIcon.bmp" />
+    <Content Include="Bitmaps\N2LetterIcon.bmp" />
+    <Content Include="Bitmaps\N3LetterIcon.bmp" />
+    <Content Include="Bitmaps\N4LetterIcon.bmp" />
+    <Content Include="Bitmaps\NewDocument.bmp" />
+    <Content Include="Bitmaps\NewWorkGroup.bmp" />
+    <Content Include="Bitmaps\NextWorkDay.bmp" />
+    <Content Include="Bitmaps\NextWorkgroup.bmp" />
+    <Content Include="Bitmaps\OneLetterIcon.bmp" />
+    <Content Include="Bitmaps\Options.bmp" />
+    <Content Include="Bitmaps\PreviousWorkDay.bmp" />
+    <Content Include="Bitmaps\PrevWorkgroup.bmp" />
+    <Content Include="Bitmaps\Print.bmp" />
+    <Content Include="Bitmaps\PrintPreview.bmp" />
+    <Content Include="Bitmaps\PrintPreviewDialog.bmp" />
+    <Content Include="Bitmaps\PrintSetup.bmp" />
+    <Content Include="Bitmaps\ProdDatCollection.bmp" />
+    <Content Include="Bitmaps\Properties.bmp" />
+    <Content Include="Bitmaps\Reminder.bmp" />
+    <Content Include="Bitmaps\Save.bmp" />
+    <Content Include="Bitmaps\SuspendDayData.bmp" />
+    <Content Include="Bitmaps\TimeCollection.bmp" />
+    <Content Include="Bitmaps\ToogleDetails.bmp" />
+    <Content Include="Bitmaps\UnAssign.bmp" />
+    <Content Include="Bitmaps\User.bmp" />
+    <Content Include="Bitmaps\Workgroups.bmp" />
+    <Content Include="Bitmaps\XMLFileExport.bmp" />
+    <Content Include="Bitmaps\XMLFileImport.bmp" />
+    <Content Include="Bitmaps\XMLFile.bmp" />
+    <Content Include="MvvmFormsBaseInfo.txt" />
+    <Content Include="MvvmFormsChangeLog.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="My Project\DataSources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MvvmForms" Version="2.1.7-Beta3" />
+    <PackageReference Include="MvvmFormsBase" Version="2.1.6-Beta" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="System.Reactive" Version="6.1.0" />
+    <PackageReference Include="System.Reactive.Core" Version="6.1.0" />
+    <PackageReference Include="System.Reactive.Interfaces" Version="6.1.0" />
+    <PackageReference Include="System.Reactive.Linq" Version="6.1.0" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
+  </ItemGroup>
+</Project>

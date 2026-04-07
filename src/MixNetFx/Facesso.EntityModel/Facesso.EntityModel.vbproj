@@ -1,58 +1,51 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
-    <OutputType>WinExe</OutputType>
-    <StartupObject>FacessoConfig.My.MyApplication</StartupObject>
-    <MyType>WindowsForms</MyType>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Facesso.EntityModel</RootNamespace>
+    <MyType>Windows</MyType>
     <OptionStrict>On</OptionStrict>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DocumentationFile>FacessoConfig.xml</DocumentationFile>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DocumentationFile>Facesso.EntityModel.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DefineDebug>false</DefineDebug>
-    <DocumentationFile>FacessoConfig.xml</DocumentationFile>
+    <DocumentationFile>Facesso.EntityModel.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DocumentationFile>FacessoConfig.xml</DocumentationFile>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>Facesso.EntityModel.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <DocumentationFile>FacessoConfig.xml</DocumentationFile>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>Facesso.EntityModel.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DocumentationFile>FacessoConfig.xml</DocumentationFile>
+    <DocumentationFile>Facesso.EntityModel.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
-    <DocumentationFile>FacessoConfig.xml</DocumentationFile>
+    <DocumentationFile>Facesso.EntityModel.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
   <ItemGroup>
-    <Import Include="System.Drawing" />
-    <Import Include="System.Windows.Forms" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\Facesso\frmError.designer.vb">
-      <Link>frmError.designer.vb</Link>
-      <DependentUpon>frmError.vb</DependentUpon>
-    </Compile>
-    <Compile Update="frmMain.Designer.vb">
-      <DependentUpon>frmMain.vb</DependentUpon>
+    <Compile Update="FacessoModel.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FacessoModel.edmx</DependentUpon>
     </Compile>
     <Compile Update="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -69,26 +62,31 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="..\Facesso\frmError.vb">
-      <Link>frmError.vb</Link>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Update="My Project\app.manifest">
+    <EmbeddedResource Update="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </None>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="FacessoModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FacessoModel.Designer.vb</LastGenOutput>
+    </EntityDeploy>
     <None Update="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Update="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ActiveDevelop.SqlTools\ActiveDevelop.SqlTools.csproj" />
-    <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.csproj" />
-    <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.csproj" />
-    <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
-    <ProjectReference Include="..\Facesso.Data\Facesso.Data.csproj" />
-    <ProjectReference Include="..\Facesso.GenericControls\Facesso.GenericControls.vbproj" />
     <ProjectReference Include="..\Facesso.Generic\Facesso.Generic.csproj" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 Imports ActiveDevelop.EntitiesFormsLib
-Imports Facesso.Data.Entity
+Imports Facesso.EntityModel
 
 Public Class frmHiddenTestAndAdmin
 
@@ -29,7 +29,7 @@ Public Class frmHiddenTestAndAdmin
         MessageBox.Show("DirtyChanged", "test")
     End Sub
 
-    'TODO: Soll diese Funktionalität nicht besser in den DataLayer (Entity?)
+    'TODO: Soll diese Funktionalitï¿½t nicht besser in den DataLayer (Entity?)
     Private Sub CopyNowButton_Clck(sender As System.Object, e As System.EventArgs) Handles CopyNowButton.Click
 
         'Schauen, ob Daten im Bereich vorhanden sind
@@ -40,7 +40,7 @@ Public Class frmHiddenTestAndAdmin
         If Not ToEndNullableDateValue.Value.HasValue OrElse
             Not FromStartNullableDateValue.Value.HasValue OrElse
             Not ToStartNullableDateValue.Value.HasValue Then
-            MessageBox.Show("Bitte wählen Sie gültige Datumswerte!")
+            MessageBox.Show("Bitte wï¿½hlen Sie gï¿½ltige Datumswerte!")
             Exit Sub
         End If
 
@@ -54,14 +54,14 @@ Public Class frmHiddenTestAndAdmin
                          Where item.ProductionDate >= toEndValue
                          Into ItemCount = Count()) > 0
 
-        'Meldung für das Löschen aufbauen
+        'Meldung fï¿½r das Lï¿½schen aufbauen
         Dim message = "Facesso hat festgestellt, dass ab dem Zielbereich (" &
             ToEndNullableDateValue.Value.Value.ToLongDateString & ") "
         If productionDataExist Then message &= "Produktionsdaten"
         If productionDataExist And timeDataExist Then message &= " und "
         If timeDataExist Then message &= "Zeitbuchungsdaten"
 
-        message &= " existieren. Sollen diese Daten gelöscht werden?"
+        message &= " existieren. Sollen diese Daten gelï¿½scht werden?"
 
         If productionDataExist Or timeDataExist Then
             'Sicherheitsabfrage
@@ -72,15 +72,15 @@ Public Class frmHiddenTestAndAdmin
                 Return
             End If
 
-            PassCaptionLabel.Text = "Zeitdaten ab Einfügezeitpunkt löschen..."
+            PassCaptionLabel.Text = "Zeitdaten ab Einfï¿½gezeitpunkt lï¿½schen..."
             PassCaptionLabel.Refresh()
-            'Die löschen wir direkt - geht schneller
+            'Die lï¿½schen wir direkt - geht schneller
             facEnt.ExecuteStoreCommand("Delete from TimeLog Where [ProductionDate]>=Convert(datetime,{0},104)",
                                        toEndValue.ToString("dd.MM.yyyy"))
 
-            PassCaptionLabel.Text = "Mengendaten ab Einfügezeitpunkt löschen..."
+            PassCaptionLabel.Text = "Mengendaten ab Einfï¿½gezeitpunkt lï¿½schen..."
             PassCaptionLabel.Refresh()
-            'Die löschen wir über das Entity-Modell.
+            'Die lï¿½schen wir ï¿½ber das Entity-Modell.
             Dim prodDataToDelete = (From prodItem In facEnt.ProductionDatas
                                  Where prodItem.ProductionDate >= toEndValue).ToList
 

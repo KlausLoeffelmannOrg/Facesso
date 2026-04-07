@@ -1,6 +1,6 @@
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Public Class frmDateShiftPicker
-    Inherits Facesso.FrontEnd.frmBaseFacesso
+    Inherits Facesso.GenericControls.frmBaseFacesso
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -137,7 +137,7 @@ Partial Public Class frmDateShiftPicker
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(152, 16)
         Me.Label1.TabIndex = 5
-        Me.Label1.Text = "Ausgewähltes Datum:"
+        Me.Label1.Text = "Ausgewï¿½hltes Datum:"
         '
         'Button1
         '

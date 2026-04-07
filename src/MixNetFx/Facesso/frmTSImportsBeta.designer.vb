@@ -1,6 +1,6 @@
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Public Class frmTSImport
-    Inherits Facesso.FrontEnd.frmBaseFacesso
+    Inherits Facesso.GenericControls.frmBaseFacesso
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -93,7 +93,7 @@ Partial Public Class frmTSImport
         Me.chkTransformProductionData.Name = "chkTransformProductionData"
         Me.chkTransformProductionData.Size = New System.Drawing.Size(182, 17)
         Me.chkTransformProductionData.TabIndex = 6
-        Me.chkTransformProductionData.Text = "Produktionsmengen übernehmen"
+        Me.chkTransformProductionData.Text = "Produktionsmengen ï¿½bernehmen"
         Me.chkTransformProductionData.UseVisualStyleBackColor = True
         '
         'chkTransformEmployeeTimes
@@ -105,7 +105,7 @@ Partial Public Class frmTSImport
         Me.chkTransformEmployeeTimes.Name = "chkTransformEmployeeTimes"
         Me.chkTransformEmployeeTimes.Size = New System.Drawing.Size(165, 17)
         Me.chkTransformEmployeeTimes.TabIndex = 7
-        Me.chkTransformEmployeeTimes.Text = "Mitarbeiterzeiten übernehmen"
+        Me.chkTransformEmployeeTimes.Text = "Mitarbeiterzeiten ï¿½bernehmen"
         Me.chkTransformEmployeeTimes.UseVisualStyleBackColor = True
         '
         'chkAllowNewCostCenterAlignment
@@ -115,7 +115,7 @@ Partial Public Class frmTSImport
         Me.chkAllowNewCostCenterAlignment.Name = "chkAllowNewCostCenterAlignment"
         Me.chkAllowNewCostCenterAlignment.Size = New System.Drawing.Size(343, 17)
         Me.chkAllowNewCostCenterAlignment.TabIndex = 5
-        Me.chkAllowNewCostCenterAlignment.Text = "Nach Stammdatenübernahme, Kostenstellen manuell neu zuordnen"
+        Me.chkAllowNewCostCenterAlignment.Text = "Nach Stammdatenï¿½bernahme, Kostenstellen manuell neu zuordnen"
         Me.chkAllowNewCostCenterAlignment.UseVisualStyleBackColor = True
         '
         'chkTransformBaseData
@@ -127,7 +127,7 @@ Partial Public Class frmTSImport
         Me.chkTransformBaseData.Name = "chkTransformBaseData"
         Me.chkTransformBaseData.Size = New System.Drawing.Size(451, 17)
         Me.chkTransformBaseData.TabIndex = 11
-        Me.chkTransformBaseData.Text = "Stammdaten neu übernehmen (alle Daten der Subsidiarität werden dabei zuvor gelösc" & _
+        Me.chkTransformBaseData.Text = "Stammdaten neu ï¿½bernehmen (alle Daten der Subsidiaritï¿½t werden dabei zuvor gelï¿½sc" & _
             "ht!!!)"
         Me.chkTransformBaseData.UseVisualStyleBackColor = True
         '
@@ -155,7 +155,7 @@ Partial Public Class frmTSImport
         Me.ndbTransformFrom.NullValueMessage = Nothing
         Me.ndbTransformFrom.Size = New System.Drawing.Size(290, 20)
         Me.ndbTransformFrom.TabIndex = 13
-        Me.ndbTransformFrom.Text = "Datenübernahme ab:"
+        Me.ndbTransformFrom.Text = "Datenï¿½bernahme ab:"
         Me.ndbTransformFrom.ValueAreaLength = 145
         '
         'adinMonthToAdd
@@ -176,7 +176,7 @@ Partial Public Class frmTSImport
         Me.adinMonthToAdd.NullValueMessage = Nothing
         Me.adinMonthToAdd.Size = New System.Drawing.Size(290, 20)
         Me.adinMonthToAdd.TabIndex = 14
-        Me.adinMonthToAdd.Text = "Hinzuzufügende Monate:"
+        Me.adinMonthToAdd.Text = "Hinzuzufï¿½gende Monate:"
         Me.adinMonthToAdd.ValueAreaLength = 145
         '
         'frmTSImport
