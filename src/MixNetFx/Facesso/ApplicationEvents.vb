@@ -18,37 +18,52 @@ Namespace My
             Globalization.CultureInfo.DefaultThreadCurrentCulture = New Globalization.CultureInfo("de-DE")
             Globalization.CultureInfo.DefaultThreadCurrentUICulture = New Globalization.CultureInfo("de-DE")
 
-            'Splash-Dialog
-            Dim locSplash As New frmSplash
-            locSplash.Show()
-
-            'Queue-Process zum Anzeigen.
-            Me.DoEvents()
+            'Splash-Dialog (skip in non-interactive environments such as containers)
+            Dim locSplash As frmSplash = Nothing
+            If Environment.UserInteractive Then
+                locSplash = New frmSplash
+                locSplash.Show()
+                Me.DoEvents()
+            End If
 
             'Ist Setup ordnungsgemäß durchgeführt?
             If Not FacessoGeneric.IsSetup Then
-                MessageBox.Show("Facesso kann keinen Hinweis darauf finden, dass die Software bereits mit FacessoConfig konfiguriert wurde." & vbNewLine & "Bitte starten Sie FacessoConfig aus dem Start-Menü (ActiveDevelop/Facesso). Sie benötigen für die Konfiguration lokale Administratorrechte.",
-                                "Facesso-Konfigurations:", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                If Environment.UserInteractive Then
+                    MessageBox.Show("Facesso kann keinen Hinweis darauf finden, dass die Software bereits mit FacessoConfig konfiguriert wurde." & vbNewLine & "Bitte starten Sie FacessoConfig aus dem Start-Menü (ActiveDevelop/Facesso). Sie benötigen für die Konfiguration lokale Administratorrechte.",
+                                    "Facesso-Konfigurations:", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                Else
+                    Console.Error.WriteLine("Facesso is not configured. Please run FacessoConfig first.")
+                End If
                 e.Cancel = True
             Else
 
                 'Ist Datenbank-Setup ordnungsgemäß durchgeführt?
                 FacessoGeneric.InitializeComponent()
                 If Not FacessoGeneric.IsDatabaseSetup Then
-                    Dim locDbSetupWizard As New frmDbSetupWizard
-                    locDbSetupWizard.ShowDialog()
+                    If Environment.UserInteractive Then
+                        Dim locDbSetupWizard As New frmDbSetupWizard
+                        locDbSetupWizard.ShowDialog()
+                    Else
+                        Console.Error.WriteLine("Database is not configured. Please run database setup first.")
+                    End If
                     e.Cancel = True
                 Else
 
                     'Schema-Update im Bedarfsfall.
                     Dim dmUpdater As New Facesso.Data.DatenModelUpdater(FacessoGeneric.SQLConnectionString, True)
                     If dmUpdater.CheckIfUpdateRequired Then
-                        'TODO: An Facesso-Meldungen anpassen
-                        MessageBox.Show("Es müssen Änderungen an der Datenbank vorgenommen werden. Alle Facesso-Programme müssen - mit Ausnahme Ihres Programms - beendet werden. Klicken sie auf OK, wenn dieses erfolgt ist.", "WICHTIGER HINWEIS")
+                        If Environment.UserInteractive Then
+                            'TODO: An Facesso-Meldungen anpassen
+                            MessageBox.Show("Es müssen Änderungen an der Datenbank vorgenommen werden. Alle Facesso-Programme müssen - mit Ausnahme Ihres Programms - beendet werden. Klicken sie auf OK, wenn dieses erfolgt ist.", "WICHTIGER HINWEIS")
+                        End If
                         Try
                             dmUpdater.PerformSchemaUpdate()
                         Catch ex As Exception
-                            MessageBox.Show("Das Datenmodell konnte nicht angepasst werden.Grund:" & ex.Message, "Hinweis")
+                            If Environment.UserInteractive Then
+                                MessageBox.Show("Das Datenmodell konnte nicht angepasst werden.Grund:" & ex.Message, "Hinweis")
+                            Else
+                                Console.Error.WriteLine("Schema update failed: " & ex.Message)
+                            End If
                             e.Cancel = True
 
                         End Try
@@ -66,10 +81,16 @@ Namespace My
             End If
 
             'Entsorgen ohne Wenn und Aber!
-            locSplash.Dispose()
+            If locSplash IsNot Nothing Then locSplash.Dispose()
         End Sub
 
         Private Sub MyApplication_UnhandledException(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.UnhandledExceptionEventArgs) Handles Me.UnhandledException
+
+            If Not Environment.UserInteractive Then
+                Console.Error.WriteLine("Unhandled exception: " & e.Exception.ToString())
+                Environment.ExitCode = 1
+                Exit Sub
+            End If
 
             If e.Exception.GetType Is GetType(ActiveDev.ADLicenseUnvalidException) Then
                 MessageBox.Show("Facesso hat ein Problem mit den Lizensierungsinformationen festgestellt." & vbNewLine & _

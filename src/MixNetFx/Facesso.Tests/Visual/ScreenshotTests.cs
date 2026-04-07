@@ -90,7 +90,8 @@ namespace Facesso.Tests.Visual
             {
                 FileName = exePath,
                 Arguments = "/silentAdminLogon",
-                UseShellExecute = false
+                UseShellExecute = false,
+                RedirectStandardError = true
             });
 
             Assert.NotNull(_facessoProcess);
@@ -155,10 +156,19 @@ namespace Facesso.Tests.Visual
 
             if (dialogWindows.Count == 0)
             {
+                string stderr = "";
+                try
+                {
+                    if (_facessoProcess.HasExited)
+                        stderr = _facessoProcess.StandardError.ReadToEnd();
+                }
+                catch { }
+
                 KillProcess();
                 Assert.Fail(
                     "Facesso main window did not appear within the timeout period " +
-                    "and no modal dialog was found on screen.");
+                    "and no modal dialog was found on screen." +
+                    (string.IsNullOrEmpty(stderr) ? "" : "\n\nStandard Error:\n" + stderr));
             }
 
             var report = new StringBuilder();

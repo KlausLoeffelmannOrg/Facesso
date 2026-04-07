@@ -3,28 +3,35 @@ Public Class frmError
     Public Sub HandleDialog(ByVal ex As Exception)
         Dim locExMessage As String
         locExMessage = ex.Message
-        lblExceptionText.Text = locExMessage
 
-        locExMessage = "Exception-Message:" & vbNewLine &
+        Dim locDetailedMessage As String
+        locDetailedMessage = "Exception-Message:" & vbNewLine &
                        "------------------" & vbNewLine &
                        locExMessage & vbNewLine & vbNewLine
 
-        locExMessage &= "Source:" & vbNewLine &
+        locDetailedMessage &= "Source:" & vbNewLine &
                        "-------" & vbNewLine &
                        ex.Source & vbNewLine & vbNewLine
 
-
         If ex.InnerException IsNot Nothing Then
-            locExMessage &= "Inner Exception Message:" & vbNewLine &
+            locDetailedMessage &= "Inner Exception Message:" & vbNewLine &
                             "------------------------" & vbNewLine &
                             ex.InnerException.Message _
                             & vbNewLine & vbNewLine
         End If
 
-        locExMessage &= "Stack-Trace:" & vbNewLine &
+        locDetailedMessage &= "Stack-Trace:" & vbNewLine &
                        "-------" & vbNewLine &
                        ex.StackTrace & vbNewLine & vbNewLine
-        txtExceptionMessage.Text = locExMessage
+
+        If Not Environment.UserInteractive Then
+            Console.Error.WriteLine(locDetailedMessage)
+            Environment.ExitCode = 1
+            Return
+        End If
+
+        lblExceptionText.Text = locExMessage
+        txtExceptionMessage.Text = locDetailedMessage
         Me.ShowDialog()
     End Sub
 

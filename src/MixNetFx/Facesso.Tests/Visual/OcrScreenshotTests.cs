@@ -79,13 +79,21 @@ namespace Facesso.Tests.Visual
             {
                 FileName = exePath,
                 Arguments = "/silentAdminLogon",
-                UseShellExecute = false
+                UseShellExecute = false,
+                RedirectStandardError = true
             });
             Assert.NotNull(_facessoProcess);
 
             var mainWindow = WaitForMainWindow(_facessoProcess, StartupTimeoutMs);
-            Assert.True(mainWindow != IntPtr.Zero,
-                "Facesso main window did not appear within the timeout period.");
+            if (mainWindow == IntPtr.Zero)
+            {
+                string stderr = _facessoProcess.HasExited
+                    ? _facessoProcess.StandardError.ReadToEnd()
+                    : "";
+                Assert.Fail(
+                    "Facesso main window did not appear within the timeout period." +
+                    (string.IsNullOrEmpty(stderr) ? "" : "\n\nStandard Error:\n" + stderr));
+            }
 
             SetForegroundWindow(mainWindow);
             ShowWindow(mainWindow, SW_SHOWMAXIMIZED);
