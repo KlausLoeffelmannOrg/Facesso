@@ -22,7 +22,7 @@ namespace Facesso.Tests.Visual
     {
         private Process _facessoProcess;
 
-        private const string OutputFolder = @"c:\out";
+        private const string OutputFolder = @"c:\output";
         private const string MarkdownFileName = "FacessoOcrReport.md";
         private const int StartupTimeoutMs = 30_000;
         private const int RenderDelayMs = 5_000;

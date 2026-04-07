@@ -24,7 +24,7 @@ namespace Facesso.Tests.Visual
     {
         private Process _facessoProcess;
 
-        private const string OutputFolder = @"c:\out";
+        private const string OutputFolder = @"c:\output";
         private const string ScreenshotFileName = "FacessoScreenshot.png";
         private const string DialogScreenshotFileName = "FacessoDialog.png";
         private const int StartupTimeoutMs = 30_000;
