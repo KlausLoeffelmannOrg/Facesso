@@ -113,6 +113,7 @@ Namespace My
                 Diagnostics.Trace.TraceError("Unhandled exception (non-interactive): " & e.Exception.ToString())
                 Console.Error.WriteLine("Unhandled exception: " & e.Exception.ToString())
                 Environment.ExitCode = 1
+                e.ExitApplication = True
                 Exit Sub
             End If
 
