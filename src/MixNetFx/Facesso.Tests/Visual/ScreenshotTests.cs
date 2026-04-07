@@ -10,6 +10,7 @@ using Tesseract;
 using ImageFormat = System.Drawing.Imaging.ImageFormat;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 using Xunit;
+using Facesso.Tests.Infrastructure;
 
 namespace Facesso.Tests.Visual
 {
@@ -85,43 +86,60 @@ namespace Facesso.Tests.Visual
             var exePath = FindFacessoExe();
             Assert.True(File.Exists(exePath), $"Facesso.exe not found at: {exePath}");
 
+            TestRunLogger.Trace($"Starting Facesso.exe from: {exePath}");
+
             // Start Facesso with silent admin logon
             _facessoProcess = Process.Start(new ProcessStartInfo
             {
                 FileName = exePath,
                 Arguments = "/silentAdminLogon",
+                RedirectStandardError = true,
                 UseShellExecute = false,
-                RedirectStandardError = true
+                WindowStyle = ProcessWindowStyle.Normal
             });
 
             Assert.NotNull(_facessoProcess);
 
+            TestRunLogger.Trace($"{_facessoProcess.ProcessName} is now running.");
+
             // Wait for the main window to appear
             var mainWindowHandle = WaitForMainWindow(_facessoProcess, StartupTimeoutMs);
+            TestRunLogger.Trace($"Got mainWindowHandle {mainWindowHandle}.");
 
             if (mainWindowHandle == IntPtr.Zero)
             {
                 // Main window never appeared — look for a modal dialog instead
+                TestRunLogger.Trace($"mainWindowHandle was unvalid, though.");
                 HandleMissingMainWindow();
                 return; // HandleMissingMainWindow always calls Assert.Fail
             }
 
             // Maximize the window (fullscreen)
+            TestRunLogger.Trace($"Setting Application window as foreground window.");
             SetForegroundWindow(mainWindowHandle);
+
+            TestRunLogger.Trace($"Show the window.");
             ShowWindow(mainWindowHandle, SW_SHOWMAXIMIZED);
 
             // Give the application time to render fully
+            TestRunLogger.Trace($"Giving time for the messages to process.");
             Thread.Sleep(RenderDelayMs);
+            TestRunLogger.Trace($"Continuing.");
 
             // Capture the window via PrintWindow
+            TestRunLogger.Trace($"Retrieving the Window Rectangle of the main window.");
             GetWindowRect(mainWindowHandle, out var rect);
             Assert.True(rect.Width > 0 && rect.Height > 0,
                 $"Window has invalid dimensions: {rect.Width}x{rect.Height}");
 
+            TestRunLogger.Trace($"Creating a bitmap in that size.");
             using (var bitmap = new Bitmap(rect.Width, rect.Height, PixelFormat.Format32bppArgb))
             using (var graphics = Graphics.FromImage(bitmap))
             {
+                TestRunLogger.Trace($"Retrieving the Bitmap's HDC.");
                 var hdc = graphics.GetHdc();
+
+                TestRunLogger.Trace($"Try capturing the main window into the bitmap.");
                 try
                 {
                     bool success = PrintWindow(mainWindowHandle, hdc, PW_RENDERFULLCONTENT);
@@ -131,6 +149,8 @@ namespace Facesso.Tests.Visual
                 {
                     graphics.ReleaseHdc(hdc);
                 }
+
+                TestRunLogger.Trace($"Cleaning up resources and saving screenshot.");
 
                 // Save the screenshot
                 Directory.CreateDirectory(OutputFolder);
