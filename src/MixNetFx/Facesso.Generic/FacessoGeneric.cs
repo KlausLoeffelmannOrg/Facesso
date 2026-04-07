@@ -236,19 +236,7 @@ namespace Facesso
 
         public static void Login()
         {
-            // Check for silent admin logon command line switch
-            foreach (string arg in Environment.GetCommandLineArgs())
-            {
-                if (string.Equals(arg, "/silentAdminLogon", StringComparison.OrdinalIgnoreCase))
-                {
-                    PerformSilentLogin(
-                        SuperUser, 
-                        SuperUserPasswordForLoginTestingPurposesOnlyNoThreat);
-
-                    return;
-                }
-            }
-
+            // Ensure LoginHistory exists (first-ever run won't have one)
             LoginHistory locLoginHistory = AppSettings.LoginHistory;
 
             if (locLoginHistory == null)
@@ -262,6 +250,19 @@ namespace Facesso
             else
             {
                 locLoginHistory.LastLoginName = AppSettings.LastLoginName;
+            }
+
+            // Check for silent admin logon command line switch
+            foreach (string arg in Environment.GetCommandLineArgs())
+            {
+                if (string.Equals(arg, "/silentAdminLogon", StringComparison.OrdinalIgnoreCase))
+                {
+                    PerformSilentLogin(
+                        SuperUser, 
+                        SuperUserPasswordForLoginTestingPurposesOnlyNoThreat);
+
+                    return;
+                }
             }
 
             var locLoginForm = new frmLogin();
