@@ -658,11 +658,21 @@ namespace Facesso.Tests.Visual
                         GetWindowText(hWnd, titleBuf, titleBuf.Capacity);
                         string title = titleBuf.ToString();
 
-                        if (title.IndexOf("Facesso", StringComparison.OrdinalIgnoreCase) >= 0
-                            && IsWindow(hWnd))
+                        // Look for the WinForms main form — must have a title
+                        // and a WinForms window class. Skip GDI+ hook windows,
+                        // tooltip windows, broadcast windows, etc.
+                        if (!string.IsNullOrEmpty(title) && IsWindow(hWnd))
                         {
-                            found = hWnd;
-                            return false; // stop enumeration
+                            var classBuf = new StringBuilder(256);
+                            GetClassName(hWnd, classBuf, classBuf.Capacity);
+                            string className = classBuf.ToString();
+
+                            if (className.StartsWith("WindowsForms10.Window",
+                                    StringComparison.OrdinalIgnoreCase))
+                            {
+                                found = hWnd;
+                                return false; // stop enumeration
+                            }
                         }
 
                         return true;
