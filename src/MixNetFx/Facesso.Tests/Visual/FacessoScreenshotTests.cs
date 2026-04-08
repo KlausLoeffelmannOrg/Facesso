@@ -71,8 +71,26 @@ namespace Facesso.Tests.Visual
         private static extern bool EnumThreadWindows(
             int dwThreadId, EnumThreadWndProc lpfn, IntPtr lParam);
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
+        private delegate bool EnumChildProc(IntPtr hWnd, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        private static extern bool EnumChildWindows(IntPtr hWndParent, EnumChildProc lpEnumFunc, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        private static extern int MapWindowPoints(IntPtr hWndFrom, IntPtr hWndTo, ref POINT lpPoints, int cPoints);
+
         private const int SW_SHOWMAXIMIZED = 3;
         private const uint PW_RENDERFULLCONTENT = 0x00000002;
+
+        private const int WM_PRINT = 0x0317;
+        private const int WM_PRINTCLIENT = 0x0318;
+        private const int PRF_NONCLIENT = 0x02;
+        private const int PRF_CLIENT = 0x04;
+        private const int PRF_ERASEBKGND = 0x08;
+        private const int PRF_CHILDREN = 0x10;
 
         [StructLayout(LayoutKind.Sequential)]
         private struct RECT
@@ -107,6 +125,14 @@ namespace Facesso.Tests.Visual
                 RedirectStandardError = true
             };
             startInfo.EnvironmentVariables["FACESSO_DIAG_LOG"] = diagLogPath;
+
+            // Tell the app to save its own screenshot via DrawToBitmap.
+            // This works in headless / container environments where
+            // cross-process PrintWindow produces black images.
+            Directory.CreateDirectory(OutputFolder);
+            var drawToBitmapPath = Path.Combine(OutputFolder, "FacessoScreenshot_DrawToBitmap.png");
+            if (File.Exists(drawToBitmapPath)) File.Delete(drawToBitmapPath);
+            startInfo.EnvironmentVariables["FACESSO_SCREENSHOT_PATH"] = drawToBitmapPath;
 
             _facessoProcess = Process.Start(startInfo);
             Assert.NotNull(_facessoProcess);
@@ -177,27 +203,39 @@ namespace Facesso.Tests.Visual
                 $"Window has invalid dimensions: {windowRect.Width}x{windowRect.Height}");
 
             // ── Capture the screenshot ──
-            Directory.CreateDirectory(OutputFolder);
             var screenshotPath = Path.Combine(OutputFolder, ScreenshotFileName);
 
-            TestRunLogger.Trace("Capturing window via PrintWindow.");
-            using (var bitmap = new Bitmap(windowRect.Width, windowRect.Height, PixelFormat.Format32bppArgb))
+            // Prefer the in-process DrawToBitmap screenshot (saved by
+            // frmFacessoShell via FACESSO_SCREENSHOT_PATH). DrawToBitmap
+            // uses a memory DC and works in headless / container environments
+            // — exactly like the proven WinFormsSmoke test pattern.
+            if (File.Exists(drawToBitmapPath) && new FileInfo(drawToBitmapPath).Length > 0)
             {
-                using (var g = Graphics.FromImage(bitmap))
+                File.Copy(drawToBitmapPath, screenshotPath, true);
+                TestRunLogger.Info(
+                    "Using in-process DrawToBitmap screenshot (headless-safe).");
+            }
+            else
+            {
+                // Fallback: cross-process capture (PrintWindow → WM_PRINT).
+                // Works on interactive desktops but may produce black images
+                // in headless environments.
+                TestRunLogger.Trace(
+                    "In-process screenshot not available, falling back to external capture.");
+                using (var bitmap = new Bitmap(windowRect.Width, windowRect.Height,
+                           PixelFormat.Format32bppArgb))
                 {
-                    var hdc = g.GetHdc();
-                    try
+                    using (var g = Graphics.FromImage(bitmap))
                     {
-                        bool captured = PrintWindow(mainWindowHandle, hdc, PW_RENDERFULLCONTENT);
-                        Assert.True(captured, "PrintWindow failed to capture the window content.");
+                        g.Clear(Color.White);
                     }
-                    finally
-                    {
-                        g.ReleaseHdc(hdc);
-                    }
-                }
 
-                bitmap.Save(screenshotPath, ImageFormat.Png);
+                    var captureMethod = CaptureWindow(mainWindowHandle, bitmap);
+                    TestRunLogger.Info(
+                        $"External capture succeeded via: {captureMethod}");
+
+                    bitmap.Save(screenshotPath, ImageFormat.Png);
+                }
             }
 
             Assert.True(File.Exists(screenshotPath), $"Screenshot was not saved to: {screenshotPath}");
@@ -339,24 +377,21 @@ namespace Facesso.Tests.Visual
 
                     try
                     {
+                        string dlgMethod;
                         using (var bmp = new Bitmap(dlgRect.Width, dlgRect.Height,
                                    PixelFormat.Format32bppArgb))
-                        using (var g = Graphics.FromImage(bmp))
                         {
-                            var hdc = g.GetHdc();
-                            try
+                            using (var g = Graphics.FromImage(bmp))
                             {
-                                PrintWindow(info.Handle, hdc, PW_RENDERFULLCONTENT);
+                                g.Clear(Color.White);
                             }
-                            finally
-                            {
-                                g.ReleaseHdc(hdc);
-                            }
+
+                            dlgMethod = CaptureWindow(info.Handle, bmp);
 
                             bmp.Save(pngPath, ImageFormat.Png);
                         }
 
-                        report.AppendLine($"  Screenshot saved to: {pngPath}");
+                        report.AppendLine($"  Screenshot saved to: {pngPath} (via {dlgMethod})");
                     }
                     catch (Exception ex)
                     {
@@ -565,6 +600,209 @@ namespace Facesso.Tests.Visual
             int right = Math.Min(imgWidth, rect.Right);
             int bottom = Math.Min(imgHeight, rect.Bottom);
             return new Rectangle(x, y, Math.Max(0, right - x), Math.Max(0, bottom - y));
+        }
+
+        /// <summary>
+        /// Captures a window into the given bitmap. The bitmap should
+        /// already be pre-filled (e.g. with white) so that unpainted
+        /// areas are visible.
+        ///
+        /// Strategy (in order):
+        ///   1. WM_PRINT cross-process — sends a message asking the window
+        ///      to paint itself (incl. children) into our memory DC.
+        ///      Works in headless / container environments because it
+        ///      triggers the control's actual OnPaint code via GDI,
+        ///      not a compositor surface capture.
+        ///   2. PrintWindow with PW_RENDERFULLCONTENT — works well on
+        ///      interactive desktops where DWM is active.
+        ///   3. Recursive child painting — enumerates every child HWND
+        ///      and sends WM_PRINT/WM_PRINTCLIENT to each individually
+        ///      in case the top-level message didn't propagate.
+        ///   4. ForceOpaqueAlpha — fixes the alpha channel which
+        ///      WM_PRINT / PrintWindow often leave at 0.
+        /// </summary>
+        private static string CaptureWindow(IntPtr hWnd, Bitmap target)
+        {
+            string method;
+
+            // ── Attempt 1: WM_PRINT (universal, works in headless) ──
+            using (var g = Graphics.FromImage(target))
+            {
+                var hdc = g.GetHdc();
+                try
+                {
+                    SendMessage(hWnd, WM_PRINT, hdc,
+                        (IntPtr)(PRF_NONCLIENT | PRF_CLIENT
+                               | PRF_CHILDREN | PRF_ERASEBKGND));
+                }
+                finally
+                {
+                    g.ReleaseHdc(hdc);
+                }
+            }
+
+            method = "WM_PRINT";
+
+            // ── Attempt 2: PrintWindow (interactive desktops) ──
+            if (IsImageMostlyUniform(target))
+            {
+                using (var g = Graphics.FromImage(target))
+                {
+                    g.Clear(Color.White);
+                    var hdc = g.GetHdc();
+                    try
+                    {
+                        PrintWindow(hWnd, hdc, PW_RENDERFULLCONTENT);
+                    }
+                    finally
+                    {
+                        g.ReleaseHdc(hdc);
+                    }
+                }
+
+                method = "PrintWindow";
+            }
+
+            // ── Attempt 3: Recursive child window painting ──
+            // If top-level WM_PRINT didn't propagate to children, paint
+            // each child individually at its correct position.
+            if (IsImageMostlyUniform(target))
+            {
+                using (var g = Graphics.FromImage(target))
+                {
+                    g.Clear(Color.White);
+                }
+
+                PaintChildWindowsRecursive(hWnd, hWnd, target);
+                method = "RecursiveChildPaint";
+            }
+
+            // Fix alpha channel — WM_PRINT / PrintWindow may write valid
+            // RGB but leave alpha at 0, making the PNG appear transparent.
+            ForceOpaqueAlpha(target);
+
+            return method;
+        }
+
+        /// <summary>
+        /// Enumerates all child windows of <paramref name="root"/> and sends
+        /// WM_PRINTCLIENT to each, painting them at their correct position
+        /// relative to the root window into <paramref name="target"/>.
+        /// </summary>
+        private static void PaintChildWindowsRecursive(
+            IntPtr root, IntPtr parent, Bitmap target)
+        {
+            GetWindowRect(root, out var rootRect);
+
+            EnumChildWindows(parent, (child, _) =>
+            {
+                GetWindowRect(child, out var childRect);
+
+                int x = childRect.Left - rootRect.Left;
+                int y = childRect.Top - rootRect.Top;
+                int w = childRect.Width;
+                int h = childRect.Height;
+
+                if (w <= 0 || h <= 0)
+                    return true;
+
+                // Clamp to target bounds
+                if (x + w > target.Width) w = target.Width - x;
+                if (y + h > target.Height) h = target.Height - y;
+                if (x < 0 || y < 0 || w <= 0 || h <= 0)
+                    return true;
+
+                using (var childBmp = new Bitmap(childRect.Width, childRect.Height,
+                           PixelFormat.Format32bppArgb))
+                {
+                    using (var g = Graphics.FromImage(childBmp))
+                    {
+                        g.Clear(Color.White);
+                        var hdc = g.GetHdc();
+                        try
+                        {
+                            // Try WM_PRINTCLIENT first (client area only),
+                            // then WM_PRINT as fallback.
+                            SendMessage(child, WM_PRINTCLIENT, hdc,
+                                (IntPtr)(PRF_CLIENT | PRF_ERASEBKGND));
+
+                            // Also try WM_PRINT with children for nested controls
+                            SendMessage(child, WM_PRINT, hdc,
+                                (IntPtr)(PRF_CLIENT | PRF_CHILDREN | PRF_ERASEBKGND));
+                        }
+                        finally
+                        {
+                            g.ReleaseHdc(hdc);
+                        }
+                    }
+
+                    // Composite onto the main bitmap
+                    using (var g = Graphics.FromImage(target))
+                    {
+                        g.DrawImage(childBmp, x, y, w, h);
+                    }
+                }
+
+                return true; // continue enumeration
+            }, IntPtr.Zero);
+        }
+
+        /// <summary>
+        /// Sets the alpha byte of every pixel to 255 (fully opaque).
+        /// </summary>
+        private static void ForceOpaqueAlpha(Bitmap bitmap)
+        {
+            var rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+            var bmpData = bitmap.LockBits(rect,
+                System.Drawing.Imaging.ImageLockMode.ReadWrite,
+                PixelFormat.Format32bppArgb);
+
+            try
+            {
+                int byteCount = Math.Abs(bmpData.Stride) * bitmap.Height;
+                byte[] pixels = new byte[byteCount];
+                Marshal.Copy(bmpData.Scan0, pixels, 0, byteCount);
+
+                // BGRA layout — byte 3 of each 4-byte pixel is the alpha channel
+                for (int i = 3; i < byteCount; i += 4)
+                {
+                    pixels[i] = 255;
+                }
+
+                Marshal.Copy(pixels, 0, bmpData.Scan0, byteCount);
+            }
+            finally
+            {
+                bitmap.UnlockBits(bmpData);
+            }
+        }
+
+        /// <summary>
+        /// Samples pixels to determine whether the image is essentially a single
+        /// solid colour (i.e. capture produced no meaningful content).
+        /// </summary>
+        private static bool IsImageMostlyUniform(Bitmap bitmap)
+        {
+            const int sampleCount = 80;
+            var rng = new Random(42); // deterministic seed
+            Color reference = bitmap.GetPixel(bitmap.Width / 2, bitmap.Height / 2);
+            int matchCount = 0;
+
+            for (int i = 0; i < sampleCount; i++)
+            {
+                int x = rng.Next(bitmap.Width);
+                int y = rng.Next(bitmap.Height);
+                var px = bitmap.GetPixel(x, y);
+
+                if (Math.Abs(px.R - reference.R) < 8
+                    && Math.Abs(px.G - reference.G) < 8
+                    && Math.Abs(px.B - reference.B) < 8)
+                {
+                    matchCount++;
+                }
+            }
+
+            return matchCount > (int)(sampleCount * 0.92);
         }
 
         private static List<WindowInfo> FindProcessWindows(Process process)

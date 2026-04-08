@@ -114,6 +114,39 @@ Public Class frmFacessoShell
 
         'TODO: Wieder einblenden - nur ausgeblendet, weil der Start zu lange dauert.
         AssignChartAnalysises()
+
+        ScheduleScreenshotCaptureIfRequested()
+    End Sub
+
+    ''' <summary>
+    ''' If the FACESSO_SCREENSHOT_PATH environment variable is set,
+    ''' maximizes the form and schedules a DrawToBitmap capture after a
+    ''' short delay. DrawToBitmap renders via a memory DC and works in
+    ''' headless / container environments where cross-process PrintWindow
+    ''' produces black images.
+    ''' </summary>
+    Private Sub ScheduleScreenshotCaptureIfRequested()
+        Dim screenshotPath = Environment.GetEnvironmentVariable("FACESSO_SCREENSHOT_PATH")
+        If String.IsNullOrEmpty(screenshotPath) Then Return
+
+        Me.WindowState = FormWindowState.Maximized
+
+        Dim captureTimer As New Timer With {.Interval = 3000}
+        AddHandler captureTimer.Tick, Sub(s, ev)
+            DirectCast(s, Timer).Stop()
+            DirectCast(s, Timer).Dispose()
+            Try
+                Using bmp As New Bitmap(Me.Width, Me.Height)
+                    Me.DrawToBitmap(bmp, New Rectangle(0, 0, Me.Width, Me.Height))
+                    Dim dir = IO.Path.GetDirectoryName(screenshotPath)
+                    If Not String.IsNullOrEmpty(dir) Then IO.Directory.CreateDirectory(dir)
+                    bmp.Save(screenshotPath, System.Drawing.Imaging.ImageFormat.Png)
+                End Using
+            Catch
+                ' Best-effort — the test will fall back to external capture
+            End Try
+        End Sub
+        captureTimer.Start()
     End Sub
 
     Protected Overrides Sub OnClosed(ByVal e As System.EventArgs)
