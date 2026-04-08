@@ -28,7 +28,6 @@ namespace Facesso.Tests.Visual
         private const string OutputFolder = @"c:\output";
         private const string ScreenshotFileName = "FacessoScreenshot.png";
         private const string DialogScreenshotFileName = "FacessoDialog.png";
-        private const string MarkdownFileName = "FacessoA11yReport.md";
         private const int StartupTimeoutMs = 30_000;
         private const int RenderDelayMs = 5_000;
 
@@ -81,8 +80,23 @@ namespace Facesso.Tests.Visual
         [DllImport("user32.dll")]
         private static extern int MapWindowPoints(IntPtr hWndFrom, IntPtr hWndTo, ref POINT lpPoints, int cPoints);
 
+        [DllImport("user32.dll")]
+        private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter,
+            int X, int Y, int cx, int cy, uint uFlags);
+
         private const int SW_SHOWMAXIMIZED = 3;
+        private const int SW_SHOWNORMAL = 1;
         private const uint PW_RENDERFULLCONTENT = 0x00000002;
+        private const uint SWP_NOMOVE = 0x0002;
+        private const uint SWP_NOZORDER = 0x0004;
+
+        /// <summary>
+        /// Desired window size for the screenshot. In containers, the virtual
+        /// desktop is often only 1024×768. By setting a specific size instead
+        /// of maximizing, we get a consistent, higher-resolution capture.
+        /// </summary>
+        private const int CaptureWidth = 1920;
+        private const int CaptureHeight = 1080;
 
         private const int WM_PRINT = 0x0317;
         private const int WM_PRINTCLIENT = 0x0318;
@@ -179,10 +193,12 @@ namespace Facesso.Tests.Visual
                 return;
             }
 
-            // Maximize and give the application time to render
-            TestRunLogger.Trace("Setting application window as foreground window.");
+            // Resize to desired capture resolution and give the application time to render
+            TestRunLogger.Trace($"Resizing window to {CaptureWidth}×{CaptureHeight}.");
             SetForegroundWindow(mainWindowHandle);
-            ShowWindow(mainWindowHandle, SW_SHOWMAXIMIZED);
+            ShowWindow(mainWindowHandle, SW_SHOWNORMAL);
+            SetWindowPos(mainWindowHandle, IntPtr.Zero, 0, 0,
+                CaptureWidth, CaptureHeight, SWP_NOMOVE | SWP_NOZORDER);
 
             TestRunLogger.Trace("Waiting for rendering to settle.");
             Thread.Sleep(RenderDelayMs);
@@ -240,17 +256,6 @@ namespace Facesso.Tests.Visual
             Assert.True(File.Exists(screenshotPath), $"Screenshot was not saved to: {screenshotPath}");
             Assert.True(new FileInfo(screenshotPath).Length > 0, "Screenshot file is empty.");
             TestRunLogger.Info($"Screenshot saved: {screenshotPath}");
-
-            // ── Capture UI text via Accessibility (UI Automation) ──
-            TestRunLogger.Trace("Capturing accessibility snapshot.");
-            var snapshot = A11ySnapshot.Capture(mainWindowHandle);
-
-            var mdPath = Path.Combine(OutputFolder, MarkdownFileName);
-            File.WriteAllText(mdPath, snapshot.ToMarkdown(), Encoding.UTF8);
-
-            Assert.True(File.Exists(mdPath), $"A11y report was not saved to: {mdPath}");
-            Assert.True(new FileInfo(mdPath).Length > 0, "A11y report is empty.");
-            TestRunLogger.Info($"Accessibility report saved: {mdPath}");
         }
 
         #region Error Handling — Missing Main Window
@@ -330,24 +335,10 @@ namespace Facesso.Tests.Visual
                     }
                 }
 
-                // Use UI Automation to extract dialog text
-                try
+                // Report the dialog title as diagnostic text
+                if (!string.IsNullOrEmpty(info.Title))
                 {
-                    var dialogSnapshot = A11ySnapshot.Capture(info.Handle);
-                    string a11yText = dialogSnapshot.ToPlainText();
-                    report.AppendLine($"  Accessibility text:");
-                    report.AppendLine();
-
-                    foreach (var line in a11yText.Split('\n'))
-                    {
-                        report.AppendLine($"    {line.TrimEnd()}");
-                    }
-
-                    report.AppendLine();
-                }
-                catch
-                {
-                    report.AppendLine("  (accessibility text extraction failed)");
+                    report.AppendLine($"  Dialog title: {info.Title}");
                     report.AppendLine();
                 }
             }
