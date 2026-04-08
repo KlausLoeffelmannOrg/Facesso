@@ -283,3 +283,71 @@ The silent login bailed out at line 248 (`return`) before `LoginHistory` was eve
 - `e8a85aa` — LoginHistory null-check in PerformSilentLogin
 - `2c15974` — ExitApplication=True for non-interactive unhandled exceptions
 - `d47cd29` — **Root fix**: Move LoginHistory init above /silentAdminLogon check
+
+### Session 2026-04-07 (evening) — Screenshot capture in headless containers
+
+After the silent-login bug was fixed and the application started successfully inside a Windows Server Core container, the focus shifted to **capturing a visible screenshot** of the running `frmFacessoShell` for automated visual verification and OCR-based content analysis.
+
+#### Problem: black screenshots in headless environments
+
+`PrintWindow` (the Win32 API used for cross-process window capture) relies on the DWM compositor to render the window surface into a bitmap. In headless containers (no desktop session, no DWM), every pixel comes back black — `PrintWindow` returns success but writes nothing.
+
+Separately, `Process.MainWindowHandle` stays `IntPtr.Zero` in containers because the .NET API uses visibility-based heuristics that fail without an interactive desktop.
+
+#### Approach: layered capture strategy
+
+The investigation identified that **`WM_PRINT` is fundamentally different** from `PrintWindow`:
+
+| API | Mechanism | Headless? |
+| --- | --- | --- |
+| `PrintWindow` | Compositor surface capture (DWM) | ❌ Black output |
+| `WM_PRINT` (SendMessage) | Window message → `OnPaint` into caller's DC | ✅ GDI memory DC |
+| `DrawToBitmap` (in-process) | Same as WM_PRINT, but called on the control directly | ✅ Always works |
+
+`WM_PRINT` sends a message to the target window's WndProc, which triggers `OnPaint` code against whatever DC the caller provides. Since GDI handles live in a **session-wide kernel handle table**, a memory DC created in the test process is valid when the Facesso process paints into it. This is the same mechanism `Control.DrawToBitmap()` uses internally.
+
+#### Implementation
+
+**`CaptureWindow` method** in `FacessoScreenshotTests.cs` now tries three strategies in order:
+
+1. **`WM_PRINT`** cross-process (primary) — sends `WM_PRINT` with `PRF_NONCLIENT | PRF_CLIENT | PRF_CHILDREN | PRF_ERASEBKGND` to the window, asking it to paint itself and all children into the test's memory DC.
+2. **`PrintWindow`** with `PW_RENDERFULLCONTENT` (fallback) — works well on interactive desktops where DWM is active.
+3. **Recursive child painting** (fallback) — `EnumChildWindows` iterates every child HWND, sends `WM_PRINTCLIENT` / `WM_PRINT` to each, and composites them at their screen-relative positions in the bitmap.
+
+After every attempt, `ForceOpaqueAlpha` sets all alpha bytes to 255 (WM_PRINT often writes valid RGB but leaves alpha at 0, making PNGs appear transparent/black in viewers). `IsImageMostlyUniform` determines whether a strategy produced content or needs to fall through.
+
+**`frmFacessoShell.vb`** gained `ScheduleScreenshotCaptureIfRequested()` — when the `FACESSO_SCREENSHOT_PATH` environment variable is set, the form maximizes itself and fires a 3-second one-shot timer that calls `Me.DrawToBitmap()` and saves the PNG. This is the belt-and-suspenders fallback for environments where even cross-process `WM_PRINT` fails.
+
+**Window detection** was also improved: `WaitForMainWindow` now falls back to `EnumThreadWindows` (walking every thread of the process) when `Process.MainWindowHandle` stays zero. `FindMainWindowViaThreads` matches any window whose title contains "Facesso".
+
+#### Tesseract OCR integration
+
+Tesseract 5.2.0 was added to `Facesso.Tests` with **eng + deu** traineddata files (standard tessdata, supporting both LSTM and legacy engines). The test computes 10 OCR regions from the `frmFacessoShell.Designer.vb` layout:
+
+1. Menu Bar (MenuStripMain)
+2. Toolbar (ToolStripMain)
+3. Date/Shift Selector (ToolStripDateShiftSelector, left panel)
+4. Info Bar — Current Date, Current Work Group, Current Shift
+5. Work Groups ListView (wglWorkGroups)
+6. Work Group Details DataGridView (dgvWorkGroupResults)
+7. Employees ListView (elvEmployees)
+8. Status Bar (StatusStrip)
+
+Each region is OCR'd with `TesseractEngine("eng+deu", EngineMode.Default)` and the results are written to a Markdown report at `c:\output\FacessoOcrReport.md`.
+
+#### Also explored (then reverted)
+
+UI Automation (UIA) with `TreeWalker.RawViewWalker` was explored as an alternative to OCR for extracting control text. While it could enumerate the control tree, WinForms accessibility support in containers proved unreliable — controls returned empty `Name` / `Value` properties. The approach was reverted in favour of Tesseract OCR which works directly against the captured bitmap.
+
+### Commits (session 2026-04-07 evening / 2026-04-08)
+
+- `db079dc` — Document container screenshot testing session and silent login bug analysis
+- `2c1ca51` — Fix window detection in containers: use EnumThreadWindows fallback
+- `82dae13` — Update screen capture strategy for text recognition base
+- `524c833` — Replace Tesseract OCR with UI Automation accessibility snapshots
+- `b8be068` — Fix FindMainWindowViaThreads: match WinForms class, not GDI+ hook window
+- `ca43375` — Use RawViewWalker for deeper WinForms A11y tree traversal
+- `7650b21` — Enable WinForms accessibility features for UIA support
+- `1112420` — Revert A11y text extraction, keep screenshot-only test
+- `081ffea` — Remove leftover ControlTreeDumper.cs
+- `4701211` — Fix Screenshot and assembly inventory test
