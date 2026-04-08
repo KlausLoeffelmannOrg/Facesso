@@ -197,7 +197,7 @@ Partial Public Class frmFacessoShell
         '
         Me.ToolStripContainer1.ContentPanel.AutoScroll = True
         Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.TabControl1)
-        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(1126, 695)
+        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(1657, 738)
         Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
         '
         'ToolStripContainer1.LeftToolStripPanel
@@ -205,24 +205,25 @@ Partial Public Class frmFacessoShell
         Me.ToolStripContainer1.LeftToolStripPanel.Controls.Add(Me.ToolStripDateShiftSelector)
         Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStripContainer1.Name = "ToolStripContainer1"
-        Me.ToolStripContainer1.Size = New System.Drawing.Size(1152, 774)
+        Me.ToolStripContainer1.Size = New System.Drawing.Size(1684, 847)
         Me.ToolStripContainer1.TabIndex = 7
         Me.ToolStripContainer1.Text = "ToolStripContainer1"
         '
         'ToolStripContainer1.TopToolStripPanel
         '
-        Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.MenuStripMain)
         Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ToolStripMain)
+        Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.MenuStripMain)
         '
         'StatusStrip
         '
         Me.StatusStrip.Dock = System.Windows.Forms.DockStyle.None
-        Me.StatusStrip.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.StatusStrip.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.StatusStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSplitButton1, Me.tslAdminInfo, Me.tslActiveEmployees, Me.tslActiveWorkgroups, Me.tslCurrentDateAndTime})
         Me.StatusStrip.Location = New System.Drawing.Point(0, 0)
         Me.StatusStrip.Name = "StatusStrip"
         Me.StatusStrip.Padding = New System.Windows.Forms.Padding(1, 4, 19, 1)
-        Me.StatusStrip.Size = New System.Drawing.Size(1152, 30)
+        Me.StatusStrip.Size = New System.Drawing.Size(1684, 42)
         Me.StatusStrip.TabIndex = 2
         Me.StatusStrip.Text = "StatusStrip1"
         '
@@ -231,7 +232,7 @@ Partial Public Class frmFacessoShell
         Me.ToolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripSplitButton1.Name = "ToolStripSplitButton1"
-        Me.ToolStripSplitButton1.Size = New System.Drawing.Size(0, 20)
+        Me.ToolStripSplitButton1.Size = New System.Drawing.Size(0, 31)
         Me.ToolStripSplitButton1.Text = "Sie sind angemeldet als: Administrator"
         '
         'tslAdminInfo
@@ -241,7 +242,7 @@ Partial Public Class frmFacessoShell
             Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.tslAdminInfo.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken
         Me.tslAdminInfo.Name = "tslAdminInfo"
-        Me.tslAdminInfo.Size = New System.Drawing.Size(190, 20)
+        Me.tslAdminInfo.Size = New System.Drawing.Size(291, 31)
         Me.tslAdminInfo.Text = "Angemeldet als: Administrator "
         '
         'tslActiveEmployees
@@ -251,7 +252,7 @@ Partial Public Class frmFacessoShell
             Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.tslActiveEmployees.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken
         Me.tslActiveEmployees.Name = "tslActiveEmployees"
-        Me.tslActiveEmployees.Size = New System.Drawing.Size(199, 20)
+        Me.tslActiveEmployees.Size = New System.Drawing.Size(309, 31)
         Me.tslActiveEmployees.Text = "Aktive bzw. beteiligte Mitarbeiter"
         '
         'tslActiveWorkgroups
@@ -261,7 +262,7 @@ Partial Public Class frmFacessoShell
             Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.tslActiveWorkgroups.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken
         Me.tslActiveWorkgroups.Name = "tslActiveWorkgroups"
-        Me.tslActiveWorkgroups.Size = New System.Drawing.Size(135, 20)
+        Me.tslActiveWorkgroups.Size = New System.Drawing.Size(208, 31)
         Me.tslActiveWorkgroups.Text = "Aktive Produktiv-Sites"
         '
         'tslCurrentDateAndTime
@@ -270,8 +271,9 @@ Partial Public Class frmFacessoShell
             Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
             Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.tslCurrentDateAndTime.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken
+        Me.tslCurrentDateAndTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tslCurrentDateAndTime.Name = "tslCurrentDateAndTime"
-        Me.tslCurrentDateAndTime.Size = New System.Drawing.Size(608, 20)
+        Me.tslCurrentDateAndTime.Size = New System.Drawing.Size(810, 30)
         Me.tslCurrentDateAndTime.Spring = True
         Me.tslCurrentDateAndTime.Text = "Current Date and Time"
         '
@@ -283,17 +285,17 @@ Partial Public Class frmFacessoShell
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1126, 695)
+        Me.TabControl1.Size = New System.Drawing.Size(1657, 738)
         Me.TabControl1.TabIndex = 2
         '
         'TabPage1
         '
         Me.TabPage1.Controls.Add(Me.SplitEmployeesWorkGroups)
         Me.TabPage1.Controls.Add(Me.TopLineLayoutPanel)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 34)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1118, 666)
+        Me.TabPage1.Size = New System.Drawing.Size(1649, 700)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Tag = "SYSTEM"
         Me.TabPage1.Text = "Bearbeitung"
@@ -315,8 +317,8 @@ Partial Public Class frmFacessoShell
         '
         Me.SplitEmployeesWorkGroups.Panel2.BackColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.SplitEmployeesWorkGroups.Panel2.Controls.Add(Me.gbEmployees)
-        Me.SplitEmployeesWorkGroups.Size = New System.Drawing.Size(1112, 596)
-        Me.SplitEmployeesWorkGroups.SplitterDistance = 262
+        Me.SplitEmployeesWorkGroups.Size = New System.Drawing.Size(1643, 630)
+        Me.SplitEmployeesWorkGroups.SplitterDistance = 276
         Me.SplitEmployeesWorkGroups.TabIndex = 1
         Me.SplitEmployeesWorkGroups.Text = "SplitContainer1"
         '
@@ -333,8 +335,8 @@ Partial Public Class frmFacessoShell
         'splitWorkGroups.Panel2
         '
         Me.splitWorkGroups.Panel2.Controls.Add(Me.GroupBox1)
-        Me.splitWorkGroups.Size = New System.Drawing.Size(1112, 262)
-        Me.splitWorkGroups.SplitterDistance = 688
+        Me.splitWorkGroups.Size = New System.Drawing.Size(1643, 276)
+        Me.splitWorkGroups.SplitterDistance = 1016
         Me.splitWorkGroups.TabIndex = 0
         Me.splitWorkGroups.Text = "SplitContainer2"
         '
@@ -346,7 +348,7 @@ Partial Public Class frmFacessoShell
         Me.gbWorkGroups.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbWorkGroups.Location = New System.Drawing.Point(0, 0)
         Me.gbWorkGroups.Name = "gbWorkGroups"
-        Me.gbWorkGroups.Size = New System.Drawing.Size(688, 262)
+        Me.gbWorkGroups.Size = New System.Drawing.Size(1016, 276)
         Me.gbWorkGroups.TabIndex = 2
         Me.gbWorkGroups.TabStop = False
         Me.gbWorkGroups.Text = "Produktiv-Sites"
@@ -355,13 +357,13 @@ Partial Public Class frmFacessoShell
         '
         Me.wglWorkGroups.AutoGroup = True
         Me.wglWorkGroups.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.wglWorkGroups.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.wglWorkGroups.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.wglWorkGroups.FullRowSelect = True
         Me.wglWorkGroups.HideSelection = False
-        Me.wglWorkGroups.Location = New System.Drawing.Point(3, 18)
+        Me.wglWorkGroups.Location = New System.Drawing.Point(3, 26)
         Me.wglWorkGroups.Name = "wglWorkGroups"
         Me.wglWorkGroups.OnlyActiveWorkgroups = True
-        Me.wglWorkGroups.Size = New System.Drawing.Size(682, 241)
+        Me.wglWorkGroups.Size = New System.Drawing.Size(1010, 247)
         Me.wglWorkGroups.TabIndex = 0
         Me.wglWorkGroups.UseCompatibleStateImageBehavior = False
         Me.wglWorkGroups.View = System.Windows.Forms.View.Details
@@ -375,7 +377,7 @@ Partial Public Class frmFacessoShell
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(420, 262)
+        Me.GroupBox1.Size = New System.Drawing.Size(623, 276)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Produktiv-Site-Info:"
@@ -384,10 +386,11 @@ Partial Public Class frmFacessoShell
         '
         Me.dgvWorkGroupResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvWorkGroupResults.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dgvWorkGroupResults.Location = New System.Drawing.Point(3, 18)
+        Me.dgvWorkGroupResults.Location = New System.Drawing.Point(3, 26)
         Me.dgvWorkGroupResults.Name = "dgvWorkGroupResults"
         Me.dgvWorkGroupResults.Object = Nothing
-        Me.dgvWorkGroupResults.Size = New System.Drawing.Size(414, 241)
+        Me.dgvWorkGroupResults.RowHeadersWidth = 62
+        Me.dgvWorkGroupResults.Size = New System.Drawing.Size(617, 247)
         Me.dgvWorkGroupResults.TabIndex = 0
         '
         'gbEmployees
@@ -398,7 +401,7 @@ Partial Public Class frmFacessoShell
         Me.gbEmployees.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbEmployees.Location = New System.Drawing.Point(0, 0)
         Me.gbEmployees.Name = "gbEmployees"
-        Me.gbEmployees.Size = New System.Drawing.Size(1112, 330)
+        Me.gbEmployees.Size = New System.Drawing.Size(1643, 350)
         Me.gbEmployees.TabIndex = 2
         Me.gbEmployees.TabStop = False
         Me.gbEmployees.Text = "Mitarbeiter"
@@ -409,14 +412,14 @@ Partial Public Class frmFacessoShell
         Me.elvEmployees.Dock = System.Windows.Forms.DockStyle.Fill
         Me.elvEmployees.EmployeeInfoCollection = Nothing
         Me.elvEmployees.EmployeeSortOrder = Facesso.GenericControls.EmployeeSortOrder.PersonnelNumber
-        Me.elvEmployees.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.elvEmployees.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.elvEmployees.FullRowSelect = True
         Me.elvEmployees.HideSelection = False
-        Me.elvEmployees.Location = New System.Drawing.Point(3, 18)
+        Me.elvEmployees.Location = New System.Drawing.Point(3, 26)
         Me.elvEmployees.Name = "elvEmployees"
         Me.elvEmployees.OnlyActiveEmployees = True
         Me.elvEmployees.OnlyIncentiveEmployees = False
-        Me.elvEmployees.Size = New System.Drawing.Size(1106, 309)
+        Me.elvEmployees.Size = New System.Drawing.Size(1637, 321)
         Me.elvEmployees.TabIndex = 0
         Me.elvEmployees.UseCompatibleStateImageBehavior = False
         Me.elvEmployees.View = System.Windows.Forms.View.Details
@@ -436,7 +439,7 @@ Partial Public Class frmFacessoShell
         Me.TopLineLayoutPanel.Name = "TopLineLayoutPanel"
         Me.TopLineLayoutPanel.RowCount = 1
         Me.TopLineLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TopLineLayoutPanel.Size = New System.Drawing.Size(1112, 64)
+        Me.TopLineLayoutPanel.Size = New System.Drawing.Size(1643, 64)
         Me.TopLineLayoutPanel.TabIndex = 2
         '
         'lblCurrentShift
@@ -447,11 +450,11 @@ Partial Public Class frmFacessoShell
         Me.lblCurrentShift.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblCurrentShift.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCurrentShift.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblCurrentShift.Location = New System.Drawing.Point(559, 3)
+        Me.lblCurrentShift.Location = New System.Drawing.Point(823, 3)
         Me.lblCurrentShift.Margin = New System.Windows.Forms.Padding(3)
         Me.lblCurrentShift.Name = "lblCurrentShift"
         Me.lblCurrentShift.Padding = New System.Windows.Forms.Padding(2)
-        Me.lblCurrentShift.Size = New System.Drawing.Size(550, 58)
+        Me.lblCurrentShift.Size = New System.Drawing.Size(817, 58)
         Me.lblCurrentShift.TabIndex = 4
         Me.lblCurrentShift.Text = "Schicht 1 (06:15 - 12:15)"
         Me.lblCurrentShift.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -464,11 +467,11 @@ Partial Public Class frmFacessoShell
         Me.lblCurrentWorkgroup.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblCurrentWorkgroup.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCurrentWorkgroup.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblCurrentWorkgroup.Location = New System.Drawing.Point(281, 3)
+        Me.lblCurrentWorkgroup.Location = New System.Drawing.Point(413, 3)
         Me.lblCurrentWorkgroup.Margin = New System.Windows.Forms.Padding(3)
         Me.lblCurrentWorkgroup.Name = "lblCurrentWorkgroup"
         Me.lblCurrentWorkgroup.Padding = New System.Windows.Forms.Padding(2)
-        Me.lblCurrentWorkgroup.Size = New System.Drawing.Size(272, 58)
+        Me.lblCurrentWorkgroup.Size = New System.Drawing.Size(404, 58)
         Me.lblCurrentWorkgroup.TabIndex = 5
         Me.lblCurrentWorkgroup.Text = "Schicht 1 (06:15 - 12:15)"
         Me.lblCurrentWorkgroup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -485,7 +488,7 @@ Partial Public Class frmFacessoShell
         Me.lblCurrentDate.Margin = New System.Windows.Forms.Padding(3)
         Me.lblCurrentDate.Name = "lblCurrentDate"
         Me.lblCurrentDate.Padding = New System.Windows.Forms.Padding(2)
-        Me.lblCurrentDate.Size = New System.Drawing.Size(272, 58)
+        Me.lblCurrentDate.Size = New System.Drawing.Size(404, 58)
         Me.lblCurrentDate.TabIndex = 0
         Me.lblCurrentDate.Text = "Montag, 23.2.2005"
         Me.lblCurrentDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -497,10 +500,10 @@ Partial Public Class frmFacessoShell
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1118, 669)
+        Me.TabPage2.Size = New System.Drawing.Size(1649, 710)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Tag = "SYSTEM"
-        Me.TabPage2.Text = "Ãœberblick"
+        Me.TabPage2.Text = "Überblick"
         '
         'SplitContainer1
         '
@@ -516,8 +519,8 @@ Partial Public Class frmFacessoShell
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.mainChartThree)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1112, 663)
-        Me.SplitContainer1.SplitterDistance = 295
+        Me.SplitContainer1.Size = New System.Drawing.Size(1643, 704)
+        Me.SplitContainer1.SplitterDistance = 312
         Me.SplitContainer1.TabIndex = 1
         '
         'SplitContainer2
@@ -533,8 +536,8 @@ Partial Public Class frmFacessoShell
         'SplitContainer2.Panel2
         '
         Me.SplitContainer2.Panel2.Controls.Add(Me.mainChartTwo)
-        Me.SplitContainer2.Size = New System.Drawing.Size(1112, 295)
-        Me.SplitContainer2.SplitterDistance = 543
+        Me.SplitContainer2.Size = New System.Drawing.Size(1643, 312)
+        Me.SplitContainer2.SplitterDistance = 801
         Me.SplitContainer2.TabIndex = 0
         '
         'mainChartOne
@@ -543,7 +546,7 @@ Partial Public Class frmFacessoShell
         Me.mainChartOne.Location = New System.Drawing.Point(0, 0)
         Me.mainChartOne.Margin = New System.Windows.Forms.Padding(4)
         Me.mainChartOne.Name = "mainChartOne"
-        Me.mainChartOne.Size = New System.Drawing.Size(543, 295)
+        Me.mainChartOne.Size = New System.Drawing.Size(801, 312)
         Me.mainChartOne.TabIndex = 1
         '
         'mainChartTwo
@@ -552,7 +555,7 @@ Partial Public Class frmFacessoShell
         Me.mainChartTwo.Location = New System.Drawing.Point(0, 0)
         Me.mainChartTwo.Margin = New System.Windows.Forms.Padding(4)
         Me.mainChartTwo.Name = "mainChartTwo"
-        Me.mainChartTwo.Size = New System.Drawing.Size(565, 295)
+        Me.mainChartTwo.Size = New System.Drawing.Size(838, 312)
         Me.mainChartTwo.TabIndex = 2
         '
         'mainChartThree
@@ -561,29 +564,32 @@ Partial Public Class frmFacessoShell
         Me.mainChartThree.Location = New System.Drawing.Point(0, 0)
         Me.mainChartThree.Margin = New System.Windows.Forms.Padding(4)
         Me.mainChartThree.Name = "mainChartThree"
-        Me.mainChartThree.Size = New System.Drawing.Size(1112, 364)
+        Me.mainChartThree.Size = New System.Drawing.Size(1643, 388)
         Me.mainChartThree.TabIndex = 3
         '
         'ToolStripDateShiftSelector
         '
         Me.ToolStripDateShiftSelector.Dock = System.Windows.Forms.DockStyle.None
         Me.ToolStripDateShiftSelector.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStripDateShiftSelector.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.ToolStripDateShiftSelector.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
         Me.ToolStripDateShiftSelector.Location = New System.Drawing.Point(0, 0)
         Me.ToolStripDateShiftSelector.Name = "ToolStripDateShiftSelector"
-        Me.ToolStripDateShiftSelector.Size = New System.Drawing.Size(26, 695)
+        Me.ToolStripDateShiftSelector.Size = New System.Drawing.Size(27, 738)
         Me.ToolStripDateShiftSelector.Stretch = True
         Me.ToolStripDateShiftSelector.TabIndex = 7
         '
         'MenuStripMain
         '
         Me.MenuStripMain.Dock = System.Windows.Forms.DockStyle.None
-        Me.MenuStripMain.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MenuStripMain.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MenuStripMain.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
+        Me.MenuStripMain.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.MenuStripMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DateiToolStripMenuItem, Me.EditToolStripMenuItem, Me.ViewToolStripMenuItem, Me.AnalysisToolStripMenuItem, Me.tsmCostCalculation, Me.BaseDataToolStripMenuItem, Me.ExtrasToolStripMenuItem, Me.HelpToolStripMenuItem})
-        Me.MenuStripMain.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStripMain.Location = New System.Drawing.Point(0, 33)
         Me.MenuStripMain.Name = "MenuStripMain"
         Me.MenuStripMain.Padding = New System.Windows.Forms.Padding(8, 2, 0, 2)
-        Me.MenuStripMain.Size = New System.Drawing.Size(1152, 24)
+        Me.MenuStripMain.Size = New System.Drawing.Size(1684, 34)
         Me.MenuStripMain.TabIndex = 0
         Me.MenuStripMain.Text = "MenuStrip1"
         '
@@ -591,143 +597,143 @@ Partial Public Class frmFacessoShell
         '
         Me.DateiToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem8, Me.ToolStripMenuItem7, Me.ToolStripMenuItem5, Me.ToolStripMenuItem6, Me.ExportierenalsXMLToolStripMenuItem, Me.ImportierenalsXMLToolStripMenuItem, Me.BaseDataImportToolStripMenuItem, Me.ToolStripSeparator1, Me.DruckenToolStripMenuItem, Me.ToolStripSeparator2, Me.ProgrammbeendenToolStripMenuItem})
         Me.DateiToolStripMenuItem.Name = "DateiToolStripMenuItem"
-        Me.DateiToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
+        Me.DateiToolStripMenuItem.Size = New System.Drawing.Size(79, 30)
         Me.DateiToolStripMenuItem.Text = "&Datei"
         '
         'ToolStripMenuItem8
         '
         Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
-        Me.ToolStripMenuItem8.Size = New System.Drawing.Size(222, 22)
+        Me.ToolStripMenuItem8.Size = New System.Drawing.Size(372, 34)
         Me.ToolStripMenuItem8.Text = "Neu anmelden..."
         '
         'ToolStripMenuItem7
         '
         Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
-        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(219, 6)
+        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(369, 6)
         '
         'ToolStripMenuItem5
         '
         Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(222, 22)
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(372, 34)
         Me.ToolStripMenuItem5.Text = "Daten&sicherung..."
         '
         'ToolStripMenuItem6
         '
         Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
-        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(219, 6)
+        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(369, 6)
         '
         'ExportierenalsXMLToolStripMenuItem
         '
         Me.ExportierenalsXMLToolStripMenuItem.Name = "ExportierenalsXMLToolStripMenuItem"
-        Me.ExportierenalsXMLToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.ExportierenalsXMLToolStripMenuItem.Size = New System.Drawing.Size(372, 34)
         Me.ExportierenalsXMLToolStripMenuItem.Text = "&Exportieren als XML..."
         Me.ExportierenalsXMLToolStripMenuItem.Visible = False
         '
         'ImportierenalsXMLToolStripMenuItem
         '
         Me.ImportierenalsXMLToolStripMenuItem.Name = "ImportierenalsXMLToolStripMenuItem"
-        Me.ImportierenalsXMLToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.ImportierenalsXMLToolStripMenuItem.Size = New System.Drawing.Size(372, 34)
         Me.ImportierenalsXMLToolStripMenuItem.Text = "&Importieren als XML..."
         Me.ImportierenalsXMLToolStripMenuItem.Visible = False
         '
         'BaseDataImportToolStripMenuItem
         '
         Me.BaseDataImportToolStripMenuItem.Name = "BaseDataImportToolStripMenuItem"
-        Me.BaseDataImportToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.BaseDataImportToolStripMenuItem.Size = New System.Drawing.Size(372, 34)
         Me.BaseDataImportToolStripMenuItem.Text = "Stammdaten importieren..."
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(219, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(369, 6)
         '
         'DruckenToolStripMenuItem
         '
         Me.DruckenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MitarbeiterToolStripMenuItem1, Me.ProduktivSitesAnalyseToolStripMenuItem, Me.ToolStripSeparator7})
         Me.DruckenToolStripMenuItem.Name = "DruckenToolStripMenuItem"
-        Me.DruckenToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.DruckenToolStripMenuItem.Size = New System.Drawing.Size(372, 34)
         Me.DruckenToolStripMenuItem.Text = "Drucken"
         Me.DruckenToolStripMenuItem.Visible = False
         '
         'MitarbeiterToolStripMenuItem1
         '
         Me.MitarbeiterToolStripMenuItem1.Name = "MitarbeiterToolStripMenuItem1"
-        Me.MitarbeiterToolStripMenuItem1.Size = New System.Drawing.Size(212, 22)
+        Me.MitarbeiterToolStripMenuItem1.Size = New System.Drawing.Size(364, 34)
         Me.MitarbeiterToolStripMenuItem1.Text = "&Mitarbeiteranalyse..."
         '
         'ProduktivSitesAnalyseToolStripMenuItem
         '
         Me.ProduktivSitesAnalyseToolStripMenuItem.Name = "ProduktivSitesAnalyseToolStripMenuItem"
-        Me.ProduktivSitesAnalyseToolStripMenuItem.Size = New System.Drawing.Size(212, 22)
+        Me.ProduktivSitesAnalyseToolStripMenuItem.Size = New System.Drawing.Size(364, 34)
         Me.ProduktivSitesAnalyseToolStripMenuItem.Text = "&Produktiv-Sites-Analyse..."
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(209, 6)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(361, 6)
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(219, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(369, 6)
         Me.ToolStripSeparator2.Visible = False
         '
         'ProgrammbeendenToolStripMenuItem
         '
         Me.ProgrammbeendenToolStripMenuItem.Name = "ProgrammbeendenToolStripMenuItem"
-        Me.ProgrammbeendenToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.ProgrammbeendenToolStripMenuItem.Size = New System.Drawing.Size(372, 34)
         Me.ProgrammbeendenToolStripMenuItem.Text = "Programm be&enden"
         '
         'EditToolStripMenuItem
         '
         Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmEdit_ProductionDataCollection, Me.ToolStripSeparator3, Me.tsmEdit_EmployeeTimeBookings, Me.ToolStripMenuItem3, Me.tsmEdit_SetMyReminder})
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(78, 20)
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(133, 30)
         Me.EditToolStripMenuItem.Text = "&Bearbeiten"
         '
         'tsmEdit_ProductionDataCollection
         '
         Me.tsmEdit_ProductionDataCollection.Name = "tsmEdit_ProductionDataCollection"
         Me.tsmEdit_ProductionDataCollection.ShortcutKeys = System.Windows.Forms.Keys.F2
-        Me.tsmEdit_ProductionDataCollection.Size = New System.Drawing.Size(282, 22)
+        Me.tsmEdit_ProductionDataCollection.Size = New System.Drawing.Size(486, 34)
         Me.tsmEdit_ProductionDataCollection.Text = "Datenmanager..."
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(279, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(483, 6)
         '
         'tsmEdit_EmployeeTimeBookings
         '
         Me.tsmEdit_EmployeeTimeBookings.Enabled = False
         Me.tsmEdit_EmployeeTimeBookings.Name = "tsmEdit_EmployeeTimeBookings"
         Me.tsmEdit_EmployeeTimeBookings.ShortcutKeys = System.Windows.Forms.Keys.F3
-        Me.tsmEdit_EmployeeTimeBookings.Size = New System.Drawing.Size(282, 22)
+        Me.tsmEdit_EmployeeTimeBookings.Size = New System.Drawing.Size(486, 34)
         Me.tsmEdit_EmployeeTimeBookings.Text = "Mitarbeiter-Einzelzeiten bearbeiten"
         '
         'ToolStripMenuItem3
         '
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(279, 6)
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(483, 6)
         '
         'tsmEdit_SetMyReminder
         '
         Me.tsmEdit_SetMyReminder.Name = "tsmEdit_SetMyReminder"
         Me.tsmEdit_SetMyReminder.ShortcutKeys = System.Windows.Forms.Keys.F5
-        Me.tsmEdit_SetMyReminder.Size = New System.Drawing.Size(282, 22)
+        Me.tsmEdit_SetMyReminder.Size = New System.Drawing.Size(486, 34)
         Me.tsmEdit_SetMyReminder.Text = "Mein Merkdatum setzen..."
         '
         'ViewToolStripMenuItem
         '
         Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmView_WorkGroupInfo, Me.tsmView_Employees, Me.FilternToolStripMenuItem, Me.tsmView_OnlyActiveWorkgroups, Me.tsmView_OnlyActiveEmployees, Me.ToolStripSeparator8, Me.tsmView_DockDateSelector})
         Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(100, 30)
         Me.ViewToolStripMenuItem.Text = "&Ansicht"
         '
         'tsmView_WorkGroupInfo
         '
         Me.tsmView_WorkGroupInfo.Name = "tsmView_WorkGroupInfo"
-        Me.tsmView_WorkGroupInfo.Size = New System.Drawing.Size(266, 22)
+        Me.tsmView_WorkGroupInfo.Size = New System.Drawing.Size(459, 34)
         Me.tsmView_WorkGroupInfo.Text = "&Produktiv-Site-Info"
         '
         'tsmView_Employees
@@ -735,20 +741,20 @@ Partial Public Class frmFacessoShell
         Me.tsmView_Employees.Checked = True
         Me.tsmView_Employees.CheckState = System.Windows.Forms.CheckState.Checked
         Me.tsmView_Employees.Name = "tsmView_Employees"
-        Me.tsmView_Employees.Size = New System.Drawing.Size(266, 22)
+        Me.tsmView_Employees.Size = New System.Drawing.Size(459, 34)
         Me.tsmView_Employees.Text = "&Mitarbeiter"
         '
         'FilternToolStripMenuItem
         '
         Me.FilternToolStripMenuItem.Name = "FilternToolStripMenuItem"
-        Me.FilternToolStripMenuItem.Size = New System.Drawing.Size(263, 6)
+        Me.FilternToolStripMenuItem.Size = New System.Drawing.Size(456, 6)
         '
         'tsmView_OnlyActiveWorkgroups
         '
         Me.tsmView_OnlyActiveWorkgroups.Checked = True
         Me.tsmView_OnlyActiveWorkgroups.CheckState = System.Windows.Forms.CheckState.Checked
         Me.tsmView_OnlyActiveWorkgroups.Name = "tsmView_OnlyActiveWorkgroups"
-        Me.tsmView_OnlyActiveWorkgroups.Size = New System.Drawing.Size(266, 22)
+        Me.tsmView_OnlyActiveWorkgroups.Size = New System.Drawing.Size(459, 34)
         Me.tsmView_OnlyActiveWorkgroups.Text = "Nur aktive Produktiv-Sites anzeigen"
         '
         'tsmView_OnlyActiveEmployees
@@ -756,13 +762,13 @@ Partial Public Class frmFacessoShell
         Me.tsmView_OnlyActiveEmployees.Checked = True
         Me.tsmView_OnlyActiveEmployees.CheckState = System.Windows.Forms.CheckState.Checked
         Me.tsmView_OnlyActiveEmployees.Name = "tsmView_OnlyActiveEmployees"
-        Me.tsmView_OnlyActiveEmployees.Size = New System.Drawing.Size(266, 22)
+        Me.tsmView_OnlyActiveEmployees.Size = New System.Drawing.Size(459, 34)
         Me.tsmView_OnlyActiveEmployees.Text = "Nur aktive Mitarbeiter anzeigen"
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(263, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(456, 6)
         '
         'tsmView_DockDateSelector
         '
@@ -770,233 +776,234 @@ Partial Public Class frmFacessoShell
         Me.tsmView_DockDateSelector.CheckState = System.Windows.Forms.CheckState.Checked
         Me.tsmView_DockDateSelector.Enabled = False
         Me.tsmView_DockDateSelector.Name = "tsmView_DockDateSelector"
-        Me.tsmView_DockDateSelector.Size = New System.Drawing.Size(266, 22)
+        Me.tsmView_DockDateSelector.Size = New System.Drawing.Size(459, 34)
         Me.tsmView_DockDateSelector.Text = "Datums-Selektor gedockt"
         '
         'AnalysisToolStripMenuItem
         '
         Me.AnalysisToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmAnalyses_AnalysisWizard, Me.tsmAnalyses_AnalysisManager, Me.ToolStripMenuItem9, Me.tsmArticleAmountAnalysis, Me.ToolStripMenuItem10, Me.AusfallzeitenAnalyseToolStripMenuItem})
         Me.AnalysisToolStripMenuItem.Name = "AnalysisToolStripMenuItem"
-        Me.AnalysisToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
+        Me.AnalysisToolStripMenuItem.Size = New System.Drawing.Size(118, 30)
         Me.AnalysisToolStripMenuItem.Text = "Anal&ysen"
         '
         'tsmAnalyses_AnalysisWizard
         '
         Me.tsmAnalyses_AnalysisWizard.Name = "tsmAnalyses_AnalysisWizard"
         Me.tsmAnalyses_AnalysisWizard.ShortcutKeys = System.Windows.Forms.Keys.F8
-        Me.tsmAnalyses_AnalysisWizard.Size = New System.Drawing.Size(334, 22)
-        Me.tsmAnalyses_AnalysisWizard.Text = "Assistent fÃ¼r &Produktiv-Site-Analysen..."
+        Me.tsmAnalyses_AnalysisWizard.Size = New System.Drawing.Size(582, 34)
+        Me.tsmAnalyses_AnalysisWizard.Text = "Assistent für &Produktiv-Site-Analysen..."
         '
         'tsmAnalyses_AnalysisManager
         '
         Me.tsmAnalyses_AnalysisManager.Name = "tsmAnalyses_AnalysisManager"
         Me.tsmAnalyses_AnalysisManager.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F8), System.Windows.Forms.Keys)
-        Me.tsmAnalyses_AnalysisManager.Size = New System.Drawing.Size(334, 22)
-        Me.tsmAnalyses_AnalysisManager.Text = "Analysen-Manager fÃ¼r Produktiv-Sites..."
+        Me.tsmAnalyses_AnalysisManager.Size = New System.Drawing.Size(582, 34)
+        Me.tsmAnalyses_AnalysisManager.Text = "Analysen-Manager für Produktiv-Sites..."
         '
         'ToolStripMenuItem9
         '
         Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
-        Me.ToolStripMenuItem9.Size = New System.Drawing.Size(331, 6)
+        Me.ToolStripMenuItem9.Size = New System.Drawing.Size(579, 6)
         '
         'tsmArticleAmountAnalysis
         '
         Me.tsmArticleAmountAnalysis.Name = "tsmArticleAmountAnalysis"
-        Me.tsmArticleAmountAnalysis.Size = New System.Drawing.Size(334, 22)
+        Me.tsmArticleAmountAnalysis.Size = New System.Drawing.Size(582, 34)
         Me.tsmArticleAmountAnalysis.Text = "&Produktionsergebnis-Analyse..."
         '
         'ToolStripMenuItem10
         '
         Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
-        Me.ToolStripMenuItem10.Size = New System.Drawing.Size(331, 6)
+        Me.ToolStripMenuItem10.Size = New System.Drawing.Size(579, 6)
         '
         'AusfallzeitenAnalyseToolStripMenuItem
         '
         Me.AusfallzeitenAnalyseToolStripMenuItem.Name = "AusfallzeitenAnalyseToolStripMenuItem"
-        Me.AusfallzeitenAnalyseToolStripMenuItem.Size = New System.Drawing.Size(334, 22)
+        Me.AusfallzeitenAnalyseToolStripMenuItem.Size = New System.Drawing.Size(582, 34)
         Me.AusfallzeitenAnalyseToolStripMenuItem.Text = "&Quick-Info..."
         '
         'tsmCostCalculation
         '
         Me.tsmCostCalculation.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmCostCalculation_IncentiveWageCalculation, Me.ToolStripSeparator4, Me.tsmCostCalculation_CostOfEmployees, Me.tsmCostCalculation_CostOfCostCenter, Me.tsmCostCalculation_CostOfWorkgroups})
         Me.tsmCostCalculation.Name = "tsmCostCalculation"
-        Me.tsmCostCalculation.Size = New System.Drawing.Size(143, 20)
+        Me.tsmCostCalculation.Size = New System.Drawing.Size(243, 30)
         Me.tsmCostCalculation.Text = "&Kosten/Abrechnungen"
         '
         'tsmCostCalculation_IncentiveWageCalculation
         '
         Me.tsmCostCalculation_IncentiveWageCalculation.Name = "tsmCostCalculation_IncentiveWageCalculation"
         Me.tsmCostCalculation_IncentiveWageCalculation.ShortcutKeys = System.Windows.Forms.Keys.F9
-        Me.tsmCostCalculation_IncentiveWageCalculation.Size = New System.Drawing.Size(237, 22)
-        Me.tsmCostCalculation_IncentiveWageCalculation.Text = "&PrÃ¤mienlohnabrechnung..."
+        Me.tsmCostCalculation_IncentiveWageCalculation.Size = New System.Drawing.Size(406, 34)
+        Me.tsmCostCalculation_IncentiveWageCalculation.Text = "&Prämienlohnabrechnung..."
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(234, 6)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(403, 6)
         '
         'tsmCostCalculation_CostOfEmployees
         '
         Me.tsmCostCalculation_CostOfEmployees.Name = "tsmCostCalculation_CostOfEmployees"
-        Me.tsmCostCalculation_CostOfEmployees.Size = New System.Drawing.Size(237, 22)
+        Me.tsmCostCalculation_CostOfEmployees.Size = New System.Drawing.Size(406, 34)
         Me.tsmCostCalculation_CostOfEmployees.Text = "&Mitarbeiterkosten..."
         '
         'tsmCostCalculation_CostOfCostCenter
         '
         Me.tsmCostCalculation_CostOfCostCenter.Name = "tsmCostCalculation_CostOfCostCenter"
-        Me.tsmCostCalculation_CostOfCostCenter.Size = New System.Drawing.Size(237, 22)
+        Me.tsmCostCalculation_CostOfCostCenter.Size = New System.Drawing.Size(406, 34)
         Me.tsmCostCalculation_CostOfCostCenter.Text = "&Kostenstellen-Kosten..."
         '
         'tsmCostCalculation_CostOfWorkgroups
         '
         Me.tsmCostCalculation_CostOfWorkgroups.Name = "tsmCostCalculation_CostOfWorkgroups"
-        Me.tsmCostCalculation_CostOfWorkgroups.Size = New System.Drawing.Size(237, 22)
+        Me.tsmCostCalculation_CostOfWorkgroups.Size = New System.Drawing.Size(406, 34)
         Me.tsmCostCalculation_CostOfWorkgroups.Text = "&Arbeitsgruppen-Kosten..."
         '
         'BaseDataToolStripMenuItem
         '
         Me.BaseDataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmBaseData_Subsidiaries, Me.ToolStripMenuItem4, Me.tsmBaseData_Employees, Me.tsmBaseData_LabourValues, Me.tsmBaseData_WorkGroups, Me.ToolStripSeparator5, Me.tsmBaseData_CostCenters, Me.tsmBaseData_WageGroups, Me.tsmBaseData_BonusProgressions})
         Me.BaseDataToolStripMenuItem.Name = "BaseDataToolStripMenuItem"
-        Me.BaseDataToolStripMenuItem.Size = New System.Drawing.Size(76, 20)
+        Me.BaseDataToolStripMenuItem.Size = New System.Drawing.Size(136, 30)
         Me.BaseDataToolStripMenuItem.Text = "Basi&sdaten"
         '
         'tsmBaseData_Subsidiaries
         '
         Me.tsmBaseData_Subsidiaries.Enabled = False
         Me.tsmBaseData_Subsidiaries.Name = "tsmBaseData_Subsidiaries"
-        Me.tsmBaseData_Subsidiaries.Size = New System.Drawing.Size(189, 22)
+        Me.tsmBaseData_Subsidiaries.Size = New System.Drawing.Size(319, 34)
         Me.tsmBaseData_Subsidiaries.Text = "Niederlassungen..."
         '
         'ToolStripMenuItem4
         '
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(186, 6)
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(316, 6)
         '
         'tsmBaseData_Employees
         '
         Me.tsmBaseData_Employees.Name = "tsmBaseData_Employees"
-        Me.tsmBaseData_Employees.Size = New System.Drawing.Size(189, 22)
+        Me.tsmBaseData_Employees.Size = New System.Drawing.Size(319, 34)
         Me.tsmBaseData_Employees.Text = "Mitarbeiter..."
         '
         'tsmBaseData_LabourValues
         '
         Me.tsmBaseData_LabourValues.Name = "tsmBaseData_LabourValues"
-        Me.tsmBaseData_LabourValues.Size = New System.Drawing.Size(189, 22)
+        Me.tsmBaseData_LabourValues.Size = New System.Drawing.Size(319, 34)
         Me.tsmBaseData_LabourValues.Text = "REFA-Arbeitswerte..."
         '
         'tsmBaseData_WorkGroups
         '
         Me.tsmBaseData_WorkGroups.Name = "tsmBaseData_WorkGroups"
-        Me.tsmBaseData_WorkGroups.Size = New System.Drawing.Size(189, 22)
+        Me.tsmBaseData_WorkGroups.Size = New System.Drawing.Size(319, 34)
         Me.tsmBaseData_WorkGroups.Text = "Produktiv-Sites..."
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(186, 6)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(316, 6)
         '
         'tsmBaseData_CostCenters
         '
         Me.tsmBaseData_CostCenters.Name = "tsmBaseData_CostCenters"
-        Me.tsmBaseData_CostCenters.Size = New System.Drawing.Size(189, 22)
+        Me.tsmBaseData_CostCenters.Size = New System.Drawing.Size(319, 34)
         Me.tsmBaseData_CostCenters.Text = "&Kostenstellen..."
         '
         'tsmBaseData_WageGroups
         '
         Me.tsmBaseData_WageGroups.Name = "tsmBaseData_WageGroups"
-        Me.tsmBaseData_WageGroups.Size = New System.Drawing.Size(189, 22)
+        Me.tsmBaseData_WageGroups.Size = New System.Drawing.Size(319, 34)
         Me.tsmBaseData_WageGroups.Text = "&Lohngruppen..."
         '
         'tsmBaseData_BonusProgressions
         '
         Me.tsmBaseData_BonusProgressions.Name = "tsmBaseData_BonusProgressions"
-        Me.tsmBaseData_BonusProgressions.Size = New System.Drawing.Size(189, 22)
+        Me.tsmBaseData_BonusProgressions.Size = New System.Drawing.Size(319, 34)
         Me.tsmBaseData_BonusProgressions.Text = "&Bonusprogression..."
         '
         'ExtrasToolStripMenuItem
         '
         Me.ExtrasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmDataImport, Me.ToolStripSeparator9, Me.tsmTools_UserManagement, Me.tsmTools_LoginInfo, Me.ToolStripSeparator6, Me.SupportToolStripMenuItem, Me.ToolStripSeparator16, Me.tsmTools_Options})
         Me.ExtrasToolStripMenuItem.Name = "ExtrasToolStripMenuItem"
-        Me.ExtrasToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
+        Me.ExtrasToolStripMenuItem.Size = New System.Drawing.Size(90, 30)
         Me.ExtrasToolStripMenuItem.Text = "&Extras"
         '
         'tsmDataImport
         '
         Me.tsmDataImport.Name = "tsmDataImport"
-        Me.tsmDataImport.Size = New System.Drawing.Size(286, 22)
+        Me.tsmDataImport.Size = New System.Drawing.Size(478, 34)
         Me.tsmDataImport.Text = "Datenimport..."
         '
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(283, 6)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(475, 6)
         '
         'tsmTools_UserManagement
         '
         Me.tsmTools_UserManagement.Name = "tsmTools_UserManagement"
-        Me.tsmTools_UserManagement.Size = New System.Drawing.Size(286, 22)
+        Me.tsmTools_UserManagement.Size = New System.Drawing.Size(478, 34)
         Me.tsmTools_UserManagement.Text = "Facesso Benutzermanagement..."
         '
         'tsmTools_LoginInfo
         '
         Me.tsmTools_LoginInfo.Enabled = False
         Me.tsmTools_LoginInfo.Name = "tsmTools_LoginInfo"
-        Me.tsmTools_LoginInfo.Size = New System.Drawing.Size(286, 22)
+        Me.tsmTools_LoginInfo.Size = New System.Drawing.Size(478, 34)
         Me.tsmTools_LoginInfo.Text = "Anmeldeinformationen..."
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(283, 6)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(475, 6)
         '
         'SupportToolStripMenuItem
         '
         Me.SupportToolStripMenuItem.Name = "SupportToolStripMenuItem"
-        Me.SupportToolStripMenuItem.Size = New System.Drawing.Size(286, 22)
-        Me.SupportToolStripMenuItem.Text = "Support-Zugang (nur fÃ¼r AD-Support!)"
+        Me.SupportToolStripMenuItem.Size = New System.Drawing.Size(478, 34)
+        Me.SupportToolStripMenuItem.Text = "Support-Zugang (nur für AD-Support!)"
         '
         'ToolStripSeparator16
         '
         Me.ToolStripSeparator16.Name = "ToolStripSeparator16"
-        Me.ToolStripSeparator16.Size = New System.Drawing.Size(283, 6)
+        Me.ToolStripSeparator16.Size = New System.Drawing.Size(475, 6)
         '
         'tsmTools_Options
         '
         Me.tsmTools_Options.Name = "tsmTools_Options"
-        Me.tsmTools_Options.Size = New System.Drawing.Size(286, 22)
+        Me.tsmTools_Options.Size = New System.Drawing.Size(478, 34)
         Me.tsmTools_Options.Text = "&Optionen..."
         '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.tsmHelpAbout})
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(42, 20)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(72, 30)
         Me.HelpToolStripMenuItem.Text = "&Hilfe"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(200, 22)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(338, 34)
         Me.ToolStripMenuItem1.Text = "Neuer Freischaltcode..."
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(197, 6)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(335, 6)
         '
         'tsmHelpAbout
         '
         Me.tsmHelpAbout.Name = "tsmHelpAbout"
-        Me.tsmHelpAbout.Size = New System.Drawing.Size(200, 22)
-        Me.tsmHelpAbout.Text = "&Info Ã¼ber Faceso..."
+        Me.tsmHelpAbout.Size = New System.Drawing.Size(338, 34)
+        Me.tsmHelpAbout.Text = "&Info über Faceso..."
         '
         'ToolStripMain
         '
         Me.ToolStripMain.Dock = System.Windows.Forms.DockStyle.None
+        Me.ToolStripMain.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.ToolStripMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbDataManager, Me.ToolStripSeparator10, Me.tsbWorkGroupAnalysis, Me.tsbAnalysisIncentiveWage, Me.ToolStripSeparator11, Me.tsbPrevWorkgroup, Me.tsbNextWorkgroup, Me.ToolStripSeparator12, Me.tsbPrevWorkDay, Me.tsbMyTodoList, Me.tsbNextWorkDay, Me.ToolStripSeparator13, Me.tsbBaseDataEmployee, Me.tsbBaseDataWorkGroups, Me.tsbBaseDataLabourValue, Me.ToolStripSeparator14, Me.tsbBaseDataUser, Me.ToolStripSeparator15, Me.tsbOptions})
-        Me.ToolStripMain.Location = New System.Drawing.Point(3, 24)
+        Me.ToolStripMain.Location = New System.Drawing.Point(4, 0)
         Me.ToolStripMain.Name = "ToolStripMain"
-        Me.ToolStripMain.Size = New System.Drawing.Size(347, 25)
+        Me.ToolStripMain.Size = New System.Drawing.Size(496, 33)
         Me.ToolStripMain.TabIndex = 1
         Me.ToolStripMain.Text = "tsmDataManager"
         '
@@ -1006,13 +1013,13 @@ Partial Public Class frmFacessoShell
         Me.tsbDataManager.Image = CType(resources.GetObject("tsbDataManager.Image"), System.Drawing.Image)
         Me.tsbDataManager.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbDataManager.Name = "tsbDataManager"
-        Me.tsbDataManager.Size = New System.Drawing.Size(23, 22)
+        Me.tsbDataManager.Size = New System.Drawing.Size(34, 28)
         Me.tsbDataManager.Text = "Datenmanager aufrufen"
         '
         'ToolStripSeparator10
         '
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        Me.ToolStripSeparator10.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator10.Size = New System.Drawing.Size(6, 33)
         '
         'tsbWorkGroupAnalysis
         '
@@ -1020,7 +1027,7 @@ Partial Public Class frmFacessoShell
         Me.tsbWorkGroupAnalysis.Image = CType(resources.GetObject("tsbWorkGroupAnalysis.Image"), System.Drawing.Image)
         Me.tsbWorkGroupAnalysis.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbWorkGroupAnalysis.Name = "tsbWorkGroupAnalysis"
-        Me.tsbWorkGroupAnalysis.Size = New System.Drawing.Size(23, 22)
+        Me.tsbWorkGroupAnalysis.Size = New System.Drawing.Size(34, 28)
         Me.tsbWorkGroupAnalysis.Text = "Produktiv-Site-Analysen"
         '
         'tsbAnalysisIncentiveWage
@@ -1029,13 +1036,13 @@ Partial Public Class frmFacessoShell
         Me.tsbAnalysisIncentiveWage.Image = CType(resources.GetObject("tsbAnalysisIncentiveWage.Image"), System.Drawing.Image)
         Me.tsbAnalysisIncentiveWage.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbAnalysisIncentiveWage.Name = "tsbAnalysisIncentiveWage"
-        Me.tsbAnalysisIncentiveWage.Size = New System.Drawing.Size(23, 22)
+        Me.tsbAnalysisIncentiveWage.Size = New System.Drawing.Size(34, 28)
         Me.tsbAnalysisIncentiveWage.Text = "Monatslohnabrechnung Mitarbeiter"
         '
         'ToolStripSeparator11
         '
         Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        Me.ToolStripSeparator11.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator11.Size = New System.Drawing.Size(6, 33)
         '
         'tsbPrevWorkgroup
         '
@@ -1043,7 +1050,7 @@ Partial Public Class frmFacessoShell
         Me.tsbPrevWorkgroup.Image = CType(resources.GetObject("tsbPrevWorkgroup.Image"), System.Drawing.Image)
         Me.tsbPrevWorkgroup.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbPrevWorkgroup.Name = "tsbPrevWorkgroup"
-        Me.tsbPrevWorkgroup.Size = New System.Drawing.Size(23, 22)
+        Me.tsbPrevWorkgroup.Size = New System.Drawing.Size(34, 28)
         Me.tsbPrevWorkgroup.Text = "Vorherige Produktiv-Site"
         '
         'tsbNextWorkgroup
@@ -1052,13 +1059,13 @@ Partial Public Class frmFacessoShell
         Me.tsbNextWorkgroup.Image = CType(resources.GetObject("tsbNextWorkgroup.Image"), System.Drawing.Image)
         Me.tsbNextWorkgroup.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbNextWorkgroup.Name = "tsbNextWorkgroup"
-        Me.tsbNextWorkgroup.Size = New System.Drawing.Size(23, 22)
-        Me.tsbNextWorkgroup.Text = "NÃ¤chste Produktiv-Site"
+        Me.tsbNextWorkgroup.Size = New System.Drawing.Size(34, 28)
+        Me.tsbNextWorkgroup.Text = "Nächste Produktiv-Site"
         '
         'ToolStripSeparator12
         '
         Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
-        Me.ToolStripSeparator12.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator12.Size = New System.Drawing.Size(6, 33)
         '
         'tsbPrevWorkDay
         '
@@ -1066,7 +1073,7 @@ Partial Public Class frmFacessoShell
         Me.tsbPrevWorkDay.Image = CType(resources.GetObject("tsbPrevWorkDay.Image"), System.Drawing.Image)
         Me.tsbPrevWorkDay.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbPrevWorkDay.Name = "tsbPrevWorkDay"
-        Me.tsbPrevWorkDay.Size = New System.Drawing.Size(23, 22)
+        Me.tsbPrevWorkDay.Size = New System.Drawing.Size(34, 28)
         Me.tsbPrevWorkDay.Text = "vorheriger Arbeitstag"
         '
         'tsbMyTodoList
@@ -1075,7 +1082,7 @@ Partial Public Class frmFacessoShell
         Me.tsbMyTodoList.Image = CType(resources.GetObject("tsbMyTodoList.Image"), System.Drawing.Image)
         Me.tsbMyTodoList.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbMyTodoList.Name = "tsbMyTodoList"
-        Me.tsbMyTodoList.Size = New System.Drawing.Size(23, 22)
+        Me.tsbMyTodoList.Size = New System.Drawing.Size(34, 28)
         Me.tsbMyTodoList.Text = "Meine To-do-Liste"
         '
         'tsbNextWorkDay
@@ -1084,13 +1091,13 @@ Partial Public Class frmFacessoShell
         Me.tsbNextWorkDay.Image = CType(resources.GetObject("tsbNextWorkDay.Image"), System.Drawing.Image)
         Me.tsbNextWorkDay.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbNextWorkDay.Name = "tsbNextWorkDay"
-        Me.tsbNextWorkDay.Size = New System.Drawing.Size(23, 22)
-        Me.tsbNextWorkDay.Text = "nÃ¤chster Arbeitstag"
+        Me.tsbNextWorkDay.Size = New System.Drawing.Size(34, 28)
+        Me.tsbNextWorkDay.Text = "nächster Arbeitstag"
         '
         'ToolStripSeparator13
         '
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-        Me.ToolStripSeparator13.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator13.Size = New System.Drawing.Size(6, 33)
         '
         'tsbBaseDataEmployee
         '
@@ -1098,7 +1105,7 @@ Partial Public Class frmFacessoShell
         Me.tsbBaseDataEmployee.Image = CType(resources.GetObject("tsbBaseDataEmployee.Image"), System.Drawing.Image)
         Me.tsbBaseDataEmployee.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbBaseDataEmployee.Name = "tsbBaseDataEmployee"
-        Me.tsbBaseDataEmployee.Size = New System.Drawing.Size(23, 22)
+        Me.tsbBaseDataEmployee.Size = New System.Drawing.Size(34, 28)
         Me.tsbBaseDataEmployee.Text = "Mitarbeiter-Stammdaten"
         '
         'tsbBaseDataWorkGroups
@@ -1107,7 +1114,7 @@ Partial Public Class frmFacessoShell
         Me.tsbBaseDataWorkGroups.Image = CType(resources.GetObject("tsbBaseDataWorkGroups.Image"), System.Drawing.Image)
         Me.tsbBaseDataWorkGroups.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbBaseDataWorkGroups.Name = "tsbBaseDataWorkGroups"
-        Me.tsbBaseDataWorkGroups.Size = New System.Drawing.Size(23, 22)
+        Me.tsbBaseDataWorkGroups.Size = New System.Drawing.Size(34, 28)
         Me.tsbBaseDataWorkGroups.Text = "Produktiv-Site-Manager"
         Me.tsbBaseDataWorkGroups.ToolTipText = "Produktiv-Site-Manager"
         '
@@ -1117,13 +1124,13 @@ Partial Public Class frmFacessoShell
         Me.tsbBaseDataLabourValue.Image = CType(resources.GetObject("tsbBaseDataLabourValue.Image"), System.Drawing.Image)
         Me.tsbBaseDataLabourValue.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbBaseDataLabourValue.Name = "tsbBaseDataLabourValue"
-        Me.tsbBaseDataLabourValue.Size = New System.Drawing.Size(23, 22)
+        Me.tsbBaseDataLabourValue.Size = New System.Drawing.Size(34, 28)
         Me.tsbBaseDataLabourValue.Text = "REFA-Arbeitswert-Stammdaten"
         '
         'ToolStripSeparator14
         '
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
-        Me.ToolStripSeparator14.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator14.Size = New System.Drawing.Size(6, 33)
         '
         'tsbBaseDataUser
         '
@@ -1131,13 +1138,13 @@ Partial Public Class frmFacessoShell
         Me.tsbBaseDataUser.Image = CType(resources.GetObject("tsbBaseDataUser.Image"), System.Drawing.Image)
         Me.tsbBaseDataUser.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbBaseDataUser.Name = "tsbBaseDataUser"
-        Me.tsbBaseDataUser.Size = New System.Drawing.Size(23, 22)
+        Me.tsbBaseDataUser.Size = New System.Drawing.Size(34, 28)
         Me.tsbBaseDataUser.Text = "Benutzerverwaltung"
         '
         'ToolStripSeparator15
         '
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
-        Me.ToolStripSeparator15.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator15.Size = New System.Drawing.Size(6, 33)
         '
         'tsbOptions
         '
@@ -1145,14 +1152,14 @@ Partial Public Class frmFacessoShell
         Me.tsbOptions.Image = CType(resources.GetObject("tsbOptions.Image"), System.Drawing.Image)
         Me.tsbOptions.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbOptions.Name = "tsbOptions"
-        Me.tsbOptions.Size = New System.Drawing.Size(23, 22)
+        Me.tsbOptions.Size = New System.Drawing.Size(34, 28)
         Me.tsbOptions.Text = "Optionen"
         '
         'frmFacessoShell
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1152, 774)
+        Me.ClientSize = New System.Drawing.Size(1684, 847)
         Me.Controls.Add(Me.ToolStripContainer1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Location = New System.Drawing.Point(40, 40)

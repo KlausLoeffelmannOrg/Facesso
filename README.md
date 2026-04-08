@@ -1,5 +1,7 @@
 # Facesso  
+
 ### Production Data Acquisition & REFA-Based KPI System  
+
 *(Historical Reference Implementation)*
 
 ---
@@ -42,12 +44,23 @@ Facesso requires a running SQL Server instance and a set of Windows Registry ent
 ### Prerequisites
 
 1. **SQL Server Express** (2017 or later) must be installed and the instance must be running.
-2. If you are running inside a **container** or need **unattended / unit-test access**, the SQL Server instance must be configured in **mixed-mode authentication** (SQL + Windows auth) so that a SQL login (e.g. `sa`) can be used.
+   - If SQL Server Express is running on the local machine, we consider the instance name `.\SQLEXPRESS` as the default.
+     If you have a different setup, you will need to specify the connection details when using `FacessoSetup` (see below).
+   - If SQL Server Express is running in a Windows (headless Windows server) container on the local machine, the default connection is `localhost,1433` with the predefined
+     SQL authentication (user `sa`, password `Sandbox#2025!`). These credentials are JUST for testing the containerized setup and for the provided demo database.
+     They are not setup by any script, and the actual password you need to set manually, when you build the container for test purposes.
+
+2. If you are running inside a **container** or need **unattended / unit-test access**, the SQL Server instance which you use for testing purposes must be configured in
+   **mixed-mode authentication** (SQL + Windows auth) so that a SQL login (e.g. `sa`) can be used.
+   PLEASE REMEMBER to AVOID mixed-mode authentication for any production or non-testing environments, as it is a significant security risk.
+   For production use, Windows Authentication with properly configured permissions is recommended.
+
 3. The Facesso demo database must be restored from the backup in `DemoData\Facesso-demo-backup.zip`.
 
 ### Quick Setup with FacessoSetup
 
-The tool `FacessoSetup` in `src\Tools\FacessoSetup\` automates the most common database-administration tasks. Build it first:
+The tool `FacessoSetup` in `src\Tools\FacessoSetup\` automates the most common database-administration tasks, but!
+You need to build it first from the solution file in this repository:
 
 ```powershell
 msbuild src\Tools\FacessoSetup\FacessoSetup.sln /restore /p:Configuration=Release /v:minimal
@@ -67,27 +80,35 @@ Then use it in the following order:
 
 When neither `--instance` nor `--conn-str` is given, the tool assumes a container-style SQL auth connection:
 
-```
+```text
 Server=localhost,1433;User Id=sa;Password=Sandbox#2025!;TrustServerCertificate=true;
 ```
 
-For a local SQL Express instance with Windows auth, add `--instance .\SQLEXPRESS`.
+For a *local* SQL Express instance with Windows auth, add `--instance .\SQLEXPRESS`.
 
-#### 2. Add the default administrator account
+#### 2. Adding the default admin account to the Facesso database
+
+Note: This is not a SQL Server login, but an application-level user in the `Users` table.
+It is required to log in to the application for the first time, or to use unattended access with the universal test serial (see below).
 
 ```powershell
 .\FacessoSetup.exe --add-default-admin
 ```
 
-This creates the Facesso application user **Admin** with password **P@$$w0rd**.
+This ensures that the Facesso application user **Admin** with password **P@$$w0rd** is created in the demo/test database.
 
 #### 3. Configure the Windows Registry
+
+Facesso's original setup at the time stored a series of information it needed to run in the Windows Registry.
+This was original during the deployment at the customer's site by the consultant.
+For testing purposes, we need this to be running unattended, so we need to set up the registry keys with the expected values.
+
+The `--setup` command of `FacessoSetup` automates this process.
+It also allows you to specify the admin password for the default admin user created in step 2.
 
 ```powershell
 .\FacessoSetup.exe --setup --admin-password "P@$$w0rd"
 ```
-
-This writes the universal test serial number, the connection string, and the required date/GUID values to HKLM and HKCU (see the *Registry Keys* section below for details). Requires Administrator privileges.
 
 #### All-in-one command (container / CI)
 
@@ -100,7 +121,8 @@ This writes the universal test serial number, the connection string, and the req
 
 ### Resetting the Database for Fresh Testing
 
-To save the current state, back up with a timestamped file name:
+To save the current state, back up with a timestamped file name (replace the path with your desired backup location,
+and for journal reason, make sure to replace the date pattern with the actual date when you run the command):
 
 ```powershell
 .\FacessoSetup.exe --Backup "C:\output\DBBackup\Facesso-{yyyy-MM-dd-HHmmss}.bak"
@@ -122,7 +144,7 @@ Both restore commands force-close all existing connections before restoring.
 
 ---
 
-## Intended Use
+## Intended Use of This Repository
 
 You are welcome to:
 
@@ -181,7 +203,7 @@ The licensing scheme is a two-step phone-in process. The client generates a **Pr
 from local hardware; the vendor uses that Pre-Key plus licence parameters to calculate
 the final **Serial Number**.
 
-```
+```text
 ══════════════════════════════════════════════════════════════
  STEP 1 — PRE-KEY (generated on the client machine)
 ══════════════════════════════════════════════════════════════
@@ -262,7 +284,7 @@ During first-time database initialisation (`frmDbSetupWizard`) three internal se
 accounts are created automatically.  Their password is assembled at runtime from three
 obfuscated string literals so it does not appear literally in the source:
 
-```
+```text
 locString1 = "MSI!=Mainboard Creation Computer"
 locString2 = "Cuslaka, Alfred"
 locString3 = "2cp3b - Fargoroad"
@@ -289,7 +311,7 @@ systemPassword = locString1[0..3]   // "MSI!"
 Passwords are stored in the `Users` table, `Password` column (`varbinary(128)`) using a
 salted SHA-1 scheme implemented in `ADSundries\ADSaltedPasswordHash.cs`:
 
-```
+```text
 STORE:
   hash1        = SHA1( UTF8(plainPassword) )              // 20 bytes
   salt         = CSPRNG(4 bytes)                          // random per password
