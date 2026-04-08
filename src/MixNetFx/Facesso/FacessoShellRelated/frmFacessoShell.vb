@@ -53,7 +53,7 @@ Public Class frmFacessoShell
             locTsShiftButton.Text = ""
             locTsShiftButton.TextAlign = ContentAlignment.MiddleCenter
         Next
-        myTsNextWorkday = New ToolStripButton("NÃ¤chster Arbeitstag >>")
+        myTsNextWorkday = New ToolStripButton("Nächster Arbeitstag >>")
         myTsNextWorkday.Font = myStandardFont
         myTsPreviousWorkday = New ToolStripButton("<< Vorheriger Arbeitstag")
         myTsPreviousWorkday.Font = myStandardFont
@@ -143,7 +143,7 @@ Public Class frmFacessoShell
                     bmp.Save(screenshotPath, System.Drawing.Imaging.ImageFormat.Png)
                 End Using
             Catch
-                ' Best-effort â€” the test will fall back to external capture
+                ' Best-effort — the test will fall back to external capture
             End Try
         End Sub
         captureTimer.Start()
@@ -166,14 +166,14 @@ Public Class frmFacessoShell
     End Sub
 
 
-#Region "Datei-MenÃ¼-Handler"
+#Region "Datei-Menü-Handler"
     Private Sub BaseDataImportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BaseDataImportToolStripMenuItem.Click
         Dim locfrm As New frmTSImport
         locfrm.ShowDialog()
     End Sub
 #End Region
 
-#Region "Stammdaten-MenÃ¼-Handler"
+#Region "Stammdaten-Menü-Handler"
     Private Sub tsmBaseData_CostCenters_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmBaseData_CostCenters.Click
         Dim locFH As GetFrmCostcenterInfoCenter = FunctionHandler(Of GetFrmCostcenterInfoCenter).GetFunctionInstance
         If locFH Is Nothing Then Return
@@ -213,7 +213,7 @@ Public Class frmFacessoShell
     End Sub
 #End Region
 
-#Region "Extras-MenÃ¼-Handler"
+#Region "Extras-Menü-Handler"
     Private Sub tsmTools_UserManagement_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmTools_UserManagement.Click
         Dim locFH As GetFrmUserInfoCenter = FunctionHandler(Of GetFrmUserInfoCenter).GetFunctionInstance
         If locFH Is Nothing Then Return
@@ -223,7 +223,7 @@ Public Class frmFacessoShell
 
     Private Sub tsmEdit_ProductionDataCollection_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmEdit_ProductionDataCollection.Click, tsbDataManager.Click
         If (myCombinedParameters IsNot Nothing) AndAlso (Not myCombinedParameters.WorkGroup.IsActive) Then
-            MessageBox.Show("Sie kÃ¶nnen keine Datenerfassung fÃ¼r eine inaktive Produktiv-Site durchfÃ¼hren!", "Datenerfassung nicht mÃ¶glich!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            MessageBox.Show("Sie können keine Datenerfassung für eine inaktive Produktiv-Site durchführen!", "Datenerfassung nicht möglich!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
         Dim locFh As GetFrmProductionDataCollector = FunctionHandler(Of GetFrmProductionDataCollector).GetFunctionInstance
@@ -239,7 +239,7 @@ Public Class frmFacessoShell
             myCombinedParameters.WorkGroup = Nothing
         End If
         If (myCombinedParameters IsNot Nothing) AndAlso (Not myCombinedParameters.WorkGroup.IsActive) Then
-            MessageBox.Show("Sie kÃ¶nnen keine Datenerfassung fÃ¼r eine inaktive Produktiv-Site durchfÃ¼hren!", "Datenerfassung nicht mÃ¶glich!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            MessageBox.Show("Sie können keine Datenerfassung für eine inaktive Produktiv-Site durchführen!", "Datenerfassung nicht möglich!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
         Dim locFh As GetFrmProductionDataCollector = FunctionHandler(Of GetFrmProductionDataCollector).GetFunctionInstance
@@ -267,15 +267,15 @@ Public Class frmFacessoShell
     End Sub
 
     Private Sub tsmCostCalculation_CostOfEmployees_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmCostCalculation_CostOfEmployees.Click
-        MessageBox.Show("Diese Funktion steht Ihnen nur in der Enterprise Version zur VerfÃ¼gung!", "Nicht implementiert!")
+        MessageBox.Show("Diese Funktion steht Ihnen nur in der Enterprise Version zur Verfügung!", "Nicht implementiert!")
     End Sub
 
     Private Sub tsmCostCalculation_CostOfCostCenter_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmCostCalculation_CostOfCostCenter.Click
-        MessageBox.Show("Diese Funktion steht Ihnen nur in der Enterprise Version zur VerfÃ¼gung!", "Nicht implementiert!")
+        MessageBox.Show("Diese Funktion steht Ihnen nur in der Enterprise Version zur Verfügung!", "Nicht implementiert!")
     End Sub
 
     Private Sub tsmCostCalculation_CostOfWorkgroups_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmCostCalculation_CostOfWorkgroups.Click
-        MessageBox.Show("Diese Funktion steht Ihnen nur in der Enterprise Version zur VerfÃ¼gung!", "Nicht implementiert!")
+        MessageBox.Show("Diese Funktion steht Ihnen nur in der Enterprise Version zur Verfügung!", "Nicht implementiert!")
     End Sub
 
     Private Sub myWindowsControl_WindowsControlSettingsChange(ByVal sender As Object, ByVal e As System.EventArgs) Handles myWindowsControl.WindowsControlSettingsChange
@@ -380,7 +380,7 @@ Public Class frmFacessoShell
     End Sub
 
     Private Sub tsbMyTodoList_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbMyTodoList.Click, myTsTodoList.Click
-        MessageBox.Show("Diese Funktion steht nur in der Enterprise-Edition zur VerfÃ¼gung", _
+        MessageBox.Show("Diese Funktion steht nur in der Enterprise-Edition zur Verfügung", _
                         "Nicht implementiert!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
     End Sub
 
@@ -426,7 +426,7 @@ Public Class frmFacessoShell
     End Sub
 
     Private Sub AusfallzeitenAnalyseToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AusfallzeitenAnalyseToolStripMenuItem.Click
-        MessageBox.Show("Diese Funktion steht Ihnen nur in der Enterprise Version zur VerfÃ¼gung!", "Nicht implementiert!")
+        MessageBox.Show("Diese Funktion steht Ihnen nur in der Enterprise Version zur Verfügung!", "Nicht implementiert!")
     End Sub
 
     Private Sub SupportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SupportToolStripMenuItem.Click
