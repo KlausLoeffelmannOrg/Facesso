@@ -1,4 +1,3 @@
-Imports Facesso
 Imports Facesso.Data
 
 Partial Class frmFacessoShell
