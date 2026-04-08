@@ -12,8 +12,6 @@ namespace Facesso.Tests.Infrastructure
     /// </summary>
     public static class TestRunLogger
     {
-        private const string LogDir = @"C:\output";
-
         private static string _logFilePath;
         private static readonly object SyncLock = new object();
 
@@ -60,9 +58,9 @@ namespace Facesso.Tests.Infrastructure
                 {
                     if (_logFilePath == null)
                     {
-                        Directory.CreateDirectory(LogDir);
-                        _logFilePath = Path.Combine(LogDir,
-                            $"testrun_{DateTime.Now:yy-MM-dd_HH-mm-ss}.txt");
+                        Directory.CreateDirectory(TestSettings.OutputRoot);
+                        _logFilePath = Path.Combine(TestSettings.OutputRoot,
+                            $"testrun_{DateTime.Now.ToString(TestSettings.TimestampFormat)}.txt");
                         File.WriteAllText(_logFilePath,
                             $"=== Test Run Started: {DateTime.Now:yyyy-MM-dd HH:mm:ss} ===" +
                             Environment.NewLine + Environment.NewLine);

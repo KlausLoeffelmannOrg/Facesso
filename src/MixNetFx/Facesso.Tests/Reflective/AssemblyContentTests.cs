@@ -43,7 +43,19 @@ namespace Facesso.Tests.Reflective
 
             var baselineContent = File.ReadAllText(baselinePath, Encoding.UTF8);
 
-            Assert.Equal(baselineContent, currentContent);
+            // If the context differ, we need to write the new content to a separate file for easier comparison.
+            // but into the same folder as the baseline for easy side-by-side comparison.
+            if (baselineContent != currentContent)
+            {
+                var currentPath = Path.Combine(BaselineFolder, "Facesso_AssemblyContent_Current.txt");
+                File.WriteAllText(currentPath, currentContent, Encoding.UTF8);
+
+                Assert.Fail(
+                    $"Assembly content does not match the baseline.\n" +
+                    $"Baseline: {baselinePath}\n" +
+                    $"Current: {currentPath}\n" +
+                    "Please compare the two files to understand the differences.");
+            }
         }
 
         /// <summary>

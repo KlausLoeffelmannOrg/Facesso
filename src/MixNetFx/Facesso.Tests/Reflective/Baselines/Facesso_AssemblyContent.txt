@@ -248,6 +248,7 @@
   [Method] [Private] RebuildWorkGroup() : Void
   [Method] [Private] ResetWorkedEmployees() : Void
   [Method] [Private] SaveChartAnalysisChanges() : Void
+  [Method] [Private] ScheduleScreenshotCaptureIfRequested() : Void
   [Method] [Private] ShiftButtons_Click(Object sender, EventArgs e) : Void
   [Method] [Private] SupportToolStripMenuItem_Click(Object sender, EventArgs e) : Void
   [Method] [Private] TimerMain_Tick(Object sender, EventArgs e) : Void
@@ -413,6 +414,10 @@
   [Property] [Internal] tsmView_OnlyActiveWorkgroups : ToolStripMenuItem
   [Property] [Internal] tsmView_WorkGroupInfo : ToolStripMenuItem
   [Property] [Internal] wglWorkGroups : ucWorkGroupListView
+
+[Class] Facesso.frmFacessoShell+_Closure$__507-0
+  [Constructor] [Public] .ctor()
+  [Method] [Internal] _Lambda$__0(Object s, EventArgs ev) : Void
 
 [Class] Facesso.frmHiddenTestAndAdmin
   [Constructor] [Private] .cctor()

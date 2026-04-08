@@ -25,6 +25,7 @@ namespace Facesso.Tests.Visual
     {
         private Process _facessoProcess;
 
+        private const string OutputFolder = @"c:\output";
         private const string ScreenshotFileName = "FacessoScreenshot.png";
         private const string DialogScreenshotFileName = "FacessoDialog.png";
         private const int StartupTimeoutMs = 30_000;
@@ -123,13 +124,13 @@ namespace Facesso.Tests.Visual
         [Fact]
         public void Facesso_CaptureScreenshotAndOcrReport()
         {
-            string exePath = FindFacessoExe();
+            var exePath = FindFacessoExe();
             Assert.True(File.Exists(exePath), $"Facesso.exe not found at: {exePath}");
 
             TestRunLogger.Trace($"Starting Facesso.exe from: {exePath}");
 
-            string diagLogPath = Path.Combine(TestSettings.OutputRoot, "FacessoDiag.log");
-            ProcessStartInfo startInfo = new ProcessStartInfo
+            var diagLogPath = Path.Combine(OutputFolder, "FacessoDiag.log");
+            var startInfo = new ProcessStartInfo
             {
                 FileName = exePath,
                 Arguments = "/silentAdminLogon",
@@ -141,14 +142,9 @@ namespace Facesso.Tests.Visual
             // Tell the app to save its own screenshot via DrawToBitmap.
             // This works in headless / container environments where
             // cross-process PrintWindow produces black images.
-            Directory.CreateDirectory(TestSettings.OutputRoot);
-            string drawToBitmapPath = Path.Combine(
-                TestSettings.OutputRoot, 
-                "FacessoScreenshot_DrawToBitmap.png");
-            
-            if (File.Exists(drawToBitmapPath)) 
-                File.Delete(drawToBitmapPath);
-
+            Directory.CreateDirectory(OutputFolder);
+            var drawToBitmapPath = Path.Combine(OutputFolder, "FacessoScreenshot_DrawToBitmap.png");
+            if (File.Exists(drawToBitmapPath)) File.Delete(drawToBitmapPath);
             startInfo.EnvironmentVariables["FACESSO_SCREENSHOT_PATH"] = drawToBitmapPath;
 
             _facessoProcess = Process.Start(startInfo);
@@ -164,12 +160,10 @@ namespace Facesso.Tests.Visual
                 if (_facessoProcess.HasExited)
                 {
                     string stderr = "";
-                    
                     try { stderr = _facessoProcess.StandardError.ReadToEnd(); }
                     catch { }
 
                     string diagLog = "";
-
                     try
                     {
                         if (File.Exists(diagLogPath))
@@ -178,14 +172,12 @@ namespace Facesso.Tests.Visual
                     catch { }
 
                     TestRunLogger.Info($"Facesso.exe exited with code {_facessoProcess.ExitCode}.");
-
                     if (!string.IsNullOrEmpty(stderr))
                         TestRunLogger.Info($"stderr: {stderr}");
                     if (!string.IsNullOrEmpty(diagLog))
                         TestRunLogger.Info($"Diagnostic log:\n{diagLog}");
 
-                    string msg = $"Facesso.exe crashed on startup (exit code {_facessoProcess.ExitCode}).";
-
+                    var msg = $"Facesso.exe crashed on startup (exit code {_facessoProcess.ExitCode}).";
                     if (!string.IsNullOrEmpty(stderr))
                         msg += $"\n\nStandard Error:\n{stderr}";
                     if (!string.IsNullOrEmpty(diagLog))
@@ -203,11 +195,6 @@ namespace Facesso.Tests.Visual
 
             // Resize to desired capture resolution and give the application time to render
             TestRunLogger.Trace($"Resizing window to {CaptureWidth}×{CaptureHeight}.");
-
-            // Determine window geometry and client area offset
-            GetWindowRect(mainWindowHandle, out var windowRect);
-            GetClientRect(mainWindowHandle, out var clientRect);
-
             SetForegroundWindow(mainWindowHandle);
             ShowWindow(mainWindowHandle, SW_SHOWNORMAL);
             SetWindowPos(mainWindowHandle, IntPtr.Zero, 0, 0,
@@ -217,10 +204,9 @@ namespace Facesso.Tests.Visual
             Thread.Sleep(RenderDelayMs);
 
             // Determine window geometry and client area offset
-            GetWindowRect(mainWindowHandle, out windowRect);
-            GetClientRect(mainWindowHandle, out clientRect);
-
-            POINT clientOrigin = new POINT { X = 0, Y = 0 };
+            GetWindowRect(mainWindowHandle, out var windowRect);
+            GetClientRect(mainWindowHandle, out var clientRect);
+            var clientOrigin = new POINT { X = 0, Y = 0 };
             ClientToScreen(mainWindowHandle, ref clientOrigin);
 
             int ncLeft = clientOrigin.X - windowRect.Left;
@@ -232,7 +218,7 @@ namespace Facesso.Tests.Visual
                 $"Window has invalid dimensions: {windowRect.Width}x{windowRect.Height}");
 
             // ── Capture the screenshot ──
-            string screenshotPath = Path.Combine(TestSettings.OutputRoot, ScreenshotFileName);
+            var screenshotPath = Path.Combine(OutputFolder, ScreenshotFileName);
 
             // Prefer the in-process DrawToBitmap screenshot (saved by
             // frmFacessoShell via FACESSO_SCREENSHOT_PATH). DrawToBitmap
@@ -251,18 +237,20 @@ namespace Facesso.Tests.Visual
                 // in headless environments.
                 TestRunLogger.Trace(
                     "In-process screenshot not available, falling back to external capture.");
-                using Bitmap bitmap = new Bitmap(windowRect.Width, windowRect.Height,
-                           PixelFormat.Format32bppArgb);
-                using (Graphics g = Graphics.FromImage(bitmap))
+                using (var bitmap = new Bitmap(windowRect.Width, windowRect.Height,
+                           PixelFormat.Format32bppArgb))
                 {
-                    g.Clear(Color.White);
+                    using (var g = Graphics.FromImage(bitmap))
+                    {
+                        g.Clear(Color.White);
+                    }
+
+                    var captureMethod = CaptureWindow(mainWindowHandle, bitmap);
+                    TestRunLogger.Info(
+                        $"External capture succeeded via: {captureMethod}");
+
+                    bitmap.Save(screenshotPath, ImageFormat.Png);
                 }
-
-                string captureMethod = CaptureWindow(mainWindowHandle, bitmap);
-                TestRunLogger.Info(
-                    $"External capture succeeded via: {captureMethod}");
-
-                bitmap.Save(screenshotPath, ImageFormat.Png);
             }
 
             Assert.True(File.Exists(screenshotPath), $"Screenshot was not saved to: {screenshotPath}");
@@ -280,7 +268,7 @@ namespace Facesso.Tests.Visual
         /// </summary>
         private void HandleMissingMainWindow()
         {
-            Directory.CreateDirectory(TestSettings.OutputRoot);
+            Directory.CreateDirectory(OutputFolder);
 
             var dialogWindows = FindProcessWindows(_facessoProcess);
 
@@ -295,15 +283,13 @@ namespace Facesso.Tests.Visual
                 catch { }
 
                 KillProcess();
-
                 Assert.Fail(
                     "Facesso main window did not appear within the timeout period " +
                     "and no modal dialog was found on screen." +
                     (string.IsNullOrEmpty(stderr) ? "" : "\n\nStandard Error:\n" + stderr));
             }
 
-            StringBuilder report = new StringBuilder();
-
+            var report = new StringBuilder();
             report.AppendLine("Facesso main window did not appear. " +
                               "The following dialog(s) were found:");
             report.AppendLine();
@@ -319,7 +305,7 @@ namespace Facesso.Tests.Visual
 
                 if (dlgRect.Width > 0 && dlgRect.Height > 0)
                 {
-                    pngPath = Path.Combine(TestSettings.OutputRoot,
+                    pngPath = Path.Combine(OutputFolder,
                         dialogWindows.Count == 1
                             ? DialogScreenshotFileName
                             : $"FacessoDialog_{i + 1}.png");
@@ -327,10 +313,10 @@ namespace Facesso.Tests.Visual
                     try
                     {
                         string dlgMethod;
-                        using (Bitmap bmp = new Bitmap(dlgRect.Width, dlgRect.Height,
+                        using (var bmp = new Bitmap(dlgRect.Width, dlgRect.Height,
                                    PixelFormat.Format32bppArgb))
                         {
-                            using (Graphics g = Graphics.FromImage(bmp))
+                            using (var g = Graphics.FromImage(bmp))
                             {
                                 g.Clear(Color.White);
                             }
@@ -389,7 +375,7 @@ namespace Facesso.Tests.Visual
             string method;
 
             // ── Attempt 1: WM_PRINT (universal, works in headless) ──
-            using (Graphics g = Graphics.FromImage(target))
+            using (var g = Graphics.FromImage(target))
             {
                 var hdc = g.GetHdc();
                 try
@@ -409,7 +395,7 @@ namespace Facesso.Tests.Visual
             // ── Attempt 2: PrintWindow (interactive desktops) ──
             if (IsImageMostlyUniform(target))
             {
-                using (Graphics g = Graphics.FromImage(target))
+                using (var g = Graphics.FromImage(target))
                 {
                     g.Clear(Color.White);
                     var hdc = g.GetHdc();
@@ -431,7 +417,7 @@ namespace Facesso.Tests.Visual
             // each child individually at its correct position.
             if (IsImageMostlyUniform(target))
             {
-                using (Graphics g = Graphics.FromImage(target))
+                using (var g = Graphics.FromImage(target))
                 {
                     g.Clear(Color.White);
                 }
@@ -475,33 +461,35 @@ namespace Facesso.Tests.Visual
                 if (x < 0 || y < 0 || w <= 0 || h <= 0)
                     return true;
 
-                using Bitmap childBmp = new Bitmap(childRect.Width, childRect.Height,
-                           PixelFormat.Format32bppArgb);
-                using (Graphics g = Graphics.FromImage(childBmp))
+                using (var childBmp = new Bitmap(childRect.Width, childRect.Height,
+                           PixelFormat.Format32bppArgb))
                 {
-                    g.Clear(Color.White);
-                    var hdc = g.GetHdc();
-                    try
+                    using (var g = Graphics.FromImage(childBmp))
                     {
-                        // Try WM_PRINTCLIENT first (client area only),
-                        // then WM_PRINT as fallback.
-                        SendMessage(child, WM_PRINTCLIENT, hdc,
-                            (IntPtr)(PRF_CLIENT | PRF_ERASEBKGND));
+                        g.Clear(Color.White);
+                        var hdc = g.GetHdc();
+                        try
+                        {
+                            // Try WM_PRINTCLIENT first (client area only),
+                            // then WM_PRINT as fallback.
+                            SendMessage(child, WM_PRINTCLIENT, hdc,
+                                (IntPtr)(PRF_CLIENT | PRF_ERASEBKGND));
 
-                        // Also try WM_PRINT with children for nested controls
-                        SendMessage(child, WM_PRINT, hdc,
-                            (IntPtr)(PRF_CLIENT | PRF_CHILDREN | PRF_ERASEBKGND));
+                            // Also try WM_PRINT with children for nested controls
+                            SendMessage(child, WM_PRINT, hdc,
+                                (IntPtr)(PRF_CLIENT | PRF_CHILDREN | PRF_ERASEBKGND));
+                        }
+                        finally
+                        {
+                            g.ReleaseHdc(hdc);
+                        }
                     }
-                    finally
+
+                    // Composite onto the main bitmap
+                    using (var g = Graphics.FromImage(target))
                     {
-                        g.ReleaseHdc(hdc);
+                        g.DrawImage(childBmp, x, y, w, h);
                     }
-                }
-
-                // Composite onto the main bitmap
-                using (Graphics g = Graphics.FromImage(target))
-                {
-                    g.DrawImage(childBmp, x, y, w, h);
                 }
 
                 return true; // continue enumeration
@@ -513,7 +501,7 @@ namespace Facesso.Tests.Visual
         /// </summary>
         private static void ForceOpaqueAlpha(Bitmap bitmap)
         {
-            Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+            var rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
             var bmpData = bitmap.LockBits(rect,
                 System.Drawing.Imaging.ImageLockMode.ReadWrite,
                 PixelFormat.Format32bppArgb);
@@ -545,7 +533,7 @@ namespace Facesso.Tests.Visual
         private static bool IsImageMostlyUniform(Bitmap bitmap)
         {
             const int sampleCount = 80;
-            Random rng = new Random(42); // deterministic seed
+            var rng = new Random(42); // deterministic seed
             Color reference = bitmap.GetPixel(bitmap.Width / 2, bitmap.Height / 2);
             int matchCount = 0;
 
@@ -568,7 +556,7 @@ namespace Facesso.Tests.Visual
 
         private static List<WindowInfo> FindProcessWindows(Process process)
         {
-            List<WindowInfo> windows = new List<WindowInfo>();
+            var windows = new List<WindowInfo>();
 
             try
             {
@@ -580,14 +568,14 @@ namespace Facesso.Tests.Visual
                     {
                         // Skip IsWindowVisible check — in containers, windows
                         // exist but are never marked visible (no desktop session).
-                        StringBuilder titleBuf = new StringBuilder(512);
+                        var titleBuf = new StringBuilder(512);
                         GetWindowText(hWnd, titleBuf, titleBuf.Capacity);
                         string title = titleBuf.ToString();
 
                         if (string.IsNullOrEmpty(title))
                             return true;
 
-                        StringBuilder classBuf = new StringBuilder(256);
+                        var classBuf = new StringBuilder(256);
                         GetClassName(hWnd, classBuf, classBuf.Capacity);
 
                         windows.Add(new WindowInfo
@@ -611,7 +599,7 @@ namespace Facesso.Tests.Visual
 
         private static IntPtr WaitForMainWindow(Process process, int timeoutMs)
         {
-            Stopwatch sw = Stopwatch.StartNew();
+            var sw = Stopwatch.StartNew();
 
             while (sw.ElapsedMilliseconds < timeoutMs)
             {
@@ -657,7 +645,7 @@ namespace Facesso.Tests.Visual
                 {
                     EnumThreadWindows(thread.Id, (hWnd, _) =>
                     {
-                        StringBuilder titleBuf = new StringBuilder(512);
+                        var titleBuf = new StringBuilder(512);
                         GetWindowText(hWnd, titleBuf, titleBuf.Capacity);
                         string title = titleBuf.ToString();
 
@@ -666,7 +654,7 @@ namespace Facesso.Tests.Visual
                         // tooltip windows, broadcast windows, etc.
                         if (!string.IsNullOrEmpty(title) && IsWindow(hWnd))
                         {
-                            StringBuilder classBuf = new StringBuilder(256);
+                            var classBuf = new StringBuilder(256);
                             GetClassName(hWnd, classBuf, classBuf.Capacity);
                             string className = classBuf.ToString();
 
@@ -695,12 +683,12 @@ namespace Facesso.Tests.Visual
 
         private static string FindFacessoExe()
         {
-            string testDir = Path.GetDirectoryName(
+            var testDir = Path.GetDirectoryName(
                 typeof(FacessoScreenshotTests).Assembly.Location);
 
-            foreach (string config in new[] { "Debug", "Release" })
+            foreach (var config in new[] { "Debug", "Release" })
             {
-                string candidate = Path.GetFullPath(Path.Combine(
+                var candidate = Path.GetFullPath(Path.Combine(
                     testDir, "..", "..", "..", "..",
                     "Facesso", "bin", config, "net472", "Facesso.exe"));
 
@@ -708,7 +696,7 @@ namespace Facesso.Tests.Visual
                     return candidate;
             }
 
-            string sameDir = Path.Combine(testDir, "Facesso.exe");
+            var sameDir = Path.Combine(testDir, "Facesso.exe");
             if (File.Exists(sameDir))
                 return sameDir;
 
