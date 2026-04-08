@@ -81,7 +81,7 @@ namespace Facesso.Tests.Infrastructure
             // Recurse into children (skip if we've gone too deep)
             if (maxDepth > 0)
             {
-                var walker = TreeWalker.ControlViewWalker;
+                var walker = TreeWalker.RawViewWalker;
                 var child = SafeGet(() => walker.GetFirstChild(element));
                 while (child != null)
                 {
