@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using Facesso.Tests.Infrastructure;
-using Tesseract;
 using ImageFormat = System.Drawing.Imaging.ImageFormat;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 using Xunit;
@@ -29,7 +28,7 @@ namespace Facesso.Tests.Visual
         private const string OutputFolder = @"c:\output";
         private const string ScreenshotFileName = "FacessoScreenshot.png";
         private const string DialogScreenshotFileName = "FacessoDialog.png";
-        private const string MarkdownFileName = "FacessoOcrReport.md";
+        private const string MarkdownFileName = "FacessoA11yReport.md";
         private const int StartupTimeoutMs = 30_000;
         private const int RenderDelayMs = 5_000;
 
@@ -242,85 +241,16 @@ namespace Facesso.Tests.Visual
             Assert.True(new FileInfo(screenshotPath).Length > 0, "Screenshot file is empty.");
             TestRunLogger.Info($"Screenshot saved: {screenshotPath}");
 
-            // ── OCR each UI region and build the Markdown report ──
-            var regions = ComputeRegions(ncLeft, ncTop, clientWidth, clientHeight);
-
-            var tessdataDir = Path.Combine(
-                Path.GetDirectoryName(typeof(FacessoScreenshotTests).Assembly.Location),
-                "Visual", "tessdata");
-            Assert.True(Directory.Exists(tessdataDir),
-                $"tessdata directory not found at: {tessdataDir}");
-
-            var md = new StringBuilder();
-            md.AppendLine("# Facesso Shell — OCR Report");
-            md.AppendLine();
-            md.AppendLine($"*Generated: {DateTime.Now:yyyy-MM-dd HH:mm:ss}*  ");
-            md.AppendLine($"*Screenshot: {screenshotPath}*  ");
-            md.AppendLine($"*Window: {windowRect.Width} × {windowRect.Height} px | " +
-                          $"Client area: {clientWidth} × {clientHeight} px*");
-            md.AppendLine();
-            md.AppendLine("---");
-            md.AppendLine();
-
-            TestRunLogger.Trace("Starting OCR on UI regions.");
-
-            using (var engine = new TesseractEngine(tessdataDir, "eng+deu", EngineMode.Default))
-            using (var pix = Pix.LoadFromFile(screenshotPath))
-            {
-                foreach (var region in regions)
-                {
-                    var r = ClampRect(region.Rect, pix.Width, pix.Height);
-
-                    md.AppendLine($"## {region.Name}");
-                    md.AppendLine();
-                    md.AppendLine($"> {region.Description}");
-                    md.AppendLine();
-                    md.AppendLine($"**Region:** `({r.X}, {r.Y})` — `{r.Width} × {r.Height}` px  ");
-
-                    if (r.Width <= 10 || r.Height <= 10)
-                    {
-                        md.AppendLine();
-                        md.AppendLine("*(Region too small or outside captured area)*");
-                        md.AppendLine();
-                        md.AppendLine("---");
-                        md.AppendLine();
-                        continue;
-                    }
-
-                    var tessRect = new Rect(r.X, r.Y, r.Width, r.Height);
-
-                    using (var page = engine.Process(pix, tessRect, region.SegMode))
-                    {
-                        string text = page.GetText()?.Trim() ?? "";
-                        float confidence = page.GetMeanConfidence();
-
-                        md.AppendLine($"**Confidence:** {confidence:P1}");
-                        md.AppendLine();
-
-                        if (string.IsNullOrWhiteSpace(text))
-                        {
-                            md.AppendLine("*(no text detected)*");
-                        }
-                        else
-                        {
-                            md.AppendLine("```");
-                            md.AppendLine(text);
-                            md.AppendLine("```");
-                        }
-
-                        md.AppendLine();
-                        md.AppendLine("---");
-                        md.AppendLine();
-                    }
-                }
-            }
+            // ── Capture UI text via Accessibility (UI Automation) ──
+            TestRunLogger.Trace("Capturing accessibility snapshot.");
+            var snapshot = A11ySnapshot.Capture(mainWindowHandle);
 
             var mdPath = Path.Combine(OutputFolder, MarkdownFileName);
-            File.WriteAllText(mdPath, md.ToString(), Encoding.UTF8);
+            File.WriteAllText(mdPath, snapshot.ToMarkdown(), Encoding.UTF8);
 
-            Assert.True(File.Exists(mdPath), $"Markdown report was not saved to: {mdPath}");
-            Assert.True(new FileInfo(mdPath).Length > 0, "Markdown report is empty.");
-            TestRunLogger.Info($"OCR report saved: {mdPath}");
+            Assert.True(File.Exists(mdPath), $"A11y report was not saved to: {mdPath}");
+            Assert.True(new FileInfo(mdPath).Length > 0, "A11y report is empty.");
+            TestRunLogger.Info($"Accessibility report saved: {mdPath}");
         }
 
         #region Error Handling — Missing Main Window
@@ -400,22 +330,24 @@ namespace Facesso.Tests.Visual
                     }
                 }
 
-                if (pngPath != null && File.Exists(pngPath))
+                // Use UI Automation to extract dialog text
+                try
                 {
-                    string ocrText = OcrImage(pngPath);
-                    report.AppendLine($"  OCR text:");
+                    var dialogSnapshot = A11ySnapshot.Capture(info.Handle);
+                    string a11yText = dialogSnapshot.ToPlainText();
+                    report.AppendLine($"  Accessibility text:");
                     report.AppendLine();
 
-                    foreach (var line in ocrText.Split('\n'))
+                    foreach (var line in a11yText.Split('\n'))
                     {
                         report.AppendLine($"    {line.TrimEnd()}");
                     }
 
                     report.AppendLine();
                 }
-                else
+                catch
                 {
-                    report.AppendLine("  (no image available for OCR)");
+                    report.AppendLine("  (accessibility text extraction failed)");
                     report.AppendLine();
                 }
             }
@@ -426,181 +358,7 @@ namespace Facesso.Tests.Visual
 
         #endregion
 
-        #region OCR Regions
-
-        /// <summary>
-        /// Computes OCR regions from the frmFacessoShell layout as defined in
-        /// frmFacessoShell.Designer.vb. All coordinates are relative to the
-        /// captured bitmap (0,0 = window top-left including non-client area).
-        ///
-        /// Layout (from Designer):
-        ///   ToolStripContainer1 (Dock=Fill)
-        ///     TopToolStripPanel:  MenuStripMain (h≈24) + ToolStripMain (h≈25)
-        ///     LeftToolStripPanel: ToolStripDateShiftSelector (w≈210 at runtime)
-        ///     ContentPanel:       TabControl1 (Dock=Fill)
-        ///       TabPage1 "Bearbeitung":
-        ///         TopLineLayoutPanel (Dock=Top, h=64): lblCurrentDate, lblCurrentWorkgroup, lblCurrentShift
-        ///         SplitEmployeesWorkGroups (Dock=Fill, Horizontal, SplitterDistance≈262):
-        ///           Panel1 → splitWorkGroups (Vertical, SplitterDistance≈688):
-        ///             Panel1 → gbWorkGroups "Produktiv-Sites" → wglWorkGroups (ucWorkGroupListView)
-        ///             Panel2 → GroupBox1 "Produktiv-Site-Info:" → dgvWorkGroupResults (ucWorkGroupItemDetailsView)
-        ///           Panel2 → gbEmployees "Mitarbeiter" → elvEmployees (ucEmployeeListView)
-        ///     BottomToolStripPanel: StatusStrip (h≈30)
-        /// </summary>
-        private static List<OcrRegion> ComputeRegions(
-            int ncLeft, int ncTop, int clientWidth, int clientHeight)
-        {
-            const int menuHeight = 24;
-            const int toolbarHeight = 25;
-            const int statusBarHeight = 30;
-            const int tabHeaderHeight = 25;
-            const int topInfoHeight = 64;
-            const int tabPad = 3;
-            const int splitterThick = 4;
-            const int dateShiftWidth = 210;
-
-            int cx = ncLeft;
-            int cy = ncTop;
-
-            var regions = new List<OcrRegion>();
-
-            regions.Add(new OcrRegion(
-                "Menu Bar",
-                "MenuStripMain — Datei | Bearbeiten | Ansicht | Analysen | " +
-                "Kosten/Abrechnungen | Basisdaten | Extras | Hilfe",
-                new Rectangle(cx, cy, clientWidth, menuHeight),
-                PageSegMode.SingleLine));
-
-            regions.Add(new OcrRegion(
-                "Toolbar",
-                "ToolStripMain — Datenmanager, Produktiv-Site-Analysen, " +
-                "Prämienlohn, Prev/Next Site, Prev/Next Arbeitstag, " +
-                "To-do, Stammdaten, Benutzerverwaltung, Optionen",
-                new Rectangle(cx, cy + menuHeight, clientWidth, toolbarHeight),
-                PageSegMode.SingleLine));
-
-            int contentX = cx + dateShiftWidth;
-            int contentY = cy + menuHeight + toolbarHeight;
-            int contentW = clientWidth - dateShiftWidth;
-            int contentH = clientHeight - menuHeight - toolbarHeight - statusBarHeight;
-
-            regions.Add(new OcrRegion(
-                "Date / Shift Selector",
-                "ToolStripDateShiftSelector (LeftToolStripPanel) — " +
-                "'Arbeitstagdatum' label, MonthCalendar, " +
-                "'Nächster/Vorheriger Arbeitstag', 'Meine To-do-Liste', " +
-                "'Schicht' label, Shift buttons 1 / 2 / 3 / S",
-                new Rectangle(cx, contentY, dateShiftWidth, contentH),
-                PageSegMode.SingleBlock));
-
-            int tpX = contentX + tabPad;
-            int tpY = contentY + tabHeaderHeight + tabPad;
-            int tpW = contentW - 2 * tabPad;
-            int tpH = contentH - tabHeaderHeight - 2 * tabPad;
-
-            int col1W = tpW / 4;
-            int col2W = tpW / 4;
-            int col3W = tpW - col1W - col2W;
-
-            regions.Add(new OcrRegion(
-                "Info Bar — Current Date",
-                "lblCurrentDate — selected production date (e.g. 'Montag, 23.2.2005')",
-                new Rectangle(tpX, tpY, col1W, topInfoHeight),
-                PageSegMode.SingleBlock));
-
-            regions.Add(new OcrRegion(
-                "Info Bar — Current Work Group",
-                "lblCurrentWorkgroup — selected Produktiv-Site name",
-                new Rectangle(tpX + col1W, tpY, col2W, topInfoHeight),
-                PageSegMode.SingleBlock));
-
-            regions.Add(new OcrRegion(
-                "Info Bar — Current Shift",
-                "lblCurrentShift — selected shift and time range " +
-                "(e.g. 'Schicht 1 (06:15 - 12:15)')",
-                new Rectangle(tpX + col1W + col2W, tpY, col3W, topInfoHeight),
-                PageSegMode.SingleBlock));
-
-            int splitY = tpY + topInfoHeight;
-            int splitH = tpH - topInfoHeight;
-
-            int wgPanelH = Math.Min(262, splitH / 2);
-            int empPanelH = splitH - wgPanelH - splitterThick;
-
-            int wgListW = Math.Min(688, (int)(tpW * 0.62));
-            int wgDetailW = tpW - wgListW - splitterThick;
-
-            regions.Add(new OcrRegion(
-                "Work Groups (Produktiv-Sites)",
-                "gbWorkGroups → wglWorkGroups (ucWorkGroupListView) — " +
-                "grouped Details view listing production sites",
-                new Rectangle(tpX, splitY, wgListW, wgPanelH),
-                PageSegMode.SingleBlock));
-
-            regions.Add(new OcrRegion(
-                "Work Group Details (Produktiv-Site-Info)",
-                "GroupBox1 → dgvWorkGroupResults (ucWorkGroupItemDetailsView) — " +
-                "DataGridView showing selected site KPIs",
-                new Rectangle(tpX + wgListW + splitterThick, splitY,
-                              wgDetailW, wgPanelH),
-                PageSegMode.SingleBlock));
-
-            regions.Add(new OcrRegion(
-                "Employees (Mitarbeiter)",
-                "gbEmployees → elvEmployees (ucEmployeeListView) — " +
-                "grouped Details view of employee personnel data",
-                new Rectangle(tpX, splitY + wgPanelH + splitterThick,
-                              tpW, empPanelH),
-                PageSegMode.SingleBlock));
-
-            regions.Add(new OcrRegion(
-                "Status Bar",
-                "StatusStrip — tslAdminInfo (login user + subsidiary), " +
-                "tslActiveEmployees, tslActiveWorkgroups, tslCurrentDateAndTime",
-                new Rectangle(cx, cy + clientHeight - statusBarHeight,
-                              clientWidth, statusBarHeight),
-                PageSegMode.SingleLine));
-
-            return regions;
-        }
-
-        #endregion
-
         #region Helpers
-
-        private static string OcrImage(string imagePath)
-        {
-            try
-            {
-                var tessdataDir = Path.Combine(
-                    Path.GetDirectoryName(typeof(FacessoScreenshotTests).Assembly.Location),
-                    "Visual", "tessdata");
-
-                if (!Directory.Exists(tessdataDir))
-                    return $"(tessdata not found at {tessdataDir})";
-
-                using (var engine = new TesseractEngine(
-                           tessdataDir, "eng+deu", EngineMode.Default))
-                using (var pix = Pix.LoadFromFile(imagePath))
-                using (var page = engine.Process(pix, PageSegMode.Auto))
-                {
-                    return page.GetText()?.Trim() ?? "(empty)";
-                }
-            }
-            catch (Exception ex)
-            {
-                return $"(OCR failed: {ex.Message})";
-            }
-        }
-
-        private static Rectangle ClampRect(Rectangle rect, int imgWidth, int imgHeight)
-        {
-            int x = Math.Max(0, rect.X);
-            int y = Math.Max(0, rect.Y);
-            int right = Math.Min(imgWidth, rect.Right);
-            int bottom = Math.Min(imgHeight, rect.Bottom);
-            return new Rectangle(x, y, Math.Max(0, right - x), Math.Max(0, bottom - y));
-        }
 
         /// <summary>
         /// Captures a window into the given bitmap. The bitmap should
@@ -968,23 +726,6 @@ namespace Facesso.Tests.Visual
         {
             KillProcess();
             _facessoProcess?.Dispose();
-        }
-
-        private readonly struct OcrRegion
-        {
-            public string Name { get; }
-            public string Description { get; }
-            public Rectangle Rect { get; }
-            public PageSegMode SegMode { get; }
-
-            public OcrRegion(string name, string description,
-                             Rectangle rect, PageSegMode segMode)
-            {
-                Name = name;
-                Description = description;
-                Rect = rect;
-                SegMode = segMode;
-            }
         }
 
         private struct WindowInfo
