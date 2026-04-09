@@ -257,6 +257,9 @@ namespace Facesso.Tests.Reflective
                 && binary.IsKind(CSharpSyntaxKind.AddExpression))
             {
                 // Recursively classify each leaf in the concatenation.
+                // This allows variables that trace back to StaticLiteral
+                // (e.g., string sql = "literal"; ... sql + "more")
+                // to be recognized as safe.
                 var leafClassifications = AllLeavesCSharp(binary)
                     .Select(leaf => ClassifyCSharpExpression(leaf, model, visiting))
                     .ToList();
@@ -264,10 +267,8 @@ namespace Facesso.Tests.Reflective
                 if (leafClassifications.All(c => c == SqlTextClassification.StaticLiteral))
                     return SqlTextClassification.StaticLiteral;
 
-                if (leafClassifications.Any(c => c == SqlTextClassification.Concatenation))
-                    return SqlTextClassification.Concatenation;
-
-                return SqlTextClassification.Indeterminate;
+                // Any non-static value concatenated into SQL IS the vulnerability.
+                return SqlTextClassification.Concatenation;
             }
 
             // Interpolated string with non-constant parts.
@@ -494,10 +495,8 @@ namespace Facesso.Tests.Reflective
                     if (leafClassifications.All(c => c == SqlTextClassification.StaticLiteral))
                         return SqlTextClassification.StaticLiteral;
 
-                    if (leafClassifications.Any(c => c == SqlTextClassification.Concatenation))
-                        return SqlTextClassification.Concatenation;
-
-                    return SqlTextClassification.Indeterminate;
+                    // Any non-static value concatenated into SQL IS the vulnerability.
+                    return SqlTextClassification.Concatenation;
                 }
 
                 if (binaryExpr.IsKind(VBSyntaxKind.AddExpression))
@@ -512,10 +511,7 @@ namespace Facesso.Tests.Reflective
                         if (leafClassifications.All(c => c == SqlTextClassification.StaticLiteral))
                             return SqlTextClassification.StaticLiteral;
 
-                        if (leafClassifications.Any(c => c == SqlTextClassification.Concatenation))
-                            return SqlTextClassification.Concatenation;
-
-                        return SqlTextClassification.Indeterminate;
+                        return SqlTextClassification.Concatenation;
                     }
                 }
             }
