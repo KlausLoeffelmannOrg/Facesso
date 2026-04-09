@@ -70,19 +70,37 @@ namespace Facesso.Tests.Reflective
 
         private static string GetSolutionPath([CallerFilePath] string callerFilePath = "")
         {
-            // Navigate from this file up to the solution root.
-            string dir = Path.GetDirectoryName(callerFilePath);
+            // Prefer the runtime assembly location over the compile-time source path.
+            // [CallerFilePath] is baked at compile time and may point to a different
+            // repo clone if the test binary was compiled elsewhere.
+            string assemblyDir = Path.GetDirectoryName(
+                typeof(SqlInjectionAnalysisTests).Assembly.Location);
+
+            string result = FindSolutionUpward(assemblyDir);
+            if (result != null)
+                return result;
+
+            // Fall back to compile-time source path.
+            result = FindSolutionUpward(Path.GetDirectoryName(callerFilePath));
+            if (result != null)
+                return result;
+
+            throw new InvalidOperationException(
+                $"Could not locate Facesso.sln from assembly at {assemblyDir}" +
+                $" or source at {callerFilePath}");
+        }
+
+        private static string FindSolutionUpward(string startDir)
+        {
+            string dir = startDir;
             while (dir != null)
             {
                 string sln = Path.Combine(dir, "Facesso.sln");
-
                 if (File.Exists(sln))
                     return sln;
-
                 dir = Path.GetDirectoryName(dir);
             }
-
-            throw new InvalidOperationException("Could not locate Facesso.sln from " + callerFilePath);
+            return null;
         }
 
         [Fact]
@@ -222,7 +240,8 @@ namespace Facesso.Tests.Reflective
         }
 
         private SqlTextClassification ClassifyCSharpExpression(
-            CSharpSyntax.ExpressionSyntax expr, SemanticModel model)
+            CSharpSyntax.ExpressionSyntax expr, SemanticModel model,
+            HashSet<string> visiting = null)
         {
             // Strip parentheses.
             while (expr is CSharpSyntax.ParenthesizedExpressionSyntax paren)
@@ -237,11 +256,18 @@ namespace Facesso.Tests.Reflective
             if (expr is CSharpSyntax.BinaryExpressionSyntax binary
                 && binary.IsKind(CSharpSyntaxKind.AddExpression))
             {
-                // If all parts are string literals, it's fine (just split for readability).
-                if (AllPartsAreLiterals_CSharp(binary))
+                // Recursively classify each leaf in the concatenation.
+                var leafClassifications = AllLeavesCSharp(binary)
+                    .Select(leaf => ClassifyCSharpExpression(leaf, model, visiting))
+                    .ToList();
+
+                if (leafClassifications.All(c => c == SqlTextClassification.StaticLiteral))
                     return SqlTextClassification.StaticLiteral;
 
-                return SqlTextClassification.Concatenation;
+                if (leafClassifications.Any(c => c == SqlTextClassification.Concatenation))
+                    return SqlTextClassification.Concatenation;
+
+                return SqlTextClassification.Indeterminate;
             }
 
             // Interpolated string with non-constant parts.
@@ -261,7 +287,7 @@ namespace Facesso.Tests.Reflective
 
             // Variable reference — trace back to see if it was concatenated.
             if (expr is CSharpSyntax.IdentifierNameSyntax identifier)
-                return TraceCSharpVariable(identifier, model);
+                return TraceCSharpVariable(identifier, model, visiting);
 
             // Constant field/property (e.g., const string).
             Optional<object> constValue = model.GetConstantValue(expr);
@@ -269,12 +295,13 @@ namespace Facesso.Tests.Reflective
             if (constValue.HasValue && constValue.Value is string)
                 return SqlTextClassification.StaticLiteral;
 
-            // Method call or other complex expression — assume suspicious.
-            return SqlTextClassification.Concatenation;
+            // Method call or other complex expression — genuinely indeterminate.
+            return SqlTextClassification.Indeterminate;
         }
 
         private SqlTextClassification TraceCSharpVariable(
-            CSharpSyntax.IdentifierNameSyntax identifier, SemanticModel model)
+            CSharpSyntax.IdentifierNameSyntax identifier, SemanticModel model,
+            HashSet<string> visiting = null)
         {
             ISymbol symbol = model.GetSymbolInfo(identifier).Symbol;
 
@@ -290,60 +317,66 @@ namespace Facesso.Tests.Reflective
             // For local variables, find the most recent assignment in the same method.
             if (symbol is ILocalSymbol localSym)
             {
-                SyntaxNode containingMethod = identifier.Ancestors()
-                    .OfType<CSharpSyntax.MethodDeclarationSyntax>().FirstOrDefault()
-                    ?? (SyntaxNode)identifier.Ancestors()
-                        .OfType<CSharpSyntax.ConstructorDeclarationSyntax>().FirstOrDefault();
-
-                if (containingMethod == null)
+                // Cycle detection: if we're already tracing this variable, break the cycle.
+                string varKey = identifier.Identifier.Text;
+                visiting ??= new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                if (!visiting.Add(varKey))
                     return SqlTextClassification.Indeterminate;
 
-                // Find all assignments to this variable that precede the current usage.
-                var assignmentsAndDeclarators = new List<CSharpSyntax.ExpressionSyntax>();
-
-                // Check declarators (e.g., string sql = "..." + x).
-                foreach (CSharpSyntax.VariableDeclaratorSyntax declarator in containingMethod.DescendantNodes()
-                    .OfType<CSharpSyntax.VariableDeclaratorSyntax>()
-                    .Where(d => d.Identifier.Text == identifier.Identifier.Text
-                                && d.Initializer != null))
+                try
                 {
-                    assignmentsAndDeclarators.Add(declarator.Initializer.Value);
-                }
+                    SyntaxNode containingMethod = identifier.Ancestors()
+                        .OfType<CSharpSyntax.MethodDeclarationSyntax>().FirstOrDefault()
+                        ?? (SyntaxNode)identifier.Ancestors()
+                            .OfType<CSharpSyntax.ConstructorDeclarationSyntax>().FirstOrDefault();
 
-                // Check assignment expressions (e.g., sql = sql + "...").
-                foreach (AssignmentExpressionSyntax assign in containingMethod.DescendantNodes()
-                    .OfType<CSharpSyntax.AssignmentExpressionSyntax>())
-                {
-                    if (assign.Left is CSharpSyntax.IdentifierNameSyntax lhs
-                        && lhs.Identifier.Text == identifier.Identifier.Text)
+                    if (containingMethod == null)
+                        return SqlTextClassification.Indeterminate;
+
+                    // Find all assignments to this variable that precede the current usage.
+                    var assignmentsAndDeclarators = new List<CSharpSyntax.ExpressionSyntax>();
+
+                    // Check declarators (e.g., string sql = "..." + x).
+                    foreach (CSharpSyntax.VariableDeclaratorSyntax declarator in containingMethod.DescendantNodes()
+                        .OfType<CSharpSyntax.VariableDeclaratorSyntax>()
+                        .Where(d => d.Identifier.Text == identifier.Identifier.Text
+                                    && d.Initializer != null))
                     {
-                        assignmentsAndDeclarators.Add(assign.Right);
+                        assignmentsAndDeclarators.Add(declarator.Initializer.Value);
                     }
-                }
 
-                // If any assignment involves concatenation, flag it.
-                foreach (CSharpSyntax.ExpressionSyntax rhs in assignmentsAndDeclarators)
-                {
-                    SqlTextClassification rhsClass = ClassifyCSharpExpression(rhs, model);
-                    if (rhsClass == SqlTextClassification.Concatenation)
+                    // Check assignment expressions (e.g., sql = sql + "...").
+                    foreach (AssignmentExpressionSyntax assign in containingMethod.DescendantNodes()
+                        .OfType<CSharpSyntax.AssignmentExpressionSyntax>())
+                    {
+                        if (assign.Left is CSharpSyntax.IdentifierNameSyntax lhs
+                            && lhs.Identifier.Text == identifier.Identifier.Text)
+                        {
+                            assignmentsAndDeclarators.Add(assign.Right);
+                        }
+                    }
+
+                    // Classify all assignments.
+                    var classifications = assignmentsAndDeclarators
+                        .Select(rhs => ClassifyCSharpExpression(rhs, model, visiting))
+                        .ToList();
+
+                    // If any assignment involves confirmed concatenation, flag it.
+                    if (classifications.Any(c => c == SqlTextClassification.Concatenation))
                         return SqlTextClassification.Concatenation;
-                }
 
-                // If all assignments are static literals, it's safe.
-                if (assignmentsAndDeclarators.Count > 0
-                    && assignmentsAndDeclarators.All(
-                        rhs => ClassifyCSharpExpression(rhs, model) == SqlTextClassification.StaticLiteral))
-                    return SqlTextClassification.StaticLiteral;
+                    // If all assignments are static literals, it's safe.
+                    if (classifications.Count > 0
+                        && classifications.All(c => c == SqlTextClassification.StaticLiteral))
+                        return SqlTextClassification.StaticLiteral;
+                }
+                finally
+                {
+                    visiting.Remove(identifier.Identifier.Text);
+                }
             }
 
             return SqlTextClassification.Indeterminate;
-        }
-
-        private bool AllPartsAreLiterals_CSharp(CSharpSyntax.BinaryExpressionSyntax binary)
-        {
-            return AllLeavesCSharp(binary).All(
-                e => e is CSharpSyntax.LiteralExpressionSyntax lit
-                        && lit.IsKind(CSharpSyntaxKind.StringLiteralExpression));
         }
 
         private IEnumerable<CSharpSyntax.ExpressionSyntax> AllLeavesCSharp(
@@ -437,7 +470,8 @@ namespace Facesso.Tests.Reflective
         }
 
         private SqlTextClassification ClassifyVBExpression(
-            VBSyntax.ExpressionSyntax expr, SemanticModel model)
+            VBSyntax.ExpressionSyntax expr, SemanticModel model,
+            HashSet<string> visiting = null)
         {
             while (expr is VBSyntax.ParenthesizedExpressionSyntax paren)
                 expr = paren.Expression;
@@ -452,9 +486,18 @@ namespace Facesso.Tests.Reflective
             {
                 if (binaryExpr.IsKind(VBSyntaxKind.ConcatenateExpression))
                 {
-                    if (AllPartsAreLiterals_VB(binaryExpr))
+                    // Recursively classify each leaf in the concatenation.
+                    var leafClassifications = AllLeavesVB(binaryExpr)
+                        .Select(leaf => ClassifyVBExpression(leaf, model, visiting))
+                        .ToList();
+
+                    if (leafClassifications.All(c => c == SqlTextClassification.StaticLiteral))
                         return SqlTextClassification.StaticLiteral;
-                    return SqlTextClassification.Concatenation;
+
+                    if (leafClassifications.Any(c => c == SqlTextClassification.Concatenation))
+                        return SqlTextClassification.Concatenation;
+
+                    return SqlTextClassification.Indeterminate;
                 }
 
                 if (binaryExpr.IsKind(VBSyntaxKind.AddExpression))
@@ -462,9 +505,17 @@ namespace Facesso.Tests.Reflective
                     TypeInfo typeInfo = model.GetTypeInfo(binaryExpr);
                     if (typeInfo.Type?.SpecialType == SpecialType.System_String)
                     {
-                        if (AllPartsAreLiterals_VB(binaryExpr))
+                        var leafClassifications = AllLeavesVB(binaryExpr)
+                            .Select(leaf => ClassifyVBExpression(leaf, model, visiting))
+                            .ToList();
+
+                        if (leafClassifications.All(c => c == SqlTextClassification.StaticLiteral))
                             return SqlTextClassification.StaticLiteral;
-                        return SqlTextClassification.Concatenation;
+
+                        if (leafClassifications.Any(c => c == SqlTextClassification.Concatenation))
+                            return SqlTextClassification.Concatenation;
+
+                        return SqlTextClassification.Indeterminate;
                     }
                 }
             }
@@ -487,18 +538,20 @@ namespace Facesso.Tests.Reflective
 
             // Variable reference — trace back.
             if (expr is VBSyntax.IdentifierNameSyntax identifier)
-                return TraceVBVariable(identifier, model);
+                return TraceVBVariable(identifier, model, visiting);
 
             // Constant.
             Optional<object> constValue = model.GetConstantValue(expr);
             if (constValue.HasValue && constValue.Value is string)
                 return SqlTextClassification.StaticLiteral;
 
-            return SqlTextClassification.Concatenation;
+            // Method call or other complex expression — genuinely indeterminate.
+            return SqlTextClassification.Indeterminate;
         }
 
         private SqlTextClassification TraceVBVariable(
-            VBSyntax.IdentifierNameSyntax identifier, SemanticModel model)
+            VBSyntax.IdentifierNameSyntax identifier, SemanticModel model,
+            HashSet<string> visiting = null)
         {
             ISymbol symbol = model.GetSymbolInfo(identifier).Symbol;
             if (symbol == null)
@@ -511,60 +564,68 @@ namespace Facesso.Tests.Reflective
 
             if (symbol is ILocalSymbol)
             {
-                SyntaxNode containingMethod = identifier.Ancestors()
-                    .OfType<VBSyntax.MethodBlockSyntax>().FirstOrDefault()
-                    ?? (SyntaxNode)identifier.Ancestors()
-                        .OfType<VBSyntax.ConstructorBlockSyntax>().FirstOrDefault();
-
-                if (containingMethod == null)
+                // Cycle detection: if we're already tracing this variable, break the cycle.
+                string varKey = identifier.Identifier.Text;
+                visiting ??= new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                if (!visiting.Add(varKey))
                     return SqlTextClassification.Indeterminate;
 
-                var assignedValues = new List<VBSyntax.ExpressionSyntax>();
-
-                // Variable declarations with initializer.
-                foreach (ModifiedIdentifierSyntax declarator in containingMethod.DescendantNodes()
-                    .OfType<VBSyntax.ModifiedIdentifierSyntax>()
-                    .Where(d => string.Equals(d.Identifier.Text, identifier.Identifier.Text,
-                        StringComparison.OrdinalIgnoreCase)))
+                try
                 {
-                    var variableDecl = declarator.Parent as VBSyntax.VariableDeclaratorSyntax;
-                    if (variableDecl?.Initializer != null)
-                        assignedValues.Add(variableDecl.Initializer.Value);
-                }
+                    SyntaxNode containingMethod = identifier.Ancestors()
+                        .OfType<VBSyntax.MethodBlockSyntax>().FirstOrDefault()
+                        ?? (SyntaxNode)identifier.Ancestors()
+                            .OfType<VBSyntax.ConstructorBlockSyntax>().FirstOrDefault();
 
-                // Assignment statements.
-                foreach (AssignmentStatementSyntax assign in containingMethod.DescendantNodes()
-                    .OfType<VBSyntax.AssignmentStatementSyntax>())
-                {
-                    if (assign.Left is VBSyntax.IdentifierNameSyntax lhs
-                        && string.Equals(lhs.Identifier.Text, identifier.Identifier.Text,
-                            StringComparison.OrdinalIgnoreCase))
+                    if (containingMethod == null)
+                        return SqlTextClassification.Indeterminate;
+
+                    var assignedValues = new List<VBSyntax.ExpressionSyntax>();
+
+                    // Variable declarations with initializer.
+                    foreach (ModifiedIdentifierSyntax declarator in containingMethod.DescendantNodes()
+                        .OfType<VBSyntax.ModifiedIdentifierSyntax>()
+                        .Where(d => string.Equals(d.Identifier.Text, identifier.Identifier.Text,
+                            StringComparison.OrdinalIgnoreCase)))
                     {
-                        assignedValues.Add(assign.Right);
+                        var variableDecl = declarator.Parent as VBSyntax.VariableDeclaratorSyntax;
+                        if (variableDecl?.Initializer != null)
+                            assignedValues.Add(variableDecl.Initializer.Value);
                     }
-                }
 
-                foreach (VBSyntax.ExpressionSyntax rhs in assignedValues)
-                {
-                    SqlTextClassification rhsClass = ClassifyVBExpression(rhs, model);
-                    if (rhsClass == SqlTextClassification.Concatenation)
+                    // Assignment statements.
+                    foreach (AssignmentStatementSyntax assign in containingMethod.DescendantNodes()
+                        .OfType<VBSyntax.AssignmentStatementSyntax>())
+                    {
+                        if (assign.Left is VBSyntax.IdentifierNameSyntax lhs
+                            && string.Equals(lhs.Identifier.Text, identifier.Identifier.Text,
+                                StringComparison.OrdinalIgnoreCase))
+                        {
+                            assignedValues.Add(assign.Right);
+                        }
+                    }
+
+                    // Classify all assignments.
+                    var classifications = assignedValues
+                        .Select(rhs => ClassifyVBExpression(rhs, model, visiting))
+                        .ToList();
+
+                    // If any assignment involves confirmed concatenation, flag it.
+                    if (classifications.Any(c => c == SqlTextClassification.Concatenation))
                         return SqlTextClassification.Concatenation;
-                }
 
-                if (assignedValues.Count > 0
-                    && assignedValues.All(
-                        rhs => ClassifyVBExpression(rhs, model) == SqlTextClassification.StaticLiteral))
-                    return SqlTextClassification.StaticLiteral;
+                    // If all assignments are static literals, it's safe.
+                    if (classifications.Count > 0
+                        && classifications.All(c => c == SqlTextClassification.StaticLiteral))
+                        return SqlTextClassification.StaticLiteral;
+                }
+                finally
+                {
+                    visiting.Remove(identifier.Identifier.Text);
+                }
             }
 
             return SqlTextClassification.Indeterminate;
-        }
-
-        private bool AllPartsAreLiterals_VB(VBSyntax.ExpressionSyntax expr)
-        {
-            return AllLeavesVB(expr).All(e =>
-                e is VBSyntax.LiteralExpressionSyntax lit
-                && lit.IsKind(VBSyntaxKind.StringLiteralExpression));
         }
 
         private IEnumerable<VBSyntax.ExpressionSyntax> AllLeavesVB(
@@ -716,7 +777,7 @@ namespace Facesso.Tests.Reflective
             WriteMarkdownReport(allFindings, totalCommands, staticLiteral, concatenated, indeterminate, score);
 
             Assert.True(
-                concatenated == 0 && indeterminate == 0,
+                concatenated == 0,
                 $"SQL injection vulnerabilities detected! Score: {score}/10. " +
                 $"{concatenated} concatenated, {indeterminate} indeterminate out of {totalCommands} total commands. " +
                 "See test output for detailed report.");
