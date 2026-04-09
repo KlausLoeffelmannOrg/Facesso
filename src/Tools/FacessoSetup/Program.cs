@@ -19,8 +19,8 @@ namespace FacessoSetup
             string backupFile = null;
             bool doRestore = false;
             bool doSetup = false;
-            string instance = @".\SQLEXPRESS";
-            string dbName = "Facesso";
+            string instance = null;
+            string dbName = null;
             string connStr = null;
             string adminUser = "Administrator";
             string adminPassword = null;
@@ -32,6 +32,15 @@ namespace FacessoSetup
             string subsidiaryName = null;
             string addAdminUser = null;
             var demoCliOptions = new DemoConversionCliOptions();
+
+            // New server-operations options.
+            string restoreCompressedFile = null;
+            string restoreCompressedDest = null;
+            string extractDbFile = null;
+            string extractDbDest = null;
+            string detachDbName = null;
+            string detachCopyTo = null;
+            string backupDbPath = null;
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -54,6 +63,33 @@ namespace FacessoSetup
                     case "--restore-latest-demo-backup":
                         doRestore = true;
                         restoreLatestDemoBackup = true;
+                        break;
+
+                    case "--RestoreCompressedDb":
+                    case "--restore-compressed-db":
+                        if (!TryReadOptionValue(args, ref i, args[i], out restoreCompressedFile)) return 1;
+                        if (!TryReadOptionValue(args, ref i, args[i - 1], out restoreCompressedDest)) return 1;
+                        break;
+
+                    case "--ExtractDb":
+                    case "--extract-db":
+                        if (!TryReadOptionValue(args, ref i, args[i], out extractDbFile)) return 1;
+                        if (!TryReadOptionValue(args, ref i, args[i - 1], out extractDbDest)) return 1;
+                        break;
+
+                    case "--DetachDb":
+                    case "--detach-db":
+                        if (!TryReadOptionValue(args, ref i, args[i], out detachDbName)) return 1;
+                        break;
+
+                    case "--CopyTo":
+                    case "--copy-to":
+                        if (!TryReadOptionValue(args, ref i, args[i], out detachCopyTo)) return 1;
+                        break;
+
+                    case "--Backup":
+                    case "--backup":
+                        if (!TryReadOptionValue(args, ref i, args[i], out backupDbPath)) return 1;
                         break;
 
                     case "--setup":
@@ -222,6 +258,14 @@ namespace FacessoSetup
                 return 1;
             }
 
+            if (detachCopyTo != null && detachDbName == null)
+            {
+                WriteError("--CopyTo requires --DetachDb.");
+                return 1;
+            }
+
+            bool hasServerOperation = restoreCompressedFile != null || extractDbFile != null ||
+                                      detachDbName != null || backupDbPath != null;
             bool hasDbOperation = doSetup || listUsers || deleteUsers || removeExistingUserAdmins ||
                                   subsidiaryName != null || addAdminUser != null || doConvertToDemo;
             bool hasDemoAutomationOption = demoCliOptions.Silent ||
@@ -238,7 +282,7 @@ namespace FacessoSetup
                 return 1;
             }
 
-            if (!doRestore && !hasDbOperation)
+            if (!doRestore && !hasDbOperation && !hasServerOperation)
             {
                 PrintUsage();
                 return 1;
@@ -250,8 +294,45 @@ namespace FacessoSetup
                 return 1;
             }
 
-            if (doRestore || hasDbOperation)
+            // For legacy callers that rely on the old defaults: when --instance is set
+            // but --conn-str is not, use Integrated Security (the previous behavior).
+            // The new default (SQL auth on localhost:1433) only kicks in when neither
+            // --instance nor --conn-str is supplied.
+            string effectiveInstance = instance ?? @".\SQLEXPRESS";
+            string effectiveDbName = dbName ?? "Facesso";
+
+            if (doRestore || hasDbOperation || hasServerOperation)
                 PrintExecutionContext();
+
+            // ── New server-level operations (run before legacy restore/setup) ──
+
+            if (extractDbFile != null)
+            {
+                int rc = RunExtractDb(extractDbFile, extractDbDest);
+                if (rc != 0) return rc;
+            }
+
+            if (restoreCompressedFile != null)
+            {
+                int rc = RunRestoreCompressedDb(
+                    restoreCompressedFile, restoreCompressedDest,
+                    instance, ref effectiveDbName, connStr);
+                if (rc != 0) return rc;
+            }
+
+            if (backupDbPath != null)
+            {
+                int rc = RunBackupDb(backupDbPath, connStr, instance, dbName);
+                if (rc != 0) return rc;
+            }
+
+            if (detachDbName != null)
+            {
+                int rc = RunDetachDb(detachDbName, detachCopyTo, connStr, instance);
+                if (rc != 0) return rc;
+            }
+
+            // ── Legacy restore ──
 
             if (doRestore)
             {
@@ -266,30 +347,16 @@ namespace FacessoSetup
                     }
                 }
 
-                int rc = RunRestore(backupFile, instance, ref dbName, connStr);
+                int rc = RunRestore(backupFile, effectiveInstance, ref effectiveDbName, connStr);
                 if (rc != 0) return rc;
             }
+
+            // ── Database-level operations ──
 
             string databaseConnStr = null;
             if (hasDbOperation)
             {
-                if (connStr != null)
-                {
-                    var builder = new SqlConnectionStringBuilder(connStr);
-                    if (string.IsNullOrEmpty(builder.InitialCatalog))
-                        builder.InitialCatalog = dbName;
-                    databaseConnStr = builder.ConnectionString;
-                }
-                else
-                {
-                    if (dbName == null)
-                    {
-                        WriteError("Database operations require --conn-str or --db-name (and optionally --instance).");
-                        return 1;
-                    }
-
-                    databaseConnStr = BuildConnStr(instance, dbName);
-                }
+                databaseConnStr = ResolveDatabaseConnStr(connStr, instance, dbName);
             }
 
             if (removeExistingUserAdmins || deleteUsers || subsidiaryName != null)

@@ -528,7 +528,7 @@ namespace FacessoSetup
 
         static void PrintUsage()
         {
-            Console.WriteLine("FacessoSetup — Facesso Database Restore & Registry Setup Tool");
+            Console.WriteLine("FacessoSetup — Facesso Database Restore, Backup & Registry Setup Tool");
             Console.WriteLine();
             Console.WriteLine("Usage:");
             Console.WriteLine("  FacessoSetup [operations] [options]");
@@ -537,6 +537,16 @@ namespace FacessoSetup
             Console.WriteLine("  --restore <backup.bak>, -r   Restore a SQL Server backup file");
             Console.WriteLine("  --restore-last-demo-backup   Restore the newest '*-demo-backup-*.bak'");
             Console.WriteLine("                               found below the current directory");
+            Console.WriteLine("  --RestoreCompressedDb <file> <destPath>");
+            Console.WriteLine("                               Extract a ZIP-compressed .bak and restore it");
+            Console.WriteLine("  --ExtractDb <file> <destPath>");
+            Console.WriteLine("                               Extract a ZIP-compressed .bak (no restore)");
+            Console.WriteLine("  --Backup <bakPath>           Close all connections, rollback pending");
+            Console.WriteLine("                               transactions, and back up the database.");
+            Console.WriteLine("                               Supports {datetime-format} tokens in the path,");
+            Console.WriteLine("                               e.g. Facesso-{yyyy-MM-dd-HHmmss}.bak");
+            Console.WriteLine("  --DetachDb <dbName>          Close all connections and detach the database");
+            Console.WriteLine("    --CopyTo <destPath>        (with --DetachDb) Copy MDF/LDF files after detach");
             Console.WriteLine("  --setup, -s                  Configure registry (universal licence +");
             Console.WriteLine("                               connection string) and set admin password");
             Console.WriteLine("  --list-users                 List current users in the Facesso database");
@@ -556,9 +566,9 @@ namespace FacessoSetup
             Console.WriteLine();
             Console.WriteLine("Connection / setup options:");
             Console.WriteLine("  --instance, -i <name>        SQL Server instance  (default: .\\SQLEXPRESS)");
-            Console.WriteLine("  --db-name, -n <name>         Target / existing database name");
+            Console.WriteLine("  --db-name, -n <name>         Target / existing database name (default: Facesso)");
             Console.WriteLine("  --conn-str, -c <cs>          Full ADO.NET connection string");
-            Console.WriteLine("                               (overrides --instance + --db-name for --setup)");
+            Console.WriteLine("                               (overrides --instance + --db-name)");
             Console.WriteLine("  --admin-user <name>          Admin username for --setup  (default: Administrator)");
             Console.WriteLine("  --admin-password <pwd>       Admin password for --setup / --add-admin");
             Console.WriteLine("                               (skips interactive prompt)");
@@ -573,6 +583,10 @@ namespace FacessoSetup
             Console.WriteLine("                               Control workgroup/labour-value renaming");
             Console.WriteLine("  --help, -h                   Show this help");
             Console.WriteLine();
+            Console.WriteLine("Default connection string (when neither --instance nor --conn-str is given):");
+            Console.WriteLine("  Server=localhost,1433;User Id=sa;Password=Sandbox#2025!;TrustServerCertificate=true;");
+            Console.WriteLine("  Database: Facesso");
+            Console.WriteLine();
             Console.WriteLine("Examples:");
             Console.WriteLine(@"  FacessoSetup --restore C:\Backups\Facesso.bak");
             Console.WriteLine(@"  FacessoSetup --setup --conn-str ""Data Source=.\SQLEXPRESS;Initial Catalog=Facesso;Integrated Security=True""");
@@ -584,6 +598,13 @@ namespace FacessoSetup
             Console.WriteLine(@"  FacessoSetup --convert-to-demo --conn-str ""Data Source=.\SQLEXPRESS;Initial Catalog=Facesso;Integrated Security=True""");
             Console.WriteLine(@"  FacessoSetup --convert-to-demo --silent --demo-time-offset +0:15 --demo-jitter-seconds 30 --demo-target-date 2026-04-01");
             Console.WriteLine(@"  FacessoSetup --restore-last-demo-backup --instance .\SQLEXPRESS");
+            Console.WriteLine();
+            Console.WriteLine("  Container / MSBench scenarios (use default SQL auth connection):");
+            Console.WriteLine(@"  FacessoSetup --RestoreCompressedDb C:\backups\Facesso-demo.zip C:\backups");
+            Console.WriteLine(@"  FacessoSetup --ExtractDb C:\backups\Facesso-demo.zip C:\temp\extracted");
+            Console.WriteLine(@"  FacessoSetup --Backup ""C:\output\DBBackup\Facesso-{yyyy-MM-dd-HHmmss}.bak""");
+            Console.WriteLine(@"  FacessoSetup --DetachDb Facesso --CopyTo C:\output\detached");
+            Console.WriteLine(@"  FacessoSetup --Backup ""C:\output\Facesso-{yyyy-MM-dd-HHmmss}.bak"" --restore C:\backups\Facesso-demo.bak --setup --add-default-admin");
             Console.WriteLine();
             Console.WriteLine("Note: --setup writes to HKLM and requires Administrator privileges.");
             Console.WriteLine(@"PowerShell note: when running the local build from the current directory, use .\FacessoSetup.exe ...");
