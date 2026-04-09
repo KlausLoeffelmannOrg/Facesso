@@ -35,6 +35,93 @@ It is intentionally preserved close to its original architectural form to provid
 
 ---
 
+## How to Make Facesso Startable
+
+Facesso requires a running SQL Server instance and a set of Windows Registry entries before it can start. This section explains the minimal setup.
+
+### Prerequisites
+
+1. **SQL Server Express** (2017 or later) must be installed and the instance must be running.
+2. If you are running inside a **container** or need **unattended / unit-test access**, the SQL Server instance must be configured in **mixed-mode authentication** (SQL + Windows auth) so that a SQL login (e.g. `sa`) can be used.
+3. The Facesso demo database must be restored from the backup in `DemoData\Facesso-demo-backup.zip`.
+
+### Quick Setup with FacessoSetup
+
+The tool `FacessoSetup` in `src\Tools\FacessoSetup\` automates the most common database-administration tasks. Build it first:
+
+```powershell
+msbuild src\Tools\FacessoSetup\FacessoSetup.sln /restore /p:Configuration=Release /v:minimal
+```
+
+Then use it in the following order:
+
+#### 1. Extract and restore the demo database
+
+```powershell
+# If your backup is a ZIP archive (e.g. the shipped DemoData\Facesso-demo-backup.zip):
+.\FacessoSetup.exe --RestoreCompressedDb "DemoData\Facesso-demo-backup.zip" "C:\backups"
+
+# If you already have a plain .bak file:
+.\FacessoSetup.exe --restore "C:\backups\Facesso-demo-backup.bak"
+```
+
+When neither `--instance` nor `--conn-str` is given, the tool assumes a container-style SQL auth connection:
+
+```
+Server=localhost,1433;User Id=sa;Password=Sandbox#2025!;TrustServerCertificate=true;
+```
+
+For a local SQL Express instance with Windows auth, add `--instance .\SQLEXPRESS`.
+
+#### 2. Add the default administrator account
+
+```powershell
+.\FacessoSetup.exe --add-default-admin
+```
+
+This creates the Facesso application user **Admin** with password **P@$$w0rd**.
+
+#### 3. Configure the Windows Registry
+
+```powershell
+.\FacessoSetup.exe --setup --admin-password "P@$$w0rd"
+```
+
+This writes the universal test serial number, the connection string, and the required date/GUID values to HKLM and HKCU (see the *Registry Keys* section below for details). Requires Administrator privileges.
+
+#### All-in-one command (container / CI)
+
+```powershell
+.\FacessoSetup.exe `
+    --RestoreCompressedDb "DemoData\Facesso-demo-backup.zip" "C:\backups" `
+    --setup `
+    --add-default-admin
+```
+
+### Resetting the Database for Fresh Testing
+
+To save the current state, back up with a timestamped file name:
+
+```powershell
+.\FacessoSetup.exe --Backup "C:\output\DBBackup\Facesso-{yyyy-MM-dd-HHmmss}.bak"
+```
+
+To restore the original demo data (discarding all changes):
+
+```powershell
+.\FacessoSetup.exe --RestoreCompressedDb "DemoData\Facesso-demo-backup.zip" "C:\backups"
+```
+
+Or, if you kept an uncompressed `.bak`:
+
+```powershell
+.\FacessoSetup.exe --restore "C:\backups\Facesso-demo-backup.bak"
+```
+
+Both restore commands force-close all existing connections before restoring.
+
+---
+
 ## Intended Use
 
 You are welcome to:

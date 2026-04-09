@@ -351,3 +351,41 @@ UI Automation (UIA) with `TreeWalker.RawViewWalker` was explored as an alternati
 - `1112420` — Revert A11y text extraction, keep screenshot-only test
 - `081ffea` — Remove leftover ControlTreeDumper.cs
 - `4701211` — Fix Screenshot and assembly inventory test
+
+## Server-level DB administration operations (session 2026-04-09)
+
+### Context
+
+The MSBench test team identified a gap: in containerized testing scenarios, no script runs before the AI agent starts working. The agent itself must be able to set up the Facesso database from scratch. To support this, FacessoSetup needed new CLI operations that cover the full lifecycle of a SQL Server database — extract, restore, backup, and detach — without requiring any external orchestration.
+
+### New operations added
+
+| Option | Purpose |
+| --- | --- |
+| `--RestoreCompressedDb <file> <destPath>` | Extracts a ZIP-compressed `.bak` archive to `destPath`, then restores the contained backup to SQL Server. |
+| `--ExtractDb <file> <destPath>` | Extracts a ZIP-compressed `.bak` archive without restoring (useful for inspection or manual restore). |
+| `--Backup <bakPath>` | Closes all connections (SINGLE_USER WITH ROLLBACK IMMEDIATE), performs a full database backup. Supports `{datetime-format}` tokens in the path, e.g. `Facesso-{yyyy-MM-dd-HHmmss}.bak`. |
+| `--DetachDb <dbName>` | Closes all connections and detaches the named database from the SQL Server instance. |
+| `--CopyTo <destPath>` | Used with `--DetachDb` to copy the MDF/LDF files to a destination folder after detach. |
+
+### Default connection string
+
+When neither `--instance` nor `--conn-str` is supplied, the tool now assumes:
+
+```
+Server=localhost,1433;User Id=sa;Password=Sandbox#2025!;TrustServerCertificate=true;
+```
+
+with `Facesso` as the default database name. This matches the standard container/MSBench configuration. The old behavior (Integrated Security via `.\SQLEXPRESS`) is preserved when `--instance` is explicitly passed.
+
+### Implementation notes
+
+- New file: `Program.ServerOperations.cs` — contains all server-level operation methods, the default connection string constants, and the `ResolveMasterConnStr` / `ResolveDatabaseConnStr` helpers.
+- `Program.cs` — extended CLI parser with both PascalCase (`--RestoreCompressedDb`) and kebab-case (`--restore-compressed-db`) variants for all new options.
+- `Program.Common.cs` — updated `PrintUsage()` with new operations, default connection string documentation, and container/MSBench example commands.
+- `FacessoSetup.csproj` — added framework references for `System.IO.Compression` and `System.IO.Compression.FileSystem`.
+- `README.md` — added "How to Make Facesso Startable" section with step-by-step setup guide and database reset instructions.
+
+### Container infrastructure
+
+The `sql.ini` unattended installation config was updated to include `SECURITYMODE="SQL"` and `SAPWD` so that mixed-mode authentication and the `sa` account are configured during SQL Server installation itself, rather than requiring a post-install runtime step. The redundant registry-based LoginMode override was removed from the Dockerfile.
