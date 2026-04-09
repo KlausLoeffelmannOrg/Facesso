@@ -85,8 +85,9 @@ namespace Facesso.Data
                         "SELECT [WageGroups].*,[Currencies].[CurrencyToken] From [WageGroups] " +
                         "[WageGroups] INNER JOIN [Currencies] ON " +
                         "[WageGroups].[IDCurrency] = [Currencies].[IDCurrency] WHERE " +
-                        "[WageGroups].[IDSubsidiary]=" + FacessoGeneric.LoginInfo.IDSubsidiary +
-                        " AND [WageGroups].[IsCurrent]='true'", locConnection);
+                        "[WageGroups].[IDSubsidiary]=@IDSubsidiary AND [WageGroups].[IsCurrent]='true'",
+                        locConnection);
+                    locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary;
                     SqlDataReader locDR = locCommand.ExecuteReader();
                     if (locDR.HasRows)
                     {
@@ -113,8 +114,10 @@ namespace Facesso.Data
                     "SELECT [WageGroups].*,[WageGroups].[CurrencyToken] From [WageGroups] " +
                     "[WageGroups] INNER JOIN [Currencies] ON " +
                     "[WageGroups].[IDCurrency] = [Currencies].[IDCurrency] WHERE " +
-                    "[WageGroups].[IDSubsidiary]=" + FacessoGeneric.LoginInfo.IDSubsidiary +
-                    " AND [WageGroups].[IDWageGroups]=" + idWageGroup, locConnection);
+                    "[WageGroups].[IDSubsidiary]=@IDSubsidiary AND [WageGroups].[IDWageGroups]=@IDWageGroup",
+                    locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary;
+                locCommand.Parameters.Add("@IDWageGroup", SqlDbType.Int).Value = idWageGroup;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (locDR.HasRows)
                 {

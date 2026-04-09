@@ -356,9 +356,12 @@ namespace FacessoSetup
         static bool TableExists(SqlConnection conn, string tableName, SqlTransaction tx = null)
         {
             using (var cmd = new SqlCommand(
-                $"SELECT COUNT(1) FROM sys.objects " +
-                $"WHERE object_id = OBJECT_ID(N'[dbo].[{tableName}]') AND type = N'U'", conn, tx))
+                "SELECT COUNT(1) FROM sys.objects " +
+                "WHERE object_id = OBJECT_ID(@TableName) AND type = N'U'", conn, tx))
+            {
+                cmd.Parameters.Add("@TableName", SqlDbType.NVarChar, 256).Value = QualifyDboObjectName(tableName);
                 return Convert.ToInt32(ExecuteScalarLogged(cmd), CultureInfo.InvariantCulture) > 0;
+            }
         }
 
         static string QueryScalar(SqlConnection conn, string sql)
@@ -524,7 +527,35 @@ namespace FacessoSetup
             return value.Substring(0, Math.Max(0, maxLength - 3)) + "...";
         }
 
-        static string EscSql(string s) => s?.Replace("'", "''");
+        static string QuoteSqlLiteral(string value) => "N'" + (value ?? string.Empty).Replace("'", "''") + "'";
+
+        static string QualifyDboObjectName(string objectName)
+        {
+            string qualifiedName = (objectName ?? string.Empty).IndexOf('.') >= 0 ? objectName : "dbo." + objectName;
+            return QuoteSqlIdentifier(qualifiedName);
+        }
+
+        static string QuoteSqlIdentifier(string identifier)
+        {
+            if (string.IsNullOrWhiteSpace(identifier))
+                throw new ArgumentException("SQL identifier must not be empty.", nameof(identifier));
+
+            string[] parts = identifier.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < parts.Length; i++)
+            {
+                string part = parts[i].Trim();
+                if (part.StartsWith("[", StringComparison.Ordinal) &&
+                    part.EndsWith("]", StringComparison.Ordinal) &&
+                    part.Length >= 2)
+                {
+                    part = part.Substring(1, part.Length - 2);
+                }
+
+                parts[i] = "[" + part.Replace("]", "]]") + "]";
+            }
+
+            return string.Join(".", parts);
+        }
 
         static void PrintUsage()
         {

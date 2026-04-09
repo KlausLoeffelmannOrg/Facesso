@@ -45,6 +45,28 @@ namespace Facesso.Data
             return locConnection;
         }
 
+        private static string QuoteSqlIdentifier(string identifier)
+        {
+            if (string.IsNullOrWhiteSpace(identifier))
+                throw new ArgumentException("SQL identifier must not be empty.", nameof(identifier));
+
+            string[] parts = identifier.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < parts.Length; i++)
+            {
+                string part = parts[i].Trim();
+                if (part.StartsWith("[", StringComparison.Ordinal) &&
+                    part.EndsWith("]", StringComparison.Ordinal) &&
+                    part.Length >= 2)
+                {
+                    part = part.Substring(1, part.Length - 2);
+                }
+
+                parts[i] = "[" + part.Replace("]", "]]") + "]";
+            }
+
+            return string.Join(".", parts);
+        }
+
         public string SQLConnectionString => FacessoGeneric.SQLConnectionString;
 
         public void DeleteDataForOleDbImport(int idSubsidiary)

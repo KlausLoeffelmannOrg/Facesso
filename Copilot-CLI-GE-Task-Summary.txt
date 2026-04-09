@@ -1,0 +1,115 @@
+Task complete 
+└ Outcome: I completed the C# SQL-injection audit and patched the live injection sinks by replacing concatenated SQL
+  with SqlParameter bindings and adding safe identifier quoting where SQL Server does not permit parameterized
+  identifiers.
+
+  Best-practice fix pattern applied
+
+   1. Values (username, IDs, dates, CLI paths, database names used as literals) now go through typed SqlParameters.
+   2. Identifiers (ORDER BY columns, table names, database names in DDL) are now bracket-quoted via dedicated helpers
+   instead of raw concatenation.
+   3. Legacy manual escaping (EscSql) was removed from the affected paths in favor of parameterization or explicit 
+  identifier quoting.
+
+  Risk-prioritized audit report
+
+  High risk
+
+  src\MixNetFx\Facesso.Generic\LoginUserClasses.cs (46-51)
+
+   - Vulnerable snippet: "SELECT
+    * FROM [Users] WHERE [IDSubsidiary]=" + idSubsidiary + " AND [Username] = '" + username + "' ...
+   - Injection vector: username from the login UI.
+   - Patch: converted to @IDSubsidiary and @Username parameters.
+
+  Medium risk
+
+  src\MixNetFx\Facesso.Data\SQLServer\SPAccess_ProductionData.cs (275-290)
+
+   - Vulnerable snippet: "[IDWorkgroup]=" + workgroup.IDWorkGroup + ... "[ProductionDate]=CONVERT(...)" + ... 
+  "[Shift]=" + shift
+   - Injection vector: workgroup/date/shift values passed through form/business logic state.
+   - Patch: parameterized the SELECT and both DELETE statements with @IDWorkGroup, @ProductionDate, @Shift, and 
+  @IDProductionData.
+
+  src\MixNetFx\Facesso.Data\SQLServer\SPAccess_BonusList.cs (98-106, 128-135)
+
+   - Vulnerable snippet: ... WHERE CostCenters.IDSubsidiary=" + idSubsidiary and ... [IDCostCenter]=" + idCostCenter
+   - Injection vector: runtime subsidiary and cost-center IDs.
+   - Patch: parameterized both bonus-list lookup queries.
+
+  src\MixNetFx\Facesso.Data\SQLServer\SPAccess_Users.cs (130-133)
+
+   - Vulnerable snippet: "SELECT
+    * From [Users] WHERE [IDSubsidiary]=" + FacessoGeneric.LoginInfo.IDSubsidiary ...
+   - Injection vector: current subsidiary ID from session state.
+   - Patch: parameterized the subsidiary filter.
+
+  src\MixNetFx\Facesso.Data\SQLServer\SPAccess_Employees.cs (202-218)
+
+   - Vulnerable snippet: ... [IDSubsidiary]=" + FacessoGeneric.LoginInfo.IDSubsidiary ... " ORDER BY [" + 
+  orderByString + "]"
+   - Injection vector: session subsidiary ID and orderByString sort input.
+   - Patch: parameterized @IDSubsidiary; sanitized ORDER BY via identifier quoting.
+
+  src\MixNetFx\Facesso.Data\SQLServer\SPAccess_LabourValue.cs (117-121, 144-150, 172-176, 194-197)
+
+   - Vulnerable snippet: concatenated IDSubsidiary, IDLabourValue, LabourValueNumber, and orderByString into lookup 
+  SQL.
+   - Injection vector: runtime IDs and sort-column input.
+   - Patch: parameterized all scalar filters and quote-sanitized the ORDER BY identifier.
+
+  src\MixNetFx\Facesso.Data\SQLServer\SPAccess_CostCenter.cs (129-186)
+
+   - Vulnerable snippet: concatenated IDSubsidiary, IDCostCenter, and IDCostCenterInternal into SELECT statements.
+   - Injection vector: runtime cost-center/subsidiary values.
+   - Patch: parameterized all lookups.
+
+  src\MixNetFx\Facesso.Data\SQLServer\SPAccess_WageGroups.cs (84-117)
+
+   - Vulnerable snippet: concatenated IDSubsidiary and idWageGroup into wage-group queries.
+   - Injection vector: runtime wage-group/session values.
+   - Patch: parameterized the filters.
+
+  src\MixNetFx\Facesso.Data\SQLServer\SPAccess_WorkGroups.cs (233-264)
+
+   - Vulnerable snippet: concatenated IDSubsidiary, idWorkGroup, and workGroupNumber into work-group lookups.
+   - Injection vector: runtime work-group/session values.
+   - Patch: parameterized the filters.
+
+  Low-to-medium risk admin/tooling hardening
+
+  src\MixNetFx\ADSqlSupportComponents\AdDatabaseManager.cs (40-65, 96-119, 128-158, 176-186)
+
+   - Vulnerable snippet: ... where name='" + _databaseName + "', CREATE DATABASE [" + databasename + "], 
+  sp_changedbowner ... N'" + newDbOwner + "'.
+   - Injection vector: database names, owner names, MDF/LDF paths from setup/admin workflows.
+   - Patch: parameterized literal values, switched catalog creation to SqlConnectionStringBuilder, and 
+  quote-sanitized database identifiers for DDL.
+
+  src\MixNetFx\ActiveDevelop.SqlTools\DatabaseSchemaUpdateManager.cs (22-181)
+
+   - Vulnerable snippet: OBJECT_ID(N'" + tablename + "'), "alter table " + tablename + " add ...", "drop column " + 
+  columnName.
+   - Injection vector: table/column/constraint identifiers passed to schema-update helpers.
+   - Patch: parameterized metadata checks, quote-sanitized identifiers before DDL assembly, and corrected the coupled
+   DeleteColumnIfExits existence check while hardening.
+
+  src\Tools\FacSqlInfo\Program.cs (224-225, 328-345)
+
+   - Vulnerable snippet: $"SELECT create_date ... N'{EscSql(dbName)}'" and OBJECT_ID(N'[dbo].[{tableName}]').
+   - Injection vector: discovered database/table names used by the inspection tool.
+   - Patch: replaced escape-based interpolation with parameters and identifier quoting.
+
+  src\Tools\FacessoSetup\Program.Common.cs (356-362) and src\Tools\FacessoSetup\Program.Restore.cs (132-155, 243-265)
+
+   - Vulnerable snippet: RESTORE ... N'{EscSql(backupFile)}', IF DB_ID(N'{EscSql(dbName)}') ..., MOVE 
+  N'{EscSql(logical)}' TO N'{EscSql(physical)}'.
+   - Injection vector: CLI/file-system supplied backup path, database name, and logical/physical file names.
+   - Patch: parameterized RESTORE HEADERONLY / FILELISTONLY and safely quoted literals and identifiers in generated 
+  restore SQL.
+
+  Net result: the application-side C# data access now follows the safe pattern of parameterizing every scalar value
+  and only composing dynamic SQL for identifiers after explicit quoting. Most remaining database writes were already
+  using stored procedures with typed parameters, so the risky surface was concentrated in these ad hoc read/admin
+  helpers.

@@ -278,6 +278,7 @@ namespace Facesso.Data
             using (locConnection)
             {
                 var locCommand = new SqlCommand(SPAccess.GetInstance().EmployeeInfoCollectionCommandString(), locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", System.Data.SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (locDR.HasRows)
                 {
@@ -297,6 +298,7 @@ namespace Facesso.Data
             using (locConnection)
             {
                 var locCommand = new SqlCommand(SPAccess.GetInstance().EmployeeInfoCollectionCommandString(orderByString), locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", System.Data.SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (locDR.HasRows)
                 {

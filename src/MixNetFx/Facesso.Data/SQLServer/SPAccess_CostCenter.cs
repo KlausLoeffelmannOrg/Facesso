@@ -130,8 +130,9 @@ namespace Facesso.Data
                         "SELECT [CostCenters].*,[Currencies].[CurrencyToken] From [CostCenters] " +
                         "[CostCenters] INNER JOIN [Currencies] ON " +
                         "[CostCenters].[IDCurrency] = [Currencies].[IDCurrency] WHERE " +
-                        "[CostCenters].[IDSubsidiary]=" + FacessoGeneric.LoginInfo.IDSubsidiary +
-                        " AND [CostCenters].[IsCurrent]='true'", locConnection);
+                        "[CostCenters].[IDSubsidiary]=@IDSubsidiary AND [CostCenters].[IsCurrent]='true'",
+                        locConnection);
+                    locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary;
                     SqlDataReader locDR = locCommand.ExecuteReader();
                     if (locDR.HasRows)
                     {
@@ -158,8 +159,10 @@ namespace Facesso.Data
                     "SELECT [CostCenters].*,[Currencies].[CurrencyToken] From [CostCenters] " +
                     "[CostCenters] INNER JOIN [Currencies] ON " +
                     "[CostCenters].[IDCurrency] = [Currencies].[IDCurrency] WHERE " +
-                    "[CostCenters].[IDSubsidiary]=" + FacessoGeneric.LoginInfo.IDSubsidiary +
-                    " AND [CostCenters].[IDCostCenter]=" + idCostCenter, locConnection);
+                    "[CostCenters].[IDSubsidiary]=@IDSubsidiary AND [CostCenters].[IDCostCenter]=@IDCostCenter",
+                    locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary;
+                locCommand.Parameters.Add("@IDCostCenter", SqlDbType.Int).Value = idCostCenter;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (locDR.HasRows)
                 {
@@ -180,8 +183,10 @@ namespace Facesso.Data
                     "SELECT [CostCenters].*,[Currencies].[CurrencyToken] From [CostCenters] " +
                     "[CostCenters] INNER JOIN [Currencies] ON " +
                     "[CostCenters].[IDCurrency] = [Currencies].[IDCurrency] WHERE " +
-                    "[CostCenters].[IDSubsidiary]=" + idSubsidiary +
-                    " AND [CostCenters].[IDCostCenterInternal]=" + 0, locConnection);
+                    "[CostCenters].[IDSubsidiary]=@IDSubsidiary AND [CostCenters].[IDCostCenterInternal]=@IDCostCenterInternal",
+                    locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = idSubsidiary;
+                locCommand.Parameters.Add("@IDCostCenterInternal", SqlDbType.Int).Value = 0;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 locDR.Read();
                 return new CostcenterInfo(locDR, true);

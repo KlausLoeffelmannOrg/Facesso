@@ -131,9 +131,9 @@ namespace FacessoSetup
 
         static string GetBackupDatabaseName(SqlConnection conn, string backupFile)
         {
-            using (var cmd = new SqlCommand(
-                $"RESTORE HEADERONLY FROM DISK = N'{EscSql(backupFile)}'", conn))
+            using (var cmd = new SqlCommand("RESTORE HEADERONLY FROM DISK = @BackupFile", conn))
             {
+                cmd.Parameters.Add("@BackupFile", System.Data.SqlDbType.NVarChar, 260).Value = backupFile;
                 cmd.CommandTimeout = 60;
                 using (var reader = ExecuteReaderLogged(cmd))
                 {
@@ -151,9 +151,9 @@ namespace FacessoSetup
         static List<BackupFile> GetBackupFileList(SqlConnection conn, string backupFile)
         {
             var result = new List<BackupFile>();
-            using (var cmd = new SqlCommand(
-                $"RESTORE FILELISTONLY FROM DISK = N'{EscSql(backupFile)}'", conn))
+            using (var cmd = new SqlCommand("RESTORE FILELISTONLY FROM DISK = @BackupFile", conn))
             {
+                cmd.Parameters.Add("@BackupFile", System.Data.SqlDbType.NVarChar, 260).Value = backupFile;
                 cmd.CommandTimeout = 60;
                 using (var reader = ExecuteReaderLogged(cmd))
                 {
@@ -244,25 +244,25 @@ namespace FacessoSetup
             string backupFile, string dbName,
             List<(string Logical, string Physical)> moves)
         {
-            string safeDbName = dbName.Replace("]", "]]");
+            string safeDbName = QuoteSqlIdentifier(dbName);
             var sb = new StringBuilder();
             sb.AppendLine("SET NOCOUNT ON;");
             sb.AppendLine("BEGIN TRY");
-            sb.AppendLine($"    IF DB_ID(N'{EscSql(dbName)}') IS NOT NULL");
-            sb.AppendLine($"        ALTER DATABASE [{safeDbName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;");
-            sb.Append($"    RESTORE DATABASE [{safeDbName}]");
-            sb.Append($" FROM DISK = N'{EscSql(backupFile)}'");
+            sb.AppendLine($"    IF DB_ID({QuoteSqlLiteral(dbName)}) IS NOT NULL");
+            sb.AppendLine($"        ALTER DATABASE {safeDbName} SET SINGLE_USER WITH ROLLBACK IMMEDIATE;");
+            sb.Append($"    RESTORE DATABASE {safeDbName}");
+            sb.Append($" FROM DISK = {QuoteSqlLiteral(backupFile)}");
             sb.Append(" WITH ");
             foreach (var (logical, physical) in moves)
-                sb.Append($"MOVE N'{EscSql(logical)}' TO N'{EscSql(physical)}', ");
+                sb.Append($"MOVE {QuoteSqlLiteral(logical)} TO {QuoteSqlLiteral(physical)}, ");
             sb.AppendLine("REPLACE, STATS = 10;");
-            sb.AppendLine($"    ALTER DATABASE [{safeDbName}] SET MULTI_USER;");
+            sb.AppendLine($"    ALTER DATABASE {safeDbName} SET MULTI_USER;");
             sb.AppendLine("END TRY");
             sb.AppendLine("BEGIN CATCH");
-            sb.AppendLine($"    IF DB_ID(N'{EscSql(dbName)}') IS NOT NULL");
+            sb.AppendLine($"    IF DB_ID({QuoteSqlLiteral(dbName)}) IS NOT NULL");
             sb.AppendLine("    BEGIN");
             sb.AppendLine("        BEGIN TRY");
-            sb.AppendLine($"            ALTER DATABASE [{safeDbName}] SET MULTI_USER;");
+            sb.AppendLine($"            ALTER DATABASE {safeDbName} SET MULTI_USER;");
             sb.AppendLine("        END TRY");
             sb.AppendLine("        BEGIN CATCH");
             sb.AppendLine("        END CATCH");

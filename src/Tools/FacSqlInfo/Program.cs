@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -222,7 +223,8 @@ namespace FacSqlInfo
         {
             // --- Database creation date ---
             string created = QueryScalar(conn,
-                $"SELECT create_date FROM sys.databases WHERE name = N'{EscSql(dbName)}'");
+                "SELECT create_date FROM sys.databases WHERE name = @DbName",
+                new SqlParameter("@DbName", SqlDbType.NVarChar, 128) { Value = dbName });
             if (created != null && DateTime.TryParse(created, out var createdDt))
                 Console.WriteLine($"      Created              : {createdDt:yyyy-MM-dd HH:mm}");
 
@@ -329,20 +331,52 @@ namespace FacSqlInfo
         {
             using (var cmd = new SqlCommand(
                 "SELECT COUNT(1) FROM sys.objects " +
-                $"WHERE object_id = OBJECT_ID(N'[dbo].[{tableName}]') AND type = N'U'", conn))
+                "WHERE object_id = OBJECT_ID(@TableName) AND type = N'U'", conn))
+            {
+                cmd.Parameters.Add("@TableName", SqlDbType.NVarChar, 256).Value = QualifyDboObjectName(tableName);
                 return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+            }
         }
 
-        static string QueryScalar(SqlConnection conn, string sql)
+        static string QueryScalar(SqlConnection conn, string sql, params SqlParameter[] parameters)
         {
             using (var cmd = new SqlCommand(sql, conn))
             {
+                if (parameters != null && parameters.Length > 0)
+                    cmd.Parameters.AddRange(parameters);
+
                 var r = cmd.ExecuteScalar();
                 return (r == null || r == DBNull.Value) ? null : r.ToString();
             }
         }
 
-        static string EscSql(string s) => s?.Replace("'", "''");
+        static string QualifyDboObjectName(string objectName)
+        {
+            string qualifiedName = (objectName ?? string.Empty).IndexOf('.') >= 0 ? objectName : "dbo." + objectName;
+            return QuoteSqlIdentifier(qualifiedName);
+        }
+
+        static string QuoteSqlIdentifier(string identifier)
+        {
+            if (string.IsNullOrWhiteSpace(identifier))
+                throw new ArgumentException("SQL identifier must not be empty.", nameof(identifier));
+
+            string[] parts = identifier.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < parts.Length; i++)
+            {
+                string part = parts[i].Trim();
+                if (part.StartsWith("[", StringComparison.Ordinal) &&
+                    part.EndsWith("]", StringComparison.Ordinal) &&
+                    part.Length >= 2)
+                {
+                    part = part.Substring(1, part.Length - 2);
+                }
+
+                parts[i] = "[" + part.Replace("]", "]]") + "]";
+            }
+
+            return string.Join(".", parts);
+        }
 
         // -------------------------------------------------------------------------
         //  Help
