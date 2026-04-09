@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en" target-language="en-US" original="../Resources.resx">
+    <body>
+      <trans-unit id="CostCenter_Base_Description">
+        <source>gewiesen.</source>
+        <target state="new">gewiesen.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenter_Base_Name">
+        <source>Systemkostenstelle</source>
+        <target state="new">Systemkostenstelle</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Dialog_InfoItemAddEditView_OKAdd">
+        <source>Hinzufügen</source>
+        <target state="new">Hinzufügen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Dialog_InfoItemAddEditView_OKEdit">
+        <source>Übernehmen</source>
+        <target state="new">Übernehmen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="RolesList">
+        <source>Keine Rechte|Produktionauswertungen einsehen|Mitarbeiterauswertungen einsehen|Systemdaten einsehen|Produktionsauswertungen drucken|Mitarbeiterauswertungen drucken|Systemdaten drucken|Neue Produktionsdaten erfassen|Neue Mitarbeiterdaten erfassen|Produktionsdaten korrigieren|Mitarbeiterdaten korrigieren|Lohnabrechnungen durchführen|Import-Funktionen durchführen|Export-Funktionen durchführen|Import-/Export-Regeln ändern|Stammdaten ändern|Systemdaten ändern|Systempflege durchführen|Administrator-Rechte</source>
+        <target state="new">Keine Rechte|Produktionauswertungen einsehen|Mitarbeiterauswertungen einsehen|Systemdaten einsehen|Produktionsauswertungen drucken|Mitarbeiterauswertungen drucken|Systemdaten drucken|Neue Produktionsdaten erfassen|Neue Mitarbeiterdaten erfassen|Produktionsdaten korrigieren|Mitarbeiterdaten korrigieren|Lohnabrechnungen durchführen|Import-Funktionen durchführen|Export-Funktionen durchführen|Import-/Export-Regeln ändern|Stammdaten ändern|Systemdaten ändern|Systempflege durchführen|Administrator-Rechte</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="SubsidiaryDefaultSynonym">
+        <source>Niederlassung</source>
+        <target state="new">Niederlassung</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfo_UserNotExisting">
+        <source>Das Konto mit dem angegebenen Benutzername ist in der Benutzerdatenbank nicht vorhanden!</source>
+        <target state="new">Das Konto mit dem angegebenen Benutzername ist in der Benutzerdatenbank nicht vorhanden!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfo_WrongPassword">
+        <source>Das eingegebene Kennwort für diesen Benutzer stimmt nicht mit dem hinterlegten Kennwort überein!</source>
+        <target state="new">Das eingegebene Kennwort für diesen Benutzer stimmt nicht mit dem hinterlegten Kennwort überein!</target>
+        <note />
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en" target-language="en-US" original="../frmWorkGroupInfoAddEditView.resx">
+    <body>
+      <trans-unit id="Label1.Text">
+        <source>HINWEIS: Um Kernarbeitszeiten über Datumsgrenzen hinweg korrekt zuordnen zu können, ist ein Referenzdatum für den Datumswechsel erforderlich. Referenzdatum hier ist der 1.1.2003, der mit einem Montag beginnt. Das ist das Datum, das sich über den Zeiteingabefeldern befindet.</source>
+        <target state="new">HINWEIS: Um Kernarbeitszeiten über Datumsgrenzen hinweg korrekt zuordnen zu können, ist ein Referenzdatum für den Datumswechsel erforderlich. Referenzdatum hier ist der 1.1.2003, der mit einem Montag beginnt. Das ist das Datum, das sich über den Zeiteingabefeldern befindet.</target>
+        <note />
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

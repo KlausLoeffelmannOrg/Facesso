@@ -3,7 +3,9 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.EntityClient;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
+using System.Threading;
 using System.Xml.Serialization;
 
 namespace Facesso
@@ -114,6 +116,36 @@ namespace Facesso
 
             if (myLoginInfo == null)
                 Login();
+        }
+
+        public static void ApplyRequestedCulture(ReadOnlyCollection<string> commandLineArgs)
+        {
+            var culture = CultureInfo.GetCultureInfo(ResolveCultureName(commandLineArgs));
+
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+        }
+
+        private static string ResolveCultureName(ReadOnlyCollection<string> commandLineArgs)
+        {
+            foreach (string arg in commandLineArgs)
+            {
+                if (string.Equals(arg, "--English", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(arg, "/English", StringComparison.OrdinalIgnoreCase))
+                {
+                    return "en-US";
+                }
+
+                if (string.Equals(arg, "--German", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(arg, "/German", StringComparison.OrdinalIgnoreCase))
+                {
+                    return "de-DE";
+                }
+            }
+
+            return "de-DE";
         }
 
         public static DateTime OpenCurrentToDate => new DateTime(2199, 12, 31);

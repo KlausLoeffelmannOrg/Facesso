@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en" target-language="en-US" original="../frmWorkGroupAnalysis.resx">
+    <body>
+      <trans-unit id="Label4.Text">
+        <source>Dazu fragt Sie dieser Assistent bestimmte Informationen auf den nächsten Seiten ab, auf deren Basis Sie die Auswertung anschließend als Liste oder für jede Produktiv-Site detailliert im Stapel anschauen, exportieren oder drucken können.</source>
+        <target state="new">Dazu fragt Sie dieser Assistent bestimmte Informationen auf den nächsten Seiten ab, auf deren Basis Sie die Auswertung anschließend als Liste oder für jede Produktiv-Site detailliert im Stapel anschauen, exportieren oder drucken können.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Label6.Text">
+        <source>Sie können übrigens die Einstellungen für eine einmalig durchgeführte Auswertung im letzten Assistenten-Schritt speichern und diese zu einem späteren Zeitpunkt direkt aus dem Pulldown-Menü 'Analysen' abrufen.</source>
+        <target state="new">Sie können übrigens die Einstellungen für eine einmalig durchgeführte Auswertung im letzten Assistenten-Schritt speichern und diese zu einem späteren Zeitpunkt direkt aus dem Pulldown-Menü 'Analysen' abrufen.</target>
+        <note />
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

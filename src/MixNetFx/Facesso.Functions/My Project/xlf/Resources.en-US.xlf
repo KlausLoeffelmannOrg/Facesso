@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en" target-language="en-US" original="../Resources.resx">
+    <body>
+      <trans-unit id="AddressDetails_FirstNameNullMessage">
+        <source>Bitte geben Sie den Vornamen ein!</source>
+        <target state="new">Bitte geben Sie den Vornamen ein!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="AddressDetails_LastNameNullMessage">
+        <source>Bitte geben Sie den Nachnamen ein!</source>
+        <target state="new">Bitte geben Sie den Nachnamen ein!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="BonusListMaintenance_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um die Lohntabelle zu bearbeiten!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um die Lohntabelle zu bearbeiten!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="BonusListMaintenance_InputValueFormatError_MB_Body">
+        <source>Der eingegebene Wert hat nicht das richtige Format. Bitte korrigieren Sie die Eingabe!</source>
+        <target state="new">Der eingegebene Wert hat nicht das richtige Format. Bitte korrigieren Sie die Eingabe!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="BonusListMaintenance_InputValueFormatError_MB_Title">
+        <source>Falsches Eingabeformat:</source>
+        <target state="new">Falsches Eingabeformat:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterInfoAdd_CostCenterNoAlreadyExist_MB_Body">
+        <source>Die Kostenstelle mit der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Kostenstellennr.</source>
+        <target state="new">Die Kostenstelle mit der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Kostenstellennr.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterInfoAdd_CostCenterNoAlreadyExist_MB_Title">
+        <source>Kostenstellennr. schon vorhanden:</source>
+        <target state="new">Kostenstellennr. schon vorhanden:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterInfoAdd_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um eine neue Kostenstelle hinzuzufügen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um eine neue Kostenstelle hinzuzufügen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterInfoAdd_FormCaption">
+        <source>Neue Kostenstelle anlegen</source>
+        <target state="new">Neue Kostenstelle anlegen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterInfoCenter_LocalizedTypeName">
+        <source>Kostenstelle</source>
+        <target state="new">Kostenstelle</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterInfoCenter_NoSelectedCostCenter_MB_Body">
+        <source>Bitte wählen Sie zunächst eine Kostenstelle aus, bevor Sie die Funktion verwenden!</source>
+        <target state="new">Bitte wählen Sie zunächst eine Kostenstelle aus, bevor Sie die Funktion verwenden!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterInfoCenter_NoSelectedCostCenter_MB_Title">
+        <source>Keine Kostenstelle ausgewählt!</source>
+        <target state="new">Keine Kostenstelle ausgewählt!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterInfoCollectionGet_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um die Liste der Kostenstellen einzusehen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um die Liste der Kostenstellen einzusehen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterInfoDelete_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um eine Kostenstelle zu löschen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um eine Kostenstelle zu löschen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterInfoEdit_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um eine Kostenstelle zu bearbeiten!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um eine Kostenstelle zu bearbeiten!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterInfoEdit_FormCaption">
+        <source>Kostenstelle bearbeiten</source>
+        <target state="new">Kostenstelle bearbeiten</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterInfoView_FormCaption">
+        <source>Kostenstellendetails ansehen</source>
+        <target state="new">Kostenstellendetails ansehen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterSelection_NoSelection_MB_Body">
+        <source>Sie haben keine Kostenstelle ausgewählt. Bitte wählen Sie eine Kostenstelle aus.</source>
+        <target state="new">Sie haben keine Kostenstelle ausgewählt. Bitte wählen Sie eine Kostenstelle aus.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterSelection_NoSelection_MB_Title">
+        <source>Keine Kostenstelle selektiert:</source>
+        <target state="new">Keine Kostenstelle selektiert:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="EmployeeInfoAddEditView_Dialog_IncentiveSynonym">
+        <source>Für {0} verwenden:</source>
+        <target state="new">Für {0} verwenden:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="EmployeeInfoAdd_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um einen neuen Mitarbeiter hinzuzufügen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um einen neuen Mitarbeiter hinzuzufügen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="EmployeeInfoAdd_FormCaption">
+        <source>Neuen Mitarbeiter anlegen</source>
+        <target state="new">Neuen Mitarbeiter anlegen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="EmployeeInfoAdd_PersonnelNoAlreadyExist_MB_Body">
+        <source>Die Personalnummer mit der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Personalnr.</source>
+        <target state="new">Die Personalnummer mit der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Personalnr.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="EmployeeInfoAdd_PersonnelNoAlreadyExist_MB_Title">
+        <source>Personalnr. schon vorhanden:</source>
+        <target state="new">Personalnr. schon vorhanden:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="EmployeeInfoCenter_LocalizedTypeName">
+        <source>Mitarbeiter</source>
+        <target state="new">Mitarbeiter</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="EmployeeInfoCenter_NoSelectedEmployee_MB_Body">
+        <source>Bitte wählen Sie zunächst einen Mitarbeiter aus, bevor Sie die Funktion verwenden!</source>
+        <target state="new">Bitte wählen Sie zunächst einen Mitarbeiter aus, bevor Sie die Funktion verwenden!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="EmployeeInfoCenter_NoSelectedEmployee_MB_Title">
+        <source>Kein Mitarbeiter ausgewählt!</source>
+        <target state="new">Kein Mitarbeiter ausgewählt!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="EmployeeInfoCollectionGet_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um die Liste der Mitarbeiter einzusehen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um die Liste der Mitarbeiter einzusehen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="EmployeeInfoDelete_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um einen Mitarbeiter zu löschen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um einen Mitarbeiter zu löschen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="EmployeeInfoEdit_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um Daten eines Mitarbeiters zu bearbeiten!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um Daten eines Mitarbeiters zu bearbeiten!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="EmployeeInfoEdit_FormCaption">
+        <source>Mitarbeiter bearbeiten</source>
+        <target state="new">Mitarbeiter bearbeiten</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="IncentiveWageCalculation_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um eine Prämienlohnberechnung durchzuführen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um eine Prämienlohnberechnung durchzuführen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Incentive_Dimension">
+        <source>%</source>
+        <target state="new">%</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Incentive_Synonym">
+        <source>Zeitgrad</source>
+        <target state="new">Zeitgrad</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Incentive_WageCurrency">
+        <source>€</source>
+        <target state="new">€</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Incentive_WageSynonym">
+        <source>Prämienlohn</source>
+        <target state="new">Prämienlohn</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="InfoItemBase_AddCommandButtonText">
+        <source>&amp;Hinzufügen</source>
+        <target state="new">&amp;Hinzufügen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="InfoItemBase_EditCommandButtonText">
+        <source>Über&amp;nehmen</source>
+        <target state="new">Über&amp;nehmen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="InfoItemBase_NullsInFields_MB_BodyPrefix">
+        <source>Bitte überprüfen Sie folgende Eingabefelder auf unvollständige Eingaben:</source>
+        <target state="new">Bitte überprüfen Sie folgende Eingabefelder auf unvollständige Eingaben:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="InfoItemBase_NullsInFields_MB_Title">
+        <source>Eingabe überprüfen:</source>
+        <target state="new">Eingabe überprüfen:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="InfoItemBase_ViewCommandButtonText">
+        <source>&amp;OK</source>
+        <target state="new">&amp;OK</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="LabourValueInfoAdd_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um einen neuen REFA-Arbeitswert hinzuzufügen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um einen neuen REFA-Arbeitswert hinzuzufügen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="LabourValueInfoAdd_FormCaption">
+        <source>Neuen REFA-Arbeitswert anlegen</source>
+        <target state="new">Neuen REFA-Arbeitswert anlegen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="LabourValueInfoAdd_NumberAlreadyExists_MB_Body">
+        <source>Der REFA-Arbeitswert mit dem der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Bezeichnung.</source>
+        <target state="new">Der REFA-Arbeitswert mit dem der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Bezeichnung.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="LabourValueInfoAdd_NumberAlreadyExists_MB_Title">
+        <source>Arbeitswert schon vorhanden:</source>
+        <target state="new">Arbeitswert schon vorhanden:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="LabourValueInfoCenter_LocalizedTypeName">
+        <source>Arbeitswert</source>
+        <target state="new">Arbeitswert</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="LabourValueInfoCenter_NoSelectedLabourValue_MB_Body">
+        <source>Bitte wählen Sie zunächst einen Arbeitswert aus, bevor Sie die Funktion verwenden!</source>
+        <target state="new">Bitte wählen Sie zunächst einen Arbeitswert aus, bevor Sie die Funktion verwenden!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="LabourValueInfoCenter_NoSelectedLabourValue_MB_Title">
+        <source>Kein Arbeitswert ausgewählt!</source>
+        <target state="new">Kein Arbeitswert ausgewählt!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="LabourValueInfoCollectionGet_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um die Liste der Arbeitswerte einzusehen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um die Liste der Arbeitswerte einzusehen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="LabourValueInfoDelete_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um einen REFA-Arbeitswert zu löschen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um einen REFA-Arbeitswert zu löschen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="LabourValueInfoEdit_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um einen Arbeitswert zu bearbeiten!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um einen Arbeitswert zu bearbeiten!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="LabourValueInfoEdit_FormCaption">
+        <source>REFA-Arbeitswert bearbeiten</source>
+        <target state="new">REFA-Arbeitswert bearbeiten</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="LabourValueInfoView_FormCaption">
+        <source>REFA-Arbeitswertdetails ansehen</source>
+        <target state="new">REFA-Arbeitswertdetails ansehen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="SubsidiaryInfoAddEditDelete_DeniedDueToRole">
+        <source>Nur Administratoren können neue Subsidiaritäten anlegen, vorhandene bearbeiten oder löschen</source>
+        <target state="new">Nur Administratoren können neue Subsidiaritäten anlegen, vorhandene bearbeiten oder löschen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="SubsidiaryInfoAdd_FormCaption">
+        <source>Neue Kostenstelle anlegen</source>
+        <target state="new">Neue Kostenstelle anlegen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="SubsidiaryInfoAdd_SubsidiaryNameAlreadyExist_MB_Body">
+        <source>Die Subsidiarität namens {0} existiert bereits. Bitte korrigieren Sie die Eingabe, und bestimmen Sie einen anderen Namen für die Subsidiarität.</source>
+        <target state="new">Die Subsidiarität namens {0} existiert bereits. Bitte korrigieren Sie die Eingabe, und bestimmen Sie einen anderen Namen für die Subsidiarität.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="SubsidiaryInfoAdd_SubsidiaryNameAlreadyExist_MB_Title">
+        <source>Kostenstellennr. schon vorhanden:</source>
+        <target state="new">Kostenstellennr. schon vorhanden:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="SubsidiaryInfoEdit_FormCaption">
+        <source>Subsidiaritäten bearbeiten</source>
+        <target state="new">Subsidiaritäten bearbeiten</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="SubsidiaryInfoManager_NoSelectedSubsidiary_MB_Body">
+        <source>Bitte wählen Sie zunächst eine Subsidiarität aus, bevor Sie die Funktion verwenden!</source>
+        <target state="new">Bitte wählen Sie zunächst eine Subsidiarität aus, bevor Sie die Funktion verwenden!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="SubsidiaryInfoManager_NoSelectedSubsidiary_MB_Title">
+        <source>Keine Subsidiarität ausgewählt!</source>
+        <target state="new">Keine Subsidiarität ausgewählt!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoAddOrEdit_AddressDetailsDialogTitle">
+        <source>Adressendetails für Benutzer erfassen:</source>
+        <target state="new">Adressendetails für Benutzer erfassen:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoAddOrEdit_NoPassword_MB_Body">
+        <source>Sie haben kein Passwort eingegeben. Facesso erlaubt es aus Sicherheitsgründen nicht, dass Benutzer ohne Passwort angelegt sind.</source>
+        <target state="new">Sie haben kein Passwort eingegeben. Facesso erlaubt es aus Sicherheitsgründen nicht, dass Benutzer ohne Passwort angelegt sind.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoAddOrEdit_NoPassword_MB_Title">
+        <source>Kein Passwort eingegeben:</source>
+        <target state="new">Kein Passwort eingegeben:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoAddOrEdit_PasswordRepetitionFailed_MB_Body">
+        <source>Die Passwort-Wiederholung stimmt nicht mit dem eingegebenen Passwort überein. Bitte führen Sie die Passworteingabe und die Passwortwiederholung als Bestätigung erneut durch.</source>
+        <target state="new">Die Passwort-Wiederholung stimmt nicht mit dem eingegebenen Passwort überein. Bitte führen Sie die Passworteingabe und die Passwortwiederholung als Bestätigung erneut durch.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoAddOrEdit_PasswordRepetitionFailed_MB_Title">
+        <source>Passwörter stimmen nicht überein:</source>
+        <target state="new">Passwörter stimmen nicht überein:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoAdd_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um einen neuen Benutzer hinzuzufügen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um einen neuen Benutzer hinzuzufügen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoAdd_FormCaption">
+        <source>Neuen Benutzer anlegen</source>
+        <target state="new">Neuen Benutzer anlegen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoAdd_UsernameAlreadyExist_MB_Body">
+        <source>Der Benutzername mit der Nummer {0} existiert bereits in {1} "{2}". Bitte wählen Sie einen anderen Benutzernamen!</source>
+        <target state="new">Der Benutzername mit der Nummer {0} existiert bereits in {1} "{2}". Bitte wählen Sie einen anderen Benutzernamen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoAdd_UsernameAlreadyExist_MB_Title">
+        <source>Benutzername schon vorhanden:</source>
+        <target state="new">Benutzername schon vorhanden:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoCenter_LocalizedTypeName">
+        <source>Benutzer</source>
+        <target state="new">Benutzer</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoCenter_NoSelectedUser_MB_Body">
+        <source>Bitte wählen Sie zunächst einen Benutzer aus, bevor Sie die Funktion verwenden!</source>
+        <target state="new">Bitte wählen Sie zunächst einen Benutzer aus, bevor Sie die Funktion verwenden!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoCenter_NoSelectedUser_MB_Title">
+        <source>Kein Benutzer ausgewählt:</source>
+        <target state="new">Kein Benutzer ausgewählt:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoCollectionGet_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um die Liste der Benutzer einzusehen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um die Liste der Benutzer einzusehen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoEdit_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um die Daten eines Benutzers zu bearbeiten!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um die Daten eines Benutzers zu bearbeiten!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoEdit_FormCaption">
+        <source>Benutzerdaten bearbeiten</source>
+        <target state="new">Benutzerdaten bearbeiten</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="UserInfoView_FormCaption">
+        <source>Benutzerdatendetails ansehen</source>
+        <target state="new">Benutzerdatendetails ansehen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WageGroupInfoAdd_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um eine neue Lohngruppe hinzuzufügen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um eine neue Lohngruppe hinzuzufügen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WageGroupInfoAdd_FormCaption">
+        <source>Neue Lohngruppe anlegen</source>
+        <target state="new">Neue Lohngruppe anlegen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WageGroupInfoAdd_TokenAlreadyExists_MB_Body">
+        <source>Die Lohngruppe mit dem Kürzel/der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Bezeichnung.</source>
+        <target state="new">Die Lohngruppe mit dem Kürzel/der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Bezeichnung.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WageGroupInfoAdd_TokenAlreadyExists_MB_Title">
+        <source>Lohngruppe schon vorhanden:</source>
+        <target state="new">Lohngruppe schon vorhanden:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WageGroupInfoCenter_LocalizedTypeName">
+        <source>Lohngruppe</source>
+        <target state="new">Lohngruppe</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WageGroupInfoCenter_NoSelectedWageGroup_MB_Body">
+        <source>Bitte wählen Sie zunächst eine Lohngruppe aus, bevor Sie die Funktion verwenden!</source>
+        <target state="new">Bitte wählen Sie zunächst eine Lohngruppe aus, bevor Sie die Funktion verwenden!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WageGroupInfoCenter_NoSelectedWageGroup_MB_Title">
+        <source>Keine Lohngruppe ausgewählt!</source>
+        <target state="new">Keine Lohngruppe ausgewählt!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WageGroupInfoCollectionGet_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um die Liste der Lohngruppen einzusehen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um die Liste der Lohngruppen einzusehen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WageGroupInfoEdit_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um eine Lohngruppe zu bearbeiten!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um eine Lohngruppe zu bearbeiten!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WageGroupInfoEdit_FormCaption">
+        <source>Lohngruppendaten bearbeiten</source>
+        <target state="new">Lohngruppendaten bearbeiten</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WageGroupInfoView_FormCaption">
+        <source>Lohngruppendetails ansehen</source>
+        <target state="new">Lohngruppendetails ansehen</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WorkGroupAnalysis_DeniedDueToRole">
+        <source>Sie besitzen nicht die erforderlichen Rechte, um eine Produktiv-Site-Analyse durchzuführen!</source>
+        <target state="new">Sie besitzen nicht die erforderlichen Rechte, um eine Produktiv-Site-Analyse durchzuführen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WorkGroupInfoAdd_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um eine neue Produktiv-Site anzulegen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um eine neue Produktiv-Site anzulegen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WorkGroupInfoAdd_FormCaption">
+        <source>Neue Produktiv-Site einrichten</source>
+        <target state="new">Neue Produktiv-Site einrichten</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WorkGroupInfoAdd_WorkGroupNumberAlreadyExists_MB_Body">
+        <source>Die Produktiv-Site mit der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Nummer.</source>
+        <target state="new">Die Produktiv-Site mit der Nummer {0} existiert bereits in {1} "{2}". Bitte korrigieren Sie die Eingabe, und wählen Sie eine andere Nummer.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WorkGroupInfoAdd_WorkGroupNumberAlreadyExists_MB_Title">
+        <source>Produktiv-Site schon vorhanden:</source>
+        <target state="new">Produktiv-Site schon vorhanden:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WorkGroupInfoCenter_LocalizedTypeName">
+        <source>Produktiv-Site</source>
+        <target state="new">Produktiv-Site</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WorkGroupInfoCenter_NoSelectedWorkGroup_MB_Body">
+        <source>Bitte wählen Sie zunächst eine Produktiv-Site aus, bevor Sie die Funktion verwenden!</source>
+        <target state="new">Bitte wählen Sie zunächst eine Produktiv-Site aus, bevor Sie die Funktion verwenden!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WorkGroupInfoCenter_NoSelectedWorkGroup_MB_Title">
+        <source>Keine Produktiv-Site ausgewählt!</source>
+        <target state="new">Keine Produktiv-Site ausgewählt!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WorkGroupInfoDelete_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um eine Produktiv-Site zu löschen!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um eine Produktiv-Site zu löschen!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WorkGroupInfoEdit_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um die Stammdaten einer Produktiv-Site zu bearbeiten!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um die Stammdaten einer Produktiv-Site zu bearbeiten!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WorkGroupInfoEdit_FormCaption">
+        <source>Produktiv-Site-Stammdaten bearbeiten</source>
+        <target state="new">Produktiv-Site-Stammdaten bearbeiten</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="WorkGroupManager_DeniedDueToRole">
+        <source>Sie haben nicht die erforderlichen Rechte, um den Produktiv-Site-Manager zu verwenden!</source>
+        <target state="new">Sie haben nicht die erforderlichen Rechte, um den Produktiv-Site-Manager zu verwenden!</target>
+        <note />
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

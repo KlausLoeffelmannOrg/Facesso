@@ -18,6 +18,8 @@ Namespace My
         End Sub
 
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
+            FacessoGeneric.ApplyRequestedCulture(e.CommandLine)
+
             'Splash-Dialog
 
             'Ist Setup ordnungsgemäß durchgeführt?

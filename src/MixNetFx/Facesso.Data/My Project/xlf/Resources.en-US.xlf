@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en" target-language="en-US" original="../Resources.resx">
+    <body>
+      <trans-unit id="CostCenterInfo_ColumnCaption_Description">
+        <source>Kostenstellenbeschreibung</source>
+        <target state="new">Kostenstellenbeschreibung</target>
+        <note>Momentan nicht verwendet</note>
+      </trans-unit>
+      <trans-unit id="CostCenterInfo_ColumnCaption_Name">
+        <source>Kostenstellenname</source>
+        <target state="new">Kostenstellenname</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="CostCenterInfo_ColumnCaption_No">
+        <source>Kostenstellennr</source>
+        <target state="new">Kostenstellennr</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="SELECT_ProductionDataAmount">
+        <source>SELECT     ProductionDataItems.IDSubsidiary, ProductionDataItems.IDLabourValue, SUM(ProductionDataItems.Amount) AS AmountTotal, 
+                      LabourValues.LabourValueName, LabourValues.LabourValueNumber, LabourValues.TeHMin, LabourValues.Dimension, 
+                      LabourValues.LabourValueDescription, CostCenters.CostCenterNo, CostCenters.CostCenterName, LabourValues.IDCostCenter, 
+                      LabourValues.IDLabourValueInternal, LabourValues.WasCurrentFrom, LabourValues.WasCurrentTo, LabourValues.LastEdited, 
+                      CostCenters.BaseValuePrecision, CostCenters.BaseValueSynonym, LabourValues.IsActive, LabourValues.IsCurrent
+FROM         ProductionDataItems INNER JOIN
+                      ProductionData ON ProductionDataItems.IDSubsidiary = ProductionData.IDSubsidiary AND 
+                      ProductionDataItems.IDProductionData = ProductionData.IDProductionData INNER JOIN
+                      LabourValues ON ProductionDataItems.IDLabourValue = LabourValues.IDLabourValue AND 
+                      ProductionDataItems.IDSubsidiary = LabourValues.IDSubsidiary INNER JOIN
+                      CostCenters ON LabourValues.IDSubsidiary = CostCenters.IDSubsidiary AND LabourValues.IDCostCenter = CostCenters.IDCostCenter
+WHERE     (ProductionData.ProductionDate &gt;= @FromDate) AND (ProductionData.ProductionDate &lt;= @ToDate) AND (ProductionData.IDSubsidiary = @IDSubsidiary) 
+                      AND (ProductionData.IDWorkGroup = @IDWorkgroup)
+GROUP BY ProductionDataItems.IDSubsidiary, ProductionDataItems.IDLabourValue, LabourValues.LabourValueName, LabourValues.LabourValueNumber, 
+                      LabourValues.TeHMin, LabourValues.Dimension, LabourValues.LabourValueDescription, CostCenters.CostCenterNo, CostCenters.CostCenterName, 
+                      LabourValues.IDCostCenter, LabourValues.IDLabourValueInternal, LabourValues.WasCurrentFrom, LabourValues.WasCurrentTo, 
+                      LabourValues.LastEdited, CostCenters.BaseValuePrecision, CostCenters.BaseValueSynonym, LabourValues.IsActive, LabourValues.IsCurrent
+</source>
+        <target state="new">SELECT     ProductionDataItems.IDSubsidiary, ProductionDataItems.IDLabourValue, SUM(ProductionDataItems.Amount) AS AmountTotal, 
+                      LabourValues.LabourValueName, LabourValues.LabourValueNumber, LabourValues.TeHMin, LabourValues.Dimension, 
+                      LabourValues.LabourValueDescription, CostCenters.CostCenterNo, CostCenters.CostCenterName, LabourValues.IDCostCenter, 
+                      LabourValues.IDLabourValueInternal, LabourValues.WasCurrentFrom, LabourValues.WasCurrentTo, LabourValues.LastEdited, 
+                      CostCenters.BaseValuePrecision, CostCenters.BaseValueSynonym, LabourValues.IsActive, LabourValues.IsCurrent
+FROM         ProductionDataItems INNER JOIN
+                      ProductionData ON ProductionDataItems.IDSubsidiary = ProductionData.IDSubsidiary AND 
+                      ProductionDataItems.IDProductionData = ProductionData.IDProductionData INNER JOIN
+                      LabourValues ON ProductionDataItems.IDLabourValue = LabourValues.IDLabourValue AND 
+                      ProductionDataItems.IDSubsidiary = LabourValues.IDSubsidiary INNER JOIN
+                      CostCenters ON LabourValues.IDSubsidiary = CostCenters.IDSubsidiary AND LabourValues.IDCostCenter = CostCenters.IDCostCenter
+WHERE     (ProductionData.ProductionDate &gt;= @FromDate) AND (ProductionData.ProductionDate &lt;= @ToDate) AND (ProductionData.IDSubsidiary = @IDSubsidiary) 
+                      AND (ProductionData.IDWorkGroup = @IDWorkgroup)
+GROUP BY ProductionDataItems.IDSubsidiary, ProductionDataItems.IDLabourValue, LabourValues.LabourValueName, LabourValues.LabourValueNumber, 
+                      LabourValues.TeHMin, LabourValues.Dimension, LabourValues.LabourValueDescription, CostCenters.CostCenterNo, CostCenters.CostCenterName, 
+                      LabourValues.IDCostCenter, LabourValues.IDLabourValueInternal, LabourValues.WasCurrentFrom, LabourValues.WasCurrentTo, 
+                      LabourValues.LastEdited, CostCenters.BaseValuePrecision, CostCenters.BaseValueSynonym, LabourValues.IsActive, LabourValues.IsCurrent
+</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Sp_Main_FailedInstancingDueToLicence">
+        <source>Funktionsinstanz für den Zugriff auf die Datenbank konnte wegen fehlernder Lizenz nicht erstellt werden!</source>
+        <target state="new">Funktionsinstanz für den Zugriff auf die Datenbank konnte wegen fehlernder Lizenz nicht erstellt werden!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Sp_Main_OpenFacessoConnectionFailed">
+        <source>Beim Versuch, die Facesso-Datenbank zu öffnen, ist ein Fehler aufgetreten!</source>
+        <target state="new">Beim Versuch, die Facesso-Datenbank zu öffnen, ist ein Fehler aufgetreten!</target>
+        <note />
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

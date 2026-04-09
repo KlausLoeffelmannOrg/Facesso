@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en" target-language="en-US" original="../frmDbSetupWizard.resx">
+    <body>
+      <trans-unit id="Label19.Text">
+        <source>Wenn Sie mit Facesso arbeiten, müssen Sie sich am Facesso-Datenbank-Server anmelden, der in diesem Rahmen automtisch mitinstalliert und konfiguriert wird. Damit sich mehrere Benutzer anmelden können, richten Sie diese im Benutzermanager von Facesso ein. Um das Programm nach der Installation überhaupt administrieren zu können, existiert ein Standard-Benutzerkonto für den so genannten "Administrator". Der Benutzername dieses Kontos kann nicht verändert werden; es benötigt jedoch, wie jedes andere Konto, ein Passwort, das Sie im Folgenden erfassen:</source>
+        <target state="new">Wenn Sie mit Facesso arbeiten, müssen Sie sich am Facesso-Datenbank-Server anmelden, der in diesem Rahmen automtisch mitinstalliert und konfiguriert wird. Damit sich mehrere Benutzer anmelden können, richten Sie diese im Benutzermanager von Facesso ein. Um das Programm nach der Installation überhaupt administrieren zu können, existiert ein Standard-Benutzerkonto für den so genannten "Administrator". Der Benutzername dieses Kontos kann nicht verändert werden; es benötigt jedoch, wie jedes andere Konto, ein Passwort, das Sie im Folgenden erfassen:</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Label23.Text">
+        <source>WICHTIG: Merken Sie sich dieses Passwort gut. Auch der Facesso-Support hat keine Möglichkeit, Zugriff auf die Datenbank zu nehmen, sollte das Administrator-Passwort verloren gehen oder vergessen werden!</source>
+        <target state="new">WICHTIG: Merken Sie sich dieses Passwort gut. Auch der Facesso-Support hat keine Möglichkeit, Zugriff auf die Datenbank zu nehmen, sollte das Administrator-Passwort verloren gehen oder vergessen werden!</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Label36.Text">
+        <source>Facesso kann in der entsprechenden Ausbaustufe (optional ab Enterprise Edition) mehrere so genannte "Subsidiaritäten" (etwa Filialen, Niederlassungen, Abteilungen, Sitze, etc.) zentral verwalten. Geben Sie daher an dieser Stelle die Basisdaten für die Hauptsubsidiarität (etwa den Stammsitz) an.</source>
+        <target state="new">Facesso kann in der entsprechenden Ausbaustufe (optional ab Enterprise Edition) mehrere so genannte "Subsidiaritäten" (etwa Filialen, Niederlassungen, Abteilungen, Sitze, etc.) zentral verwalten. Geben Sie daher an dieser Stelle die Basisdaten für die Hauptsubsidiarität (etwa den Stammsitz) an.</target>
+        <note />
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

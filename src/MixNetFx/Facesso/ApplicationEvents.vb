@@ -14,6 +14,8 @@ Namespace My
         End Sub
 
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
+            FacessoGeneric.ApplyRequestedCulture(e.CommandLine)
+
             'Enable diagnostic file logging when FACESSO_DIAG_LOG is set (e.g. in containers)
             Dim diagLogPath = Environment.GetEnvironmentVariable("FACESSO_DIAG_LOG")
             If Not String.IsNullOrEmpty(diagLogPath) Then
@@ -28,10 +30,6 @@ Namespace My
             Diagnostics.Trace.TraceInformation("Facesso startup beginning.")
             Diagnostics.Trace.TraceInformation("UserInteractive={0}, CommandLine={1}",
                 Environment.UserInteractive, Environment.CommandLine)
-
-            'Deutsche Kultur erzwingen im Bedarfsfall
-            Globalization.CultureInfo.DefaultThreadCurrentCulture = New Globalization.CultureInfo("de-DE")
-            Globalization.CultureInfo.DefaultThreadCurrentUICulture = New Globalization.CultureInfo("de-DE")
 
             'Splash-Dialog (skip in non-interactive environments such as containers)
             Dim locSplash As frmSplash = Nothing

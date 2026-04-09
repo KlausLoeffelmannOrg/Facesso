@@ -1,0 +1,3 @@
+<Project>
+  <Target Name="UpdateXlf" Condition="'$(FacessoEnableXlfLocalization)' != 'true'" />
+</Project>

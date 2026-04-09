@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: System.Resources.NeutralResourcesLanguage("")]
+[assembly: System.Resources.NeutralResourcesLanguage("de-DE")]
 [assembly: AssemblyTitle("FacGeneric")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("ActiveDev")]

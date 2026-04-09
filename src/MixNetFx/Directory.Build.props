@@ -1,0 +1,38 @@
+<Project>
+  <PropertyGroup>
+    <!-- Keep XLIFF setup scoped to the projects that are actually part of Facesso.sln. -->
+    <FacessoEnableXlfLocalization>false</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'Facesso.Generic'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'Facesso.Functions'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'Facesso.Data'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'ADDataTypes'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'ADInfoItem'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'ADLicenceManager'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'ADSimplePrintDocument'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'ADSqlSupportComponents'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'ADSundries'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'Facesso.GenericControls'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'Facesso.EntityModel'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'Facesso'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'ADNullableValueControls'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'ActiveDevelop.SqlTools'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'ADSerialGenerator'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'FacessoConfig'">true</FacessoEnableXlfLocalization>
+    <FacessoEnableXlfLocalization Condition="'$(MSBuildProjectName)' == 'Facesso.Interfaces'">true</FacessoEnableXlfLocalization>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(FacessoEnableXlfLocalization)' == 'true'">
+    <NeutralLanguage Condition="'$(NeutralLanguage)' == ''">de-DE</NeutralLanguage>
+    <XlfLanguages Condition="'$(XlfLanguages)' == ''">en-US</XlfLanguages>
+    <UpdateXlfOnBuild Condition="'$(UpdateXlfOnBuild)' == '' and '$(DesignTimeBuild)' == 'true'">false</UpdateXlfOnBuild>
+    <UpdateXlfOnBuild Condition="'$(UpdateXlfOnBuild)' == '' and '$(DesignTimeBuild)' != 'true'">true</UpdateXlfOnBuild>
+    <ErrorOnOutOfDateXlf Condition="'$(ErrorOnOutOfDateXlf)' == '' and '$(CI)' == 'true'">true</ErrorOnOutOfDateXlf>
+    <ErrorOnOutOfDateXlf Condition="'$(ErrorOnOutOfDateXlf)' == '' and '$(CI)' != 'true'">false</ErrorOnOutOfDateXlf>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(FacessoEnableXlfLocalization)' == 'true'">
+    <PackageReference Include="Microsoft.DotNet.XliffTasks"
+                      Version="1.0.0-beta.21378.1"
+                      PrivateAssets="all" />
+  </ItemGroup>
+</Project>
