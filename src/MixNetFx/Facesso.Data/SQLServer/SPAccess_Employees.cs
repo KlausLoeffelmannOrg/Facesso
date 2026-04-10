@@ -204,18 +204,14 @@ namespace Facesso.Data
             return "SELECT [Employees].*,[CostCenters].[CostCenterNo], [CostCenters].[CostCenterName] FROM [Employees] " +
                 "[Employees] INNER JOIN [CostCenters] ON " +
                 "[Employees].[IDCostCenter] = [CostCenters].[IDCostCenter] WHERE " +
-                "[Employees].[IDSubsidiary]=" + FacessoGeneric.LoginInfo.IDSubsidiary +
-                " AND [Employees].[IsCurrent]='true'";
+                "[Employees].[IDSubsidiary]=@IDSubsidiary" +
+                " AND [Employees].[IsCurrent]=1";
         }
 
         public string EmployeeInfoCollectionCommandString(string orderByString)
         {
-            return "SELECT [Employees].*,[CostCenters].[CostCenterNo], [CostCenters].[CostCenterName] FROM [Employees] " +
-                "[Employees] INNER JOIN [CostCenters] ON " +
-                "[Employees].[IDCostCenter] = [CostCenters].[IDCostCenter] WHERE " +
-                "[Employees].[IDSubsidiary]=" + FacessoGeneric.LoginInfo.IDSubsidiary +
-                " AND [Employees].[IsCurrent]='true'" +
-                " ORDER BY [" + orderByString + "]";
+            return EmployeeInfoCollectionCommandString() +
+                " ORDER BY " + QuoteSqlIdentifier(orderByString);
         }
 
         internal void Employees_LookUpWageData(EmployeeWageInfo employee)

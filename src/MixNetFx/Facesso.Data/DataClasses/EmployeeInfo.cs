@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using System.Data.SqlClient;
 using ActiveDev;
 using Facesso;
@@ -278,6 +279,7 @@ namespace Facesso.Data
             using (locConnection)
             {
                 var locCommand = new SqlCommand(SPAccess.GetInstance().EmployeeInfoCollectionCommandString(), locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (locDR.HasRows)
                 {
@@ -297,6 +299,7 @@ namespace Facesso.Data
             using (locConnection)
             {
                 var locCommand = new SqlCommand(SPAccess.GetInstance().EmployeeInfoCollectionCommandString(orderByString), locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (locDR.HasRows)
                 {

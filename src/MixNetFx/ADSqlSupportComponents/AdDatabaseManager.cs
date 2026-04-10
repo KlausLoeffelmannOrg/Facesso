@@ -18,6 +18,33 @@ namespace ActiveDev.Data.SqlClient
             _databaseName = databasename;
         }
 
+        private static string QuoteSqlIdentifier(string identifier)
+        {
+            if (string.IsNullOrWhiteSpace(identifier))
+                throw new ArgumentException("SQL identifier cannot be null or whitespace.", nameof(identifier));
+
+            string trimmed = identifier.Trim();
+            if (trimmed.StartsWith("[") && trimmed.EndsWith("]") && trimmed.Length >= 2)
+                trimmed = trimmed.Substring(1, trimmed.Length - 2).Replace("]]", "]");
+
+            return "[" + trimmed.Replace("]", "]]") + "]";
+        }
+
+        private static SqlConnection CreateConnectionForDatabase(string connectionString, string databaseName)
+        {
+            var builder = new SqlConnectionStringBuilder(connectionString)
+            {
+                InitialCatalog = databaseName
+            };
+
+            return new SqlConnection(builder.ConnectionString);
+        }
+
+        private static string EscapeSqlLiteral(string value)
+        {
+            return (value ?? string.Empty).Replace("'", "''");
+        }
+
         public void QueryProperties()
         {
             var connection = new SqlConnection(_sqlInstanceConnString);
@@ -37,8 +64,9 @@ namespace ActiveDev.Data.SqlClient
                     return;
                 }
 
-                command = new SqlCommand("SELECT name FROM sys.databases where name='" + _databaseName + "'");
+                command = new SqlCommand("SELECT name FROM sys.databases where name=@DatabaseName");
                 command.Connection = connection;
+                command.Parameters.Add("@DatabaseName", System.Data.SqlDbType.NVarChar, 128).Value = _databaseName;
                 SqlDataReader reader = command.ExecuteReader();
                 _databaseExists = reader.HasRows;
                 reader.Close();
@@ -46,7 +74,7 @@ namespace ActiveDev.Data.SqlClient
 
             if (_databaseExists)
             {
-                connection = new SqlConnection(_sqlInstanceConnString + "; Initial Catalog='" + _databaseName + "'");
+                connection = CreateConnectionForDatabase(_sqlInstanceConnString, _databaseName);
                 using (connection)
                 {
                     try
@@ -61,8 +89,9 @@ namespace ActiveDev.Data.SqlClient
                         return;
                     }
 
-                    command = new SqlCommand("SELECT name, physical_name FROM sys.database_files where name='" + _databaseName + "'");
+                    command = new SqlCommand("SELECT name, physical_name FROM sys.database_files where name=@DatabaseName");
                     command.Connection = connection;
+                    command.Parameters.Add("@DatabaseName", System.Data.SqlDbType.NVarChar, 128).Value = _databaseName;
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
@@ -90,18 +119,19 @@ namespace ActiveDev.Data.SqlClient
         {
             var connection = new SqlConnection(sqlInstanceConnString);
             SqlCommand command;
+            string quotedDatabaseName = QuoteSqlIdentifier(databasename);
 
             if (string.IsNullOrEmpty(logFilename))
             {
-                command = new SqlCommand("CREATE DATABASE [" + databasename + "] ON " +
-                    "( FILENAME = N'" + databaseFilename + "' )" +
+                command = new SqlCommand("CREATE DATABASE " + quotedDatabaseName + " ON " +
+                    "( FILENAME = N'" + EscapeSqlLiteral(databaseFilename) + "' )" +
                     " FOR ATTACH_REBUILD_LOG", connection);
             }
             else
             {
-                command = new SqlCommand("CREATE DATABASE [" + databasename + "] ON " +
-                    "( FILENAME = N'" + databaseFilename + "' )," +
-                    "( FILENAME = N'" + logFilename + "' )" +
+                command = new SqlCommand("CREATE DATABASE " + quotedDatabaseName + " ON " +
+                    "( FILENAME = N'" + EscapeSqlLiteral(databaseFilename) + "' )," +
+                    "( FILENAME = N'" + EscapeSqlLiteral(logFilename) + "' )" +
                     " FOR ATTACH", connection);
             }
 
@@ -112,9 +142,13 @@ namespace ActiveDev.Data.SqlClient
 
                 if (!string.IsNullOrEmpty(newDbOwner))
                 {
-                    command = new SqlCommand("if not exists (select name from master.sys.databases sd where name = N'" + databasename +
-                        "' and SUSER_SNAME(sd.owner_sid) = SUSER_SNAME() ) EXEC [" + databasename + "].dbo.sp_changedbowner " +
-                        "@loginame=N'" + newDbOwner + "', @map=false", connection);
+                    command = new SqlCommand(
+                        "if not exists (select name from master.sys.databases sd where name = @DatabaseName " +
+                        "and SUSER_SNAME(sd.owner_sid) = SUSER_SNAME() ) EXEC " + quotedDatabaseName + ".dbo.sp_changedbowner " +
+                        "@loginame=@LoginName, @map=false",
+                        connection);
+                    command.Parameters.Add("@DatabaseName", System.Data.SqlDbType.NVarChar, 128).Value = databasename;
+                    command.Parameters.Add("@LoginName", System.Data.SqlDbType.NVarChar, 128).Value = newDbOwner;
                     command.ExecuteScalar();
                 }
             }
@@ -125,7 +159,8 @@ namespace ActiveDev.Data.SqlClient
         {
             using (var connection = new SqlConnection(_sqlInstanceConnString))
             {
-                var command = new SqlCommand("EXEC master.dbo.sp_detach_db @dbname = N'" + _databaseName + "', @keepfulltextindexfile=N'true'");
+                var command = new SqlCommand("EXEC master.dbo.sp_detach_db @dbname=@DatabaseName, @keepfulltextindexfile=N'true'");
+                command.Parameters.Add("@DatabaseName", System.Data.SqlDbType.NVarChar, 128).Value = _databaseName;
                 try
                 {
                     connection.Open();
@@ -148,7 +183,7 @@ namespace ActiveDev.Data.SqlClient
         {
             using (var connection = new SqlConnection(_sqlInstanceConnString))
             {
-                var command = new SqlCommand("ALTER DATABASE " + _databaseName + " SET Single_User WITH ROLLBACK IMMEDIATE");
+                var command = new SqlCommand("ALTER DATABASE " + QuoteSqlIdentifier(_databaseName) + " SET Single_User WITH ROLLBACK IMMEDIATE");
                 try
                 {
                     connection.Open();
@@ -173,11 +208,11 @@ namespace ActiveDev.Data.SqlClient
         {
             using (var connection = new SqlConnection(_sqlInstanceConnString))
             {
-                var command = new SqlCommand("CREATE DATABASE  [" + dbName + "] ON  PRIMARY " +
-                    "( NAME = N'" + dbName + "', FILENAME = N'" + filenameOnSqlServer +
-                    "' , SIZE = " + dbSizeInKb + "KB , FILEGROWTH = " + dbFileGrowthInKb + "KB )" +
-                    " LOG ON ( NAME = N'" + dbLogname + "', FILENAME = N'" + logFilenameOnSqlServer +
-                    "' , SIZE = " + logSizeInKb + "KB , FILEGROWTH = " + logFileGrowthInPercent + "%)");
+                var command = new SqlCommand("CREATE DATABASE " + QuoteSqlIdentifier(dbName) + " ON PRIMARY " +
+                    "( NAME = N'" + EscapeSqlLiteral(dbName) + "', FILENAME = N'" + EscapeSqlLiteral(filenameOnSqlServer) + "'" +
+                    " , SIZE = " + dbSizeInKb + "KB , FILEGROWTH = " + dbFileGrowthInKb + "KB )" +
+                    " LOG ON ( NAME = N'" + EscapeSqlLiteral(dbLogname) + "', FILENAME = N'" + EscapeSqlLiteral(logFilenameOnSqlServer) + "'" +
+                    " , SIZE = " + logSizeInKb + "KB , FILEGROWTH = " + logFileGrowthInPercent + "%)");
                 try
                 {
                     connection.Open();

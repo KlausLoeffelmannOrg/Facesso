@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Data.SqlClient;
 using ActiveDev;
 
@@ -44,8 +45,10 @@ namespace Facesso
             {
                 locConnection.Open();
                 var locCommand = new SqlCommand(
-                    "SELECT * FROM [Users] WHERE [IDSubsidiary]=" + idSubsidiary.ToString() +
-                    " AND [Username] = '" + username + "'" + " AND [IsCurrent]=1", locConnection);
+                    "SELECT * FROM [Users] WHERE [IDSubsidiary]=@IDSubsidiary" +
+                    " AND [Username]=@Username AND [IsCurrent]=1", locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = idSubsidiary;
+                locCommand.Parameters.Add("@Username", SqlDbType.NVarChar, 100).Value = username;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (!locDR.Read())
                 {

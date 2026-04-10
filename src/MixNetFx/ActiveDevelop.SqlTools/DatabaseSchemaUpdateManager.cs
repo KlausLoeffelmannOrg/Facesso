@@ -19,9 +19,31 @@ namespace ActiveDevelop.SqlTools
             myConnection.Open();
         }
 
+        private static string QuoteSqlIdentifier(string identifier)
+        {
+            if (string.IsNullOrWhiteSpace(identifier))
+                throw new ArgumentException("SQL identifier cannot be null or whitespace.", nameof(identifier));
+
+            string[] parts = identifier.Split('.');
+
+            for (int i = 0; i < parts.Length; i++)
+            {
+                string part = parts[i].Trim();
+                if (part.Length == 0)
+                    throw new ArgumentException("SQL identifier contains an empty name segment.", nameof(identifier));
+
+                if (part.StartsWith("[", StringComparison.Ordinal) && part.EndsWith("]", StringComparison.Ordinal) && part.Length >= 2)
+                    part = part.Substring(1, part.Length - 2).Replace("]]", "]");
+
+                parts[i] = "[" + part.Replace("]", "]]") + "]";
+            }
+
+            return string.Join(".", parts);
+        }
+
         public bool CheckTableExists(string tablename)
         {
-            string sel = "SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'" + tablename + "') AND type in (N'U') ";
+            const string sel = "SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(@TableName) AND type in (N'U') ";
             int reti;
 
             using (SqlCommand cmd = myConnection.CreateCommand())
@@ -29,6 +51,7 @@ namespace ActiveDevelop.SqlTools
                 cmd.Transaction = myTransaction;
                 cmd.CommandText = sel;
                 cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add("@TableName", SqlDbType.NVarChar, 256).Value = tablename;
 
                 reti = (int)(cmd.ExecuteScalar() ?? -1);
             }
@@ -71,14 +94,15 @@ namespace ActiveDevelop.SqlTools
 
         public void DeleteTable(string tablename)
         {
-            string sel = "IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'" + tablename + "') AND type in (N'U')) " +
-                      "   DROP TABLE " + tablename;
+            string sel = "IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(@TableName) AND type in (N'U')) " +
+                      "DROP TABLE " + QuoteSqlIdentifier(tablename);
 
             using (SqlCommand cmd = myConnection.CreateCommand())
             {
                 cmd.Transaction = myTransaction;
                 cmd.CommandText = sel;
                 cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add("@TableName", SqlDbType.NVarChar, 256).Value = tablename;
                 cmd.ExecuteNonQuery();
             }
         }
@@ -96,8 +120,8 @@ namespace ActiveDevelop.SqlTools
 
         public bool CheckConstraintExists(string tablename, string constraintName)
         {
-            string sel = "select distinct 1 FROM INFORMATION_SCHEMA.CONSTRAINT_TABLE_USAGE " +
-                      "where table_name ='" + tablename + "' AND CONSTRAINT_NAME = '" + constraintName + "'";
+            const string sel = "select distinct 1 FROM INFORMATION_SCHEMA.CONSTRAINT_TABLE_USAGE " +
+                      "where table_name = @TableName AND CONSTRAINT_NAME = @ConstraintName";
  
             int reti;
 
@@ -106,6 +130,8 @@ namespace ActiveDevelop.SqlTools
                 cmd.Transaction = myTransaction;
                 cmd.CommandText = sel;
                 cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add("@TableName", SqlDbType.NVarChar, 256).Value = tablename;
+                cmd.Parameters.Add("@ConstraintName", SqlDbType.NVarChar, 256).Value = constraintName;
                 reti = (int)(cmd.ExecuteScalar() ?? -1);
             }
 
@@ -116,14 +142,15 @@ namespace ActiveDevelop.SqlTools
         {
             if (!CheckConstraintExists(tablename, contraintName))
             {
-                ExecDDLStmt("alter table " + tablename + " add constraint " + contraintName + " " + constraintBody);
+                ExecDDLStmt("alter table " + QuoteSqlIdentifier(tablename) + " add constraint " +
+                    QuoteSqlIdentifier(contraintName) + " " + constraintBody);
             }
         }
 
         public bool CheckColumnExists(string tablename, string columnName)
         {
-            string sel = "SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS " +
-                      "WHERE TABLE_NAME = '" + tablename + "' AND COLUMN_NAME = '" + columnName + "'";
+            const string sel = "SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS " +
+                      "WHERE TABLE_NAME = @TableName AND COLUMN_NAME = @ColumnName";
             int reti;
 
             using (SqlCommand cmd = myConnection.CreateCommand())
@@ -131,6 +158,8 @@ namespace ActiveDevelop.SqlTools
                 cmd.Transaction = myTransaction;
                 cmd.CommandText = sel;
                 cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add("@TableName", SqlDbType.NVarChar, 256).Value = tablename;
+                cmd.Parameters.Add("@ColumnName", SqlDbType.NVarChar, 256).Value = columnName;
                 reti = (int) (cmd.ExecuteScalar() ?? -1);
             }
 
@@ -141,14 +170,16 @@ namespace ActiveDevelop.SqlTools
         {
             if (!CheckColumnExists(tablename, columnName))
             {
-                ExecDDLStmt("alter table " + tablename + " add " + columnName + " " + datatype);
+                string quotedTableName = QuoteSqlIdentifier(tablename);
+                string quotedColumnName = QuoteSqlIdentifier(columnName);
+                ExecDDLStmt("alter table " + quotedTableName + " add " + quotedColumnName + " " + datatype);
 
                 if (notNull)
                 {
                     using (var updateCmd = myConnection.CreateCommand())
                     {
                         updateCmd.Transaction = myTransaction;
-                        updateCmd.CommandText = "update " + tablename + " set " + columnName + "=" + nnDefaultValueStr;
+                        updateCmd.CommandText = "update " + quotedTableName + " set " + quotedColumnName + "=" + nnDefaultValueStr;
                         updateCmd.CommandType = CommandType.Text;
                         updateCmd.ExecuteNonQuery();
                     }
@@ -156,7 +187,7 @@ namespace ActiveDevelop.SqlTools
                     using (var alterCmd = myConnection.CreateCommand())
                     {
                         alterCmd.Transaction = myTransaction;
-                        alterCmd.CommandText = "alter table " + tablename + " alter column " + columnName + " " + datatype + " not null";
+                        alterCmd.CommandText = "alter table " + quotedTableName + " alter column " + quotedColumnName + " " + datatype + " not null";
                         alterCmd.CommandType = CommandType.Text;
                         alterCmd.ExecuteNonQuery();
                     }
@@ -168,7 +199,7 @@ namespace ActiveDevelop.SqlTools
         {
             if (!CheckColumnExists(tablename, columnName))
             {
-                ExecDDLStmt("alter table " + tablename + " drop column " + columnName);
+                ExecDDLStmt("alter table " + QuoteSqlIdentifier(tablename) + " drop column " + QuoteSqlIdentifier(columnName));
             }
         }
     }

@@ -99,11 +99,12 @@ namespace Facesso.Data
                     "FROM CostCenters INNER JOIN " +
                     "BonusLists ON BonusLists.IDSubsidiary = CostCenters.IDSubsidiary ";
                 if (invert)
-                    locCommandString += "AND BonusLists.IDCostCenter <> CostCenters.IDCostCenter WHERE CostCenters.IDSubsidiary=" + idSubsidiary;
+                    locCommandString += "AND BonusLists.IDCostCenter <> CostCenters.IDCostCenter WHERE CostCenters.IDSubsidiary=@IDSubsidiary";
                 else
-                    locCommandString += "AND BonusLists.IDCostCenter = CostCenters.IDCostCenter WHERE CostCenters.IDSubsidiary=" + idSubsidiary;
+                    locCommandString += "AND BonusLists.IDCostCenter = CostCenters.IDCostCenter WHERE CostCenters.IDSubsidiary=@IDSubsidiary";
 
                 var locCommand = new SqlCommand(locCommandString, locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = idSubsidiary;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (locDR.HasRows)
                 {
@@ -127,10 +128,12 @@ namespace Facesso.Data
             {
                 string locCommandString = "SELECT [BonusList].* FROM [BonusList] INNER JOIN [BonusLists] " +
                     "ON BonusList.IDBonusLists = BonusLists.IDBonusLists AND BonusList.IDSubsidiary = BonusLists.IDSubsidiary " +
-                    " WHERE [BonusLists].[IDSubsidiary]=" + idSubsidiary + " AND [BonusLists].[IDCostCenter]=" + idCostCenter +
+                    " WHERE [BonusLists].[IDSubsidiary]=@IDSubsidiary AND [BonusLists].[IDCostCenter]=@IDCostCenter" +
                     " ORDER BY [DegreeOfTime]";
 
                 var locCommand = new SqlCommand(locCommandString, locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = idSubsidiary;
+                locCommand.Parameters.Add("@IDCostCenter", SqlDbType.Int).Value = idCostCenter;
                 CostcenterInfo locCci = SPAccess.GetInstance().GetCostCenter(idSubsidiary, idCostCenter);
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (locDR.HasRows)
