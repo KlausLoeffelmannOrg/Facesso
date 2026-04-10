@@ -8,19 +8,18 @@ Partial Class JensenProductionDataImportTaskElement
             Return
         End If
 
-        'Quelldaten für den Tag abrufen
+        'Quelldaten fï¿½r den Tag abrufen
         Dim locConnection As New SqlConnection(JensenSQLConnectionString)
         Dim locSourceData As New DataTable
         Using locConnection
-            Dim locAdapter As New SqlDataAdapter("SELECT * FROM [LogData] WHERE " & _
-                "(TargetId='" & Me.JensenDeviceID & "') AND" & _
-                "([TimeStamp] >= CONVERT(DATETIME,'" & _
-                ProductionDate.Date.ToString("MM\-dd\-yyyy") & _
-                " 00:00:00', 102) AND [TimeStamp] <= CONVERT(DATETIME,'" & _
-                ProductionDate.ToString("MM\-dd\-yyyy") & _
-                " 23:59:59', 102)) AND " & _
-                "(([Mode]=1 AND [ValueID]=1) OR [Mode]=6)" & _
+            Dim locAdapter As New SqlDataAdapter("SELECT * FROM [LogData] WHERE " &
+                "(TargetId=@TargetId) AND " &
+                "([TimeStamp] >= @FromTime AND [TimeStamp] <= @ToTime) AND " &
+                "(([Mode]=1 AND [ValueID]=1) OR [Mode]=6)" &
                 " ORDER BY [TargetID],[LineNo],[Mode]", locConnection)
+            locAdapter.SelectCommand.Parameters.AddWithValue("@TargetId", Me.JensenDeviceID)
+            locAdapter.SelectCommand.Parameters.AddWithValue("@FromTime", ProductionDate.Date)
+            locAdapter.SelectCommand.Parameters.AddWithValue("@ToTime", ProductionDate.Date.AddDays(1).AddSeconds(-1))
             locAdapter.SelectCommand.CommandTimeout = 120
             Dim locIntBack As Integer = locAdapter.Fill(locSourceData)
         End Using
@@ -40,9 +39,9 @@ Partial Class JensenProductionDataImportTaskElement
             Try
                 ''Ist es ein "Programm-Umstell-Datensatz"?
                 If CInt(locDataRow("Mode")) = 1 And CInt(locDataRow("ValueID")) = 1 Then
-                    'Ja, neue Programmnr. für die nächsten Datensätze
+                    'Ja, neue Programmnr. fï¿½r die nï¿½chsten Datensï¿½tze
                     locCurrPrgNo = CInt(locDataRow("Value"))
-                    'und nächster Datensatz
+                    'und nï¿½chster Datensatz
                     Continue For
                 End If
 
@@ -81,7 +80,7 @@ Partial Class JensenProductionDataImportTaskElement
                 My.Computer.FileSystem.WriteAllText(My.Computer.FileSystem.SpecialDirectories.MyDocuments _
                         & "\" & DateTime.Now.ToString("yymmdd-hhMMss") & "FcExPrt.log", exCollection, False)
             Catch ex As Exception
-                System.Windows.Forms.MessageBox.Show("Beim Versuch, das Ausnahmebehandlungsprotokoll für den Jensen-Import zu schreiben, ist ein Fehler aufgetreten!" & vbNewLine & vbNewLine & _
+                System.Windows.Forms.MessageBox.Show("Beim Versuch, das Ausnahmebehandlungsprotokoll fï¿½r den Jensen-Import zu schreiben, ist ein Fehler aufgetreten!" & vbNewLine & vbNewLine &
                                                      ex.Message, "IO-Fehler!", Windows.Forms.MessageBoxButtons.OK, Windows.Forms.MessageBoxIcon.Exclamation)
             Finally
                 Try

@@ -8,17 +8,16 @@ Partial Class KannegiesserProductionDataImportTaskElement
             Return
         End If
 
-        'Quelldaten für den Tag abrufen
+        'Quelldaten fï¿½r den Tag abrufen
         Dim locConnection As New OleDbConnection(ConnectionString)
 
         Dim locSourceData As new DataTable
         Using locConnection
-            Dim locAdapter As New OleDbDataAdapter("SELECT * FROM PROTOKOL WHERE DATUM=" & _
-                    ProductionDate.ToString("\#MM\/dd\/yyyy\#") & _
-                    " AND TYP=0 AND ARTNR>0", locConnection)
+            Dim locAdapter As New OleDbDataAdapter("SELECT * FROM PROTOKOL WHERE DATUM=? AND TYP=0 AND ARTNR>0", locConnection)
+            locAdapter.SelectCommand.Parameters.AddWithValue("@DATUM", ProductionDate.Date)
             'Falls das eine Exception wirft, dann den BDE (Paradox-Treiber) installieren.
-            'Der ist nicht mehr erhältlich, heißt bde.exe ist im Install-Verzeichnis auf
-            'dem Server, ca. 5 MByte groß.
+            'Der ist nicht mehr erhï¿½ltlich, heiï¿½t bde.exe ist im Install-Verzeichnis auf
+            'dem Server, ca. 5 MByte groï¿½.
             Dim locIntBack As Integer = locAdapter.Fill(locSourceData)
         End Using
 

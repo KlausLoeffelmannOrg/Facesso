@@ -399,9 +399,10 @@ Public Class frmUserInfoAddEditView
                 myAddressDetails = New AddressDetailsInfo
                 Dim locConn As SqlConnection = SPAccess.GetInstance.GetOpenedConnectionSafely
                 Using locConn
-                    Dim locCommand As New SqlCommand("SELECT * FROM AddressDetails WHERE IDSubsidiary=" & _
-                    FacessoGeneric.LoginInfo.SubsidiaryInfo.IDSubsidiary.ToString & _
-                    " AND [IDAddressDetail]=" & locIDAddressDetails.ToString, locConn)
+                    Dim locCommand As New SqlCommand("SELECT * FROM AddressDetails WHERE IDSubsidiary=@IDSubsidiary " & _
+                    "AND [IDAddressDetail]=@IDAddressDetail", locConn)
+                    locCommand.Parameters.AddWithValue("@IDSubsidiary", FacessoGeneric.LoginInfo.SubsidiaryInfo.IDSubsidiary)
+                    locCommand.Parameters.AddWithValue("@IDAddressDetail", locIDAddressDetails.Value)
                     Dim locDR As SqlDataReader = locCommand.ExecuteReader
                 End Using
             End If
