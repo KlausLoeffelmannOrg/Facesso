@@ -37,7 +37,8 @@ namespace ActiveDev.Data.SqlClient
                     return;
                 }
 
-                command = new SqlCommand("SELECT name FROM sys.databases where name='" + _databaseName + "'");
+                command = new SqlCommand("SELECT name FROM sys.databases where name = @name");
+                command.Parameters.Add("@name", System.Data.SqlDbType.NVarChar, 128).Value = _databaseName;
                 command.Connection = connection;
                 SqlDataReader reader = command.ExecuteReader();
                 _databaseExists = reader.HasRows;
@@ -61,7 +62,8 @@ namespace ActiveDev.Data.SqlClient
                         return;
                     }
 
-                    command = new SqlCommand("SELECT name, physical_name FROM sys.database_files where name='" + _databaseName + "'");
+                    command = new SqlCommand("SELECT name, physical_name FROM sys.database_files where name = @name");
+                    command.Parameters.Add("@name", System.Data.SqlDbType.NVarChar, 128).Value = _databaseName;
                     command.Connection = connection;
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
@@ -93,16 +95,15 @@ namespace ActiveDev.Data.SqlClient
 
             if (string.IsNullOrEmpty(logFilename))
             {
-                command = new SqlCommand("CREATE DATABASE [" + databasename + "] ON " +
-                    "( FILENAME = N'" + databaseFilename + "' )" +
-                    " FOR ATTACH_REBUILD_LOG", connection);
+                command = new SqlCommand(
+                    BuildAttachDatabaseSql(databasename, databaseFilename),
+                    connection);
             }
             else
             {
-                command = new SqlCommand("CREATE DATABASE [" + databasename + "] ON " +
-                    "( FILENAME = N'" + databaseFilename + "' )," +
-                    "( FILENAME = N'" + logFilename + "' )" +
-                    " FOR ATTACH", connection);
+                command = new SqlCommand(
+                    BuildAttachDatabaseWithLogSql(databasename, databaseFilename, logFilename),
+                    connection);
             }
 
             using (connection)
@@ -112,20 +113,44 @@ namespace ActiveDev.Data.SqlClient
 
                 if (!string.IsNullOrEmpty(newDbOwner))
                 {
-                    command = new SqlCommand("if not exists (select name from master.sys.databases sd where name = N'" + databasename +
-                        "' and SUSER_SNAME(sd.owner_sid) = SUSER_SNAME() ) EXEC [" + databasename + "].dbo.sp_changedbowner " +
-                        "@loginame=N'" + newDbOwner + "', @map=false", connection);
+                    command = new SqlCommand(
+                        BuildChangeDbOwnerSql(databasename, newDbOwner),
+                        connection);
                     command.ExecuteScalar();
                 }
             }
             return new ADSqlDatabaseManager(sqlInstanceConnString, databasename);
         }
 
+        private static string BuildAttachDatabaseSql(string databaseName, string databaseFilename)
+        {
+            return "CREATE DATABASE " + QuoteIdentifier(databaseName) + " ON " +
+                   "( FILENAME = N'" + EscapeStringLiteral(databaseFilename) + "' )" +
+                   " FOR ATTACH_REBUILD_LOG";
+        }
+
+        private static string BuildAttachDatabaseWithLogSql(string databaseName, string databaseFilename, string logFilename)
+        {
+            return "CREATE DATABASE " + QuoteIdentifier(databaseName) + " ON " +
+                   "( FILENAME = N'" + EscapeStringLiteral(databaseFilename) + "' )," +
+                   "( FILENAME = N'" + EscapeStringLiteral(logFilename) + "' )" +
+                   " FOR ATTACH";
+        }
+
+        private static string BuildChangeDbOwnerSql(string databaseName, string newDbOwner)
+        {
+            return "if not exists (select name from master.sys.databases sd where name = @dbname and SUSER_SNAME(sd.owner_sid) = SUSER_SNAME()) " +
+                   "EXEC " + QuoteIdentifier(databaseName) +
+                   ".dbo.sp_changedbowner @loginame = N'" + EscapeStringLiteral(newDbOwner) + "', @map = false";
+        }
+
         public void DetachDatabase()
         {
             using (var connection = new SqlConnection(_sqlInstanceConnString))
             {
-                var command = new SqlCommand("EXEC master.dbo.sp_detach_db @dbname = N'" + _databaseName + "', @keepfulltextindexfile=N'true'");
+                var command = new SqlCommand(
+                    "EXEC master.dbo.sp_detach_db @dbname = @dbname, @keepfulltextindexfile = N'true'");
+                command.Parameters.Add("@dbname", System.Data.SqlDbType.NVarChar, 128).Value = _databaseName;
                 try
                 {
                     connection.Open();
@@ -148,7 +173,7 @@ namespace ActiveDev.Data.SqlClient
         {
             using (var connection = new SqlConnection(_sqlInstanceConnString))
             {
-                var command = new SqlCommand("ALTER DATABASE " + _databaseName + " SET Single_User WITH ROLLBACK IMMEDIATE");
+                var command = new SqlCommand(BuildCutAllConnectionsSql(_databaseName));
                 try
                 {
                     connection.Open();
@@ -167,17 +192,21 @@ namespace ActiveDev.Data.SqlClient
             }
         }
 
+        private static string BuildCutAllConnectionsSql(string databaseName)
+        {
+            return "ALTER DATABASE " + QuoteIdentifier(databaseName) +
+                   " SET Single_User WITH ROLLBACK IMMEDIATE";
+        }
+
         public void CreateDatabase(string dbName, string filenameOnSqlServer, int dbSizeInKb,
             int dbFileGrowthInKb, string dbLogname, string logFilenameOnSqlServer,
             int logSizeInKb, int logFileGrowthInPercent)
         {
             using (var connection = new SqlConnection(_sqlInstanceConnString))
             {
-                var command = new SqlCommand("CREATE DATABASE  [" + dbName + "] ON  PRIMARY " +
-                    "( NAME = N'" + dbName + "', FILENAME = N'" + filenameOnSqlServer +
-                    "' , SIZE = " + dbSizeInKb + "KB , FILEGROWTH = " + dbFileGrowthInKb + "KB )" +
-                    " LOG ON ( NAME = N'" + dbLogname + "', FILENAME = N'" + logFilenameOnSqlServer +
-                    "' , SIZE = " + logSizeInKb + "KB , FILEGROWTH = " + logFileGrowthInPercent + "%)");
+                var command = new SqlCommand(BuildCreateDatabaseSql(
+                    dbName, filenameOnSqlServer, dbSizeInKb, dbFileGrowthInKb,
+                    dbLogname, logFilenameOnSqlServer, logSizeInKb, logFileGrowthInPercent));
                 try
                 {
                     connection.Open();
@@ -194,6 +223,39 @@ namespace ActiveDev.Data.SqlClient
                 command.ExecuteScalar();
                 _lastSqlResult = true;
             }
+        }
+
+        private static string BuildCreateDatabaseSql(
+            string dbName, string filenameOnSqlServer, int dbSizeInKb, int dbFileGrowthInKb,
+            string dbLogname, string logFilenameOnSqlServer, int logSizeInKb, int logFileGrowthInPercent)
+        {
+            return "CREATE DATABASE  " + QuoteIdentifier(dbName) + " ON  PRIMARY " +
+                   "( NAME = N'" + EscapeStringLiteral(dbName) + "', FILENAME = N'" + EscapeStringLiteral(filenameOnSqlServer) +
+                   "' , SIZE = " + dbSizeInKb + "KB , FILEGROWTH = " + dbFileGrowthInKb + "KB )" +
+                   " LOG ON ( NAME = N'" + EscapeStringLiteral(dbLogname) + "', FILENAME = N'" + EscapeStringLiteral(logFilenameOnSqlServer) +
+                   "' , SIZE = " + logSizeInKb + "KB , FILEGROWTH = " + logFileGrowthInPercent + "%)";
+        }
+
+        private static string QuoteIdentifier(string identifier)
+        {
+            if (string.IsNullOrEmpty(identifier))
+                throw new ArgumentException("Identifier must not be null or empty.", nameof(identifier));
+
+            foreach (char c in identifier)
+            {
+                if (!(char.IsLetterOrDigit(c) || c == '_' || c == '$' || c == '#' || c == '@'))
+                    throw new ArgumentException(
+                        "Identifier contains invalid characters: " + identifier, nameof(identifier));
+            }
+
+            return "[" + identifier.Replace("]", "]]") + "]";
+        }
+
+        private static string EscapeStringLiteral(string value)
+        {
+            if (value == null)
+                return string.Empty;
+            return value.Replace("'", "''");
         }
 
         /// <summary>

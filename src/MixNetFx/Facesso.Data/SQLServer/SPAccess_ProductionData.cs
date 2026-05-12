@@ -274,9 +274,12 @@ namespace Facesso.Data
             {
                 var locCmd = new SqlCommand(
                     "SELECT IDProductionData FROM ProductionData WHERE " +
-                    "[IDWorkgroup]=" + workgroup.IDWorkGroup + " AND " +
-                    "[ProductionDate]=CONVERT(DateTime,'" + productionDate.ToString("dd.MM.yyyy") + "',104) AND " +
-                    "[Shift]=" + shift, locConnection);
+                    "[IDWorkgroup]=@IDWorkgroup AND " +
+                    "[ProductionDate]=@ProductionDate AND " +
+                    "[Shift]=@Shift", locConnection);
+                locCmd.Parameters.Add("@IDWorkgroup", SqlDbType.Int).Value = workgroup.IDWorkGroup;
+                locCmd.Parameters.Add("@ProductionDate", SqlDbType.DateTime).Value = productionDate.Date;
+                locCmd.Parameters.Add("@Shift", SqlDbType.Int).Value = shift;
                 SqlDataReader locReader = locCmd.ExecuteReader();
                 if (!locReader.HasRows)
                     return false;
@@ -284,10 +287,12 @@ namespace Facesso.Data
                 long locIDProductionData = locReader.GetInt64(locReader.GetOrdinal("IDProductionData"));
                 locReader.Close();
 
-                locCmd = new SqlCommand("DELETE FROM ProductionDataItems WHERE IDProductionData=" + locIDProductionData, locConnection);
+                locCmd = new SqlCommand("DELETE FROM ProductionDataItems WHERE IDProductionData=@IDProductionData", locConnection);
+                locCmd.Parameters.Add("@IDProductionData", SqlDbType.BigInt).Value = locIDProductionData;
                 locCmd.ExecuteScalar();
 
-                locCmd = new SqlCommand("DELETE FROM ProductionData WHERE IDProductionData=" + locIDProductionData, locConnection);
+                locCmd = new SqlCommand("DELETE FROM ProductionData WHERE IDProductionData=@IDProductionData", locConnection);
+                locCmd.Parameters.Add("@IDProductionData", SqlDbType.BigInt).Value = locIDProductionData;
                 locCmd.ExecuteScalar();
 
                 return true;

@@ -45,6 +45,27 @@ namespace Facesso.Data
             return locConnection;
         }
 
+        /// <summary>
+        /// Validates that <paramref name="identifier"/> is a safe SQL identifier
+        /// (column/table/order-by name) and returns a bracket-quoted form.
+        /// Throws <see cref="ArgumentException"/> for anything that could enable
+        /// SQL injection.
+        /// </summary>
+        internal static string QuoteSqlIdentifier(string identifier)
+        {
+            if (string.IsNullOrEmpty(identifier))
+                throw new ArgumentException("SQL identifier must not be null or empty.", nameof(identifier));
+
+            foreach (char c in identifier)
+            {
+                if (!(char.IsLetterOrDigit(c) || c == '_' || c == '$' || c == '#' || c == '@'))
+                    throw new ArgumentException(
+                        "SQL identifier contains invalid characters: " + identifier, nameof(identifier));
+            }
+
+            return "[" + identifier + "]";
+        }
+
         public string SQLConnectionString => FacessoGeneric.SQLConnectionString;
 
         public void DeleteDataForOleDbImport(int idSubsidiary)

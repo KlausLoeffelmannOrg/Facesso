@@ -1,5 +1,6 @@
 ﻿Imports ActiveDev
 Imports ActiveDev.Controls
+Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Windows.Forms
 
@@ -14,8 +15,8 @@ Friend Class Fac_FunctionsInternal
         locSqlConn.Open()
 
         Using locSqlConn
-            Dim locCommand As New SqlCommand("SELECT * From [Costcenters] WHERE [IDSubsidiary]=" _
-                    & FacessoGeneric.LoginInfo.IDSubsidiary & " AND [IsCurrent]='true'", locSqlConn)
+            Dim locCommand As New SqlCommand("SELECT * From [Costcenters] WHERE [IDSubsidiary]=@IDSubsidiary AND [IsCurrent]='true'", locSqlConn)
+            locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary
             Dim locDR As SqlDataReader = locCommand.ExecuteReader()
             If locDR.HasRows Then
                 Do While locDR.Read
@@ -61,8 +62,8 @@ Friend Class Fac_FunctionsInternal
         locSqlConn.Open()
 
         Using locSqlConn
-            Dim locCommand As New SqlCommand("SELECT * From [WageGroups] WHERE [IDSubsidiary]=" _
-                    & FacessoGeneric.LoginInfo.IDSubsidiary & " AND [IsCurrent]='true'", locSqlConn)
+            Dim locCommand As New SqlCommand("SELECT * From [WageGroups] WHERE [IDSubsidiary]=@IDSubsidiary AND [IsCurrent]='true'", locSqlConn)
+            locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary
             Dim locDR As SqlDataReader = locCommand.ExecuteReader()
             If locDR.HasRows Then
                 Do While locDR.Read

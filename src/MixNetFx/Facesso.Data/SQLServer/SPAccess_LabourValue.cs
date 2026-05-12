@@ -118,8 +118,9 @@ namespace Facesso.Data
                     "SELECT [LabourValues].*,[CostCenters].[CostCenterNo], [CostCenters].[CostCenterName], [CostCenters].[BaseValuePrecision], [CostCenters].[BaseValueSynonym] From [LabourValues] " +
                     "[LabourValues] INNER JOIN [CostCenters] ON " +
                     "[LabourValues].[IDCostCenter] = [CostCenters].[IDCostCenter] WHERE " +
-                    "[LabourValues].[IDSubsidiary]=" + FacessoGeneric.LoginInfo.IDSubsidiary +
+                    "[LabourValues].[IDSubsidiary]=@IDSubsidiary" +
                     " AND [LabourValues].[IsCurrent]='true'", locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (locDR.HasRows)
                 {
@@ -142,12 +143,9 @@ namespace Facesso.Data
             using (locConnection)
             {
                 var locCommand = new SqlCommand(
-                    "SELECT [LabourValues].*,[CostCenters].[CostCenterNo], [CostCenters].[CostCenterName], [CostCenters].[BaseValuePrecision], [CostCenters].[BaseValueSynonym] From [LabourValues] " +
-                    "[LabourValues] INNER JOIN [CostCenters] ON " +
-                    "[LabourValues].[IDCostCenter] = [CostCenters].[IDCostCenter] WHERE " +
-                    "[LabourValues].[IDSubsidiary]=" + FacessoGeneric.LoginInfo.IDSubsidiary +
-                    " AND [LabourValues].[IsCurrent]='true'" +
-                    " ORDER BY [" + orderByString + "]", locConnection);
+                    BuildGetLabourValueInfoCollectionOrderBySql(orderByString),
+                    locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (locDR.HasRows)
                 {
@@ -163,6 +161,16 @@ namespace Facesso.Data
             }
         }
 
+        private static string BuildGetLabourValueInfoCollectionOrderBySql(string orderByColumn)
+        {
+            return "SELECT [LabourValues].*,[CostCenters].[CostCenterNo], [CostCenters].[CostCenterName], [CostCenters].[BaseValuePrecision], [CostCenters].[BaseValueSynonym] From [LabourValues] " +
+                   "[LabourValues] INNER JOIN [CostCenters] ON " +
+                   "[LabourValues].[IDCostCenter] = [CostCenters].[IDCostCenter] WHERE " +
+                   "[LabourValues].[IDSubsidiary]=@IDSubsidiary" +
+                   " AND [LabourValues].[IsCurrent]='true'" +
+                   " ORDER BY " + QuoteSqlIdentifier(orderByColumn);
+        }
+
         public LabourValueInfo GetLabourValueByID(int idSubsidiary, int idLabourValue)
         {
             SqlConnection locConnection = GetOpenedConnectionSafely();
@@ -171,9 +179,11 @@ namespace Facesso.Data
             {
                 var locCommand = new SqlCommand(
                     "SELECT * From [LabourValues] " +
-                    " WHERE [IDSubsidiary]=" + idSubsidiary +
-                    " AND [IDLabourValue]=" + idLabourValue +
+                    " WHERE [IDSubsidiary]=@IDSubsidiary" +
+                    " AND [IDLabourValue]=@IDLabourValue" +
                     " AND [IsCurrent]='true'", locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = idSubsidiary;
+                locCommand.Parameters.Add("@IDLabourValue", SqlDbType.Int).Value = idLabourValue;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (locDR.HasRows)
                 {
@@ -192,9 +202,11 @@ namespace Facesso.Data
             {
                 var locCommand = new SqlCommand(
                     "SELECT * From [LabourValues] " +
-                    " WHERE [IDSubsidiary]=" + FacessoGeneric.LoginInfo.IDSubsidiary +
-                    " AND [LabourValueNumber]=" + labourValueNumber +
+                    " WHERE [IDSubsidiary]=@IDSubsidiary" +
+                    " AND [LabourValueNumber]=@LabourValueNumber" +
                     " AND [IsCurrent]='true'", locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary;
+                locCommand.Parameters.Add("@LabourValueNumber", SqlDbType.Int).Value = labourValueNumber;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (locDR.HasRows)
                 {

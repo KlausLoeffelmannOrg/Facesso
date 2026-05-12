@@ -1,6 +1,7 @@
 Imports Activedev
 Imports ActiveDev.Controls
 Imports Facesso.Data
+Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Windows.Forms
 
@@ -399,9 +400,9 @@ Public Class frmUserInfoAddEditView
                 myAddressDetails = New AddressDetailsInfo
                 Dim locConn As SqlConnection = SPAccess.GetInstance.GetOpenedConnectionSafely
                 Using locConn
-                    Dim locCommand As New SqlCommand("SELECT * FROM AddressDetails WHERE IDSubsidiary=" & _
-                    FacessoGeneric.LoginInfo.SubsidiaryInfo.IDSubsidiary.ToString & _
-                    " AND [IDAddressDetail]=" & locIDAddressDetails.ToString, locConn)
+                    Dim locCommand As New SqlCommand("SELECT * FROM AddressDetails WHERE IDSubsidiary=@IDSubsidiary AND [IDAddressDetail]=@IDAddressDetail", locConn)
+                    locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.SubsidiaryInfo.IDSubsidiary
+                    locCommand.Parameters.Add("@IDAddressDetail", SqlDbType.Int).Value = locIDAddressDetails
                     Dim locDR As SqlDataReader = locCommand.ExecuteReader
                 End Using
             End If

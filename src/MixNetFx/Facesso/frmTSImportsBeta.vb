@@ -1,3 +1,4 @@
+Imports System.Data
 Imports System.Data.OleDb
 Imports System.Data.SqlClient
 Imports ActiveDev
@@ -33,8 +34,8 @@ Public Class frmTSImport
         myProtocol = ""
 
         If chkTransformBaseData.Checked Then
-            'Löschen der Stammdaten
-            lblStatus.Text = "Löschen der vorhandenen Daten. Dieser Vorgang kann eine ganze Weile in Anspruch nehmen..."
+            'Lï¿½schen der Stammdaten
+            lblStatus.Text = "Lï¿½schen der vorhandenen Daten. Dieser Vorgang kann eine ganze Weile in Anspruch nehmen..."
             lblStatus.Update()
             Try
                 SPAccess.GetInstance.DeleteDataForOleDbImport(locIDSubsidiary)
@@ -62,8 +63,8 @@ Public Class frmTSImport
             Try
                 locOleDBConnection.Open()
             Catch ex As Exception
-                MessageBox.Show("Beim Öffnen der Access-Datenbank ist ein Fehler aufgetreten. Bitte überprüfen Sie den Pfad und den Dateinamen zur Access-Datenbank.", _
-                                "Fehler beim Öffnen der Datenbank:", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                MessageBox.Show("Beim ï¿½ffnen der Access-Datenbank ist ein Fehler aufgetreten. Bitte ï¿½berprï¿½fen Sie den Pfad und den Dateinamen zur Access-Datenbank.", _
+                                "Fehler beim ï¿½ffnen der Datenbank:", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 Return
             End Try
 
@@ -75,7 +76,7 @@ Public Class frmTSImport
             Dim locLabourValues As LabourValueInfoCollection
 
             If chkTransformBaseData.Checked Then
-                'Lohngruppen übernehmen
+                'Lohngruppen ï¿½bernehmen
                 locCommand = New OleDbCommand("SELECT [Lohngruppe], [Lohn2] FROM [Lohngruppen]" & _
                                        "ORDER BY [Lohngruppe]", locOleDBConnection)
                 Dim locWageGroup As WageGroupInfo
@@ -83,7 +84,7 @@ Public Class frmTSImport
                 Do While locReader.Read
                     locWageGroup = New WageGroupInfo()
                     With locWageGroup
-                        .CurrencyToken = "€"
+                        .CurrencyToken = "ï¿½"
                         Dim locObject As Object = locReader.GetValue(locReader.GetOrdinal("Lohn2"))
                         If locObject IsNot Nothing And locObject IsNot DBNull.Value Then
                             .HourlyRate = CDec(locObject)
@@ -99,12 +100,12 @@ Public Class frmTSImport
                     locWageGroup.IDWageGroup = SPAccess.GetInstance.WageGroups_Add(locWageGroup, _
                             FacessoGeneric.LoginInfo.IDUser)
                     myWgic.Add(locWageGroup)
-                    lblStatus.Text = "Lohngruppen übernehmen: " + locWageGroup.DisplayName
+                    lblStatus.Text = "Lohngruppen ï¿½bernehmen: " + locWageGroup.DisplayName
                     lblStatus.Update()
                     Application.DoEvents()
                 Loop
 
-                'Kostenstellen übernehmen
+                'Kostenstellen ï¿½bernehmen
                 locCommand = New OleDbCommand("SELECT DISTINCT [Kostenstelle] FROM [ArbeitswertStammdaten]" & _
                                                    "ORDER BY [Kostenstelle]", locOleDBConnection)
                 Dim locCostCenter As CostcenterInfo
@@ -118,14 +119,14 @@ Public Class frmTSImport
                         locCostCenterString = locReader.GetValue(locReader.GetOrdinal("Kostenstelle")).ToString
                         If Integer.TryParse(locCostCenterString, locCostCenterInteger) Then
                             locCurrentCostCenterNo = locCostCenterInteger
-                            locCostCenterString = locCostCenterInteger.ToString & ": * Name zu ergänzen *"
+                            locCostCenterString = locCostCenterInteger.ToString & ": * Name zu ergï¿½nzen *"
                         Else
                             locCurrentCostCenterNo += 10
                         End If
                         With locCostCenter
                             .BaseValuePrecision = 1
                             .BaseValueSynonym = "te in h/min"
-                            .CostCenterDescription = "Aus anderer Anwendung übernommen/noch zu ergänzen"
+                            .CostCenterDescription = "Aus anderer Anwendung ï¿½bernommen/noch zu ergï¿½nzen"
                             If blnGenerateRandom Then
                                 .CostCenterName = RandomData.DistortOrgNames(ADDBNullable.FromObject(Of String)(locCostCenterString))
                             Else
@@ -138,11 +139,11 @@ Public Class frmTSImport
                             .IncentiveIndicatorFactor = 1
                             .IncentiveIndicatorPrecision = 4
                             .IncentiveIndicatorSynonym = "Zeitgrad"
-                            .IncentiveWageSynonym = "Prämienlohn"
+                            .IncentiveWageSynonym = "Prï¿½mienlohn"
                             .UseFixValuedBonus = False
                             .WasCurrentTo = #12/31/2199#
                         End With
-                        lblStatus.Text = "Kostenstellen übernehmen: " + locCostCenter.DisplayName
+                        lblStatus.Text = "Kostenstellen ï¿½bernehmen: " + locCostCenter.DisplayName
                         lblStatus.Update()
                         Application.DoEvents()
                         locCostCenter.IDCostCenter = SPAccess.GetInstance.CostCenters_Add(locCostCenter, _
@@ -151,7 +152,7 @@ Public Class frmTSImport
                     End If
                 Loop
 
-                'Mitarbeiter übernehmen
+                'Mitarbeiter ï¿½bernehmen
                 locCommand = New OleDbCommand("SELECT * FROM [Mitarbeiter]", locOleDBConnection)
                 Dim locEmployee As EmployeeInfo
                 Dim locAdrDetails As AddressDetailsInfo
@@ -195,10 +196,10 @@ Public Class frmTSImport
                         .PersonnelNo = locReader.GetInt32(locReader.GetOrdinal("PersonalNr"))
                         .PrivateMobile = ADDBNullable.FromObject(Of String)(locReader.GetValue(locReader.GetOrdinal("Handy")))
                         .PrivatePhone = ADDBNullable.FromObject(Of String)(locReader.GetValue(locReader.GetOrdinal("PrivatTelefon")))
-                        .Street = ADDBNullable.FromObject(Of String)(locReader.GetValue(locReader.GetOrdinal("Straße")))
+                        .Street = ADDBNullable.FromObject(Of String)(locReader.GetValue(locReader.GetOrdinal("Straï¿½e")))
                         .Zip = ADDBNullable.FromObject(Of String)(locReader.GetValue(locReader.GetOrdinal("PLZ")))
                     End With
-                    lblStatus.Text = "Mitarbeiter übernehmen: " + locEmployee.DisplayName
+                    lblStatus.Text = "Mitarbeiter ï¿½bernehmen: " + locEmployee.DisplayName
                     lblStatus.Update()
                     Application.DoEvents()
                     SPAccess.GetInstance.Employees_Add(locEmployee, _
@@ -206,7 +207,7 @@ Public Class frmTSImport
                                 locAdrDetails)
                 Loop
 
-                'Arbeitswerte übernehmen
+                'Arbeitswerte ï¿½bernehmen
                 locCommand = New OleDbCommand("SELECT * FROM [ArbeitswertStammdaten]", locOleDBConnection)
                 Dim locCci As CostcenterInfo
                 locReader = locCommand.ExecuteReader()
@@ -240,7 +241,7 @@ Public Class frmTSImport
                             mySkipNextOp = True
                         End Try
                     End With
-                    lblStatus.Text = "Arbeitswerte übernehmen: " + locLabourValue.DisplayName
+                    lblStatus.Text = "Arbeitswerte ï¿½bernehmen: " + locLabourValue.DisplayName
                     lblStatus.Update()
                     Application.DoEvents()
                     If Not mySkipNextOp Then
@@ -250,7 +251,7 @@ Public Class frmTSImport
                     mySkipNextOp = False
                 Loop
 
-                'Arbeitsgruppen übernehmen
+                'Arbeitsgruppen ï¿½bernehmen
                 locCommand = New OleDbCommand("SELECT * FROM [Arbeitsgruppen]", locOleDBConnection)
                 Dim locCurrentTimeSettingDetails As TimeSettingDetails = _
                     DirectCast( _
@@ -284,7 +285,7 @@ Public Class frmTSImport
                         End If
                         .WorkGroupNumber = locReader.GetInt32(locReader.GetOrdinal("ArbeitsgruppenNr"))
                     End With
-                    lblStatus.Text = "Arbeitsgruppen übernehmen: " + locWorkGroup.DisplayName
+                    lblStatus.Text = "Arbeitsgruppen ï¿½bernehmen: " + locWorkGroup.DisplayName
                     lblStatus.Update()
                     Application.DoEvents()
                     locWorkGroup.IDWorkGroup = SPAccess.GetInstance.WorkGroups_Add(locWorkGroup, FacessoGeneric.LoginInfo.IDUser)
@@ -293,8 +294,8 @@ Public Class frmTSImport
 
                 'Zuordnungen zwischen Arbeitsgruppen und Arbeitswerten herstellen
                 For Each locWorkGroup In locWorkGroups
-                    locCommand = New OleDbCommand("SELECT Arbeitswertnr FROM AGrpArbeitswertDef WHERE ArbeitsgruppenNr=" & _
-                    locWorkGroup.WorkGroupNumber & " ORDER BY OrdinalNr", locOleDBConnection)
+                    locCommand = New OleDbCommand("SELECT Arbeitswertnr FROM AGrpArbeitswertDef WHERE ArbeitsgruppenNr=@ArbeitsgruppenNr ORDER BY OrdinalNr", locOleDBConnection)
+                    locCommand.Parameters.Add("@ArbeitsgruppenNr", OleDbType.Integer).Value = locWorkGroup.WorkGroupNumber
                     locReader = locCommand.ExecuteReader()
                     locLabourValues = New LabourValueInfoCollection()
                     Do While locReader.Read
@@ -314,17 +315,18 @@ Public Class frmTSImport
                             FacessoGeneric.LoginInfo.IDSubsidiary, _
                             locWorkGroup.IDWorkGroup, locLabourValues)
                     End If
-                    lblStatus.Text = "Arbeitsgruppenzuordnung vornehmen für: " + locWorkGroup.DisplayName
+                    lblStatus.Text = "Arbeitsgruppenzuordnung vornehmen fï¿½r: " + locWorkGroup.DisplayName
                     lblStatus.Update()
                     Application.DoEvents()
                 Next
             End If
 
             If chkTransformProductionData.Checked Then
-                'Mengendaten übernehmen
+                'Mengendaten ï¿½bernehmen
                 locCommand = New OleDbCommand("SELECT ArbeitsgruppenNr, Tagesdatum, Schicht, ArbeitswertNr, Menge FROM [AgrpMengenerfassung] " & _
-                        "WHERE Tagesdatum>=" & myTransformFrom.ToString("\#MM\/dd\/yyyy\#") & " " & _
+                        "WHERE Tagesdatum>=? " & _
                         "ORDER BY Tagesdatum, Schicht, ArbeitsgruppenNr", locOleDBConnection)
+                locCommand.Parameters.Add("?", OleDbType.Date).Value = myTransformFrom
                 locReader = locCommand.ExecuteReader()
                 Dim locFirst As Boolean = False
                 Dim locPd As ProductionData = Nothing
@@ -343,7 +345,7 @@ Public Class frmTSImport
                         locPd.Shift = locShift
                         locPd.WorkGroup = locWorkGroup
                         locPd.Clear()
-                        lblStatus.Text = "Mengendaten übernehmen: " + locProductionDate.ToShortDateString + "; S:" & locShift & " - " & locPd.WorkGroup.ListItemText
+                        lblStatus.Text = "Mengendaten ï¿½bernehmen: " + locProductionDate.ToShortDateString + "; S:" & locShift & " - " & locPd.WorkGroup.ListItemText
                         lblStatus.Update()
                         locCurrentOrdinalNo = 1
                         locFirst = True
@@ -352,7 +354,7 @@ Public Class frmTSImport
                            locPd.Shift <> locShift Or _
                            locPd.WorkGroup.IDWorkGroup <> locWorkGroup.IDWorkGroup Then
                             locPd.SaveToDatabase(FacessoGeneric.LoginInfo.IDUser, False)
-                            lblStatus.Text = "Mengendaten übernehmen: " + locProductionDate.ToShortDateString + "; S:" & locShift & " - " & locWorkGroup.ListItemText
+                            lblStatus.Text = "Mengendaten ï¿½bernehmen: " + locProductionDate.ToShortDateString + "; S:" & locShift & " - " & locWorkGroup.ListItemText
                             lblStatus.Update()
                             Application.DoEvents()
                             locPd = New ProductionData()
@@ -386,10 +388,10 @@ Public Class frmTSImport
             End If
 
             If chkTransformEmployeeTimes.Checked Then
-                'Mitarbeiterzeiten übernehmen
-                locCommand = New OleDbCommand("SELECT * From AgrpZeitenerfassung WHERE PersTagesdatum>=" & _
-                        myTransformFrom.ToString("\#MM\/dd\/yyyy\#") & _
+                'Mitarbeiterzeiten ï¿½bernehmen
+                locCommand = New OleDbCommand("SELECT * From AgrpZeitenerfassung WHERE PersTagesdatum>=?" & _
                         " ORDER BY PersTagesdatum, Schicht, ArbeitsgruppenNr, PersonalNr, Arbeitsbeginn", locOleDBConnection)
+                locCommand.Parameters.Add("?", OleDbType.Date).Value = myTransformFrom
                 locReader = locCommand.ExecuteReader()
                 Dim locFirst As Boolean = False
                 Dim locTlis As EmployeeTimeLogInfo = Nothing
@@ -407,7 +409,7 @@ Public Class frmTSImport
                         locTlis.Shift = locShift
                         locTlis.WorkGroup = locWorkGroup
                         locTlis.Clear()
-                        lblStatus.Text = "Mitarbeiterzeiten übernehmen: " + locProductionDate.ToShortDateString + "; S:" & locShift & " - " & locTlis.WorkGroup.ListItemText
+                        lblStatus.Text = "Mitarbeiterzeiten ï¿½bernehmen: " + locProductionDate.ToShortDateString + "; S:" & locShift & " - " & locTlis.WorkGroup.ListItemText
                         lblStatus.Update()
                         locFirst = True
                     Else
@@ -415,7 +417,7 @@ Public Class frmTSImport
                            locTlis.Shift <> locShift Or _
                            locTlis.WorkGroup.IDWorkGroup <> locWorkGroup.IDWorkGroup Then
                             locTlis.SaveToDatabase(FacessoGeneric.LoginInfo.IDUser, False)
-                            lblStatus.Text = "Mitarbeiterzeiten übernehmen: " + locProductionDate.ToShortDateString + "; S:" & locShift & " - " & locWorkGroup.ListItemText
+                            lblStatus.Text = "Mitarbeiterzeiten ï¿½bernehmen: " + locProductionDate.ToShortDateString + "; S:" & locShift & " - " & locWorkGroup.ListItemText
                             lblStatus.Update()
                             Application.DoEvents()
                             locTlis = New EmployeeTimeLogInfo()
@@ -447,9 +449,9 @@ Public Class frmTSImport
             End If
         End Using
 
-        lblStatus.Text = "Die Übernahme wurde erfolgreich durchgeführt!"
+        lblStatus.Text = "Die ï¿½bernahme wurde erfolgreich durchgefï¿½hrt!"
         If myProtocol <> "" Then
-            MessageBox.Show(myProtocol, "Unregelmäßigkeiten bei der Übernahme:")
+            MessageBox.Show(myProtocol, "Unregelmï¿½ï¿½igkeiten bei der ï¿½bernahme:")
         End If
         lblStatus.Update()
 
@@ -514,22 +516,22 @@ Public Class RandomData
 
     Shared Sub New()
         myRandom = New Random(Now.Millisecond)
-        myLastnames = New String() {"Heckhuis", "Löffelmann", "Thiemann", "Müller", _
-            "Meier", "Tiemann", "Sonntag", "Ademmer", "Westermann", "Vüllers", _
+        myLastnames = New String() {"Heckhuis", "Lï¿½ffelmann", "Thiemann", "Mï¿½ller", _
+            "Meier", "Tiemann", "Sonntag", "Ademmer", "Westermann", "Vï¿½llers", _
             "Hollmann", "Vielstedde", "Weigel", "Weichel", "Weichelt", "Hoffmann", _
-            "Rode", "Trouw", "Schindler", "Neumann", "Jungemann", "Hörstmann", _
+            "Rode", "Trouw", "Schindler", "Neumann", "Jungemann", "Hï¿½rstmann", _
             "Tinoco", "Albrecht", "Langenbach", "Braun", "Plenge", "Englisch", _
             "Clarke"}
 
-        myFirstnames = New String() {"Jürgen", "Gabriele", "Uwe", "Katrin", "Hans", _
+        myFirstnames = New String() {"Jï¿½rgen", "Gabriele", "Uwe", "Katrin", "Hans", _
                     "Rainer", "Christian", "Uta", "Michaela", "Franz", "Anne", "Anja", _
                     "Theo", "Momo", "Katrin", "Guido", "Barbara", "Bernhard", "Margarete", _
-                    "Alfred", "Melanie", "Britta", "José", "Thomas", "Daja", "Klaus", "Axel", _
+                    "Alfred", "Melanie", "Britta", "Josï¿½", "Thomas", "Daja", "Klaus", "Axel", _
                     "Lothar", "Gareth"}
 
         myCities = New String() {"Wuppertal", "Dortmund", "Lippstadt", "Soest", _
-                    "Liebenburg", "Hildesheim", "München", "Berlin", "Rheda", "Bielefeld", _
-                    "Braunschweig", "Unterschleißheim", "Wiesbaden", "Straubing", _
+                    "Liebenburg", "Hildesheim", "Mï¿½nchen", "Berlin", "Rheda", "Bielefeld", _
+                    "Braunschweig", "Unterschleiï¿½heim", "Wiesbaden", "Straubing", _
                     "Bad Waldliesborn", "Lippetal", "Stirpe", "Erwitte"}
     End Sub
 
@@ -556,7 +558,7 @@ Public Class RandomData
         Text = Text.Replace("Tommy", "2")
         Text = Text.Replace("Thommy", "2")
         Text = Text.Replace("Berta", "1")
-        Text = Text.Replace("Bärenbach", "Wünnenberg")
+        Text = Text.Replace("Bï¿½renbach", "Wï¿½nnenberg")
         Text = Text.Replace("Hahn", "Lippstadt")
         Text = Text.Replace("Senking", "Kannegiesser")
         Return Text

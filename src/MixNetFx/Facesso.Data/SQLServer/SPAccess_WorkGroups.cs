@@ -235,9 +235,11 @@ namespace Facesso.Data
                     "CostCenters.IncentiveIndicatorPrecision, CostCenters.IncentiveIndicatorFactor, CostCenters.BaseValuePrecision, CostCenters.BaseValueSynonym FROM [WorkGroups] " +
                     "[WorkGroups] INNER JOIN [CostCenters] ON " +
                     "[WorkGroups].[IDCostCenter] = [CostCenters].[IDCostCenter] WHERE " +
-                    "[WorkGroups].[IDSubsidiary]=" + FacessoGeneric.LoginInfo.IDSubsidiary +
-                    " AND [WorkGroups].[IsCurrent]='true' AND" +
-                    "[WorkGroups].[IDWorkGroup]=" + idWorkGroup, locConnection);
+                    "[WorkGroups].[IDSubsidiary]=@IDSubsidiary" +
+                    " AND [WorkGroups].[IsCurrent]='true' AND " +
+                    "[WorkGroups].[IDWorkGroup]=@IDWorkGroup", locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary;
+                locCommand.Parameters.Add("@IDWorkGroup", SqlDbType.Int).Value = idWorkGroup;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (locDR.HasRows)
                 {
@@ -259,9 +261,11 @@ namespace Facesso.Data
                     "CostCenters.IncentiveIndicatorPrecision, CostCenters.IncentiveIndicatorFactor, CostCenters.BaseValuePrecision, CostCenters.BaseValueSynonym FROM [WorkGroups] " +
                     "[WorkGroups] INNER JOIN [CostCenters] ON " +
                     "[WorkGroups].[IDCostCenter] = [CostCenters].[IDCostCenter] WHERE " +
-                    "[WorkGroups].[IDSubsidiary]=" + FacessoGeneric.LoginInfo.IDSubsidiary +
-                    " AND [WorkGroups].[IsCurrent]=1 AND" +
-                    "[WorkGroups].[WorkGroupNumber]=" + workGroupNumber, locConnection);
+                    "[WorkGroups].[IDSubsidiary]=@IDSubsidiary" +
+                    " AND [WorkGroups].[IsCurrent]=1 AND " +
+                    "[WorkGroups].[WorkGroupNumber]=@WorkGroupNumber", locConnection);
+                locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary;
+                locCommand.Parameters.Add("@WorkGroupNumber", SqlDbType.Int).Value = workGroupNumber;
                 SqlDataReader locDR = locCommand.ExecuteReader();
                 if (locDR.HasRows)
                 {

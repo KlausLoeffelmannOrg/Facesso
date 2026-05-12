@@ -1,6 +1,7 @@
 ï»¿Imports ActiveDev
 Imports ActiveDev.Controls
 Imports Facesso.Data
+Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Windows.Forms
 
@@ -200,7 +201,7 @@ Public Class frmEmployeeInfoAddEditView
         Me.ncbUseFixedWage.Location = New System.Drawing.Point(11, 204)
         Me.ncbUseFixedWage.Name = "ncbUseFixedWage"
         Me.ncbUseFixedWage.NullString = Nothing
-        Me.ncbUseFixedWage.NullValueMessage = "Bitte bestimmen Sie, ob fixe Beträge verwendet werden sollen oder nicht!"
+        Me.ncbUseFixedWage.NullValueMessage = "Bitte bestimmen Sie, ob fixe Betrï¿½ge verwendet werden sollen oder nicht!"
         Me.ncbUseFixedWage.Size = New System.Drawing.Size(298, 19)
         Me.ncbUseFixedWage.TabIndex = 6
         Me.ncbUseFixedWage.Text = "Fixen Betrag verwenden: "
@@ -239,10 +240,10 @@ Public Class frmEmployeeInfoAddEditView
         Me.ncbIsIncentive.Location = New System.Drawing.Point(11, 245)
         Me.ncbIsIncentive.Name = "ncbIsIncentive"
         Me.ncbIsIncentive.NullString = Nothing
-        Me.ncbIsIncentive.NullValueMessage = "Bitte bestimmen Sie, ob {%1} berücksichtigt werden soll!"
+        Me.ncbIsIncentive.NullValueMessage = "Bitte bestimmen Sie, ob {%1} berï¿½cksichtigt werden soll!"
         Me.ncbIsIncentive.Size = New System.Drawing.Size(298, 19)
         Me.ncbIsIncentive.TabIndex = 7
-        Me.ncbIsIncentive.Text = "Für {%1} verwenden:"
+        Me.ncbIsIncentive.Text = "Fï¿½r {%1} verwenden:"
         Me.ncbIsIncentive.ValueAreaLength = 77
         '
         'ncbIsActive
@@ -313,7 +314,7 @@ Public Class frmEmployeeInfoAddEditView
         Me.ndbDateOfSeparation.NullValueMessage = Nothing
         Me.ndbDateOfSeparation.Size = New System.Drawing.Size(515, 22)
         Me.ndbDateOfSeparation.TabIndex = 11
-        Me.ndbDateOfSeparation.Text = "Datum Beschäftigungsende: "
+        Me.ndbDateOfSeparation.Text = "Datum Beschï¿½ftigungsende: "
         Me.ndbDateOfSeparation.ValueAreaLength = 297
         '
         'ntbTimeCardNo
@@ -432,9 +433,9 @@ Public Class frmEmployeeInfoAddEditView
                 myAddressDetails = New AddressDetailsInfo
                 Dim locConn As SqlConnection = SPAccess.GetInstance.GetOpenedConnectionSafely
                 Using locConn
-                    Dim locCommand As New SqlCommand("SELECT * FROM AddressDetails WHERE IDSubsidiary=" & _
-                    FacessoGeneric.LoginInfo.SubsidiaryInfo.IDSubsidiary.ToString & _
-                    " AND [IDAddressDetail]=" & locIDAddressDetails.ToString, locConn)
+                    Dim locCommand As New SqlCommand("SELECT * FROM AddressDetails WHERE IDSubsidiary=@IDSubsidiary AND [IDAddressDetail]=@IDAddressDetail", locConn)
+                    locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.SubsidiaryInfo.IDSubsidiary
+                    locCommand.Parameters.Add("@IDAddressDetail", SqlDbType.Int).Value = locIDAddressDetails
                     Dim locDR As SqlDataReader = locCommand.ExecuteReader
                 End Using
             End If
@@ -527,12 +528,12 @@ Public Class frmEmployeeInfoAddEditView
             myAddressDetails = New AddressDetailsInfo()
         End If
 
-        'Die müssen im Haupt- und Adresseninfo-Dialog identisch sein!
+        'Die mï¿½ssen im Haupt- und Adresseninfo-Dialog identisch sein!
         myAddressDetails.FirstName = ntbFirstName.TypeSafeValue
         myAddressDetails.LastName = ntbLastName.TypeSafeValue
 
         Dim locBack As InfoItemMaintenanceDialogResult
-        'Für den Benutzereintrag dürfen Vor- und Nachname nicht DBNull sein!
+        'Fï¿½r den Benutzereintrag dï¿½rfen Vor- und Nachname nicht DBNull sein!
         frmAdrDetails.ForceToHaveLastNameAndFirstname()
         locBack = frmAdrDetails.Fac_HandleDialogAsEdit(My.Resources.UserInfoAddOrEdit_AddressDetailsDialogTitle, _
                                                        myAddressDetails)
@@ -560,7 +561,7 @@ Public Class frmEmployeeInfoAddEditView
     Private Sub btnHandicapManager_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHandicapManager.Click
         Dim frmInstance As New frmHandicapRangeManager
 
-        'Hack: Speichern bei Neuanlegen berücksichtigen
+        'Hack: Speichern bei Neuanlegen berï¿½cksichtigen
         frmInstance.ShowDialog(DirectCast(myCurrentInfoItem, EmployeeInfo))
 
     End Sub

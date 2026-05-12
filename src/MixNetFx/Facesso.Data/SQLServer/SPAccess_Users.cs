@@ -127,8 +127,10 @@ namespace Facesso.Data
                 if (locConnection == null) return null;
                 using (locConnection)
                 {
-                    var locCommand = new SqlCommand("SELECT * From [Users] WHERE [IDSubsidiary]=" +
-                        FacessoGeneric.LoginInfo.IDSubsidiary + " AND [IsSystemAccount]=0", locConnection);
+                    var locCommand = new SqlCommand(
+                        "SELECT * From [Users] WHERE [IDSubsidiary]=@IDSubsidiary AND [IsSystemAccount]=0",
+                        locConnection);
+                    locCommand.Parameters.Add("@IDSubsidiary", SqlDbType.Int).Value = FacessoGeneric.LoginInfo.IDSubsidiary;
                     SqlDataReader locDR = locCommand.ExecuteReader();
                     if (locDR.HasRows)
                     {

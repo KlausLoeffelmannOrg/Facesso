@@ -290,10 +290,12 @@ namespace Facesso.Tests.Reflective
             if (expr is CSharpSyntax.IdentifierNameSyntax identifier)
                 return TraceCSharpVariable(identifier, model, visiting);
 
-            // Constant field/property (e.g., const string).
+            // Constant field/property/expression. Any compile-time constant value
+            // (string, char from ChrW(constInt), int, …) is safe because it cannot
+            // carry attacker-controlled input.
             Optional<object> constValue = model.GetConstantValue(expr);
 
-            if (constValue.HasValue && constValue.Value is string)
+            if (constValue.HasValue)
                 return SqlTextClassification.StaticLiteral;
 
             // Method call or other complex expression — genuinely indeterminate.
@@ -536,9 +538,10 @@ namespace Facesso.Tests.Reflective
             if (expr is VBSyntax.IdentifierNameSyntax identifier)
                 return TraceVBVariable(identifier, model, visiting);
 
-            // Constant.
+            // Constant. Any compile-time constant (string, char from ChrW(constInt),
+            // numeric, …) is safe because it cannot carry attacker-controlled input.
             Optional<object> constValue = model.GetConstantValue(expr);
-            if (constValue.HasValue && constValue.Value is string)
+            if (constValue.HasValue)
                 return SqlTextClassification.StaticLiteral;
 
             // Method call or other complex expression — genuinely indeterminate.
