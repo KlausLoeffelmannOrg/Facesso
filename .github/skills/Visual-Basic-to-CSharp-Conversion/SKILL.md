@@ -278,7 +278,7 @@ Before considering a VB file "done" in C#, verify all of the following:
 
 Produce a buildable C# project:
 
-- Convert to SDK-Style project type first, and _only_ keep those settings inside which are really necessary.*only*
+- Convert to SDK-Style project type first, and *only* keep those settings inside which are really necessary.*only*
 
 - Use inside the `.csproj` the explicit `<LangVersion>` (from Step 1), `<Nullable>enable</Nullable>` and `<ImplicitUsings>enable</ImplicitUsings>` where appropriate, all converted `.cs` files (PascalCased), partial split-outs, and renamed/repaired resource files. Surface a short report of: effective Option settings per file, chosen LangVersion + why, any files refused (Explicit Off), and every `// TODO(vb-convert):` marker left for human review.
 

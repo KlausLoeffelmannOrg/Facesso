@@ -1,17 +1,9 @@
 using Facesso.Data;
 using Facesso.Functions;
 using Facesso.Interfaces;
-using Microsoft.VisualBasic;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace Facesso
 {
@@ -19,6 +11,7 @@ namespace Facesso
     {
         private ToolStripLabel myTsDateLabel;
         private ToolStripMonthCalender _myTsmCalender;
+
         private ToolStripMonthCalender myTsmCalender
         {
             get
@@ -44,6 +37,7 @@ namespace Facesso
         private ToolStripLabel myTsShiftLabel;
         private ShiftToolStripButton[] myTsShiftButtons;
         private ToolStripButton _myTsNextWorkday;
+
         private ToolStripButton myTsNextWorkday
         {
             get
@@ -90,6 +84,7 @@ namespace Facesso
         }
 
         private ToolStripButton _myTsTodoList;
+
         private ToolStripButton myTsTodoList
         {
             get
@@ -116,7 +111,9 @@ namespace Facesso
         private Font myStandardFont;
         private Font myBoldFont;
         private bool myDoNothing;
+
         private FacessoShellWindowsControl _myWindowsControl;
+
         private FacessoShellWindowsControl myWindowsControl
         {
             get
@@ -132,6 +129,7 @@ namespace Facesso
                 }
 
                 _myWindowsControl = value;
+
                 if (_myWindowsControl != null)
                 {
                     _myWindowsControl.WindowsControlSettingsChange += myWindowsControl_WindowsControlSettingsChange;
