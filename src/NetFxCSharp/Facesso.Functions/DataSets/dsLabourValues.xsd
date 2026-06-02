@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsLabourValues" targetNamespace="http://tempuri.org/dsLabourValues.xsd" xmlns:mstns="http://tempuri.org/dsLabourValues.xsd" xmlns="http://tempuri.org/dsLabourValues.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=.;Initial Catalog=Facesso;Integrated Security=True" IsAppSettingsProperty="False" Modifier="Assembly" Name="loeffel01.Facesso.dbo" ParameterPrefix="@" Provider="System.Data.SqlClient">
+          </Connection>
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="dtLabourValuesTableAdapter" GeneratorDataComponentClassName="dtLabourValuesTableAdapter" Name="dtLabourValues" UserDataComponentName="dtLabourValuesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="loeffel01.Facesso.dbo" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="False" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="True" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="True">
+                    <CommandText>SELECT     LabourValues.IDLabourValue, LabourValues.IDSubsidiary, LabourValues.IDLabourValueInternal, LabourValues.IDCostCenter, 
+                      LabourValues.LabourValueNumber, LabourValues.LabourValueName, LabourValues.LabourValueDescription, LabourValues.TeHMin, 
+                      LabourValues.Dimension, LabourValues.IsActive, LabourValues.IsCurrent, LabourValues.WasCurrentFrom, LabourValues.WasCurrentTo, 
+                      LabourValues.LastEdited, CostCenters.IDCostCenterInternal, CostCenters.IsCurrent AS IsCostCenterCurrent, CostCenters.CostCenterNo, 
+                      CostCenters.CostCenterName, CostCenters.CostCenterDescription, CostCenters.IDCurrency, CostCenters.IncentiveIndicatorSynonym, 
+                      CostCenters.IncentiveWageSynonym, CostCenters.IncentiveIndicatorDimension, CostCenters.IncentiveIndicatorPrecision, 
+                      CostCenters.UseFixValuedBonus, CostCenters.IncentiveIndicatorFactor, CostCenters.BaseValuePrecision, CostCenters.BaseValueSynonym, 
+                      CostCenters.WasCurrentFrom AS CostCenterWasCurrentFrom, CostCenters.WasCurrentTo AS CostCenterWasCurrentTo, 
+                      CostCenters.LastEdited AS CostCenterLastEdited
+FROM         LabourValues INNER JOIN
+                      CostCenters ON LabourValues.IDCostCenter = CostCenters.IDCostCenter</CommandText>
+                    <Parameters>
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="IDLabourValue" DataSetColumn="IDLabourValue" />
+              <Mapping SourceColumn="IDSubsidiary" DataSetColumn="IDSubsidiary" />
+              <Mapping SourceColumn="IDLabourValueInternal" DataSetColumn="IDLabourValueInternal" />
+              <Mapping SourceColumn="IDCostCenter" DataSetColumn="IDCostCenter" />
+              <Mapping SourceColumn="LabourValueNumber" DataSetColumn="LabourValueNumber" />
+              <Mapping SourceColumn="LabourValueName" DataSetColumn="LabourValueName" />
+              <Mapping SourceColumn="LabourValueDescription" DataSetColumn="LabourValueDescription" />
+              <Mapping SourceColumn="TeHMin" DataSetColumn="TeHMin" />
+              <Mapping SourceColumn="Dimension" DataSetColumn="Dimension" />
+              <Mapping SourceColumn="IsActive" DataSetColumn="IsActive" />
+              <Mapping SourceColumn="IsCurrent" DataSetColumn="IsCurrent" />
+              <Mapping SourceColumn="WasCurrentFrom" DataSetColumn="WasCurrentFrom" />
+              <Mapping SourceColumn="WasCurrentTo" DataSetColumn="WasCurrentTo" />
+              <Mapping SourceColumn="LastEdited" DataSetColumn="LastEdited" />
+              <Mapping SourceColumn="IDCostCenterInternal" DataSetColumn="IDCostCenterInternal" />
+              <Mapping SourceColumn="IsCostCenterCurrent" DataSetColumn="IsCostCenterCurrent" />
+              <Mapping SourceColumn="CostCenterNo" DataSetColumn="CostCenterNo" />
+              <Mapping SourceColumn="CostCenterName" DataSetColumn="CostCenterName" />
+              <Mapping SourceColumn="CostCenterDescription" DataSetColumn="CostCenterDescription" />
+              <Mapping SourceColumn="IDCurrency" DataSetColumn="IDCurrency" />
+              <Mapping SourceColumn="IncentiveIndicatorSynonym" DataSetColumn="IncentiveIndicatorSynonym" />
+              <Mapping SourceColumn="IncentiveWageSynonym" DataSetColumn="IncentiveWageSynonym" />
+              <Mapping SourceColumn="IncentiveIndicatorDimension" DataSetColumn="IncentiveIndicatorDimension" />
+              <Mapping SourceColumn="IncentiveIndicatorPrecision" DataSetColumn="IncentiveIndicatorPrecision" />
+              <Mapping SourceColumn="UseFixValuedBonus" DataSetColumn="UseFixValuedBonus" />
+              <Mapping SourceColumn="IncentiveIndicatorFactor" DataSetColumn="IncentiveIndicatorFactor" />
+              <Mapping SourceColumn="BaseValuePrecision" DataSetColumn="BaseValuePrecision" />
+              <Mapping SourceColumn="BaseValueSynonym" DataSetColumn="BaseValueSynonym" />
+              <Mapping SourceColumn="CostCenterWasCurrentFrom" DataSetColumn="CostCenterWasCurrentFrom" />
+              <Mapping SourceColumn="CostCenterWasCurrentTo" DataSetColumn="CostCenterWasCurrentTo" />
+              <Mapping SourceColumn="CostCenterLastEdited" DataSetColumn="CostCenterLastEdited" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="loeffel01.Facesso.dbo" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByIDSubsidiary" GenerateMethods="Both" GenerateShortCommands="True" GeneratorGetMethodName="GetDataByIDSubsidiary" GeneratorSourceName="FillByIDSubsidiary" GetMethodModifier="Public" GetMethodName="GetDataByIDSubsidiary" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="True" UserGetMethodName="GetDataByIDSubsidiary" UserSourceName="FillByIDSubsidiary">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="True">
+                    <CommandText>SELECT     LabourValues.IDLabourValue, LabourValues.IDSubsidiary, LabourValues.IDLabourValueInternal, LabourValues.IDCostCenter, 
+                      LabourValues.LabourValueNumber, LabourValues.LabourValueName, LabourValues.LabourValueDescription, LabourValues.TeHMin, 
+                      LabourValues.Dimension, LabourValues.IsActive, LabourValues.IsCurrent, LabourValues.WasCurrentFrom, LabourValues.WasCurrentTo, 
+                      LabourValues.LastEdited, CostCenters.IDCostCenterInternal, CostCenters.IsCurrent AS IsCostCenterCurrent, CostCenters.CostCenterNo, 
+                      CostCenters.CostCenterName, CostCenters.CostCenterDescription, CostCenters.IDCurrency, CostCenters.IncentiveIndicatorSynonym, 
+                      CostCenters.IncentiveWageSynonym, CostCenters.IncentiveIndicatorDimension, CostCenters.IncentiveIndicatorPrecision, 
+                      CostCenters.UseFixValuedBonus, CostCenters.IncentiveIndicatorFactor, CostCenters.BaseValuePrecision, CostCenters.BaseValueSynonym, 
+                      CostCenters.WasCurrentFrom AS CostCenterWasCurrentFrom, CostCenters.WasCurrentTo AS CostCenterWasCurrentTo, 
+                      CostCenters.LastEdited AS CostCenterLastEdited
+FROM         LabourValues INNER JOIN
+                      CostCenters ON LabourValues.IDCostCenter = CostCenters.IDCostCenter
+WHERE     (LabourValues.IDSubsidiary = @IDSubsidiary)
+ORDER BY LabourValues.LabourValueNumber</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="False" AutogeneratedName="IDSubsidiary" ColumnName="IDSubsidiary" DataSourceName="Facesso.dbo.LabourValues" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@IDSubsidiary" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="IDSubsidiary" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsLabourValues" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsLabourValues" msprop:Generator_DataSetName="dsLabourValues">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dtLabourValues" msprop:Generator_UserTableName="dtLabourValues" msprop:Generator_RowDeletedName="dtLabourValuesRowDeleted" msprop:Generator_TableClassName="dtLabourValuesDataTable" msprop:Generator_RowChangedName="dtLabourValuesRowChanged" msprop:Generator_RowClassName="dtLabourValuesRow" msprop:Generator_RowChangingName="dtLabourValuesRowChanging" msprop:Generator_RowEvArgName="dtLabourValuesRowChangeEvent" msprop:Generator_RowEvHandlerName="dtLabourValuesRowChangeEventHandler" msprop:Generator_TablePropName="dtLabourValues" msprop:Generator_TableVarName="tabledtLabourValues" msprop:Generator_RowDeletingName="dtLabourValuesRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDLabourValue" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="IDLabourValue" msprop:Generator_ColumnPropNameInRow="IDLabourValue" msprop:Generator_ColumnVarNameInTable="columnIDLabourValue" msprop:Generator_ColumnPropNameInTable="IDLabourValueColumn" type="xs:int" />
+              <xs:element name="IDSubsidiary" msprop:Generator_UserColumnName="IDSubsidiary" msprop:Generator_ColumnPropNameInRow="IDSubsidiary" msprop:Generator_ColumnVarNameInTable="columnIDSubsidiary" msprop:Generator_ColumnPropNameInTable="IDSubsidiaryColumn" type="xs:int" />
+              <xs:element name="IDLabourValueInternal" msprop:Generator_UserColumnName="IDLabourValueInternal" msprop:Generator_ColumnPropNameInRow="IDLabourValueInternal" msprop:Generator_ColumnVarNameInTable="columnIDLabourValueInternal" msprop:Generator_ColumnPropNameInTable="IDLabourValueInternalColumn" type="xs:int" />
+              <xs:element name="IDCostCenter" msprop:Generator_UserColumnName="IDCostCenter" msprop:Generator_ColumnPropNameInRow="IDCostCenter" msprop:Generator_ColumnVarNameInTable="columnIDCostCenter" msprop:Generator_ColumnPropNameInTable="IDCostCenterColumn" type="xs:int" />
+              <xs:element name="LabourValueNumber" msprop:Generator_UserColumnName="LabourValueNumber" msprop:Generator_ColumnPropNameInRow="LabourValueNumber" msprop:Generator_ColumnVarNameInTable="columnLabourValueNumber" msprop:Generator_ColumnPropNameInTable="LabourValueNumberColumn" type="xs:int" />
+              <xs:element name="LabourValueName" msprop:Generator_UserColumnName="LabourValueName" msprop:Generator_ColumnPropNameInRow="LabourValueName" msprop:Generator_ColumnVarNameInTable="columnLabourValueName" msprop:Generator_ColumnPropNameInTable="LabourValueNameColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LabourValueDescription" msprop:Generator_UserColumnName="LabourValueDescription" msprop:Generator_ColumnPropNameInRow="LabourValueDescription" msprop:Generator_ColumnVarNameInTable="columnLabourValueDescription" msprop:Generator_ColumnPropNameInTable="LabourValueDescriptionColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TeHMin" msprop:Generator_UserColumnName="TeHMin" msprop:Generator_ColumnPropNameInRow="TeHMin" msprop:Generator_ColumnVarNameInTable="columnTeHMin" msprop:Generator_ColumnPropNameInTable="TeHMinColumn" type="xs:double" />
+              <xs:element name="Dimension" msprop:Generator_UserColumnName="Dimension" msprop:Generator_ColumnPropNameInRow="Dimension" msprop:Generator_ColumnVarNameInTable="columnDimension" msprop:Generator_ColumnPropNameInTable="DimensionColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IsActive" msprop:Generator_UserColumnName="IsActive" msprop:Generator_ColumnPropNameInRow="IsActive" msprop:Generator_ColumnVarNameInTable="columnIsActive" msprop:Generator_ColumnPropNameInTable="IsActiveColumn" type="xs:boolean" />
+              <xs:element name="IsCurrent" msprop:Generator_UserColumnName="IsCurrent" msprop:Generator_ColumnPropNameInRow="IsCurrent" msprop:Generator_ColumnVarNameInTable="columnIsCurrent" msprop:Generator_ColumnPropNameInTable="IsCurrentColumn" type="xs:boolean" />
+              <xs:element name="WasCurrentFrom" msprop:Generator_UserColumnName="WasCurrentFrom" msprop:Generator_ColumnPropNameInRow="WasCurrentFrom" msprop:Generator_ColumnVarNameInTable="columnWasCurrentFrom" msprop:Generator_ColumnPropNameInTable="WasCurrentFromColumn" type="xs:dateTime" />
+              <xs:element name="WasCurrentTo" msprop:Generator_UserColumnName="WasCurrentTo" msprop:Generator_ColumnPropNameInRow="WasCurrentTo" msprop:Generator_ColumnVarNameInTable="columnWasCurrentTo" msprop:Generator_ColumnPropNameInTable="WasCurrentToColumn" type="xs:dateTime" />
+              <xs:element name="LastEdited" msprop:Generator_UserColumnName="LastEdited" msprop:Generator_ColumnPropNameInRow="LastEdited" msprop:Generator_ColumnVarNameInTable="columnLastEdited" msprop:Generator_ColumnPropNameInTable="LastEditedColumn" type="xs:dateTime" />
+              <xs:element name="IDCostCenterInternal" msprop:Generator_UserColumnName="IDCostCenterInternal" msprop:Generator_ColumnPropNameInRow="IDCostCenterInternal" msprop:Generator_ColumnVarNameInTable="columnIDCostCenterInternal" msprop:Generator_ColumnPropNameInTable="IDCostCenterInternalColumn" type="xs:int" />
+              <xs:element name="IsCostCenterCurrent" msprop:Generator_UserColumnName="IsCostCenterCurrent" msprop:Generator_ColumnPropNameInRow="IsCostCenterCurrent" msprop:Generator_ColumnVarNameInTable="columnIsCostCenterCurrent" msprop:Generator_ColumnPropNameInTable="IsCostCenterCurrentColumn" type="xs:boolean" />
+              <xs:element name="CostCenterNo" msprop:Generator_UserColumnName="CostCenterNo" msprop:Generator_ColumnPropNameInRow="CostCenterNo" msprop:Generator_ColumnVarNameInTable="columnCostCenterNo" msprop:Generator_ColumnPropNameInTable="CostCenterNoColumn" type="xs:int" />
+              <xs:element name="CostCenterName" msprop:Generator_UserColumnName="CostCenterName" msprop:Generator_ColumnPropNameInRow="CostCenterName" msprop:Generator_ColumnVarNameInTable="columnCostCenterName" msprop:Generator_ColumnPropNameInTable="CostCenterNameColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CostCenterDescription" msprop:Generator_UserColumnName="CostCenterDescription" msprop:Generator_ColumnPropNameInRow="CostCenterDescription" msprop:Generator_ColumnVarNameInTable="columnCostCenterDescription" msprop:Generator_ColumnPropNameInTable="CostCenterDescriptionColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IDCurrency" msprop:Generator_UserColumnName="IDCurrency" msprop:Generator_ColumnPropNameInRow="IDCurrency" msprop:Generator_ColumnVarNameInTable="columnIDCurrency" msprop:Generator_ColumnPropNameInTable="IDCurrencyColumn" type="xs:int" />
+              <xs:element name="IncentiveIndicatorSynonym" msprop:Generator_UserColumnName="IncentiveIndicatorSynonym" msprop:Generator_ColumnPropNameInRow="IncentiveIndicatorSynonym" msprop:Generator_ColumnVarNameInTable="columnIncentiveIndicatorSynonym" msprop:Generator_ColumnPropNameInTable="IncentiveIndicatorSynonymColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IncentiveWageSynonym" msprop:Generator_UserColumnName="IncentiveWageSynonym" msprop:Generator_ColumnPropNameInRow="IncentiveWageSynonym" msprop:Generator_ColumnVarNameInTable="columnIncentiveWageSynonym" msprop:Generator_ColumnPropNameInTable="IncentiveWageSynonymColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IncentiveIndicatorDimension" msprop:Generator_UserColumnName="IncentiveIndicatorDimension" msprop:Generator_ColumnPropNameInRow="IncentiveIndicatorDimension" msprop:Generator_ColumnVarNameInTable="columnIncentiveIndicatorDimension" msprop:Generator_ColumnPropNameInTable="IncentiveIndicatorDimensionColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IncentiveIndicatorPrecision" msprop:Generator_UserColumnName="IncentiveIndicatorPrecision" msprop:Generator_ColumnPropNameInRow="IncentiveIndicatorPrecision" msprop:Generator_ColumnVarNameInTable="columnIncentiveIndicatorPrecision" msprop:Generator_ColumnPropNameInTable="IncentiveIndicatorPrecisionColumn" type="xs:unsignedByte" />
+              <xs:element name="UseFixValuedBonus" msprop:Generator_UserColumnName="UseFixValuedBonus" msprop:Generator_ColumnPropNameInRow="UseFixValuedBonus" msprop:Generator_ColumnVarNameInTable="columnUseFixValuedBonus" msprop:Generator_ColumnPropNameInTable="UseFixValuedBonusColumn" type="xs:boolean" />
+              <xs:element name="IncentiveIndicatorFactor" msprop:Generator_UserColumnName="IncentiveIndicatorFactor" msprop:Generator_ColumnPropNameInRow="IncentiveIndicatorFactor" msprop:Generator_ColumnVarNameInTable="columnIncentiveIndicatorFactor" msprop:Generator_ColumnPropNameInTable="IncentiveIndicatorFactorColumn" type="xs:double" />
+              <xs:element name="BaseValuePrecision" msprop:Generator_UserColumnName="BaseValuePrecision" msprop:Generator_ColumnPropNameInRow="BaseValuePrecision" msprop:Generator_ColumnVarNameInTable="columnBaseValuePrecision" msprop:Generator_ColumnPropNameInTable="BaseValuePrecisionColumn" type="xs:unsignedByte" />
+              <xs:element name="BaseValueSynonym" msprop:Generator_UserColumnName="BaseValueSynonym" msprop:Generator_ColumnPropNameInRow="BaseValueSynonym" msprop:Generator_ColumnVarNameInTable="columnBaseValueSynonym" msprop:Generator_ColumnPropNameInTable="BaseValueSynonymColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CostCenterWasCurrentFrom" msprop:Generator_UserColumnName="CostCenterWasCurrentFrom" msprop:Generator_ColumnPropNameInRow="CostCenterWasCurrentFrom" msprop:Generator_ColumnVarNameInTable="columnCostCenterWasCurrentFrom" msprop:Generator_ColumnPropNameInTable="CostCenterWasCurrentFromColumn" type="xs:dateTime" />
+              <xs:element name="CostCenterWasCurrentTo" msprop:Generator_UserColumnName="CostCenterWasCurrentTo" msprop:Generator_ColumnPropNameInRow="CostCenterWasCurrentTo" msprop:Generator_ColumnVarNameInTable="columnCostCenterWasCurrentTo" msprop:Generator_ColumnPropNameInTable="CostCenterWasCurrentToColumn" type="xs:dateTime" />
+              <xs:element name="CostCenterLastEdited" msprop:Generator_UserColumnName="CostCenterLastEdited" msprop:Generator_ColumnPropNameInRow="CostCenterLastEdited" msprop:Generator_ColumnVarNameInTable="columnCostCenterLastEdited" msprop:Generator_ColumnPropNameInTable="CostCenterLastEditedColumn" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:dtLabourValues" />
+      <xs:field xpath="mstns:IDLabourValue" />
+      <xs:field xpath="mstns:IDSubsidiary" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

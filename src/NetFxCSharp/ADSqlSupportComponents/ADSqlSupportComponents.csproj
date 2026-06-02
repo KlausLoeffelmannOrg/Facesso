@@ -1,0 +1,95 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ActiveDev.Data.SqlClient</RootNamespace>
+    <AssemblyName>ADSqlSupportComponents</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <NoWarn>$(NoWarn);1591;0169;0414</NoWarn>
+    <DocumentationFile>ADSqlSupportComponents.xml</DocumentationFile>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="AdSqlDatabaseConnector.Designer.cs">
+      <DependentUpon>AdSqlDatabaseConnector.cs</DependentUpon>
+    </Compile>
+    <Compile Update="AdSqlDatabaseConnector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="AdSqlServerConnector.Designer.cs">
+      <DependentUpon>AdSqlServerConnector.cs</DependentUpon>
+    </Compile>
+    <Compile Update="AdSqlServerConnector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="AdAttachDatabaseDialog.Designer.cs">
+      <DependentUpon>AdAttachDatabaseDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="AdDatabaseConnectionDialog.Designer.cs">
+      <DependentUpon>AdDatabaseConnectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="AdSqlDirectoryPickerDialog.Designer.cs">
+      <DependentUpon>AdSqlDirectoryPickerDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="AdSqlInstanceConnectionDialog.Designer.cs">
+      <DependentUpon>AdSqlInstanceConnectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="AdTSqlScriptProcessorDialog.Designer.cs">
+      <DependentUpon>AdTSqlScriptProcessorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="AdSQLDirectoryPicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="AdSqlDatabasesInfoComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="AdSqlInstanceInfoComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="AdSqlInfoComboBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="My Project\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="My Project\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="My Project\Resources.resx">
+      <ManifestResourceName>ActiveDev.Data.SqlClient.Resources</ManifestResourceName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="AdAttachDatabaseDialog.resx">
+      <DependentUpon>AdAttachDatabaseDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="AdDatabaseConnectionDialog.resx">
+      <DependentUpon>AdDatabaseConnectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="AdSqlDirectoryPickerDialog.resx">
+      <DependentUpon>AdSqlDirectoryPickerDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="AdSqlInstanceConnectionDialog.resx">
+      <DependentUpon>AdSqlInstanceConnectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="AdTSqlScriptProcessorDialog.resx">
+      <DependentUpon>AdTSqlScriptProcessorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ActiveDev.pfx" />
+    <None Update="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
+  </ItemGroup>
+</Project>
