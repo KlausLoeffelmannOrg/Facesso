@@ -32,18 +32,27 @@ Public Class frmFacessoShell
             .Shift = 1,
             .ProductionDate = DateTime.Now
         }
+
         myStandardFont = New Font(FontFamily.GenericSansSerif, 10, FontStyle.Regular)
         myBoldFont = New Font(FontFamily.GenericSansSerif, 10, FontStyle.Bold)
 
-        myTsDateLabel = New ToolStripLabel("Arbeitstagdatum")
-        myTsDateLabel.Font = myBoldFont
+        myTsDateLabel = New ToolStripLabel("Arbeitstagdatum") With
+        {
+            .Font = myBoldFont
+        }
+
         myTsmCalender = New ToolStripMonthCalender
         myTsShiftLabel = New ToolStripLabel("Schicht")
         myTsShiftLabel.Font = myBoldFont
-        myTsShiftButtons = New ShiftToolStripButton() {New ShiftToolStripButton("1", Nothing, "1:", "Shift1", AddressOf ShiftButtons_Click), _
-                                                  New ShiftToolStripButton("2", Nothing, "2:", "Shift2", AddressOf ShiftButtons_Click), _
-                                                  New ShiftToolStripButton("3", Nothing, "3:", "Shift3", AddressOf ShiftButtons_Click), _
-                                                  New ShiftToolStripButton("S", Nothing, "S:", "Shift4", AddressOf ShiftButtons_Click)}
+
+        myTsShiftButtons = New ShiftToolStripButton() _
+        {
+            New ShiftToolStripButton("1", Nothing, "1:", "Shift1", AddressOf ShiftButtons_Click),
+            New ShiftToolStripButton("2", Nothing, "2:", "Shift2", AddressOf ShiftButtons_Click),
+            New ShiftToolStripButton("3", Nothing, "3:", "Shift3", AddressOf ShiftButtons_Click),
+            New ShiftToolStripButton("S", Nothing, "S:", "Shift4", AddressOf ShiftButtons_Click)
+        }
+
         For Each locTsShiftButton As ToolStripButton In myTsShiftButtons
             locTsShiftButton.AutoSize = False
             locTsShiftButton.Height = 30
@@ -53,12 +62,14 @@ Public Class frmFacessoShell
             locTsShiftButton.Text = ""
             locTsShiftButton.TextAlign = ContentAlignment.MiddleCenter
         Next
+
         myTsNextWorkday = New ToolStripButton("Nächster Arbeitstag >>")
         myTsNextWorkday.Font = myStandardFont
         myTsPreviousWorkday = New ToolStripButton("<< Vorheriger Arbeitstag")
         myTsPreviousWorkday.Font = myStandardFont
         myTsTodoList = New ToolStripButton("Meine To-do-Liste")
         myTsTodoList.Font = myStandardFont
+
         With ToolStripDateShiftSelector.Items
             .Add(myTsDateLabel)
             .Add(myTsmCalender)
@@ -154,13 +165,16 @@ Public Class frmFacessoShell
         myWindowsControl.WorkgroupSplitterDistance = splitWorkGroups.SplitterDistance
         myWindowsControl.EmpWorkgroupSplitterDistance = SplitEmployeesWorkGroups.SplitterDistance
         MyBase.OnClosed(e)
+
         With FacessoGeneric.FacessoUserSettings
             If Not Me.WindowState = FormWindowState.Minimized Then
                 .Settings.SetItem("FacessoShellWindowLocation", Me.Location)
                 .Settings.SetItem("FacessoShellWindowSize", Me.Size)
             End If
+
             .Settings.SetItem("FacessoShellWindowsControl", Me.myWindowsControl)
         End With
+
         FacessoGeneric.SaveAllSettings()
         TimerMain.Enabled = False
     End Sub
