@@ -119,7 +119,7 @@
     <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
     <ProjectReference Include="..\Controls\ADNullableValueControls.csproj" />
     <ProjectReference Include="..\Facesso.Data\Facesso.Data.csproj" />
-    <ProjectReference Include="..\Facesso.Functions\Facesso.Functions.vbproj" />
+    <ProjectReference Include="..\Facesso.Functions\Facesso.Functions.csproj" />
     <ProjectReference Include="..\Facesso.GenericControls\Facesso.GenericControls.csproj" />
     <ProjectReference Include="..\Facesso.Interfaces\Facesso.Interfaces.csproj" />
     <ProjectReference Include="..\Facesso.EntityModel\Facesso.EntityModel.csproj" />
