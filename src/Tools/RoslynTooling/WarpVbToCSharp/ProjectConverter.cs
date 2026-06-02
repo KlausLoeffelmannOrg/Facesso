@@ -41,9 +41,14 @@ internal sealed class ProjectConverter
         Console.Error.WriteLine($"RootNamespace: {rootNamespace ?? "(none)"}");
         Console.Error.WriteLine($"Project-level imports: {projectImports.Count}");
 
+        IReadOnlyList<SyntaxNode> roots = await CollectProjectRootsAsync(project).ConfigureAwait(false);
         IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyList<WithEventsHandler>>> projectHandlers =
-            await CollectProjectHandlersAsync(project).ConfigureAwait(false);
+            VisualBasicConverter.CollectWithEventsHandlers(roots);
         Console.Error.WriteLine($"Types with cross-file WithEvents handlers: {projectHandlers.Count}");
+
+        IReadOnlyDictionary<string, TypeConstructionInfo> projectConstruction =
+            VisualBasicConverter.CollectTypeConstruction(roots);
+        Console.Error.WriteLine($"Types with construction info: {projectConstruction.Count}");
 
         List<FileConversion> conversions = [];
 
@@ -61,7 +66,8 @@ internal sealed class ProjectConverter
                 document,
                 rootNamespace,
                 projectImports,
-                projectHandlers).ConfigureAwait(false);
+                projectHandlers,
+                projectConstruction).ConfigureAwait(false);
 
             conversions.Add(conversion);
 
@@ -99,7 +105,8 @@ internal sealed class ProjectConverter
         Document document,
         string? rootNamespace,
         IReadOnlyList<string> projectImports,
-        IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyList<WithEventsHandler>>> projectHandlers)
+        IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyList<WithEventsHandler>>> projectHandlers,
+        IReadOnlyDictionary<string, TypeConstructionInfo> projectConstruction)
     {
         SourceText text = await document.GetTextAsync().ConfigureAwait(false);
         SemanticModel? semanticModel = await document.GetSemanticModelAsync().ConfigureAwait(false);
@@ -110,6 +117,7 @@ internal sealed class ProjectConverter
             ProjectLevelImports = projectImports,
             FileName = Path.GetFileName(document.FilePath!),
             ProjectWithEventsHandlers = projectHandlers,
+            ProjectTypeConstruction = projectConstruction,
         };
 
         ConversionResult result = VisualBasicConverter.ConvertText(text.ToString(), options, semanticModel);
@@ -123,12 +131,10 @@ internal sealed class ProjectConverter
     }
 
     /// <summary>
-    ///  Pre-pass that scans every Visual Basic document in the project and builds the project-wide
-    ///  <c>WithEvents</c> handler map, so that <c>Handles</c> clauses in a main <c>.vb</c> file wire the
-    ///  fields declared in the matching <c>.Designer.vb</c> file.
+    ///  Pre-pass that gathers the syntax root of every Visual Basic document in the project, shared by the
+    ///  project-wide <c>WithEvents</c> handler and construction collectors.
     /// </summary>
-    private static async Task<IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyList<WithEventsHandler>>>> CollectProjectHandlersAsync(
-        Project project)
+    private static async Task<IReadOnlyList<SyntaxNode>> CollectProjectRootsAsync(Project project)
     {
         List<SyntaxNode> roots = [];
 
@@ -147,7 +153,7 @@ internal sealed class ProjectConverter
             }
         }
 
-        return VisualBasicConverter.CollectWithEventsHandlers(roots);
+        return roots;
     }
 
     private string DetermineOutputPath(string vbPath)

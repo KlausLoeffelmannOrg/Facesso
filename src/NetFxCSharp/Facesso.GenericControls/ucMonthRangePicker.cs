@@ -118,5 +118,10 @@ namespace Facesso.GenericControls
 
             SetControlsInternal();
         }
+
+        public ucMonthRangePicker()
+        {
+            InitializeComponent();
+        }
     }
 }

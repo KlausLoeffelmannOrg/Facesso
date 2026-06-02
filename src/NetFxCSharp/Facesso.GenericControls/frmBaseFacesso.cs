@@ -14,5 +14,9 @@ namespace Facesso.GenericControls
 {
     public partial class frmBaseFacesso
     {
+        public frmBaseFacesso()
+        {
+            InitializeComponent();
+        }
     }
 }
