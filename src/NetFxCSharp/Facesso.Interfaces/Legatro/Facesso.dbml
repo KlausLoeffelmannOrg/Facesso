@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="Facesso" Class="FacessoDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=Facesso;Integrated Security=True" SettingsObjectName="Facesso.Interfaces.My.MySettings" SettingsPropertyName="FacessoConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TimeLog" Member="TimeLog">
+    <Type Name="TimeLog">
+      <Column Name="IDTimeLog" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDSubsidiary" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDWorkGroup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDWorkGroupInternal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDEmployee" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDEmployeeInternal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDBonusLists" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDWageGroup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Shift" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ProductionDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ShiftStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ShiftStartViaInterface" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ShiftEnd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ShiftEndViaInterface" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="WorkBreak" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WorkBreakViaInterface" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DownTime" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DownTimeViaInterface" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Handicap" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="AttendanceTime" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WorkingTime" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IncentiveWageTime" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="IncentiveWageTimeAdj" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="DegreeOfTime" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="DegreeOfTimeAdj" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ReferenceWageTimeProRata" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="InsertedByInterface" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ManuallyEdited" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsSuspended" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastEdited" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EditedByIDUser" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.TimeLog_AddItemsForAddEdit" Method="TimeLog_AddItemsForAddEdit">
+    <Parameter Name="IDSubsidiary" Parameter="iDSubsidiary" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IDTimeLog" Parameter="iDTimeLog" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="IDUser" Parameter="iDUser" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IDWorkGroup" Parameter="iDWorkGroup" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="IDEmployee" Parameter="iDEmployee" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ProductionDate" Parameter="productionDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Shift" Parameter="shift" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="ShiftStart" Parameter="shiftStart" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="ShiftEnd" Parameter="shiftEnd" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="WorkBreak" Parameter="workBreak" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DownTime" Parameter="downTime" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Handicap" Parameter="handicap" Type="System.Double" DbType="Float" />
+    <Parameter Name="InsertedByInterface" Parameter="insertedByInterface" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="ManuallyEdited" Parameter="manuallyEdited" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="LastEditedByIDUser" Parameter="lastEditedByIDUser" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Ticket" Parameter="ticket" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Deleted" Parameter="deleted" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.TimeLog_HandleAddEdit" Method="TimeLog_HandleAddEdit">
+    <Parameter Name="IDSubsidiary" Parameter="iDSubsidiary" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IDUser" Parameter="iDUser" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Ticket" Parameter="ticket" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

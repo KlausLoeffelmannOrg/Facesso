@@ -1,0 +1,219 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Facesso.Functions</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <AssemblyOriginatorKeyFile>ActiveDev.pfx</AssemblyOriginatorKeyFile>
+    <LangVersion>latest</LangVersion>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Accessibility" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="BusinessControls\Charts\frmWorkgroupChartParametersPicker.Designer.cs">
+      <DependentUpon>frmWorkgroupChartParametersPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Update="BusinessControls\Charts\ucConfigurableWorkgroupChart.Designer.cs">
+      <DependentUpon>ucConfigurableWorkgroupChart.cs</DependentUpon>
+    </Compile>
+    <Compile Update="DataSets\dsLabourValues.Designer.cs">
+      <DependentUpon>dsLabourValues.cs</DependentUpon>
+    </Compile>
+    <Compile Update="DataSets\dsWorkgroupAssignments.Designer.cs">
+      <DependentUpon>dsWorkgroupAssignments.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\BaseForms\frmBaseFacesso.Designer.cs">
+      <DependentUpon>frmBaseFacesso.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\EmployeeInfoRelated\frmEmpoyeeHandicapAddEditView.Designer.cs">
+      <DependentUpon>frmEmpoyeeHandicapAddEditView.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\EmployeeInfoRelated\frmHandicapRangeManager.Designer.cs">
+      <DependentUpon>frmHandicapRangeManager.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\ProductionAmountAnalysisRelated\frmProductionAmountAnalysis.Designer.cs">
+      <DependentUpon>frmProductionAmountAnalysis.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\BaseForms\frmInfoItemAddEditViewBase.Designer.cs">
+      <DependentUpon>frmInfoItemAddEditViewBase.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\BonusListRelated\frmBonusListMaintenance.Designer.cs">
+      <DependentUpon>frmBonusListMaintenance.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\CostcenterInfoRelated\frmCostCenterSelector.Designer.cs">
+      <DependentUpon>frmCostCenterSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\EmployeeInfoRelated\frmEmployeePicker.Designer.cs">
+      <DependentUpon>frmEmployeePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\IncentiveWageRelated\frmIncentiveWageCalc.Designer.cs">
+      <DependentUpon>frmIncentiveWageCalc.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\IncentiveWageRelated\frmIncentiveWageGroupResult.Designer.cs">
+      <DependentUpon>frmIncentiveWageGroupResult.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\OptionsRelated\frmOptions.Designer.cs">
+      <DependentUpon>frmOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\ProductionDataRelated\frmProductionDataCollector.Designer.cs">
+      <DependentUpon>frmProductionDataCollector.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\ProductionDataRelated\frmTimeLogItemCollection.Designer.cs">
+      <DependentUpon>frmTimeLogItemCollection.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\SubsidiaryRelated\frmSubsidiaryManager.Designer.cs">
+      <DependentUpon>frmSubsidiaryManager.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\TimeListRelated\frmEmployeeTimeList.Designer.cs">
+      <DependentUpon>frmEmployeeTimeList.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\BaseForms\frmInfoItemsManagerBase.Designer.cs">
+      <DependentUpon>frmInfoItemsManagerBase.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\WorkGroupAnalysisRelated\frmWorkGroupAnalysisManager.Designer.cs">
+      <DependentUpon>frmWorkGroupAnalysisManager.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\WorkGroupAnalysisRelated\frmWorkGroupAnalysis.Designer.cs">
+      <DependentUpon>frmWorkGroupAnalysis.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\WorkGroupRelated\frmWorkGroupPrintBaseData.Designer.cs">
+      <DependentUpon>frmWorkGroupPrintBaseData.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\WorkGroupRelated\frmAssignTimeSettingsToWorkgroups.Designer.cs">
+      <DependentUpon>frmAssignTimeSettingsToWorkgroups.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Dialogs\WorkGroupRelated\frmWorkGroupManager.Designer.cs">
+      <DependentUpon>frmWorkGroupManager.cs</DependentUpon>
+    </Compile>
+    <Compile Update="frmTest.Designer.cs">
+      <DependentUpon>frmTest.cs</DependentUpon>
+    </Compile>
+    <Compile Update="DataSets\MasterDataSet.Designer.cs">
+      <DependentUpon>MasterDataSet.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\ReportEmployeeMasterData.Designer.cs">
+      <DependentUpon>ReportEmployeeMasterData.cs</DependentUpon>
+    </Compile>
+    <Compile Update="BusinessControls\Charts\ucConfigurableWorkgroupChart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="BusinessControls\Charts\frmWorkgroupChartParametersPicker.resx">
+      <DependentUpon>frmWorkgroupChartParametersPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BusinessControls\Charts\ucConfigurableWorkgroupChart.resx">
+      <DependentUpon>ucConfigurableWorkgroupChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\BaseForms\frmBaseFacesso.resx">
+      <DependentUpon>frmBaseFacesso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\EmployeeInfoRelated\frmEmpoyeeHandicapAddEditView.resx">
+      <DependentUpon>frmEmpoyeeHandicapAddEditView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\EmployeeInfoRelated\frmHandicapRangeManager.resx">
+      <DependentUpon>frmHandicapRangeManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\ProductionAmountAnalysisRelated\frmProductionAmountAnalysis.resx">
+      <DependentUpon>frmProductionAmountAnalysis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\BaseForms\frmInfoItemAddEditViewBase.resx">
+      <DependentUpon>frmInfoItemAddEditViewBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\BonusListRelated\frmBonusListMaintenance.resx">
+      <DependentUpon>frmBonusListMaintenance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\CostcenterInfoRelated\frmCostCenterSelector.resx">
+      <DependentUpon>frmCostCenterSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\EmployeeInfoRelated\frmEmployeePicker.resx">
+      <DependentUpon>frmEmployeePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\IncentiveWageRelated\frmIncentiveWageCalc.resx">
+      <DependentUpon>frmIncentiveWageCalc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\IncentiveWageRelated\frmIncentiveWageGroupResult.resx">
+      <DependentUpon>frmIncentiveWageGroupResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\OptionsRelated\frmOptions.resx">
+      <DependentUpon>frmOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\ProductionDataRelated\frmProductionDataCollector.resx">
+      <DependentUpon>frmProductionDataCollector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\ProductionDataRelated\frmTimeLogItemCollection.resx">
+      <DependentUpon>frmTimeLogItemCollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\SubsidiaryRelated\frmSubsidiaryManager.resx">
+      <DependentUpon>frmSubsidiaryManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\TimeListRelated\frmEmployeeTimeList.resx">
+      <DependentUpon>frmEmployeeTimeList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\BaseForms\frmInfoItemsManagerBase.resx">
+      <DependentUpon>frmInfoItemsManagerBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\WorkGroupAnalysisRelated\frmWorkGroupAnalysisManager.resx">
+      <DependentUpon>frmWorkGroupAnalysisManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\WorkGroupAnalysisRelated\frmWorkGroupAnalysis.resx">
+      <DependentUpon>frmWorkGroupAnalysis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\WorkGroupRelated\frmWorkGroupPrintBaseData.resx">
+      <DependentUpon>frmWorkGroupPrintBaseData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\WorkGroupRelated\frmAssignTimeSettingsToWorkgroups.resx">
+      <DependentUpon>frmAssignTimeSettingsToWorkgroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dialogs\WorkGroupRelated\frmWorkGroupManager.resx">
+      <DependentUpon>frmWorkGroupManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="frmTest.resx">
+      <DependentUpon>frmTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Reports\ReportEmployeeMasterData.resx">
+      <DependentUpon>ReportEmployeeMasterData.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
+    <ProjectReference Include="..\ADInfoItem\ADInfoItem.csproj" />
+    <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.csproj" />
+    <ProjectReference Include="..\ADSimplePrintDocument\ADSimplePrintDocument.csproj" />
+    <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
+    <ProjectReference Include="..\Controls\ADNullableValueControls.csproj" />
+    <ProjectReference Include="..\Facesso.Data\Facesso.Data.csproj" />
+    <ProjectReference Include="..\Facesso.EntityModel\Facesso.EntityModel.csproj" />
+    <ProjectReference Include="..\Facesso.GenericControls\Facesso.GenericControls.csproj" />
+    <ProjectReference Include="..\Facesso.Generic\Facesso.Generic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MvvmForms" Version="2.1.7-Beta3" />
+    <PackageReference Include="MvvmFormsBase" Version="2.1.6-Beta" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="System.Reactive" Version="6.1.0" />
+    <PackageReference Include="System.Reactive.Core" Version="6.1.0" />
+    <PackageReference Include="System.Reactive.Interfaces" Version="6.1.0" />
+    <PackageReference Include="System.Reactive.Linq" Version="6.1.0" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
+    <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
+  </ItemGroup>
+
+</Project>
