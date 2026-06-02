@@ -85,6 +85,27 @@ internal sealed class ProjectConverter
         }
 
         string report = ReportBuilder.Build(_options.ProjectPath, conversions, _options.WriteFiles);
+
+        // Realize WithEventsStyle.ClassicEventWiring by collapsing the faithful re-wiring properties that
+        // the text converter just emitted, reusing the proven WARP C#->C# collapse pass.
+        if (_options.WriteFiles && _options.WithEventsStyle == WithEventsStyle.ClassicEventWiring)
+        {
+            try
+            {
+                WithEventsCollapsePostPass.Result collapse =
+                    WithEventsCollapsePostPass.Run(conversions, project.MetadataReferences.ToList());
+                report += Environment.NewLine
+                    + $"WithEvents collapse pass: {collapse.Collapsed} collapsed, {collapse.Retained} retained, "
+                    + $"{collapse.FilesRewritten} file(s) rewritten.";
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"  [collapse] skipped (post-pass failed): {ex.GetType().Name}: {ex.Message}");
+                report += Environment.NewLine
+                    + "WithEvents collapse pass: skipped (faithful re-wiring retained; see stderr).";
+            }
+        }
+
         if (projectWarnings.Count > 0)
         {
             report += Environment.NewLine + "Project-file / My-namespace notes:" + Environment.NewLine

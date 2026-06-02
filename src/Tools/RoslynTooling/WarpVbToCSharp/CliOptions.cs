@@ -1,3 +1,5 @@
+using WarpToolkit.Desktop.Roslyn.VisualBasic.Conversion;
+
 namespace Warp.VbToCSharp.Cli;
 
 /// <summary>
@@ -27,6 +29,14 @@ internal sealed class CliOptions
     /// </summary>
     public string? ReportPath { get; init; }
 
+    /// <summary>
+    ///  Gets how <c>WithEvents</c> fields are surfaced. When <see cref="WithEventsStyle.ClassicEventWiring"/>
+    ///  (the default) the converted C# is post-processed with the WARP collapse pass so designer controls
+    ///  become plain fields plus classic <c>+=</c> wiring; <see cref="WithEventsStyle.ReWiringProperty"/>
+    ///  preserves the behavior-faithful re-wiring property. Only applied when <see cref="WriteFiles"/> is set.
+    /// </summary>
+    public WithEventsStyle WithEventsStyle { get; init; } = WithEventsStyle.ClassicEventWiring;
+
     public static CliOptions? Parse(string[] args)
     {
         if (args.Length == 0)
@@ -38,6 +48,7 @@ internal sealed class CliOptions
         string? output = null;
         string? report = null;
         bool write = false;
+        WithEventsStyle withEventsStyle = WithEventsStyle.ClassicEventWiring;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -50,6 +61,25 @@ internal sealed class CliOptions
 
                 case "--report" when i + 1 < args.Length:
                     report = args[++i];
+                    break;
+
+                case "--withevents-style" when i + 1 < args.Length:
+                    string value = args[++i];
+                    switch (value.ToLowerInvariant())
+                    {
+                        case "classic":
+                            withEventsStyle = WithEventsStyle.ClassicEventWiring;
+                            break;
+
+                        case "rewiring":
+                            withEventsStyle = WithEventsStyle.ReWiringProperty;
+                            break;
+
+                        default:
+                            Console.Error.WriteLine($"Unknown --withevents-style '{value}' (expected 'classic' or 'rewiring').");
+                            return null;
+                    }
+
                     break;
 
                 case "--write":
@@ -79,6 +109,7 @@ internal sealed class CliOptions
             OutputDirectory = output is null ? null : Path.GetFullPath(output),
             WriteFiles = write,
             ReportPath = report is null ? null : Path.GetFullPath(report),
+            WithEventsStyle = withEventsStyle,
         };
     }
 
@@ -88,12 +119,16 @@ internal sealed class CliOptions
             vbconvert - Visual Basic to C# project source converter (WARP)
 
             Usage:
-              vbconvert <project.vbproj> [--write] [--out <dir>] [--report <file>]
+              vbconvert <project.vbproj> [--write] [--out <dir>] [--report <file>] [--withevents-style <classic|rewiring>]
 
             Options:
-              --write          Write converted .cs files to disk (default: dry run).
-              --out <dir>      Output directory for .cs files (default: next to the .vb files).
-              --report <file>  Also write the conversion report to <file>.
+              --write                       Write converted .cs files to disk (default: dry run).
+              --out <dir>                   Output directory for .cs files (default: next to the .vb files).
+              --report <file>               Also write the conversion report to <file>.
+              --withevents-style <style>    'classic' (default) post-processes the converted C# with the
+                                            WithEvents collapse pass to produce idiomatic WinForms wiring;
+                                            'rewiring' keeps the behavior-faithful re-wiring property.
+                                            Only applied with --write.
             """);
     }
 }
