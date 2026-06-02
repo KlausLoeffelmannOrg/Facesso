@@ -162,12 +162,30 @@ internal sealed class ProjectConverter
 
         if (_options.OutputDirectory is null)
         {
-            return Path.Combine(Path.GetDirectoryName(vbPath)!, csName);
+            // A VB project may LINK a source file from a sibling project (path escapes the project cone).
+            // Such a file is compiled into THIS assembly with THIS project's root namespace, so its
+            // converted output belongs in the project directory, not back in the originating folder.
+            string ownerDir = Path.GetDirectoryName(_options.ProjectPath)!;
+            string sourceDir = Path.GetDirectoryName(vbPath)!;
+            if (!IsWithinDirectory(ownerDir, sourceDir))
+            {
+                return Path.Combine(ownerDir, csName);
+            }
+
+            return Path.Combine(sourceDir, csName);
         }
 
         string projectDir = Path.GetDirectoryName(_options.ProjectPath)!;
         string relativeDir = Path.GetRelativePath(projectDir, Path.GetDirectoryName(vbPath)!);
         return Path.Combine(_options.OutputDirectory, relativeDir, csName);
+    }
+
+    private static bool IsWithinDirectory(string parent, string candidate)
+    {
+        string relative = Path.GetRelativePath(parent, candidate);
+        return relative != ".."
+            && !relative.StartsWith(".." + Path.DirectorySeparatorChar, StringComparison.Ordinal)
+            && !Path.IsPathRooted(relative);
     }
 
     private static bool IsGeneratedPath(string path)

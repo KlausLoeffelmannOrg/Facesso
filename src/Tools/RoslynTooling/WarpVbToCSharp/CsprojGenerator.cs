@@ -69,6 +69,12 @@ internal sealed class CsprojGenerator
             sb.AppendLine($"    <AssemblyOriginatorKeyFile>{keyFile}</AssemblyOriginatorKeyFile>");
         }
 
+        string? applicationManifest = ReadProperty(root, "ApplicationManifest");
+        if (!string.IsNullOrEmpty(applicationManifest))
+        {
+            sb.AppendLine($"    <ApplicationManifest>{applicationManifest}</ApplicationManifest>");
+        }
+
         sb.AppendLine("    <LangVersion>latest</LangVersion>");
         sb.AppendLine("    <NoWarn>$(NoWarn);1591</NoWarn>");
 
@@ -100,6 +106,13 @@ internal sealed class CsprojGenerator
     ///  Returns <see langword="true"/> when any <c>.resx</c> under the project directory contains a
     ///  binary (BinaryFormatter-serialized) resource, identified by a <c>mimetype</c> attribute.
     /// </summary>
+    /// <summary>
+    ///  Collapses a path that escapes the project cone (a linked file, e.g. <c>..\Other\X.cs</c>) to its
+    ///  bare filename, because the converter writes the converted copy into this project's directory.
+    /// </summary>
+    private static string Localize(string path)
+        => path.Contains("..\\", StringComparison.Ordinal) ? Path.GetFileName(path) : path;
+
     private static bool HasBinaryResources(string projectDir)
     {
         if (!Directory.Exists(projectDir))
@@ -168,7 +181,7 @@ internal sealed class CsprojGenerator
                 string code = dep is not null
                     ? Path.ChangeExtension(Path.GetFileName(dep), ".cs")
                     : Path.ChangeExtension(Path.GetFileName(t.Path[..^".Designer.vb".Length] + ".vb"), ".cs");
-                return (Designer: Path.ChangeExtension(t.Path, ".cs"), Code: code);
+                return (Designer: Path.ChangeExtension(Localize(t.Path), ".cs"), Code: code);
             })
             .ToList();
 
@@ -180,7 +193,7 @@ internal sealed class CsprojGenerator
                 && t.SubType is "Component" or "UserControl" or "Form"
                 && t.Path.EndsWith(".vb", StringComparison.OrdinalIgnoreCase)
                 && !t.Path.StartsWith("My Project\\", StringComparison.OrdinalIgnoreCase))
-            .Select(static t => (File: Path.ChangeExtension(t.Path!, ".cs"), SubType: t.SubType!))
+            .Select(static t => (File: Path.ChangeExtension(Localize(t.Path!), ".cs"), SubType: t.SubType!))
             .ToList();
 
         bool hasDesignerItems = myProject.HasResources || myProject.HasSettings;
@@ -240,6 +253,7 @@ internal sealed class CsprojGenerator
             .Where(static path => path is not null && path.EndsWith(".Designer.vb", StringComparison.OrdinalIgnoreCase))
             .Where(static path => !path!.StartsWith("My Project\\", StringComparison.OrdinalIgnoreCase))
             .Select(static path => path![..^".Designer.vb".Length])
+            .Select(static name => Localize(name))
             .ToList();
 
         List<string> existing = controlResx

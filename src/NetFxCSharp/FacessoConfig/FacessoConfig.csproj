@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>FacessoConfig</RootNamespace>
+    <StartupObject>FacessoConfig.Program</StartupObject>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+    <LangVersion>latest</LangVersion>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="frmError.designer.cs">
+      <DependentUpon>frmError.cs</DependentUpon>
+    </Compile>
+    <Compile Update="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ActiveDevelop.SqlTools\ActiveDevelop.SqlTools.csproj" />
+    <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.csproj" />
+    <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.csproj" />
+    <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
+    <ProjectReference Include="..\Facesso.Data\Facesso.Data.csproj" />
+    <ProjectReference Include="..\Facesso.GenericControls\Facesso.GenericControls.csproj" />
+    <ProjectReference Include="..\Facesso.Generic\Facesso.Generic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
+  </ItemGroup>
+
+</Project>
