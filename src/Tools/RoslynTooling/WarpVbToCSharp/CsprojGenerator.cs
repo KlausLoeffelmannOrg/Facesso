@@ -89,14 +89,7 @@ internal sealed class CsprojGenerator
         AppendMyProjectResourceItems(sb, rootNamespace, myProject);
         AppendEntityDeployItems(sb, root);
         AppendProjectReferences(sb, root);
-
-        if (needsPreserializedResources)
-        {
-            sb.AppendLine();
-            sb.AppendLine("  <ItemGroup>");
-            sb.AppendLine("    <PackageReference Include=\"System.Resources.Extensions\" Version=\"4.6.0\" />");
-            sb.AppendLine("  </ItemGroup>");
-        }
+        AppendPackageReferences(sb, root, needsPreserializedResources);
 
         sb.AppendLine();
         sb.AppendLine("</Project>");
@@ -173,8 +166,8 @@ internal sealed class CsprojGenerator
             {
                 string? dep = t.Element.Elements(None + "DependentUpon").Select(static d => d.Value).FirstOrDefault();
                 string code = dep is not null
-                    ? Path.ChangeExtension(dep, ".cs")
-                    : Path.ChangeExtension(t.Path[..^".Designer.vb".Length] + ".vb", ".cs");
+                    ? Path.ChangeExtension(Path.GetFileName(dep), ".cs")
+                    : Path.ChangeExtension(Path.GetFileName(t.Path[..^".Designer.vb".Length] + ".vb"), ".cs");
                 return (Designer: Path.ChangeExtension(t.Path, ".cs"), Code: code);
             })
             .ToList();
@@ -263,7 +256,7 @@ internal sealed class CsprojGenerator
         foreach (string name in existing)
         {
             sb.AppendLine($"    <EmbeddedResource Update=\"{name}.resx\">");
-            sb.AppendLine($"      <DependentUpon>{name}.cs</DependentUpon>");
+            sb.AppendLine($"      <DependentUpon>{Path.GetFileName(name)}.cs</DependentUpon>");
             sb.AppendLine("    </EmbeddedResource>");
         }
 
@@ -353,6 +346,40 @@ internal sealed class CsprojGenerator
         foreach (string reference in projectReferences)
         {
             sb.AppendLine($"    <ProjectReference Include=\"{reference}\" />");
+        }
+
+        sb.AppendLine("  </ItemGroup>");
+    }
+
+    private static void AppendPackageReferences(StringBuilder sb, XElement root, bool needsPreserializedResources)
+    {
+        List<(string Include, string? Version)> packages = root
+            .Descendants(None + "PackageReference")
+            .Select(static p => ((string?)p.Attribute("Include"), (string?)p.Attribute("Version")))
+            .Where(static p => !string.IsNullOrEmpty(p.Item1))
+            .Select(static p => (p.Item1!, p.Item2))
+            .ToList();
+
+        // Legacy binary .resx need the preserialized-resources reader; ensure the package is present even
+        // when the original project did not declare it explicitly.
+        if (needsPreserializedResources
+            && !packages.Any(static p => p.Include.Equals("System.Resources.Extensions", StringComparison.OrdinalIgnoreCase)))
+        {
+            packages.Add(("System.Resources.Extensions", "4.6.0"));
+        }
+
+        if (packages.Count == 0)
+        {
+            return;
+        }
+
+        sb.AppendLine();
+        sb.AppendLine("  <ItemGroup>");
+        foreach ((string include, string? version) in packages)
+        {
+            sb.AppendLine(string.IsNullOrEmpty(version)
+                ? $"    <PackageReference Include=\"{include}\" />"
+                : $"    <PackageReference Include=\"{include}\" Version=\"{version}\" />");
         }
 
         sb.AppendLine("  </ItemGroup>");

@@ -1,0 +1,109 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Facesso.Interfaces</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <AssemblyOriginatorKeyFile>ActiveDev.pfx</AssemblyOriginatorKeyFile>
+    <LangVersion>latest</LangVersion>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="frmNewImportTask.Designer.cs">
+      <DependentUpon>frmNewImportTask.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ImportFormsAndHelper\frmImport.Designer.cs">
+      <DependentUpon>frmImport.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ImportFormsAndHelper\frmImportShiftModel.Designer.cs">
+      <DependentUpon>frmImportShiftModel.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ImportFormsAndHelper\frmTimeLogResultTable.Designer.cs">
+      <DependentUpon>frmTimeLogResultTable.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Jensen\frmJensenProdDataConfigDialog.Designer.cs">
+      <DependentUpon>frmJensenProdDataConfigDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Kannegiesser SQL\frmKannegiesserSQLProdDataConfigDialog.Designer.cs">
+      <DependentUpon>frmKannegiesserSQLProdDataConfigDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Kannegiesser SQL\Kannegiesser.designer.cs">
+      <DependentUpon>Kannegiesser.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Kannegiesser\frmKannegiesserProdDataConfigDialog.Designer.cs">
+      <DependentUpon>frmKannegiesserProdDataConfigDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Legatro\Facesso.designer.cs">
+      <DependentUpon>Facesso.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Legatro\frmLegatroTimeDataConfigDialog.Designer.cs">
+      <DependentUpon>frmLegatroTimeDataConfigDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Legatro\Legatro.designer.cs">
+      <DependentUpon>Legatro.cs</DependentUpon>
+    </Compile>
+    <Compile Update="frmProductionDataConfigureDialogBase.Designer.cs">
+      <DependentUpon>frmProductionDataConfigureDialogBase.cs</DependentUpon>
+    </Compile>
+    <Compile Update="BaseClasses\ProductionDataTableBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="BaseClasses\TimeDataTableBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="ImportFormsAndHelper\frmImport.resx">
+      <DependentUpon>frmImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ImportFormsAndHelper\frmImportShiftModel.resx">
+      <DependentUpon>frmImportShiftModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ImportFormsAndHelper\frmTimeLogResultTable.resx">
+      <DependentUpon>frmTimeLogResultTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Jensen\frmJensenProdDataConfigDialog.resx">
+      <DependentUpon>frmJensenProdDataConfigDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Kannegiesser SQL\frmKannegiesserSQLProdDataConfigDialog.resx">
+      <DependentUpon>frmKannegiesserSQLProdDataConfigDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Kannegiesser\frmKannegiesserProdDataConfigDialog.resx">
+      <DependentUpon>frmKannegiesserProdDataConfigDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Legatro\frmLegatroTimeDataConfigDialog.resx">
+      <DependentUpon>frmLegatroTimeDataConfigDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="frmProductionDataConfigureDialogBase.resx">
+      <DependentUpon>frmProductionDataConfigureDialogBase.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
+    <ProjectReference Include="..\ADInfoItem\ADInfoItem.csproj" />
+    <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.csproj" />
+    <ProjectReference Include="..\Facesso.Data\Facesso.Data.csproj" />
+    <ProjectReference Include="..\Facesso.GenericControls\Facesso.GenericControls.csproj" />
+    <ProjectReference Include="..\Facesso.Generic\Facesso.Generic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MvvmForms" Version="2.1.7-Beta3" />
+    <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
+  </ItemGroup>
+
+</Project>

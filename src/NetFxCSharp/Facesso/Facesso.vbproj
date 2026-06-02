@@ -121,7 +121,7 @@
     <ProjectReference Include="..\Facesso.Data\Facesso.Data.csproj" />
     <ProjectReference Include="..\Facesso.Functions\Facesso.Functions.vbproj" />
     <ProjectReference Include="..\Facesso.GenericControls\Facesso.GenericControls.csproj" />
-    <ProjectReference Include="..\Facesso.Interfaces\Facesso.Interfaces.vbproj" />
+    <ProjectReference Include="..\Facesso.Interfaces\Facesso.Interfaces.csproj" />
     <ProjectReference Include="..\Facesso.EntityModel\Facesso.EntityModel.csproj" />
     <ProjectReference Include="..\Facesso.Generic\Facesso.Generic.csproj" />
   </ItemGroup>
