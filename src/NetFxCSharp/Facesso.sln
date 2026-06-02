@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facesso.GenericControls", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facesso.EntityModel", "Facesso.EntityModel\Facesso.EntityModel.csproj", "{AF25A1A8-FA9A-4C50-AAB6-ABEEC9A9DB8B}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Facesso", "Facesso\Facesso.vbproj", "{6D6D57AA-8D16-4B80-A32D-9D339A6B8093}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facesso", "Facesso\Facesso.csproj", "{6D6D57AA-8D16-4B80-A32D-9D339A6B8093}"
 	ProjectSection(ProjectDependencies) = postProject
 		{53BA3350-154C-4980-B890-BF2F76A0CE14} = {53BA3350-154C-4980-B890-BF2F76A0CE14}
 	EndProjectSection
