@@ -18,28 +18,7 @@ namespace Facesso.Functions
     public class frmEmployeeInfoAddEditView : Facesso.Functions.frmInfoItemAddEditViewBase
     {
         private AddressDetailsInfo myAddressDetails;
-        private System.Windows.Forms.Button _btnHandicapManager;
-        internal System.Windows.Forms.Button btnHandicapManager
-        {
-            get
-            {
-                return _btnHandicapManager;
-            }
-
-            set
-            {
-                if (_btnHandicapManager != null)
-                {
-                    _btnHandicapManager.Click -= btnHandicapManager_Click;
-                }
-
-                _btnHandicapManager = value;
-                if (_btnHandicapManager != null)
-                {
-                    _btnHandicapManager.Click += btnHandicapManager_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnHandicapManager;
 
         private bool myDoNothing;
         private IInfoItem myCurrentInfoItem;
@@ -63,28 +42,7 @@ namespace Facesso.Functions
             base.Dispose(disposing);
         }
 
-        private ActiveDev.Controls.ADNullableIdOrIndexComboBox _ncombCostCenter;
-        internal ActiveDev.Controls.ADNullableIdOrIndexComboBox ncombCostCenter
-        {
-            get
-            {
-                return _ncombCostCenter;
-            }
-
-            set
-            {
-                if (_ncombCostCenter != null)
-                {
-                    _ncombCostCenter.ValueChanged -= ncombCostCenter_ValueChanged;
-                }
-
-                _ncombCostCenter = value;
-                if (_ncombCostCenter != null)
-                {
-                    _ncombCostCenter.ValueChanged += ncombCostCenter_ValueChanged;
-                }
-            }
-        }
+        internal ActiveDev.Controls.ADNullableIdOrIndexComboBox ncombCostCenter;
 
         internal ActiveDev.Controls.ADNullableTextBox ntbFirstName;
         internal ActiveDev.Controls.ADNullableIntBox nibPersonnelNumber;
@@ -98,28 +56,7 @@ namespace Facesso.Functions
         internal ActiveDev.Controls.ADNullableDateTimeBox ndbDateOfJoining;
         internal ActiveDev.Controls.ADNullableDateTimeBox ndbDateOfSeparation;
         internal ActiveDev.Controls.ADNullableTextBox ntbTimeCardNo;
-        private System.Windows.Forms.Button _btnAddressDetails;
-        internal System.Windows.Forms.Button btnAddressDetails
-        {
-            get
-            {
-                return _btnAddressDetails;
-            }
-
-            set
-            {
-                if (_btnAddressDetails != null)
-                {
-                    _btnAddressDetails.Click -= btnAddressDetails_Click;
-                }
-
-                _btnAddressDetails = value;
-                if (_btnAddressDetails != null)
-                {
-                    _btnAddressDetails.Click += btnAddressDetails_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnAddressDetails;
 
         //Required by the Windows Form Designer
         private System.ComponentModel.IContainer components;
@@ -130,6 +67,7 @@ namespace Facesso.Functions
         private void InitializeComponent()
         {
             this.ncombCostCenter = new ActiveDev.Controls.ADNullableIdOrIndexComboBox();
+            this.ncombCostCenter.ValueChanged += ncombCostCenter_ValueChanged;
             this.ntbFirstName = new ActiveDev.Controls.ADNullableTextBox();
             this.nibPersonnelNumber = new ActiveDev.Controls.ADNullableIntBox();
             this.ntbLastName = new ActiveDev.Controls.ADNullableTextBox();
@@ -143,7 +81,9 @@ namespace Facesso.Functions
             this.ndbDateOfSeparation = new ActiveDev.Controls.ADNullableDateTimeBox();
             this.ntbTimeCardNo = new ActiveDev.Controls.ADNullableTextBox();
             this.btnAddressDetails = new System.Windows.Forms.Button();
+            this.btnAddressDetails.Click += btnAddressDetails_Click;
             this.btnHandicapManager = new System.Windows.Forms.Button();
+            this.btnHandicapManager.Click += btnHandicapManager_Click;
             this.SuspendLayout();
             //
             //btnOK

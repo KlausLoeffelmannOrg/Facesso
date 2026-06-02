@@ -42,6 +42,7 @@ namespace Facesso.Functions
             this.Label13 = new System.Windows.Forms.Label();
             this.nudAltShiftDays = new System.Windows.Forms.NumericUpDown();
             this.btnAllShifts = new System.Windows.Forms.Button();
+            this.btnAllShifts.Click += btnAllShifts_Click;
             this.Label9 = new System.Windows.Forms.Label();
             this.nudAltShift2 = new System.Windows.Forms.NumericUpDown();
             this.Label10 = new System.Windows.Forms.Label();
@@ -57,30 +58,40 @@ namespace Facesso.Functions
             this.chkShift2 = new System.Windows.Forms.CheckBox();
             this.chkShift1 = new System.Windows.Forms.CheckBox();
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnCancel.Click += btnCancel_Click;
             this.GroupBox2 = new System.Windows.Forms.GroupBox();
             this.Label3 = new System.Windows.Forms.Label();
             this.optPickedSites = new System.Windows.Forms.RadioButton();
+            this.optPickedSites.CheckedChanged += rbPickedSites_CheckedChanged;
             this.Label2 = new System.Windows.Forms.Label();
             this.optWorst = new System.Windows.Forms.RadioButton();
+            this.optWorst.CheckedChanged += rbWorst_CheckedChanged;
             this.optBest = new System.Windows.Forms.RadioButton();
+            this.optBest.CheckedChanged += rbBest_CheckedChanged;
             this.nivBestWorstCount = new ActiveDevelop.EntitiesFormsLib.NullableIntValue();
             this.wglWorkgroups = new Facesso.GenericControls.ucWorkGroupListView();
             this.Label4 = new System.Windows.Forms.Label();
             this.GroupBox3 = new System.Windows.Forms.GroupBox();
             this.GroupBox5 = new System.Windows.Forms.GroupBox();
             this.btnResetDeltaValues = new System.Windows.Forms.Button();
+            this.btnResetDeltaValues.Click += btnResetDeltaValues_Click;
             this.chkAutomaticTimeOfDegreeRange = new System.Windows.Forms.CheckBox();
+            this.chkAutomaticTimeOfDegreeRange.CheckedChanged += chkAutomaticTimeOfDegreeRange_CheckedChanged;
             this.Label11 = new System.Windows.Forms.Label();
             this.tbDegreeOfTimeFrom = new System.Windows.Forms.TrackBar();
+            this.tbDegreeOfTimeFrom.Scroll += tbDegreeOfTimeFrom_Scroll;
             this.txtTimeOfDegreeRangeTo = new System.Windows.Forms.TextBox();
             this.Label6 = new System.Windows.Forms.Label();
             this.tbDegreeOfTimeTo = new System.Windows.Forms.TrackBar();
+            this.tbDegreeOfTimeTo.Scroll += tbDegreeOfTimeTo_Scroll;
             this.txtTimeOfDegreeRangeFrom = new System.Windows.Forms.TextBox();
             this.GroupBox4 = new System.Windows.Forms.GroupBox();
             this.opt3DChart = new System.Windows.Forms.RadioButton();
             this.opt2DChart = new System.Windows.Forms.RadioButton();
             this.txtChartTitel = new System.Windows.Forms.TextBox();
+            this.txtChartTitel.TextChanged += txtChartTitel_TextChanged;
             this.drpMain = new Facesso.GenericControls.ucAnalysisDateRangePicker();
             this.GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.nudAltShiftDays).BeginInit();
@@ -608,28 +619,7 @@ namespace Facesso.Functions
         internal System.Windows.Forms.GroupBox GroupBox1;
         internal System.Windows.Forms.Label Label13;
         internal System.Windows.Forms.NumericUpDown nudAltShiftDays;
-        private System.Windows.Forms.Button _btnAllShifts;
-        internal System.Windows.Forms.Button btnAllShifts
-        {
-            get
-            {
-                return _btnAllShifts;
-            }
-
-            set
-            {
-                if (_btnAllShifts != null)
-                {
-                    _btnAllShifts.Click -= btnAllShifts_Click;
-                }
-
-                _btnAllShifts = value;
-                if (_btnAllShifts != null)
-                {
-                    _btnAllShifts.Click += btnAllShifts_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnAllShifts;
 
         internal System.Windows.Forms.Label Label9;
         internal System.Windows.Forms.NumericUpDown nudAltShift2;
@@ -646,249 +636,39 @@ namespace Facesso.Functions
         internal System.Windows.Forms.CheckBox chkShift2;
         internal System.Windows.Forms.CheckBox chkShift1;
         internal Facesso.GenericControls.ucAnalysisDateRangePicker drpMain;
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
+        internal System.Windows.Forms.Button btnOK;
 
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
-
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnCancel;
-        internal System.Windows.Forms.Button btnCancel
-        {
-            get
-            {
-                return _btnCancel;
-            }
-
-            set
-            {
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click -= btnCancel_Click;
-                }
-
-                _btnCancel = value;
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click += btnCancel_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnCancel;
 
         internal System.Windows.Forms.GroupBox GroupBox2;
-        private System.Windows.Forms.RadioButton _optWorst;
-        internal System.Windows.Forms.RadioButton optWorst
-        {
-            get
-            {
-                return _optWorst;
-            }
+        internal System.Windows.Forms.RadioButton optWorst;
 
-            set
-            {
-                if (_optWorst != null)
-                {
-                    _optWorst.CheckedChanged -= rbWorst_CheckedChanged;
-                }
-
-                _optWorst = value;
-                if (_optWorst != null)
-                {
-                    _optWorst.CheckedChanged += rbWorst_CheckedChanged;
-                }
-            }
-        }
-
-        private System.Windows.Forms.RadioButton _optBest;
-        internal System.Windows.Forms.RadioButton optBest
-        {
-            get
-            {
-                return _optBest;
-            }
-
-            set
-            {
-                if (_optBest != null)
-                {
-                    _optBest.CheckedChanged -= rbBest_CheckedChanged;
-                }
-
-                _optBest = value;
-                if (_optBest != null)
-                {
-                    _optBest.CheckedChanged += rbBest_CheckedChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.RadioButton optBest;
 
         internal ActiveDevelop.EntitiesFormsLib.NullableIntValue nivBestWorstCount;
         internal Facesso.GenericControls.ucWorkGroupListView wglWorkgroups;
-        private System.Windows.Forms.RadioButton _optPickedSites;
-        internal System.Windows.Forms.RadioButton optPickedSites
-        {
-            get
-            {
-                return _optPickedSites;
-            }
-
-            set
-            {
-                if (_optPickedSites != null)
-                {
-                    _optPickedSites.CheckedChanged -= rbPickedSites_CheckedChanged;
-                }
-
-                _optPickedSites = value;
-                if (_optPickedSites != null)
-                {
-                    _optPickedSites.CheckedChanged += rbPickedSites_CheckedChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.RadioButton optPickedSites;
 
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.Label Label3;
         internal System.Windows.Forms.Label Label4;
         internal System.Windows.Forms.GroupBox GroupBox3;
         internal System.Windows.Forms.GroupBox GroupBox5;
-        private System.Windows.Forms.CheckBox _chkAutomaticTimeOfDegreeRange;
-        internal System.Windows.Forms.CheckBox chkAutomaticTimeOfDegreeRange
-        {
-            get
-            {
-                return _chkAutomaticTimeOfDegreeRange;
-            }
-
-            set
-            {
-                if (_chkAutomaticTimeOfDegreeRange != null)
-                {
-                    _chkAutomaticTimeOfDegreeRange.CheckedChanged -= chkAutomaticTimeOfDegreeRange_CheckedChanged;
-                }
-
-                _chkAutomaticTimeOfDegreeRange = value;
-                if (_chkAutomaticTimeOfDegreeRange != null)
-                {
-                    _chkAutomaticTimeOfDegreeRange.CheckedChanged += chkAutomaticTimeOfDegreeRange_CheckedChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.CheckBox chkAutomaticTimeOfDegreeRange;
 
         internal System.Windows.Forms.Label Label11;
-        private System.Windows.Forms.TrackBar _tbDegreeOfTimeFrom;
-        internal System.Windows.Forms.TrackBar tbDegreeOfTimeFrom
-        {
-            get
-            {
-                return _tbDegreeOfTimeFrom;
-            }
-
-            set
-            {
-                if (_tbDegreeOfTimeFrom != null)
-                {
-                    _tbDegreeOfTimeFrom.Scroll -= tbDegreeOfTimeFrom_Scroll;
-                }
-
-                _tbDegreeOfTimeFrom = value;
-                if (_tbDegreeOfTimeFrom != null)
-                {
-                    _tbDegreeOfTimeFrom.Scroll += tbDegreeOfTimeFrom_Scroll;
-                }
-            }
-        }
+        internal System.Windows.Forms.TrackBar tbDegreeOfTimeFrom;
 
         internal System.Windows.Forms.TextBox txtTimeOfDegreeRangeTo;
         internal System.Windows.Forms.Label Label6;
-        private System.Windows.Forms.TrackBar _tbDegreeOfTimeTo;
-        internal System.Windows.Forms.TrackBar tbDegreeOfTimeTo
-        {
-            get
-            {
-                return _tbDegreeOfTimeTo;
-            }
-
-            set
-            {
-                if (_tbDegreeOfTimeTo != null)
-                {
-                    _tbDegreeOfTimeTo.Scroll -= tbDegreeOfTimeTo_Scroll;
-                }
-
-                _tbDegreeOfTimeTo = value;
-                if (_tbDegreeOfTimeTo != null)
-                {
-                    _tbDegreeOfTimeTo.Scroll += tbDegreeOfTimeTo_Scroll;
-                }
-            }
-        }
+        internal System.Windows.Forms.TrackBar tbDegreeOfTimeTo;
 
         internal System.Windows.Forms.TextBox txtTimeOfDegreeRangeFrom;
         internal System.Windows.Forms.GroupBox GroupBox4;
         internal System.Windows.Forms.RadioButton opt3DChart;
         internal System.Windows.Forms.RadioButton opt2DChart;
-        private System.Windows.Forms.TextBox _txtChartTitel;
-        internal System.Windows.Forms.TextBox txtChartTitel
-        {
-            get
-            {
-                return _txtChartTitel;
-            }
+        internal System.Windows.Forms.TextBox txtChartTitel;
 
-            set
-            {
-                if (_txtChartTitel != null)
-                {
-                    _txtChartTitel.TextChanged -= txtChartTitel_TextChanged;
-                }
-
-                _txtChartTitel = value;
-                if (_txtChartTitel != null)
-                {
-                    _txtChartTitel.TextChanged += txtChartTitel_TextChanged;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnResetDeltaValues;
-        internal System.Windows.Forms.Button btnResetDeltaValues
-        {
-            get
-            {
-                return _btnResetDeltaValues;
-            }
-
-            set
-            {
-                if (_btnResetDeltaValues != null)
-                {
-                    _btnResetDeltaValues.Click -= btnResetDeltaValues_Click;
-                }
-
-                _btnResetDeltaValues = value;
-                if (_btnResetDeltaValues != null)
-                {
-                    _btnResetDeltaValues.Click += btnResetDeltaValues_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnResetDeltaValues;
     }
 }

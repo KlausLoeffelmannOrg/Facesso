@@ -40,9 +40,13 @@ namespace FacessoConfig
         private void InitializeComponent()
         {
             this.btnActivateFacesso = new System.Windows.Forms.Button();
+            this.btnActivateFacesso.Click += btnActivateFacesso_Click;
             this.btnSetupDatabase = new System.Windows.Forms.Button();
+            this.btnSetupDatabase.Click += btnSetupDatabase_Click;
             this.btnSetDatabaseInstance = new System.Windows.Forms.Button();
+            this.btnSetDatabaseInstance.Click += btnSetDatabaseInstance_Click;
             this.btnUpdateSchema = new System.Windows.Forms.Button();
+            this.btnUpdateSchema.Click += btnUpdateSchema_Click;
             this.SuspendLayout();
             //
             //btnActivateFacesso
@@ -95,96 +99,12 @@ namespace FacessoConfig
             this.ResumeLayout(false);
         }
 
-        private System.Windows.Forms.Button _btnActivateFacesso;
-        internal System.Windows.Forms.Button btnActivateFacesso
-        {
-            get
-            {
-                return _btnActivateFacesso;
-            }
+        internal System.Windows.Forms.Button btnActivateFacesso;
 
-            set
-            {
-                if (_btnActivateFacesso != null)
-                {
-                    _btnActivateFacesso.Click -= btnActivateFacesso_Click;
-                }
+        internal System.Windows.Forms.Button btnSetupDatabase;
 
-                _btnActivateFacesso = value;
-                if (_btnActivateFacesso != null)
-                {
-                    _btnActivateFacesso.Click += btnActivateFacesso_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnSetDatabaseInstance;
 
-        private System.Windows.Forms.Button _btnSetupDatabase;
-        internal System.Windows.Forms.Button btnSetupDatabase
-        {
-            get
-            {
-                return _btnSetupDatabase;
-            }
-
-            set
-            {
-                if (_btnSetupDatabase != null)
-                {
-                    _btnSetupDatabase.Click -= btnSetupDatabase_Click;
-                }
-
-                _btnSetupDatabase = value;
-                if (_btnSetupDatabase != null)
-                {
-                    _btnSetupDatabase.Click += btnSetupDatabase_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnSetDatabaseInstance;
-        internal System.Windows.Forms.Button btnSetDatabaseInstance
-        {
-            get
-            {
-                return _btnSetDatabaseInstance;
-            }
-
-            set
-            {
-                if (_btnSetDatabaseInstance != null)
-                {
-                    _btnSetDatabaseInstance.Click -= btnSetDatabaseInstance_Click;
-                }
-
-                _btnSetDatabaseInstance = value;
-                if (_btnSetDatabaseInstance != null)
-                {
-                    _btnSetDatabaseInstance.Click += btnSetDatabaseInstance_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnUpdateSchema;
-        internal System.Windows.Forms.Button btnUpdateSchema
-        {
-            get
-            {
-                return _btnUpdateSchema;
-            }
-
-            set
-            {
-                if (_btnUpdateSchema != null)
-                {
-                    _btnUpdateSchema.Click -= btnUpdateSchema_Click;
-                }
-
-                _btnUpdateSchema = value;
-                if (_btnUpdateSchema != null)
-                {
-                    _btnUpdateSchema.Click += btnUpdateSchema_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnUpdateSchema;
     }
 }

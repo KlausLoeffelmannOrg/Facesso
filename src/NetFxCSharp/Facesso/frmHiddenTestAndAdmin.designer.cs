@@ -36,6 +36,7 @@ namespace Facesso
         {
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.ToEndNullableDateValue = new ActiveDevelop.EntitiesFormsLib.NullableDateValue();
+            this.ToEndNullableDateValue.IsDirtyChanged += ToEndNullableDateValue_IsDirtyChanged;
             this.ToStartNullableDateValue = new ActiveDevelop.EntitiesFormsLib.NullableDateValue();
             this.FromStartNullableDateValue = new ActiveDevelop.EntitiesFormsLib.NullableDateValue();
             this.CheckBox2 = new System.Windows.Forms.CheckBox();
@@ -45,12 +46,15 @@ namespace Facesso
             this.Label4 = new System.Windows.Forms.Label();
             this.CopyProgressBar = new System.Windows.Forms.ProgressBar();
             this.CopyNowButton = new System.Windows.Forms.Button();
+            this.CopyNowButton.Click += CopyNowButton_Clck;
             this.CopyInfoLabel = new System.Windows.Forms.Label();
             this.PassCaptionLabel = new System.Windows.Forms.Label();
             this.Label2 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.OKButton = new System.Windows.Forms.Button();
+            this.OKButton.Click += OKButton_Click;
             this.btnNamenAnonymisieren = new System.Windows.Forms.Button();
+            this.btnNamenAnonymisieren.Click += btnNamenAnonymisieren_Click;
             this.GroupBox1.SuspendLayout();
             this.SuspendLayout();
             //
@@ -272,105 +276,21 @@ namespace Facesso
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.ProgressBar CopyProgressBar;
-        private System.Windows.Forms.Button _CopyNowButton;
-        internal System.Windows.Forms.Button CopyNowButton
-        {
-            get
-            {
-                return _CopyNowButton;
-            }
-
-            set
-            {
-                if (_CopyNowButton != null)
-                {
-                    _CopyNowButton.Click -= CopyNowButton_Clck;
-                }
-
-                _CopyNowButton = value;
-                if (_CopyNowButton != null)
-                {
-                    _CopyNowButton.Click += CopyNowButton_Clck;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button CopyNowButton;
 
         internal System.Windows.Forms.Label CopyInfoLabel;
         internal System.Windows.Forms.Label PassCaptionLabel;
-        private System.Windows.Forms.Button _OKButton;
-        internal System.Windows.Forms.Button OKButton
-        {
-            get
-            {
-                return _OKButton;
-            }
-
-            set
-            {
-                if (_OKButton != null)
-                {
-                    _OKButton.Click -= OKButton_Click;
-                }
-
-                _OKButton = value;
-                if (_OKButton != null)
-                {
-                    _OKButton.Click += OKButton_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button OKButton;
 
         internal System.Windows.Forms.CheckBox CheckBox2;
         internal System.Windows.Forms.Label Label6;
         internal System.Windows.Forms.CheckBox IncludeTineDataCheckBox;
         internal System.Windows.Forms.Label Label5;
         internal System.Windows.Forms.Label Label4;
-        private ActiveDevelop.EntitiesFormsLib.NullableDateValue _ToEndNullableDateValue;
-        internal ActiveDevelop.EntitiesFormsLib.NullableDateValue ToEndNullableDateValue
-        {
-            get
-            {
-                return _ToEndNullableDateValue;
-            }
-
-            set
-            {
-                if (_ToEndNullableDateValue != null)
-                {
-                    _ToEndNullableDateValue.IsDirtyChanged -= ToEndNullableDateValue_IsDirtyChanged;
-                }
-
-                _ToEndNullableDateValue = value;
-                if (_ToEndNullableDateValue != null)
-                {
-                    _ToEndNullableDateValue.IsDirtyChanged += ToEndNullableDateValue_IsDirtyChanged;
-                }
-            }
-        }
+        internal ActiveDevelop.EntitiesFormsLib.NullableDateValue ToEndNullableDateValue;
 
         internal ActiveDevelop.EntitiesFormsLib.NullableDateValue ToStartNullableDateValue;
         internal ActiveDevelop.EntitiesFormsLib.NullableDateValue FromStartNullableDateValue;
-        private System.Windows.Forms.Button _btnNamenAnonymisieren;
-        internal System.Windows.Forms.Button btnNamenAnonymisieren
-        {
-            get
-            {
-                return _btnNamenAnonymisieren;
-            }
-
-            set
-            {
-                if (_btnNamenAnonymisieren != null)
-                {
-                    _btnNamenAnonymisieren.Click -= btnNamenAnonymisieren_Click;
-                }
-
-                _btnNamenAnonymisieren = value;
-                if (_btnNamenAnonymisieren != null)
-                {
-                    _btnNamenAnonymisieren.Click += btnNamenAnonymisieren_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnNamenAnonymisieren;
     }
 }

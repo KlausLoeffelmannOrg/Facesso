@@ -35,7 +35,9 @@ namespace Facesso.Functions
             this.lstCostCenter = new System.Windows.Forms.ListBox();
             this.TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnCancel.Click += btnCancel_Click;
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.TableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             //
@@ -100,50 +102,8 @@ namespace Facesso.Functions
 
         internal System.Windows.Forms.ListBox lstCostCenter;
         internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;
-        private System.Windows.Forms.Button _btnCancel;
-        internal System.Windows.Forms.Button btnCancel
-        {
-            get
-            {
-                return _btnCancel;
-            }
+        internal System.Windows.Forms.Button btnCancel;
 
-            set
-            {
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click -= btnCancel_Click;
-                }
-
-                _btnCancel = value;
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click += btnCancel_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
-
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
-
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnOK;
     }
 }

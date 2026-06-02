@@ -34,16 +34,23 @@ namespace Facesso.Functions
         {
             this.GroupBox2 = new System.Windows.Forms.GroupBox();
             this.TabControl1 = new System.Windows.Forms.TabControl();
+            this.TabControl1.Selected += TabControl1_Selected;
             this.tpWorkgroups = new System.Windows.Forms.TabPage();
             this.lvwWorkgroups = new Facesso.GenericControls.ucWorkGroupListView();
             this.tpCostCenters = new System.Windows.Forms.TabPage();
             this.lvwCostCenter = new Facesso.GenericControls.ucCostCenterListView();
             this.btnDeselectAll = new System.Windows.Forms.Button();
+            this.btnDeselectAll.Click += btnDeselectAll_Click;
             this.btnSelectAll = new System.Windows.Forms.Button();
+            this.btnSelectAll.Click += btnSelectAll_Click;
             this.btnPreview = new System.Windows.Forms.Button();
+            this.btnPreview.Click += btnPreview_Click;
             this.btnPrint = new System.Windows.Forms.Button();
+            this.btnPrint.Click += btnPrint_Click;
             this.btnExport = new System.Windows.Forms.Button();
+            this.btnExport.Click += btnExport_Click;
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.lblPass = new System.Windows.Forms.Label();
             this.Label4 = new System.Windows.Forms.Label();
@@ -51,6 +58,7 @@ namespace Facesso.Functions
             this.GroupBox3 = new System.Windows.Forms.GroupBox();
             this.optGroupWorkvalues = new System.Windows.Forms.RadioButton();
             this.optGroupCostcenters = new System.Windows.Forms.RadioButton();
+            this.optGroupCostcenters.CheckedChanged += optGroupCostcenters_CheckedChanged;
             this.optStandardAnalysis = new System.Windows.Forms.RadioButton();
             this.Label3 = new System.Windows.Forms.Label();
             this.DateRangePicker = new Facesso.GenericControls.ucAnalysisDateRangePicker();
@@ -319,144 +327,18 @@ namespace Facesso.Functions
         }
 
         internal System.Windows.Forms.GroupBox GroupBox2;
-        private System.Windows.Forms.Button _btnPreview;
-        internal System.Windows.Forms.Button btnPreview
-        {
-            get
-            {
-                return _btnPreview;
-            }
+        internal System.Windows.Forms.Button btnPreview;
 
-            set
-            {
-                if (_btnPreview != null)
-                {
-                    _btnPreview.Click -= btnPreview_Click;
-                }
+        internal System.Windows.Forms.Button btnPrint;
 
-                _btnPreview = value;
-                if (_btnPreview != null)
-                {
-                    _btnPreview.Click += btnPreview_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnExport;
 
-        private System.Windows.Forms.Button _btnPrint;
-        internal System.Windows.Forms.Button btnPrint
-        {
-            get
-            {
-                return _btnPrint;
-            }
-
-            set
-            {
-                if (_btnPrint != null)
-                {
-                    _btnPrint.Click -= btnPrint_Click;
-                }
-
-                _btnPrint = value;
-                if (_btnPrint != null)
-                {
-                    _btnPrint.Click += btnPrint_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnExport;
-        internal System.Windows.Forms.Button btnExport
-        {
-            get
-            {
-                return _btnExport;
-            }
-
-            set
-            {
-                if (_btnExport != null)
-                {
-                    _btnExport.Click -= btnExport_Click;
-                }
-
-                _btnExport = value;
-                if (_btnExport != null)
-                {
-                    _btnExport.Click += btnExport_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
-
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
-
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnOK;
 
         internal Facesso.GenericControls.ucAnalysisDateRangePicker DateRangePicker;
-        private System.Windows.Forms.Button _btnSelectAll;
-        internal System.Windows.Forms.Button btnSelectAll
-        {
-            get
-            {
-                return _btnSelectAll;
-            }
+        internal System.Windows.Forms.Button btnSelectAll;
 
-            set
-            {
-                if (_btnSelectAll != null)
-                {
-                    _btnSelectAll.Click -= btnSelectAll_Click;
-                }
-
-                _btnSelectAll = value;
-                if (_btnSelectAll != null)
-                {
-                    _btnSelectAll.Click += btnSelectAll_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnDeselectAll;
-        internal System.Windows.Forms.Button btnDeselectAll
-        {
-            get
-            {
-                return _btnDeselectAll;
-            }
-
-            set
-            {
-                if (_btnDeselectAll != null)
-                {
-                    _btnDeselectAll.Click -= btnDeselectAll_Click;
-                }
-
-                _btnDeselectAll = value;
-                if (_btnDeselectAll != null)
-                {
-                    _btnDeselectAll.Click += btnDeselectAll_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnDeselectAll;
 
         internal System.Windows.Forms.GroupBox GroupBox1;
         internal System.Windows.Forms.Label Label4;
@@ -464,53 +346,11 @@ namespace Facesso.Functions
         internal System.Windows.Forms.Label lblPass;
         internal System.Windows.Forms.GroupBox GroupBox3;
         internal System.Windows.Forms.RadioButton optGroupWorkvalues;
-        private System.Windows.Forms.RadioButton _optGroupCostcenters;
-        internal System.Windows.Forms.RadioButton optGroupCostcenters
-        {
-            get
-            {
-                return _optGroupCostcenters;
-            }
-
-            set
-            {
-                if (_optGroupCostcenters != null)
-                {
-                    _optGroupCostcenters.CheckedChanged -= optGroupCostcenters_CheckedChanged;
-                }
-
-                _optGroupCostcenters = value;
-                if (_optGroupCostcenters != null)
-                {
-                    _optGroupCostcenters.CheckedChanged += optGroupCostcenters_CheckedChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.RadioButton optGroupCostcenters;
 
         internal System.Windows.Forms.RadioButton optStandardAnalysis;
         internal System.Windows.Forms.Label Label3;
-        private System.Windows.Forms.TabControl _TabControl1;
-        internal System.Windows.Forms.TabControl TabControl1
-        {
-            get
-            {
-                return _TabControl1;
-            }
-
-            set
-            {
-                if (_TabControl1 != null)
-                {
-                    _TabControl1.Selected -= TabControl1_Selected;
-                }
-
-                _TabControl1 = value;
-                if (_TabControl1 != null)
-                {
-                    _TabControl1.Selected += TabControl1_Selected;
-                }
-            }
-        }
+        internal System.Windows.Forms.TabControl TabControl1;
 
         internal System.Windows.Forms.TabPage tpWorkgroups;
         internal Facesso.GenericControls.ucWorkGroupListView lvwWorkgroups;

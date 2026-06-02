@@ -33,6 +33,7 @@ namespace Facesso.Functions
         private void InitializeComponent()
         {
             this.btnPrint = new System.Windows.Forms.Button();
+            this.btnPrint.Click += btnPrint_Click;
             this.btnOK = new System.Windows.Forms.Button();
             this.optOnlyPrintWorkgroups = new System.Windows.Forms.RadioButton();
             this.optPrintWorkgroups = new System.Windows.Forms.RadioButton();
@@ -160,28 +161,7 @@ namespace Facesso.Functions
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.Button _btnPrint;
-        internal System.Windows.Forms.Button btnPrint
-        {
-            get
-            {
-                return _btnPrint;
-            }
-
-            set
-            {
-                if (_btnPrint != null)
-                {
-                    _btnPrint.Click -= btnPrint_Click;
-                }
-
-                _btnPrint = value;
-                if (_btnPrint != null)
-                {
-                    _btnPrint.Click += btnPrint_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnPrint;
 
         internal System.Windows.Forms.Button btnOK;
         internal System.Windows.Forms.RadioButton optOnlyPrintWorkgroups;

@@ -15,6 +15,7 @@ namespace ActiveDev.Controls
     internal class ADCheckBoxedValueForNullableValueControl : ADEditableValueForNullableValueControlTemplate<bool>
     {
         private CheckBox _myCheckBox;
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         protected CheckBox myCheckBox
         {
             get

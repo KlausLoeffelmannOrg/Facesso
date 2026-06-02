@@ -33,16 +33,23 @@ namespace Facesso.Functions
         private void InitializeComponent()
         {
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
             this.Label2 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnRefresh.Click += btnRefresh_Click;
             this.btnPrint = new System.Windows.Forms.Button();
+            this.btnPrint.Click += btnPrint_Click;
             this.btnCurrentMonth = new System.Windows.Forms.Button();
+            this.btnCurrentMonth.Click += btnCurrentMonth_Click;
             this.btnLastMonth = new System.Windows.Forms.Button();
+            this.btnLastMonth.Click += btnLastMonth_Click;
             this.btnSecondLastMonth = new System.Windows.Forms.Button();
+            this.btnSecondLastMonth.Click += btnSecondLastMonth_Click;
             this.dgvTimeList = new Facesso.GenericControls.ucTimeLogItemsDataGridView();
+            this.dgvTimeList.TimeLogItemDoubleClick += dgvTimeList_TimeLogItemDoubleClick;
             ((System.ComponentModel.ISupportInitialize)this.dgvTimeList).BeginInit();
             this.SuspendLayout();
             //
@@ -170,169 +177,22 @@ namespace Facesso.Functions
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
-
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
-
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnOK;
 
         internal System.Windows.Forms.DateTimePicker dtpTo;
         internal System.Windows.Forms.DateTimePicker dtpFrom;
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.Label Label1;
-        private Facesso.GenericControls.ucTimeLogItemsDataGridView _dgvTimeList;
-        internal Facesso.GenericControls.ucTimeLogItemsDataGridView dgvTimeList
-        {
-            get
-            {
-                return _dgvTimeList;
-            }
+        internal Facesso.GenericControls.ucTimeLogItemsDataGridView dgvTimeList;
 
-            set
-            {
-                if (_dgvTimeList != null)
-                {
-                    _dgvTimeList.TimeLogItemDoubleClick -= dgvTimeList_TimeLogItemDoubleClick;
-                }
+        internal System.Windows.Forms.Button btnRefresh;
 
-                _dgvTimeList = value;
-                if (_dgvTimeList != null)
-                {
-                    _dgvTimeList.TimeLogItemDoubleClick += dgvTimeList_TimeLogItemDoubleClick;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnPrint;
 
-        private System.Windows.Forms.Button _btnRefresh;
-        internal System.Windows.Forms.Button btnRefresh
-        {
-            get
-            {
-                return _btnRefresh;
-            }
+        internal System.Windows.Forms.Button btnCurrentMonth;
 
-            set
-            {
-                if (_btnRefresh != null)
-                {
-                    _btnRefresh.Click -= btnRefresh_Click;
-                }
+        internal System.Windows.Forms.Button btnLastMonth;
 
-                _btnRefresh = value;
-                if (_btnRefresh != null)
-                {
-                    _btnRefresh.Click += btnRefresh_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnPrint;
-        internal System.Windows.Forms.Button btnPrint
-        {
-            get
-            {
-                return _btnPrint;
-            }
-
-            set
-            {
-                if (_btnPrint != null)
-                {
-                    _btnPrint.Click -= btnPrint_Click;
-                }
-
-                _btnPrint = value;
-                if (_btnPrint != null)
-                {
-                    _btnPrint.Click += btnPrint_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnCurrentMonth;
-        internal System.Windows.Forms.Button btnCurrentMonth
-        {
-            get
-            {
-                return _btnCurrentMonth;
-            }
-
-            set
-            {
-                if (_btnCurrentMonth != null)
-                {
-                    _btnCurrentMonth.Click -= btnCurrentMonth_Click;
-                }
-
-                _btnCurrentMonth = value;
-                if (_btnCurrentMonth != null)
-                {
-                    _btnCurrentMonth.Click += btnCurrentMonth_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnLastMonth;
-        internal System.Windows.Forms.Button btnLastMonth
-        {
-            get
-            {
-                return _btnLastMonth;
-            }
-
-            set
-            {
-                if (_btnLastMonth != null)
-                {
-                    _btnLastMonth.Click -= btnLastMonth_Click;
-                }
-
-                _btnLastMonth = value;
-                if (_btnLastMonth != null)
-                {
-                    _btnLastMonth.Click += btnLastMonth_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnSecondLastMonth;
-        internal System.Windows.Forms.Button btnSecondLastMonth
-        {
-            get
-            {
-                return _btnSecondLastMonth;
-            }
-
-            set
-            {
-                if (_btnSecondLastMonth != null)
-                {
-                    _btnSecondLastMonth.Click -= btnSecondLastMonth_Click;
-                }
-
-                _btnSecondLastMonth = value;
-                if (_btnSecondLastMonth != null)
-                {
-                    _btnSecondLastMonth.Click += btnSecondLastMonth_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnSecondLastMonth;
     }
 }

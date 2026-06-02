@@ -36,9 +36,13 @@ namespace Facesso.Functions
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.elvEmployees = new Facesso.GenericControls.ucEmployeeListView();
             this.btnUnselectAll = new System.Windows.Forms.Button();
+            this.btnUnselectAll.Click += btnUnselectAll_Click;
             this.btnSelectAll = new System.Windows.Forms.Button();
+            this.btnSelectAll.Click += btnSelectAll_Click;
             this.btnPerformCalculation = new System.Windows.Forms.Button();
+            this.btnPerformCalculation.Click += btnPerformCalculation_Click;
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.Label1 = new System.Windows.Forms.Label();
             this.pbEmployeesToAnalyse = new System.Windows.Forms.ProgressBar();
             this.lblCurrentEmployee = new System.Windows.Forms.Label();
@@ -181,97 +185,13 @@ namespace Facesso.Functions
         }
 
         internal System.Windows.Forms.GroupBox GroupBox1;
-        private System.Windows.Forms.Button _btnSelectAll;
-        internal System.Windows.Forms.Button btnSelectAll
-        {
-            get
-            {
-                return _btnSelectAll;
-            }
+        internal System.Windows.Forms.Button btnSelectAll;
 
-            set
-            {
-                if (_btnSelectAll != null)
-                {
-                    _btnSelectAll.Click -= btnSelectAll_Click;
-                }
+        internal System.Windows.Forms.Button btnUnselectAll;
 
-                _btnSelectAll = value;
-                if (_btnSelectAll != null)
-                {
-                    _btnSelectAll.Click += btnSelectAll_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnPerformCalculation;
 
-        private System.Windows.Forms.Button _btnUnselectAll;
-        internal System.Windows.Forms.Button btnUnselectAll
-        {
-            get
-            {
-                return _btnUnselectAll;
-            }
-
-            set
-            {
-                if (_btnUnselectAll != null)
-                {
-                    _btnUnselectAll.Click -= btnUnselectAll_Click;
-                }
-
-                _btnUnselectAll = value;
-                if (_btnUnselectAll != null)
-                {
-                    _btnUnselectAll.Click += btnUnselectAll_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnPerformCalculation;
-        internal System.Windows.Forms.Button btnPerformCalculation
-        {
-            get
-            {
-                return _btnPerformCalculation;
-            }
-
-            set
-            {
-                if (_btnPerformCalculation != null)
-                {
-                    _btnPerformCalculation.Click -= btnPerformCalculation_Click;
-                }
-
-                _btnPerformCalculation = value;
-                if (_btnPerformCalculation != null)
-                {
-                    _btnPerformCalculation.Click += btnPerformCalculation_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
-
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
-
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnOK;
 
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.ProgressBar pbEmployeesToAnalyse;

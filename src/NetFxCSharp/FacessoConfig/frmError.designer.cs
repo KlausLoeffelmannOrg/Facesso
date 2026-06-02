@@ -36,6 +36,7 @@ namespace FacessoConfig
         {
             this.Label1 = new System.Windows.Forms.Label();
             this.Button1 = new System.Windows.Forms.Button();
+            this.Button1.Click += Button1_Click;
             this.txtExceptionMessage = new System.Windows.Forms.TextBox();
             this.Label2 = new System.Windows.Forms.Label();
             this.lblExceptionText = new System.Windows.Forms.Label();
@@ -116,28 +117,7 @@ namespace FacessoConfig
         }
 
         internal System.Windows.Forms.Label Label1;
-        private System.Windows.Forms.Button _Button1;
-        internal System.Windows.Forms.Button Button1
-        {
-            get
-            {
-                return _Button1;
-            }
-
-            set
-            {
-                if (_Button1 != null)
-                {
-                    _Button1.Click -= Button1_Click;
-                }
-
-                _Button1 = value;
-                if (_Button1 != null)
-                {
-                    _Button1.Click += Button1_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button Button1;
 
         internal System.Windows.Forms.TextBox txtExceptionMessage;
         internal System.Windows.Forms.Label Label2;

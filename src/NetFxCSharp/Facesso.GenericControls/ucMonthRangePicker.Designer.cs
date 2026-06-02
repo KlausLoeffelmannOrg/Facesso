@@ -36,14 +36,20 @@ namespace Facesso.GenericControls
         {
             this.Label4 = new System.Windows.Forms.Label();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
+            this.dtpTo.ValueChanged += dtps_ValuesChanged;
             this.Label3 = new System.Windows.Forms.Label();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
+            this.dtpFrom.ValueChanged += dtps_ValuesChanged;
             this.GroupBox2 = new System.Windows.Forms.GroupBox();
             this.optSecondLastMonth = new System.Windows.Forms.RadioButton();
+            this.optSecondLastMonth.CheckedChanged += optRelatedMonth_Changed;
             this.optPreviousMonth = new System.Windows.Forms.RadioButton();
+            this.optPreviousMonth.CheckedChanged += optRelatedMonth_Changed;
             this.optCurrentMonth = new System.Windows.Forms.RadioButton();
+            this.optCurrentMonth.CheckedChanged += optRelatedMonth_Changed;
             this.Label2 = new System.Windows.Forms.Label();
             this.cmbMonthRange = new System.Windows.Forms.ComboBox();
+            this.cmbMonthRange.SelectedIndexChanged += cmbMonthRange_SelectedIndexChanged;
             this.optFreeRange = new System.Windows.Forms.RadioButton();
             this.optRelatedMonth = new System.Windows.Forms.RadioButton();
             this.GroupBox2.SuspendLayout();
@@ -189,146 +195,20 @@ namespace Facesso.GenericControls
         }
 
         internal System.Windows.Forms.Label Label4;
-        private System.Windows.Forms.DateTimePicker _dtpTo;
-        internal System.Windows.Forms.DateTimePicker dtpTo
-        {
-            get
-            {
-                return _dtpTo;
-            }
-
-            set
-            {
-                if (_dtpTo != null)
-                {
-                    _dtpTo.ValueChanged -= dtps_ValuesChanged;
-                }
-
-                _dtpTo = value;
-                if (_dtpTo != null)
-                {
-                    _dtpTo.ValueChanged += dtps_ValuesChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.DateTimePicker dtpTo;
 
         internal System.Windows.Forms.Label Label3;
-        private System.Windows.Forms.DateTimePicker _dtpFrom;
-        internal System.Windows.Forms.DateTimePicker dtpFrom
-        {
-            get
-            {
-                return _dtpFrom;
-            }
-
-            set
-            {
-                if (_dtpFrom != null)
-                {
-                    _dtpFrom.ValueChanged -= dtps_ValuesChanged;
-                }
-
-                _dtpFrom = value;
-                if (_dtpFrom != null)
-                {
-                    _dtpFrom.ValueChanged += dtps_ValuesChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.DateTimePicker dtpFrom;
 
         internal System.Windows.Forms.GroupBox GroupBox2;
-        private System.Windows.Forms.RadioButton _optSecondLastMonth;
-        internal System.Windows.Forms.RadioButton optSecondLastMonth
-        {
-            get
-            {
-                return _optSecondLastMonth;
-            }
+        internal System.Windows.Forms.RadioButton optSecondLastMonth;
 
-            set
-            {
-                if (_optSecondLastMonth != null)
-                {
-                    _optSecondLastMonth.CheckedChanged -= optRelatedMonth_Changed;
-                }
+        internal System.Windows.Forms.RadioButton optPreviousMonth;
 
-                _optSecondLastMonth = value;
-                if (_optSecondLastMonth != null)
-                {
-                    _optSecondLastMonth.CheckedChanged += optRelatedMonth_Changed;
-                }
-            }
-        }
-
-        private System.Windows.Forms.RadioButton _optPreviousMonth;
-        internal System.Windows.Forms.RadioButton optPreviousMonth
-        {
-            get
-            {
-                return _optPreviousMonth;
-            }
-
-            set
-            {
-                if (_optPreviousMonth != null)
-                {
-                    _optPreviousMonth.CheckedChanged -= optRelatedMonth_Changed;
-                }
-
-                _optPreviousMonth = value;
-                if (_optPreviousMonth != null)
-                {
-                    _optPreviousMonth.CheckedChanged += optRelatedMonth_Changed;
-                }
-            }
-        }
-
-        private System.Windows.Forms.RadioButton _optCurrentMonth;
-        internal System.Windows.Forms.RadioButton optCurrentMonth
-        {
-            get
-            {
-                return _optCurrentMonth;
-            }
-
-            set
-            {
-                if (_optCurrentMonth != null)
-                {
-                    _optCurrentMonth.CheckedChanged -= optRelatedMonth_Changed;
-                }
-
-                _optCurrentMonth = value;
-                if (_optCurrentMonth != null)
-                {
-                    _optCurrentMonth.CheckedChanged += optRelatedMonth_Changed;
-                }
-            }
-        }
+        internal System.Windows.Forms.RadioButton optCurrentMonth;
 
         internal System.Windows.Forms.Label Label2;
-        private System.Windows.Forms.ComboBox _cmbMonthRange;
-        internal System.Windows.Forms.ComboBox cmbMonthRange
-        {
-            get
-            {
-                return _cmbMonthRange;
-            }
-
-            set
-            {
-                if (_cmbMonthRange != null)
-                {
-                    _cmbMonthRange.SelectedIndexChanged -= cmbMonthRange_SelectedIndexChanged;
-                }
-
-                _cmbMonthRange = value;
-                if (_cmbMonthRange != null)
-                {
-                    _cmbMonthRange.SelectedIndexChanged += cmbMonthRange_SelectedIndexChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.ComboBox cmbMonthRange;
 
         internal System.Windows.Forms.RadioButton optFreeRange;
         internal System.Windows.Forms.RadioButton optRelatedMonth;

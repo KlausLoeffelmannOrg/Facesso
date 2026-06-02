@@ -35,14 +35,18 @@ namespace Facesso.Interfaces
             this.lblTitel = new System.Windows.Forms.Label();
             this.lvwDeviceItems = new System.Windows.Forms.ListView();
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnCancel.Click += btnCancel_Click;
             this.ucLabourValues = new Facesso.GenericControls.ucLabourValueListView();
             this.TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.GroupBox2 = new System.Windows.Forms.GroupBox();
             this.TableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnRemove = new System.Windows.Forms.Button();
+            this.btnRemove.Click += btnRemove_Click;
             this.btnAdd = new System.Windows.Forms.Button();
+            this.btnAdd.Click += btnAdd_Click;
             this.TableLayoutPanel1.SuspendLayout();
             this.GroupBox1.SuspendLayout();
             this.GroupBox2.SuspendLayout();
@@ -205,101 +209,17 @@ namespace Facesso.Interfaces
 
         protected internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;
         protected internal System.Windows.Forms.Label lblTitel;
-        private System.Windows.Forms.Button _btnOK;
-        protected internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
+        protected internal System.Windows.Forms.Button btnOK;
 
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
-
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnCancel;
-        protected internal System.Windows.Forms.Button btnCancel
-        {
-            get
-            {
-                return _btnCancel;
-            }
-
-            set
-            {
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click -= btnCancel_Click;
-                }
-
-                _btnCancel = value;
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click += btnCancel_Click;
-                }
-            }
-        }
+        protected internal System.Windows.Forms.Button btnCancel;
 
         protected internal System.Windows.Forms.ListView lvwDeviceItems;
         protected internal Facesso.GenericControls.ucLabourValueListView ucLabourValues;
         protected internal System.Windows.Forms.GroupBox GroupBox1;
         protected internal System.Windows.Forms.GroupBox GroupBox2;
         protected internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel2;
-        private System.Windows.Forms.Button _btnRemove;
-        protected internal System.Windows.Forms.Button btnRemove
-        {
-            get
-            {
-                return _btnRemove;
-            }
+        protected internal System.Windows.Forms.Button btnRemove;
 
-            set
-            {
-                if (_btnRemove != null)
-                {
-                    _btnRemove.Click -= btnRemove_Click;
-                }
-
-                _btnRemove = value;
-                if (_btnRemove != null)
-                {
-                    _btnRemove.Click += btnRemove_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnAdd;
-        protected internal System.Windows.Forms.Button btnAdd
-        {
-            get
-            {
-                return _btnAdd;
-            }
-
-            set
-            {
-                if (_btnAdd != null)
-                {
-                    _btnAdd.Click -= btnAdd_Click;
-                }
-
-                _btnAdd = value;
-                if (_btnAdd != null)
-                {
-                    _btnAdd.Click += btnAdd_Click;
-                }
-            }
-        }
+        protected internal System.Windows.Forms.Button btnAdd;
     }
 }

@@ -44,7 +44,9 @@ namespace Facesso.Functions
             this.dtpValidFrom = new System.Windows.Forms.DateTimePicker();
             this.tbHandicap = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
+            this.btnOk.Click += btnOk_Click;
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnCancel.Click += btnCancel_Click;
             this.SuspendLayout();
             //
             //lblEmployee
@@ -137,50 +139,8 @@ namespace Facesso.Functions
         internal System.Windows.Forms.Label Label3;
         internal System.Windows.Forms.DateTimePicker dtpValidFrom;
         internal System.Windows.Forms.TextBox tbHandicap;
-        private System.Windows.Forms.Button _btnOk;
-        internal System.Windows.Forms.Button btnOk
-        {
-            get
-            {
-                return _btnOk;
-            }
+        internal System.Windows.Forms.Button btnOk;
 
-            set
-            {
-                if (_btnOk != null)
-                {
-                    _btnOk.Click -= btnOk_Click;
-                }
-
-                _btnOk = value;
-                if (_btnOk != null)
-                {
-                    _btnOk.Click += btnOk_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnCancel;
-        internal System.Windows.Forms.Button btnCancel
-        {
-            get
-            {
-                return _btnCancel;
-            }
-
-            set
-            {
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click -= btnCancel_Click;
-                }
-
-                _btnCancel = value;
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click += btnCancel_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnCancel;
     }
 }

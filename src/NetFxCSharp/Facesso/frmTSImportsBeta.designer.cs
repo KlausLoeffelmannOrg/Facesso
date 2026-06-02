@@ -37,14 +37,18 @@ namespace Facesso
             this.Label1 = new System.Windows.Forms.Label();
             this.txtAccessPathAndFile = new System.Windows.Forms.TextBox();
             this.btnOpenFile = new System.Windows.Forms.Button();
+            this.btnOpenFile.Click += btnOpenFile_Click;
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.btnImportNow = new System.Windows.Forms.Button();
+            this.btnImportNow.Click += btnImportNow_Click;
             this.lblStatus = new System.Windows.Forms.Label();
             this.chkTransformProductionData = new System.Windows.Forms.CheckBox();
             this.chkTransformEmployeeTimes = new System.Windows.Forms.CheckBox();
             this.chkAllowNewCostCenterAlignment = new System.Windows.Forms.CheckBox();
             this.chkTransformBaseData = new System.Windows.Forms.CheckBox();
             this.chkGenerateRandomData = new System.Windows.Forms.CheckBox();
+            this.chkGenerateRandomData.CheckedChanged += chkGenerateRandomData_CheckedChanged;
             this.ndbTransformFrom = new ActiveDev.Controls.ADNullableDateTimeBox();
             this.adinMonthToAdd = new ActiveDev.Controls.ADNullableIntBox();
             this.SuspendLayout();
@@ -221,102 +225,18 @@ namespace Facesso
 
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.TextBox txtAccessPathAndFile;
-        private System.Windows.Forms.Button _btnOpenFile;
-        internal System.Windows.Forms.Button btnOpenFile
-        {
-            get
-            {
-                return _btnOpenFile;
-            }
+        internal System.Windows.Forms.Button btnOpenFile;
 
-            set
-            {
-                if (_btnOpenFile != null)
-                {
-                    _btnOpenFile.Click -= btnOpenFile_Click;
-                }
+        internal System.Windows.Forms.Button btnOK;
 
-                _btnOpenFile = value;
-                if (_btnOpenFile != null)
-                {
-                    _btnOpenFile.Click += btnOpenFile_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
-
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
-
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnImportNow;
-        internal System.Windows.Forms.Button btnImportNow
-        {
-            get
-            {
-                return _btnImportNow;
-            }
-
-            set
-            {
-                if (_btnImportNow != null)
-                {
-                    _btnImportNow.Click -= btnImportNow_Click;
-                }
-
-                _btnImportNow = value;
-                if (_btnImportNow != null)
-                {
-                    _btnImportNow.Click += btnImportNow_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnImportNow;
 
         internal System.Windows.Forms.Label lblStatus;
         internal System.Windows.Forms.CheckBox chkTransformProductionData;
         internal System.Windows.Forms.CheckBox chkTransformEmployeeTimes;
         internal System.Windows.Forms.CheckBox chkAllowNewCostCenterAlignment;
         internal System.Windows.Forms.CheckBox chkTransformBaseData;
-        private System.Windows.Forms.CheckBox _chkGenerateRandomData;
-        internal System.Windows.Forms.CheckBox chkGenerateRandomData
-        {
-            get
-            {
-                return _chkGenerateRandomData;
-            }
-
-            set
-            {
-                if (_chkGenerateRandomData != null)
-                {
-                    _chkGenerateRandomData.CheckedChanged -= chkGenerateRandomData_CheckedChanged;
-                }
-
-                _chkGenerateRandomData = value;
-                if (_chkGenerateRandomData != null)
-                {
-                    _chkGenerateRandomData.CheckedChanged += chkGenerateRandomData_CheckedChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.CheckBox chkGenerateRandomData;
 
         internal ActiveDev.Controls.ADNullableDateTimeBox ndbTransformFrom;
         internal ActiveDev.Controls.ADNullableIntBox adinMonthToAdd;

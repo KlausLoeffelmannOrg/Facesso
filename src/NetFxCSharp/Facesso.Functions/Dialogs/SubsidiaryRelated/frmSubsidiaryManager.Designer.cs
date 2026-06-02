@@ -36,8 +36,11 @@ namespace Facesso.Functions
             this.tcSubsidiaries = new System.Windows.Forms.TabControl();
             this.tpSubsidiaries = new System.Windows.Forms.TabPage();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnDelete.Click += btnDelete_Click;
             this.btnEdit = new System.Windows.Forms.Button();
+            this.btnEdit.Click += btnEdit_Click;
             this.btnNew = new System.Windows.Forms.Button();
+            this.btnNew.Click += btnNew_Click;
             this.arvSubsidiaries = new ActiveDev.ADAutoReportView();
             this.tpTerminology = new System.Windows.Forms.TabPage();
             this.btnApplyNewTerm = new System.Windows.Forms.Button();
@@ -46,6 +49,7 @@ namespace Facesso.Functions
             this.Label2 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.tcSubsidiaries.SuspendLayout();
             this.tpSubsidiaries.SuspendLayout();
             this.tpTerminology.SuspendLayout();
@@ -206,97 +210,13 @@ namespace Facesso.Functions
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.Button btnApplyNewTerm;
         internal System.Windows.Forms.TextBox txtSubsidiarySynonym;
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
+        internal System.Windows.Forms.Button btnOK;
 
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
+        internal System.Windows.Forms.Button btnDelete;
 
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnEdit;
 
-        private System.Windows.Forms.Button _btnDelete;
-        internal System.Windows.Forms.Button btnDelete
-        {
-            get
-            {
-                return _btnDelete;
-            }
-
-            set
-            {
-                if (_btnDelete != null)
-                {
-                    _btnDelete.Click -= btnDelete_Click;
-                }
-
-                _btnDelete = value;
-                if (_btnDelete != null)
-                {
-                    _btnDelete.Click += btnDelete_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnEdit;
-        internal System.Windows.Forms.Button btnEdit
-        {
-            get
-            {
-                return _btnEdit;
-            }
-
-            set
-            {
-                if (_btnEdit != null)
-                {
-                    _btnEdit.Click -= btnEdit_Click;
-                }
-
-                _btnEdit = value;
-                if (_btnEdit != null)
-                {
-                    _btnEdit.Click += btnEdit_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnNew;
-        internal System.Windows.Forms.Button btnNew
-        {
-            get
-            {
-                return _btnNew;
-            }
-
-            set
-            {
-                if (_btnNew != null)
-                {
-                    _btnNew.Click -= btnNew_Click;
-                }
-
-                _btnNew = value;
-                if (_btnNew != null)
-                {
-                    _btnNew.Click += btnNew_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnNew;
 
         internal ActiveDev.ADAutoReportView arvSubsidiaries;
     }

@@ -46,15 +46,22 @@ namespace Facesso.Functions
             System.Windows.Forms.DataVisualization.Charting.Title Title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.ToolStrip1 = new System.Windows.Forms.ToolStrip();
             this.NewToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.NewToolStripButton.Click += NewToolStripButton_Click;
             this.SaveToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.SaveToolStripButton.Click += SaveToolStripButton_Click;
             this.PrintToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.PrintToolStripButton.Click += PrintToolStripButton_Click;
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.CopyToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.CopyToolStripButton.Click += CopyToolStripButton_Click;
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.EditToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.EditToolStripButton.Click += EditToolStripButton_Click;
             this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.Chart3DToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.Chart3DToolStripButton.Click += Chart3DToolStripButton_Click;
             this.ShowValuesInChartToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.ShowValuesInChartToolStripButton.Click += ShowValuesInChartToolStripButton_Click;
             this.WorkgroupsDropDownItems = new System.Windows.Forms.ToolStripDropDownButton();
             this.TestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Panel1 = new System.Windows.Forms.Panel();
@@ -251,171 +258,24 @@ namespace Facesso.Functions
         }
 
         internal System.Windows.Forms.ToolStrip ToolStrip1;
-        private System.Windows.Forms.ToolStripButton _NewToolStripButton;
-        internal System.Windows.Forms.ToolStripButton NewToolStripButton
-        {
-            get
-            {
-                return _NewToolStripButton;
-            }
+        internal System.Windows.Forms.ToolStripButton NewToolStripButton;
 
-            set
-            {
-                if (_NewToolStripButton != null)
-                {
-                    _NewToolStripButton.Click -= NewToolStripButton_Click;
-                }
+        internal System.Windows.Forms.ToolStripButton SaveToolStripButton;
 
-                _NewToolStripButton = value;
-                if (_NewToolStripButton != null)
-                {
-                    _NewToolStripButton.Click += NewToolStripButton_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripButton _SaveToolStripButton;
-        internal System.Windows.Forms.ToolStripButton SaveToolStripButton
-        {
-            get
-            {
-                return _SaveToolStripButton;
-            }
-
-            set
-            {
-                if (_SaveToolStripButton != null)
-                {
-                    _SaveToolStripButton.Click -= SaveToolStripButton_Click;
-                }
-
-                _SaveToolStripButton = value;
-                if (_SaveToolStripButton != null)
-                {
-                    _SaveToolStripButton.Click += SaveToolStripButton_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripButton _PrintToolStripButton;
-        internal System.Windows.Forms.ToolStripButton PrintToolStripButton
-        {
-            get
-            {
-                return _PrintToolStripButton;
-            }
-
-            set
-            {
-                if (_PrintToolStripButton != null)
-                {
-                    _PrintToolStripButton.Click -= PrintToolStripButton_Click;
-                }
-
-                _PrintToolStripButton = value;
-                if (_PrintToolStripButton != null)
-                {
-                    _PrintToolStripButton.Click += PrintToolStripButton_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripButton PrintToolStripButton;
 
         internal System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripButton _CopyToolStripButton;
-        internal System.Windows.Forms.ToolStripButton CopyToolStripButton
-        {
-            get
-            {
-                return _CopyToolStripButton;
-            }
-
-            set
-            {
-                if (_CopyToolStripButton != null)
-                {
-                    _CopyToolStripButton.Click -= CopyToolStripButton_Click;
-                }
-
-                _CopyToolStripButton = value;
-                if (_CopyToolStripButton != null)
-                {
-                    _CopyToolStripButton.Click += CopyToolStripButton_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripButton CopyToolStripButton;
 
         internal System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton _EditToolStripButton;
-        internal System.Windows.Forms.ToolStripButton EditToolStripButton
-        {
-            get
-            {
-                return _EditToolStripButton;
-            }
-
-            set
-            {
-                if (_EditToolStripButton != null)
-                {
-                    _EditToolStripButton.Click -= EditToolStripButton_Click;
-                }
-
-                _EditToolStripButton = value;
-                if (_EditToolStripButton != null)
-                {
-                    _EditToolStripButton.Click += EditToolStripButton_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripButton EditToolStripButton;
 
         internal System.Windows.Forms.Panel Panel1;
         internal System.Windows.Forms.DataVisualization.Charting.Chart mainChart;
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton _Chart3DToolStripButton;
-        internal System.Windows.Forms.ToolStripButton Chart3DToolStripButton
-        {
-            get
-            {
-                return _Chart3DToolStripButton;
-            }
+        internal System.Windows.Forms.ToolStripButton Chart3DToolStripButton;
 
-            set
-            {
-                if (_Chart3DToolStripButton != null)
-                {
-                    _Chart3DToolStripButton.Click -= Chart3DToolStripButton_Click;
-                }
-
-                _Chart3DToolStripButton = value;
-                if (_Chart3DToolStripButton != null)
-                {
-                    _Chart3DToolStripButton.Click += Chart3DToolStripButton_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripButton _ShowValuesInChartToolStripButton;
-        internal System.Windows.Forms.ToolStripButton ShowValuesInChartToolStripButton
-        {
-            get
-            {
-                return _ShowValuesInChartToolStripButton;
-            }
-
-            set
-            {
-                if (_ShowValuesInChartToolStripButton != null)
-                {
-                    _ShowValuesInChartToolStripButton.Click -= ShowValuesInChartToolStripButton_Click;
-                }
-
-                _ShowValuesInChartToolStripButton = value;
-                if (_ShowValuesInChartToolStripButton != null)
-                {
-                    _ShowValuesInChartToolStripButton.Click += ShowValuesInChartToolStripButton_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripButton ShowValuesInChartToolStripButton;
 
         internal System.Windows.Forms.ToolStripDropDownButton WorkgroupsDropDownItems;
         internal System.Windows.Forms.ToolStripMenuItem TestToolStripMenuItem;

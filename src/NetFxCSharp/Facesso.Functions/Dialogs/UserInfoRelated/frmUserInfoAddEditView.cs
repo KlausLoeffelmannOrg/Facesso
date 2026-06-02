@@ -39,76 +39,13 @@ namespace Facesso.Functions
 
         internal System.Windows.Forms.Label Label3;
         internal System.Windows.Forms.TextBox txtPasswordRepetition;
-        private System.Windows.Forms.TextBox _txtPassword;
-        internal System.Windows.Forms.TextBox txtPassword
-        {
-            get
-            {
-                return _txtPassword;
-            }
-
-            set
-            {
-                if (_txtPassword != null)
-                {
-                    _txtPassword.TextChanged -= txtPassword_TextChanged;
-                }
-
-                _txtPassword = value;
-                if (_txtPassword != null)
-                {
-                    _txtPassword.TextChanged += txtPassword_TextChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.TextBox txtPassword;
 
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.Label lblRoles;
-        private Facesso.GenericControls.ucClearanceLevelCheckListBox _clbClearanceLevel;
-        internal Facesso.GenericControls.ucClearanceLevelCheckListBox clbClearanceLevel
-        {
-            get
-            {
-                return _clbClearanceLevel;
-            }
+        internal Facesso.GenericControls.ucClearanceLevelCheckListBox clbClearanceLevel;
 
-            set
-            {
-                if (_clbClearanceLevel != null)
-                {
-                    _clbClearanceLevel.ValueChanged -= clbClearanceLevel_ValueChanged;
-                }
-
-                _clbClearanceLevel = value;
-                if (_clbClearanceLevel != null)
-                {
-                    _clbClearanceLevel.ValueChanged += clbClearanceLevel_ValueChanged;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnAddressDetails;
-        internal System.Windows.Forms.Button btnAddressDetails
-        {
-            get
-            {
-                return _btnAddressDetails;
-            }
-
-            set
-            {
-                if (_btnAddressDetails != null)
-                {
-                    _btnAddressDetails.Click -= btnAddressDetails_Click;
-                }
-
-                _btnAddressDetails = value;
-                if (_btnAddressDetails != null)
-                {
-                    _btnAddressDetails.Click += btnAddressDetails_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnAddressDetails;
 
         internal ActiveDev.Controls.ADNullableTextBox ntbComment;
         internal ActiveDev.Controls.ADNullableDateTimeBox ndbExpireDate;
@@ -130,10 +67,13 @@ namespace Facesso.Functions
             this.Label3 = new System.Windows.Forms.Label();
             this.txtPasswordRepetition = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
+            this.txtPassword.TextChanged += txtPassword_TextChanged;
             this.Label2 = new System.Windows.Forms.Label();
             this.lblRoles = new System.Windows.Forms.Label();
             this.clbClearanceLevel = new Facesso.GenericControls.ucClearanceLevelCheckListBox();
+            this.clbClearanceLevel.ValueChanged += clbClearanceLevel_ValueChanged;
             this.btnAddressDetails = new System.Windows.Forms.Button();
+            this.btnAddressDetails.Click += btnAddressDetails_Click;
             this.ntbComment = new ActiveDev.Controls.ADNullableTextBox();
             this.ndbExpireDate = new ActiveDev.Controls.ADNullableDateTimeBox();
             this.ncbIsActivated = new ActiveDev.Controls.ADNullableCheckBox();

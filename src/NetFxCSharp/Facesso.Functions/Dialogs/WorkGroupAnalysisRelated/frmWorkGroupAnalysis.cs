@@ -17,6 +17,7 @@ namespace Facesso.Functions
     {
         //Wizard-Handler
         private ADWizardController _myWizardController;
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         private ADWizardController myWizardController
         {
             get

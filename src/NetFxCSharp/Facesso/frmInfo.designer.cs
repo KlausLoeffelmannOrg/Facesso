@@ -43,6 +43,7 @@ namespace Facesso
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.Version = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.lblSerial = new System.Windows.Forms.Label();
             this.Label2 = new System.Windows.Forms.Label();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
@@ -199,28 +200,7 @@ namespace Facesso
 
         internal System.Windows.Forms.PictureBox PictureBox1;
         internal System.Windows.Forms.Label Version;
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
-
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
-
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnOK;
 
         internal System.Windows.Forms.Label lblSerial;
         internal System.Windows.Forms.Label Label2;

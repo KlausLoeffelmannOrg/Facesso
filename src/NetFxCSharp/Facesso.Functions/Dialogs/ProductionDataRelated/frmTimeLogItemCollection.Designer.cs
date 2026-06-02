@@ -33,10 +33,12 @@ namespace Facesso.Functions
         private void InitializeComponent()
         {
             this.btnShiftStart = new System.Windows.Forms.Button();
+            this.btnShiftStart.Click += btnShiftStart_Click;
             this.lblMinutesAttendance = new System.Windows.Forms.Label();
             this.Label2 = new System.Windows.Forms.Label();
             this.lblShiftStartDate = new System.Windows.Forms.Label();
             this.btnShiftEnd = new System.Windows.Forms.Button();
+            this.btnShiftEnd.Click += btnShiftEnd_Click;
             this.lblShiftEndDate = new System.Windows.Forms.Label();
             this.Label5 = new System.Windows.Forms.Label();
             this.Label6 = new System.Windows.Forms.Label();
@@ -46,17 +48,24 @@ namespace Facesso.Functions
             this.Label10 = new System.Windows.Forms.Label();
             this.lblMinutesEffectiveAdj = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.Label12 = new System.Windows.Forms.Label();
             this.Button1 = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnCancel.Click += btnCancel_Click;
             this.Label1 = new System.Windows.Forms.Label();
             this.lblMinutesWorkingTime = new System.Windows.Forms.Label();
             this.Label4 = new System.Windows.Forms.Label();
             this.nibDownTime = new ActiveDev.Controls.ADNullableIntBox();
+            this.nibDownTime.Validated += GenericValidated;
             this.nibWorkBreak = new ActiveDev.Controls.ADNullableIntBox();
+            this.nibWorkBreak.Validated += GenericValidated;
             this.ndbShiftEnd = new ActiveDev.Controls.ADNullableDateTimeBox();
+            this.ndbShiftEnd.Validated += GenericValidated;
             this.ndbShiftStart = new ActiveDev.Controls.ADNullableDateTimeBox();
+            this.ndbShiftStart.Validated += GenericValidated;
             this.ndbHandicap = new ActiveDev.Controls.ADNullableDoubleBox();
+            this.ndbHandicap.Validated += GenericValidated;
             this.SuspendLayout();
             //
             //btnShiftStart
@@ -394,148 +403,22 @@ namespace Facesso.Functions
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.Button _btnShiftStart;
-        internal System.Windows.Forms.Button btnShiftStart
-        {
-            get
-            {
-                return _btnShiftStart;
-            }
+        internal System.Windows.Forms.Button btnShiftStart;
 
-            set
-            {
-                if (_btnShiftStart != null)
-                {
-                    _btnShiftStart.Click -= btnShiftStart_Click;
-                }
+        internal ActiveDev.Controls.ADNullableDateTimeBox ndbShiftStart;
 
-                _btnShiftStart = value;
-                if (_btnShiftStart != null)
-                {
-                    _btnShiftStart.Click += btnShiftStart_Click;
-                }
-            }
-        }
-
-        private ActiveDev.Controls.ADNullableDateTimeBox _ndbShiftStart;
-        internal ActiveDev.Controls.ADNullableDateTimeBox ndbShiftStart
-        {
-            get
-            {
-                return _ndbShiftStart;
-            }
-
-            set
-            {
-                if (_ndbShiftStart != null)
-                {
-                    _ndbShiftStart.Validated -= GenericValidated;
-                }
-
-                _ndbShiftStart = value;
-                if (_ndbShiftStart != null)
-                {
-                    _ndbShiftStart.Validated += GenericValidated;
-                }
-            }
-        }
-
-        private ActiveDev.Controls.ADNullableDateTimeBox _ndbShiftEnd;
-        internal ActiveDev.Controls.ADNullableDateTimeBox ndbShiftEnd
-        {
-            get
-            {
-                return _ndbShiftEnd;
-            }
-
-            set
-            {
-                if (_ndbShiftEnd != null)
-                {
-                    _ndbShiftEnd.Validated -= GenericValidated;
-                }
-
-                _ndbShiftEnd = value;
-                if (_ndbShiftEnd != null)
-                {
-                    _ndbShiftEnd.Validated += GenericValidated;
-                }
-            }
-        }
+        internal ActiveDev.Controls.ADNullableDateTimeBox ndbShiftEnd;
 
         internal System.Windows.Forms.Label lblMinutesAttendance;
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.Label lblShiftStartDate;
-        private System.Windows.Forms.Button _btnShiftEnd;
-        internal System.Windows.Forms.Button btnShiftEnd
-        {
-            get
-            {
-                return _btnShiftEnd;
-            }
-
-            set
-            {
-                if (_btnShiftEnd != null)
-                {
-                    _btnShiftEnd.Click -= btnShiftEnd_Click;
-                }
-
-                _btnShiftEnd = value;
-                if (_btnShiftEnd != null)
-                {
-                    _btnShiftEnd.Click += btnShiftEnd_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnShiftEnd;
 
         internal System.Windows.Forms.Label lblShiftEndDate;
         internal System.Windows.Forms.Label Label5;
-        private ActiveDev.Controls.ADNullableIntBox _nibWorkBreak;
-        internal ActiveDev.Controls.ADNullableIntBox nibWorkBreak
-        {
-            get
-            {
-                return _nibWorkBreak;
-            }
+        internal ActiveDev.Controls.ADNullableIntBox nibWorkBreak;
 
-            set
-            {
-                if (_nibWorkBreak != null)
-                {
-                    _nibWorkBreak.Validated -= GenericValidated;
-                }
-
-                _nibWorkBreak = value;
-                if (_nibWorkBreak != null)
-                {
-                    _nibWorkBreak.Validated += GenericValidated;
-                }
-            }
-        }
-
-        private ActiveDev.Controls.ADNullableIntBox _nibDownTime;
-        internal ActiveDev.Controls.ADNullableIntBox nibDownTime
-        {
-            get
-            {
-                return _nibDownTime;
-            }
-
-            set
-            {
-                if (_nibDownTime != null)
-                {
-                    _nibDownTime.Validated -= GenericValidated;
-                }
-
-                _nibDownTime = value;
-                if (_nibDownTime != null)
-                {
-                    _nibDownTime.Validated += GenericValidated;
-                }
-            }
-        }
+        internal ActiveDev.Controls.ADNullableIntBox nibDownTime;
 
         internal System.Windows.Forms.Label Label6;
         internal System.Windows.Forms.Label Label7;
@@ -543,78 +426,15 @@ namespace Facesso.Functions
         internal System.Windows.Forms.Label Label9;
         internal System.Windows.Forms.Label Label10;
         internal System.Windows.Forms.Label lblMinutesEffectiveAdj;
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
-
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
-
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnOK;
 
         internal System.Windows.Forms.Label Label12;
         internal System.Windows.Forms.Button Button1;
-        private System.Windows.Forms.Button _btnCancel;
-        internal System.Windows.Forms.Button btnCancel
-        {
-            get
-            {
-                return _btnCancel;
-            }
-
-            set
-            {
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click -= btnCancel_Click;
-                }
-
-                _btnCancel = value;
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click += btnCancel_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnCancel;
 
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.Label lblMinutesWorkingTime;
         internal System.Windows.Forms.Label Label4;
-        private ActiveDev.Controls.ADNullableDoubleBox _ndbHandicap;
-        internal ActiveDev.Controls.ADNullableDoubleBox ndbHandicap
-        {
-            get
-            {
-                return _ndbHandicap;
-            }
-
-            set
-            {
-                if (_ndbHandicap != null)
-                {
-                    _ndbHandicap.Validated -= GenericValidated;
-                }
-
-                _ndbHandicap = value;
-                if (_ndbHandicap != null)
-                {
-                    _ndbHandicap.Validated += GenericValidated;
-                }
-            }
-        }
+        internal ActiveDev.Controls.ADNullableDoubleBox ndbHandicap;
     }
 }

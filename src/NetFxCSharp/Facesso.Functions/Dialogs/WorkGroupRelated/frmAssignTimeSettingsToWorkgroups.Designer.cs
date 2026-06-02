@@ -33,7 +33,9 @@ namespace Facesso.Functions
         private void InitializeComponent()
         {
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnCancel.Click += btnCancel_Click;
             this.wglWorkGroups = new Facesso.GenericControls.ucWorkGroupListView();
             this.SuspendLayout();
             //
@@ -84,51 +86,9 @@ namespace Facesso.Functions
             this.ResumeLayout(false);
         }
 
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
+        internal System.Windows.Forms.Button btnOK;
 
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
-
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnCancel;
-        internal System.Windows.Forms.Button btnCancel
-        {
-            get
-            {
-                return _btnCancel;
-            }
-
-            set
-            {
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click -= btnCancel_Click;
-                }
-
-                _btnCancel = value;
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click += btnCancel_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnCancel;
 
         internal Facesso.GenericControls.ucWorkGroupListView wglWorkGroups;
     }

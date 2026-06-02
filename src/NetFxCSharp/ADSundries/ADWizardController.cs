@@ -30,6 +30,7 @@ namespace ActiveDev
 
         private Button _myPrevButton;
 
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         private Button myPrevButton
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
@@ -55,6 +56,7 @@ namespace ActiveDev
         }
         private Button _myNextButton;
 
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         private Button myNextButton
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
@@ -80,6 +82,7 @@ namespace ActiveDev
         }
         private Button _myCancelButton;
 
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         private Button myCancelButton
         {
             [MethodImpl(MethodImplOptions.Synchronized)]

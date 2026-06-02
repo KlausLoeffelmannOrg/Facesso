@@ -33,11 +33,17 @@ namespace Facesso.Functions
         private void InitializeComponent()
         {
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.lstCostCenter = new System.Windows.Forms.ListBox();
+            this.lstCostCenter.SelectedIndexChanged += lstCostCenter_SelectedIndexChanged;
             this.Label1 = new System.Windows.Forms.Label();
             this.NewCostcenterTable = new System.Windows.Forms.Button();
+            this.NewCostcenterTable.Click += NewCostcenterTable_Click;
             this.btnDeleteCostCenterTable = new System.Windows.Forms.Button();
+            this.btnDeleteCostCenterTable.Click += btnDeleteCostCenterTable_Click;
             this.dgvWageTable = new System.Windows.Forms.DataGridView();
+            this.dgvWageTable.DataError += dgvWageTable_DataError;
+            this.dgvWageTable.CellValueChanged += dgvWageTable_CellValueChanged;
             this.Label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)this.dgvWageTable).BeginInit();
             this.SuspendLayout();
@@ -129,123 +135,16 @@ namespace Facesso.Functions
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
+        internal System.Windows.Forms.Button btnOK;
 
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
-
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ListBox _lstCostCenter;
-        internal System.Windows.Forms.ListBox lstCostCenter
-        {
-            get
-            {
-                return _lstCostCenter;
-            }
-
-            set
-            {
-                if (_lstCostCenter != null)
-                {
-                    _lstCostCenter.SelectedIndexChanged -= lstCostCenter_SelectedIndexChanged;
-                }
-
-                _lstCostCenter = value;
-                if (_lstCostCenter != null)
-                {
-                    _lstCostCenter.SelectedIndexChanged += lstCostCenter_SelectedIndexChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.ListBox lstCostCenter;
 
         internal System.Windows.Forms.Label Label1;
-        private System.Windows.Forms.Button _NewCostcenterTable;
-        internal System.Windows.Forms.Button NewCostcenterTable
-        {
-            get
-            {
-                return _NewCostcenterTable;
-            }
+        internal System.Windows.Forms.Button NewCostcenterTable;
 
-            set
-            {
-                if (_NewCostcenterTable != null)
-                {
-                    _NewCostcenterTable.Click -= NewCostcenterTable_Click;
-                }
+        internal System.Windows.Forms.Button btnDeleteCostCenterTable;
 
-                _NewCostcenterTable = value;
-                if (_NewCostcenterTable != null)
-                {
-                    _NewCostcenterTable.Click += NewCostcenterTable_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnDeleteCostCenterTable;
-        internal System.Windows.Forms.Button btnDeleteCostCenterTable
-        {
-            get
-            {
-                return _btnDeleteCostCenterTable;
-            }
-
-            set
-            {
-                if (_btnDeleteCostCenterTable != null)
-                {
-                    _btnDeleteCostCenterTable.Click -= btnDeleteCostCenterTable_Click;
-                }
-
-                _btnDeleteCostCenterTable = value;
-                if (_btnDeleteCostCenterTable != null)
-                {
-                    _btnDeleteCostCenterTable.Click += btnDeleteCostCenterTable_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.DataGridView _dgvWageTable;
-        internal System.Windows.Forms.DataGridView dgvWageTable
-        {
-            get
-            {
-                return _dgvWageTable;
-            }
-
-            set
-            {
-                if (_dgvWageTable != null)
-                {
-                    _dgvWageTable.DataError -= dgvWageTable_DataError;
-                    _dgvWageTable.CellValueChanged -= dgvWageTable_CellValueChanged;
-                }
-
-                _dgvWageTable = value;
-                if (_dgvWageTable != null)
-                {
-                    _dgvWageTable.DataError += dgvWageTable_DataError;
-                    _dgvWageTable.CellValueChanged += dgvWageTable_CellValueChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.DataGridView dgvWageTable;
 
         internal System.Windows.Forms.Label Label2;
     }

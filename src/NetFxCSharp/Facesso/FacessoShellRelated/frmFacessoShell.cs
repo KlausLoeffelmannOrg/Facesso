@@ -12,6 +12,7 @@ namespace Facesso
         private ToolStripLabel myTsDateLabel;
         private ToolStripMonthCalender _myTsmCalender;
 
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         private ToolStripMonthCalender myTsmCalender
         {
             get
@@ -38,6 +39,7 @@ namespace Facesso
         private ShiftToolStripButton[] myTsShiftButtons;
         private ToolStripButton _myTsNextWorkday;
 
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         private ToolStripButton myTsNextWorkday
         {
             get
@@ -61,6 +63,7 @@ namespace Facesso
         }
 
         private ToolStripButton _myTsPreviousWorkday;
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         private ToolStripButton myTsPreviousWorkday
         {
             get
@@ -85,6 +88,7 @@ namespace Facesso
 
         private ToolStripButton _myTsTodoList;
 
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         private ToolStripButton myTsTodoList
         {
             get
@@ -114,6 +118,7 @@ namespace Facesso
 
         private FacessoShellWindowsControl _myWindowsControl;
 
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         private FacessoShellWindowsControl myWindowsControl
         {
             get

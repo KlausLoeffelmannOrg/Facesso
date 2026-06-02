@@ -35,20 +35,32 @@ namespace Facesso.GenericControls
         private void InitializeComponent()
         {
             this.gbTitle = new System.Windows.Forms.GroupBox();
+            this.gbTitle.Enter += gbTitle_Enter;
             this.cmbMonthsHistory = new System.Windows.Forms.ComboBox();
+            this.cmbMonthsHistory.SelectedIndexChanged += cmbMonthsHistory_SelectedIndexChanged;
             this.optWeekBeforeLastWeek = new System.Windows.Forms.RadioButton();
+            this.optWeekBeforeLastWeek.CheckedChanged += optDateRanges_CheckedChanged;
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
+            this.dtpEnd.ValueChanged += dtpEnd_ValueChanged;
             this.Label2 = new System.Windows.Forms.Label();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
+            this.dtpStart.ValueChanged += dtpStart_ValueChanged;
             this.optCustomPeriod = new System.Windows.Forms.RadioButton();
             this.Label1 = new System.Windows.Forms.Label();
             this.optToday = new System.Windows.Forms.RadioButton();
+            this.optToday.CheckedChanged += optDateRanges_CheckedChanged;
             this.optYesterday = new System.Windows.Forms.RadioButton();
+            this.optYesterday.CheckedChanged += optDateRanges_CheckedChanged;
             this.optLastWeek = new System.Windows.Forms.RadioButton();
+            this.optLastWeek.CheckedChanged += optDateRanges_CheckedChanged;
             this.optFromStartOfCurrentWeekToNow = new System.Windows.Forms.RadioButton();
+            this.optFromStartOfCurrentWeekToNow.CheckedChanged += optDateRanges_CheckedChanged;
             this.optSinceYearBegan = new System.Windows.Forms.RadioButton();
+            this.optSinceYearBegan.CheckedChanged += optDateRanges_CheckedChanged;
             this.optStartToEndOfSpecifiedMonth = new System.Windows.Forms.RadioButton();
+            this.optStartToEndOfSpecifiedMonth.CheckedChanged += optDateRanges_CheckedChanged;
             this.optFromStartOfCurrentMonthToNow = new System.Windows.Forms.RadioButton();
+            this.optFromStartOfCurrentMonthToNow.CheckedChanged += optDateRanges_CheckedChanged;
             this.gbTitle.SuspendLayout();
             this.SuspendLayout();
             //
@@ -223,283 +235,31 @@ namespace Facesso.GenericControls
             this.ResumeLayout(false);
         }
 
-        private System.Windows.Forms.GroupBox _gbTitle;
-        internal System.Windows.Forms.GroupBox gbTitle
-        {
-            get
-            {
-                return _gbTitle;
-            }
+        internal System.Windows.Forms.GroupBox gbTitle;
 
-            set
-            {
-                if (_gbTitle != null)
-                {
-                    _gbTitle.Enter -= gbTitle_Enter;
-                }
+        internal System.Windows.Forms.RadioButton optFromStartOfCurrentMonthToNow;
 
-                _gbTitle = value;
-                if (_gbTitle != null)
-                {
-                    _gbTitle.Enter += gbTitle_Enter;
-                }
-            }
-        }
+        internal System.Windows.Forms.RadioButton optStartToEndOfSpecifiedMonth;
 
-        private System.Windows.Forms.RadioButton _optFromStartOfCurrentMonthToNow;
-        internal System.Windows.Forms.RadioButton optFromStartOfCurrentMonthToNow
-        {
-            get
-            {
-                return _optFromStartOfCurrentMonthToNow;
-            }
+        internal System.Windows.Forms.RadioButton optSinceYearBegan;
 
-            set
-            {
-                if (_optFromStartOfCurrentMonthToNow != null)
-                {
-                    _optFromStartOfCurrentMonthToNow.CheckedChanged -= optDateRanges_CheckedChanged;
-                }
+        internal System.Windows.Forms.RadioButton optFromStartOfCurrentWeekToNow;
 
-                _optFromStartOfCurrentMonthToNow = value;
-                if (_optFromStartOfCurrentMonthToNow != null)
-                {
-                    _optFromStartOfCurrentMonthToNow.CheckedChanged += optDateRanges_CheckedChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.RadioButton optLastWeek;
 
-        private System.Windows.Forms.RadioButton _optStartToEndOfSpecifiedMonth;
-        internal System.Windows.Forms.RadioButton optStartToEndOfSpecifiedMonth
-        {
-            get
-            {
-                return _optStartToEndOfSpecifiedMonth;
-            }
+        internal System.Windows.Forms.RadioButton optYesterday;
 
-            set
-            {
-                if (_optStartToEndOfSpecifiedMonth != null)
-                {
-                    _optStartToEndOfSpecifiedMonth.CheckedChanged -= optDateRanges_CheckedChanged;
-                }
-
-                _optStartToEndOfSpecifiedMonth = value;
-                if (_optStartToEndOfSpecifiedMonth != null)
-                {
-                    _optStartToEndOfSpecifiedMonth.CheckedChanged += optDateRanges_CheckedChanged;
-                }
-            }
-        }
-
-        private System.Windows.Forms.RadioButton _optSinceYearBegan;
-        internal System.Windows.Forms.RadioButton optSinceYearBegan
-        {
-            get
-            {
-                return _optSinceYearBegan;
-            }
-
-            set
-            {
-                if (_optSinceYearBegan != null)
-                {
-                    _optSinceYearBegan.CheckedChanged -= optDateRanges_CheckedChanged;
-                }
-
-                _optSinceYearBegan = value;
-                if (_optSinceYearBegan != null)
-                {
-                    _optSinceYearBegan.CheckedChanged += optDateRanges_CheckedChanged;
-                }
-            }
-        }
-
-        private System.Windows.Forms.RadioButton _optFromStartOfCurrentWeekToNow;
-        internal System.Windows.Forms.RadioButton optFromStartOfCurrentWeekToNow
-        {
-            get
-            {
-                return _optFromStartOfCurrentWeekToNow;
-            }
-
-            set
-            {
-                if (_optFromStartOfCurrentWeekToNow != null)
-                {
-                    _optFromStartOfCurrentWeekToNow.CheckedChanged -= optDateRanges_CheckedChanged;
-                }
-
-                _optFromStartOfCurrentWeekToNow = value;
-                if (_optFromStartOfCurrentWeekToNow != null)
-                {
-                    _optFromStartOfCurrentWeekToNow.CheckedChanged += optDateRanges_CheckedChanged;
-                }
-            }
-        }
-
-        private System.Windows.Forms.RadioButton _optLastWeek;
-        internal System.Windows.Forms.RadioButton optLastWeek
-        {
-            get
-            {
-                return _optLastWeek;
-            }
-
-            set
-            {
-                if (_optLastWeek != null)
-                {
-                    _optLastWeek.CheckedChanged -= optDateRanges_CheckedChanged;
-                }
-
-                _optLastWeek = value;
-                if (_optLastWeek != null)
-                {
-                    _optLastWeek.CheckedChanged += optDateRanges_CheckedChanged;
-                }
-            }
-        }
-
-        private System.Windows.Forms.RadioButton _optYesterday;
-        internal System.Windows.Forms.RadioButton optYesterday
-        {
-            get
-            {
-                return _optYesterday;
-            }
-
-            set
-            {
-                if (_optYesterday != null)
-                {
-                    _optYesterday.CheckedChanged -= optDateRanges_CheckedChanged;
-                }
-
-                _optYesterday = value;
-                if (_optYesterday != null)
-                {
-                    _optYesterday.CheckedChanged += optDateRanges_CheckedChanged;
-                }
-            }
-        }
-
-        private System.Windows.Forms.RadioButton _optToday;
-        internal System.Windows.Forms.RadioButton optToday
-        {
-            get
-            {
-                return _optToday;
-            }
-
-            set
-            {
-                if (_optToday != null)
-                {
-                    _optToday.CheckedChanged -= optDateRanges_CheckedChanged;
-                }
-
-                _optToday = value;
-                if (_optToday != null)
-                {
-                    _optToday.CheckedChanged += optDateRanges_CheckedChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.RadioButton optToday;
 
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.RadioButton optCustomPeriod;
-        private System.Windows.Forms.DateTimePicker _dtpStart;
-        internal System.Windows.Forms.DateTimePicker dtpStart
-        {
-            get
-            {
-                return _dtpStart;
-            }
+        internal System.Windows.Forms.DateTimePicker dtpStart;
 
-            set
-            {
-                if (_dtpStart != null)
-                {
-                    _dtpStart.ValueChanged -= dtpStart_ValueChanged;
-                }
-
-                _dtpStart = value;
-                if (_dtpStart != null)
-                {
-                    _dtpStart.ValueChanged += dtpStart_ValueChanged;
-                }
-            }
-        }
-
-        private System.Windows.Forms.DateTimePicker _dtpEnd;
-        internal System.Windows.Forms.DateTimePicker dtpEnd
-        {
-            get
-            {
-                return _dtpEnd;
-            }
-
-            set
-            {
-                if (_dtpEnd != null)
-                {
-                    _dtpEnd.ValueChanged -= dtpEnd_ValueChanged;
-                }
-
-                _dtpEnd = value;
-                if (_dtpEnd != null)
-                {
-                    _dtpEnd.ValueChanged += dtpEnd_ValueChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.DateTimePicker dtpEnd;
 
         internal System.Windows.Forms.Label Label2;
-        private System.Windows.Forms.RadioButton _optWeekBeforeLastWeek;
-        internal System.Windows.Forms.RadioButton optWeekBeforeLastWeek
-        {
-            get
-            {
-                return _optWeekBeforeLastWeek;
-            }
+        internal System.Windows.Forms.RadioButton optWeekBeforeLastWeek;
 
-            set
-            {
-                if (_optWeekBeforeLastWeek != null)
-                {
-                    _optWeekBeforeLastWeek.CheckedChanged -= optDateRanges_CheckedChanged;
-                }
-
-                _optWeekBeforeLastWeek = value;
-                if (_optWeekBeforeLastWeek != null)
-                {
-                    _optWeekBeforeLastWeek.CheckedChanged += optDateRanges_CheckedChanged;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ComboBox _cmbMonthsHistory;
-        internal System.Windows.Forms.ComboBox cmbMonthsHistory
-        {
-            get
-            {
-                return _cmbMonthsHistory;
-            }
-
-            set
-            {
-                if (_cmbMonthsHistory != null)
-                {
-                    _cmbMonthsHistory.SelectedIndexChanged -= cmbMonthsHistory_SelectedIndexChanged;
-                }
-
-                _cmbMonthsHistory = value;
-                if (_cmbMonthsHistory != null)
-                {
-                    _cmbMonthsHistory.SelectedIndexChanged += cmbMonthsHistory_SelectedIndexChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.ComboBox cmbMonthsHistory;
     }
 }

@@ -33,9 +33,13 @@ namespace Facesso.Interfaces
         private void InitializeComponent()
         {
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnCancel.Click += btnCancel_Click;
             this.lvwTaskTemplates = new System.Windows.Forms.ListView();
+            this.lvwTaskTemplates.SelectedIndexChanged += lvwTaskTemplates_SelectedIndexChanged;
             this.lvwDeviceClasses = new System.Windows.Forms.ListView();
+            this.lvwDeviceClasses.SelectedIndexChanged += lvwDeviceClasses_SelectedIndexChanged;
             this.TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.GroupBox2 = new System.Windows.Forms.GroupBox();
@@ -141,97 +145,13 @@ namespace Facesso.Interfaces
             this.ResumeLayout(false);
         }
 
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
+        internal System.Windows.Forms.Button btnOK;
 
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
+        internal System.Windows.Forms.Button btnCancel;
 
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ListView lvwTaskTemplates;
 
-        private System.Windows.Forms.Button _btnCancel;
-        internal System.Windows.Forms.Button btnCancel
-        {
-            get
-            {
-                return _btnCancel;
-            }
-
-            set
-            {
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click -= btnCancel_Click;
-                }
-
-                _btnCancel = value;
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click += btnCancel_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ListView _lvwTaskTemplates;
-        internal System.Windows.Forms.ListView lvwTaskTemplates
-        {
-            get
-            {
-                return _lvwTaskTemplates;
-            }
-
-            set
-            {
-                if (_lvwTaskTemplates != null)
-                {
-                    _lvwTaskTemplates.SelectedIndexChanged -= lvwTaskTemplates_SelectedIndexChanged;
-                }
-
-                _lvwTaskTemplates = value;
-                if (_lvwTaskTemplates != null)
-                {
-                    _lvwTaskTemplates.SelectedIndexChanged += lvwTaskTemplates_SelectedIndexChanged;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ListView _lvwDeviceClasses;
-        internal System.Windows.Forms.ListView lvwDeviceClasses
-        {
-            get
-            {
-                return _lvwDeviceClasses;
-            }
-
-            set
-            {
-                if (_lvwDeviceClasses != null)
-                {
-                    _lvwDeviceClasses.SelectedIndexChanged -= lvwDeviceClasses_SelectedIndexChanged;
-                }
-
-                _lvwDeviceClasses = value;
-                if (_lvwDeviceClasses != null)
-                {
-                    _lvwDeviceClasses.SelectedIndexChanged += lvwDeviceClasses_SelectedIndexChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.ListView lvwDeviceClasses;
 
         internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;
         internal System.Windows.Forms.GroupBox GroupBox1;

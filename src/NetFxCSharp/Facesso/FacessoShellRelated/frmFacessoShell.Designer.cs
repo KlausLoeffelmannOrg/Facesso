@@ -39,6 +39,7 @@ namespace Facesso
             this.ToolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.EmployeeInfoCollectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.TimerMain = new System.Windows.Forms.Timer(this.components);
+            this.TimerMain.Tick += TimerMain_Tick;
             this.ToolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.ToolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -52,10 +53,13 @@ namespace Facesso
             this.splitWorkGroups = new System.Windows.Forms.SplitContainer();
             this.gbWorkGroups = new System.Windows.Forms.GroupBox();
             this.wglWorkGroups = new Facesso.GenericControls.ucWorkGroupListView();
+            this.wglWorkGroups.DoubleClick += wglWorkGroups_DoubleClick;
+            this.wglWorkGroups.ItemSelectionChanged += wglWorkGroups_ItemSelectionChanged;
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvWorkGroupResults = new Facesso.GenericControls.ucWorkGroupItemDetailsView();
             this.gbEmployees = new System.Windows.Forms.GroupBox();
             this.elvEmployees = new Facesso.GenericControls.ucEmployeeListView();
+            this.elvEmployees.DoubleClick += elvEmployees_DoubleClick;
             this.TopLineLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.lblCurrentShift = new System.Windows.Forms.Label();
             this.lblCurrentWorkgroup = new System.Windows.Forms.Label();
@@ -67,6 +71,7 @@ namespace Facesso
             this.mainChartTwo = new Facesso.Functions.ucConfigurableWorkgroupChart();
             this.mainChartThree = new Facesso.Functions.ucConfigurableWorkgroupChart();
             this.ToolStripDateShiftSelector = new System.Windows.Forms.ToolStrip();
+            this.ToolStripDateShiftSelector.MouseEnter += ToolStripDateShiftSelector_MouseEnter;
             this.MenuStripMain = new System.Windows.Forms.MenuStrip();
             this.DateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,6 +81,7 @@ namespace Facesso
             this.ExportierenalsXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ImportierenalsXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BaseDataImportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BaseDataImportToolStripMenuItem.Click += BaseDataImportToolStripMenuItem_Click;
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.DruckenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MitarbeiterToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,76 +89,113 @@ namespace Facesso
             this.ToolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ProgrammbeendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ProgrammbeendenToolStripMenuItem.Click += ProgrammbeendenToolStripMenuItem_Click;
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmEdit_ProductionDataCollection = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmEdit_ProductionDataCollection.Click += tsmEdit_ProductionDataCollection_Click;
             this.ToolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmEdit_EmployeeTimeBookings = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmEdit_SetMyReminder = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmView_WorkGroupInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmView_WorkGroupInfo.Click += tsmView_WorkGroupInfo_Click;
             this.tsmView_Employees = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmView_Employees.Click += tsmView_Employees_Click;
             this.FilternToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
             this.tsmView_OnlyActiveWorkgroups = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmView_OnlyActiveWorkgroups.Click += tsmView_OnlyActiveWorkgroups_Click;
             this.tsmView_OnlyActiveEmployees = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmView_OnlyActiveEmployees.Click += tsmView_OnlyActiveEmployees_Click;
             this.ToolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmView_DockDateSelector = new System.Windows.Forms.ToolStripMenuItem();
             this.AnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmAnalyses_AnalysisWizard = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmAnalyses_AnalysisWizard.Click += ProduktivSitesAuswertungToolStripMenuItem_Click;
             this.tsmAnalyses_AnalysisManager = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmAnalyses_AnalysisManager.Click += tsmAnalyses_AnalysisManager_Click;
             this.ToolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmArticleAmountAnalysis = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmArticleAmountAnalysis.Click += tsmArticleAmountAnalysis_Click;
             this.ToolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
             this.AusfallzeitenAnalyseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AusfallzeitenAnalyseToolStripMenuItem.Click += AusfallzeitenAnalyseToolStripMenuItem_Click;
             this.tsmCostCalculation = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmCostCalculation_IncentiveWageCalculation = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmCostCalculation_IncentiveWageCalculation.Click += tsmCostCalculation_IncentiveWageCalculation_Click;
             this.ToolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmCostCalculation_CostOfEmployees = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmCostCalculation_CostOfEmployees.Click += tsmCostCalculation_CostOfEmployees_Click;
             this.tsmCostCalculation_CostOfCostCenter = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmCostCalculation_CostOfCostCenter.Click += tsmCostCalculation_CostOfCostCenter_Click;
             this.tsmCostCalculation_CostOfWorkgroups = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmCostCalculation_CostOfWorkgroups.Click += tsmCostCalculation_CostOfWorkgroups_Click;
             this.BaseDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmBaseData_Subsidiaries = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmBaseData_Subsidiaries.Click += tsmBaseData_Subsidiaries_Click;
             this.ToolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmBaseData_Employees = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmBaseData_Employees.Click += tsmBaseData_Employees_Click;
             this.tsmBaseData_LabourValues = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmBaseData_LabourValues.Click += tsmBaseData_LabourValues_Click;
             this.tsmBaseData_WorkGroups = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmBaseData_WorkGroups.Click += tsmBaseData_WorkGroups_Click;
             this.ToolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmBaseData_CostCenters = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmBaseData_CostCenters.Click += tsmBaseData_CostCenters_Click;
             this.tsmBaseData_WageGroups = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmBaseData_WageGroups.Click += tsmBaseData_WageGroups_Click;
             this.tsmBaseData_BonusProgressions = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmBaseData_BonusProgressions.Click += tsmBaseData_BonusProgressions_Click;
             this.ExtrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDataImport = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmDataImport.Click += tsmDataImport_Click;
             this.ToolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmTools_UserManagement = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmTools_UserManagement.Click += tsmTools_UserManagement_Click;
             this.tsmTools_LoginInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.SupportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SupportToolStripMenuItem.Click += SupportToolStripMenuItem_Click;
             this.ToolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmTools_Options = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmTools_Options.Click += tsbOptions_Click;
             this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmHelpAbout.Click += tsmHelpAbout_Click;
             this.ToolStripMain = new System.Windows.Forms.ToolStrip();
             this.tsbDataManager = new System.Windows.Forms.ToolStripButton();
+            this.tsbDataManager.Click += tsmEdit_ProductionDataCollection_Click;
             this.ToolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbWorkGroupAnalysis = new System.Windows.Forms.ToolStripButton();
+            this.tsbWorkGroupAnalysis.Click += tsbWorkGroupAnalysis_Click;
             this.tsbAnalysisIncentiveWage = new System.Windows.Forms.ToolStripButton();
+            this.tsbAnalysisIncentiveWage.Click += tsbAnalysisIncentiveWage_Click;
             this.ToolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbPrevWorkgroup = new System.Windows.Forms.ToolStripButton();
             this.tsbNextWorkgroup = new System.Windows.Forms.ToolStripButton();
             this.ToolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbPrevWorkDay = new System.Windows.Forms.ToolStripButton();
+            this.tsbPrevWorkDay.Click += tsbPrevWorkDay_Click;
             this.tsbMyTodoList = new System.Windows.Forms.ToolStripButton();
+            this.tsbMyTodoList.Click += tsbMyTodoList_Click;
             this.tsbNextWorkDay = new System.Windows.Forms.ToolStripButton();
+            this.tsbNextWorkDay.Click += tsbNextWorkDay_Click;
             this.ToolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbBaseDataEmployee = new System.Windows.Forms.ToolStripButton();
+            this.tsbBaseDataEmployee.Click += tsbBaseDataEmployee_Click;
             this.tsbBaseDataWorkGroups = new System.Windows.Forms.ToolStripButton();
+            this.tsbBaseDataWorkGroups.Click += tsbBaseDataWorkGroups_Click;
             this.tsbBaseDataLabourValue = new System.Windows.Forms.ToolStripButton();
+            this.tsbBaseDataLabourValue.Click += tsbBaseDataLabourValue_Click;
             this.ToolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbBaseDataUser = new System.Windows.Forms.ToolStripButton();
+            this.tsbBaseDataUser.Click += tsbBaseDataUser_Click;
             this.ToolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbOptions = new System.Windows.Forms.ToolStripButton();
+            this.tsbOptions.Click += tsbOptions_Click;
             ((System.ComponentModel.ISupportInitialize)this.EmployeeInfoCollectionBindingSource).BeginInit();
             this.ToolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.ToolStripContainer1.ContentPanel.SuspendLayout();
@@ -1221,488 +1264,68 @@ namespace Facesso
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
         internal System.Windows.Forms.ToolStripMenuItem DruckenToolStripMenuItem;
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem _ProgrammbeendenToolStripMenuItem;
-        internal System.Windows.Forms.ToolStripMenuItem ProgrammbeendenToolStripMenuItem
-        {
-            get
-            {
-                return _ProgrammbeendenToolStripMenuItem;
-            }
-
-            set
-            {
-                if (_ProgrammbeendenToolStripMenuItem != null)
-                {
-                    _ProgrammbeendenToolStripMenuItem.Click -= ProgrammbeendenToolStripMenuItem_Click;
-                }
-
-                _ProgrammbeendenToolStripMenuItem = value;
-                if (_ProgrammbeendenToolStripMenuItem != null)
-                {
-                    _ProgrammbeendenToolStripMenuItem.Click += ProgrammbeendenToolStripMenuItem_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem ProgrammbeendenToolStripMenuItem;
 
         internal System.Windows.Forms.ToolStripMenuItem AnalysisToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem tsmCostCalculation;
         internal System.Windows.Forms.ToolStripMenuItem BaseDataToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem _tsmHelpAbout;
-        internal System.Windows.Forms.ToolStripMenuItem tsmHelpAbout
-        {
-            get
-            {
-                return _tsmHelpAbout;
-            }
-
-            set
-            {
-                if (_tsmHelpAbout != null)
-                {
-                    _tsmHelpAbout.Click -= tsmHelpAbout_Click;
-                }
-
-                _tsmHelpAbout = value;
-                if (_tsmHelpAbout != null)
-                {
-                    _tsmHelpAbout.Click += tsmHelpAbout_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmHelpAbout;
 
         internal System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem ViewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem _tsmView_OnlyActiveWorkgroups;
-        internal System.Windows.Forms.ToolStripMenuItem tsmView_OnlyActiveWorkgroups
-        {
-            get
-            {
-                return _tsmView_OnlyActiveWorkgroups;
-            }
-
-            set
-            {
-                if (_tsmView_OnlyActiveWorkgroups != null)
-                {
-                    _tsmView_OnlyActiveWorkgroups.Click -= tsmView_OnlyActiveWorkgroups_Click;
-                }
-
-                _tsmView_OnlyActiveWorkgroups = value;
-                if (_tsmView_OnlyActiveWorkgroups != null)
-                {
-                    _tsmView_OnlyActiveWorkgroups.Click += tsmView_OnlyActiveWorkgroups_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmView_OnlyActiveWorkgroups;
 
         internal System.Windows.Forms.ToolStripSeparator FilternToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem _tsmView_OnlyActiveEmployees;
-        internal System.Windows.Forms.ToolStripMenuItem tsmView_OnlyActiveEmployees
-        {
-            get
-            {
-                return _tsmView_OnlyActiveEmployees;
-            }
+        internal System.Windows.Forms.ToolStripMenuItem tsmView_OnlyActiveEmployees;
 
-            set
-            {
-                if (_tsmView_OnlyActiveEmployees != null)
-                {
-                    _tsmView_OnlyActiveEmployees.Click -= tsmView_OnlyActiveEmployees_Click;
-                }
-
-                _tsmView_OnlyActiveEmployees = value;
-                if (_tsmView_OnlyActiveEmployees != null)
-                {
-                    _tsmView_OnlyActiveEmployees.Click += tsmView_OnlyActiveEmployees_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmEdit_ProductionDataCollection;
-        internal System.Windows.Forms.ToolStripMenuItem tsmEdit_ProductionDataCollection
-        {
-            get
-            {
-                return _tsmEdit_ProductionDataCollection;
-            }
-
-            set
-            {
-                if (_tsmEdit_ProductionDataCollection != null)
-                {
-                    _tsmEdit_ProductionDataCollection.Click -= tsmEdit_ProductionDataCollection_Click;
-                }
-
-                _tsmEdit_ProductionDataCollection = value;
-                if (_tsmEdit_ProductionDataCollection != null)
-                {
-                    _tsmEdit_ProductionDataCollection.Click += tsmEdit_ProductionDataCollection_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmEdit_ProductionDataCollection;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem _tsmCostCalculation_IncentiveWageCalculation;
-        internal System.Windows.Forms.ToolStripMenuItem tsmCostCalculation_IncentiveWageCalculation
-        {
-            get
-            {
-                return _tsmCostCalculation_IncentiveWageCalculation;
-            }
-
-            set
-            {
-                if (_tsmCostCalculation_IncentiveWageCalculation != null)
-                {
-                    _tsmCostCalculation_IncentiveWageCalculation.Click -= tsmCostCalculation_IncentiveWageCalculation_Click;
-                }
-
-                _tsmCostCalculation_IncentiveWageCalculation = value;
-                if (_tsmCostCalculation_IncentiveWageCalculation != null)
-                {
-                    _tsmCostCalculation_IncentiveWageCalculation.Click += tsmCostCalculation_IncentiveWageCalculation_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmCostCalculation_IncentiveWageCalculation;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem _tsmCostCalculation_CostOfEmployees;
-        internal System.Windows.Forms.ToolStripMenuItem tsmCostCalculation_CostOfEmployees
-        {
-            get
-            {
-                return _tsmCostCalculation_CostOfEmployees;
-            }
+        internal System.Windows.Forms.ToolStripMenuItem tsmCostCalculation_CostOfEmployees;
 
-            set
-            {
-                if (_tsmCostCalculation_CostOfEmployees != null)
-                {
-                    _tsmCostCalculation_CostOfEmployees.Click -= tsmCostCalculation_CostOfEmployees_Click;
-                }
+        internal System.Windows.Forms.ToolStripMenuItem tsmCostCalculation_CostOfCostCenter;
 
-                _tsmCostCalculation_CostOfEmployees = value;
-                if (_tsmCostCalculation_CostOfEmployees != null)
-                {
-                    _tsmCostCalculation_CostOfEmployees.Click += tsmCostCalculation_CostOfEmployees_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmCostCalculation_CostOfWorkgroups;
 
-        private System.Windows.Forms.ToolStripMenuItem _tsmCostCalculation_CostOfCostCenter;
-        internal System.Windows.Forms.ToolStripMenuItem tsmCostCalculation_CostOfCostCenter
-        {
-            get
-            {
-                return _tsmCostCalculation_CostOfCostCenter;
-            }
+        internal System.Windows.Forms.ToolStripMenuItem tsmBaseData_Employees;
 
-            set
-            {
-                if (_tsmCostCalculation_CostOfCostCenter != null)
-                {
-                    _tsmCostCalculation_CostOfCostCenter.Click -= tsmCostCalculation_CostOfCostCenter_Click;
-                }
+        internal System.Windows.Forms.ToolStripMenuItem tsmBaseData_LabourValues;
 
-                _tsmCostCalculation_CostOfCostCenter = value;
-                if (_tsmCostCalculation_CostOfCostCenter != null)
-                {
-                    _tsmCostCalculation_CostOfCostCenter.Click += tsmCostCalculation_CostOfCostCenter_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmBaseData_WorkGroups;
 
-        private System.Windows.Forms.ToolStripMenuItem _tsmCostCalculation_CostOfWorkgroups;
-        internal System.Windows.Forms.ToolStripMenuItem tsmCostCalculation_CostOfWorkgroups
-        {
-            get
-            {
-                return _tsmCostCalculation_CostOfWorkgroups;
-            }
+        internal System.Windows.Forms.ToolStripMenuItem tsmBaseData_CostCenters;
 
-            set
-            {
-                if (_tsmCostCalculation_CostOfWorkgroups != null)
-                {
-                    _tsmCostCalculation_CostOfWorkgroups.Click -= tsmCostCalculation_CostOfWorkgroups_Click;
-                }
+        internal System.Windows.Forms.ToolStripMenuItem tsmBaseData_WageGroups;
 
-                _tsmCostCalculation_CostOfWorkgroups = value;
-                if (_tsmCostCalculation_CostOfWorkgroups != null)
-                {
-                    _tsmCostCalculation_CostOfWorkgroups.Click += tsmCostCalculation_CostOfWorkgroups_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmBaseData_Employees;
-        internal System.Windows.Forms.ToolStripMenuItem tsmBaseData_Employees
-        {
-            get
-            {
-                return _tsmBaseData_Employees;
-            }
-
-            set
-            {
-                if (_tsmBaseData_Employees != null)
-                {
-                    _tsmBaseData_Employees.Click -= tsmBaseData_Employees_Click;
-                }
-
-                _tsmBaseData_Employees = value;
-                if (_tsmBaseData_Employees != null)
-                {
-                    _tsmBaseData_Employees.Click += tsmBaseData_Employees_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmBaseData_LabourValues;
-        internal System.Windows.Forms.ToolStripMenuItem tsmBaseData_LabourValues
-        {
-            get
-            {
-                return _tsmBaseData_LabourValues;
-            }
-
-            set
-            {
-                if (_tsmBaseData_LabourValues != null)
-                {
-                    _tsmBaseData_LabourValues.Click -= tsmBaseData_LabourValues_Click;
-                }
-
-                _tsmBaseData_LabourValues = value;
-                if (_tsmBaseData_LabourValues != null)
-                {
-                    _tsmBaseData_LabourValues.Click += tsmBaseData_LabourValues_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmBaseData_WorkGroups;
-        internal System.Windows.Forms.ToolStripMenuItem tsmBaseData_WorkGroups
-        {
-            get
-            {
-                return _tsmBaseData_WorkGroups;
-            }
-
-            set
-            {
-                if (_tsmBaseData_WorkGroups != null)
-                {
-                    _tsmBaseData_WorkGroups.Click -= tsmBaseData_WorkGroups_Click;
-                }
-
-                _tsmBaseData_WorkGroups = value;
-                if (_tsmBaseData_WorkGroups != null)
-                {
-                    _tsmBaseData_WorkGroups.Click += tsmBaseData_WorkGroups_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmBaseData_CostCenters;
-        internal System.Windows.Forms.ToolStripMenuItem tsmBaseData_CostCenters
-        {
-            get
-            {
-                return _tsmBaseData_CostCenters;
-            }
-
-            set
-            {
-                if (_tsmBaseData_CostCenters != null)
-                {
-                    _tsmBaseData_CostCenters.Click -= tsmBaseData_CostCenters_Click;
-                }
-
-                _tsmBaseData_CostCenters = value;
-                if (_tsmBaseData_CostCenters != null)
-                {
-                    _tsmBaseData_CostCenters.Click += tsmBaseData_CostCenters_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmBaseData_WageGroups;
-        internal System.Windows.Forms.ToolStripMenuItem tsmBaseData_WageGroups
-        {
-            get
-            {
-                return _tsmBaseData_WageGroups;
-            }
-
-            set
-            {
-                if (_tsmBaseData_WageGroups != null)
-                {
-                    _tsmBaseData_WageGroups.Click -= tsmBaseData_WageGroups_Click;
-                }
-
-                _tsmBaseData_WageGroups = value;
-                if (_tsmBaseData_WageGroups != null)
-                {
-                    _tsmBaseData_WageGroups.Click += tsmBaseData_WageGroups_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmBaseData_BonusProgressions;
-        internal System.Windows.Forms.ToolStripMenuItem tsmBaseData_BonusProgressions
-        {
-            get
-            {
-                return _tsmBaseData_BonusProgressions;
-            }
-
-            set
-            {
-                if (_tsmBaseData_BonusProgressions != null)
-                {
-                    _tsmBaseData_BonusProgressions.Click -= tsmBaseData_BonusProgressions_Click;
-                }
-
-                _tsmBaseData_BonusProgressions = value;
-                if (_tsmBaseData_BonusProgressions != null)
-                {
-                    _tsmBaseData_BonusProgressions.Click += tsmBaseData_BonusProgressions_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmBaseData_BonusProgressions;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator5;
         internal System.Windows.Forms.ToolStripMenuItem ExtrasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem _tsmTools_UserManagement;
-        internal System.Windows.Forms.ToolStripMenuItem tsmTools_UserManagement
-        {
-            get
-            {
-                return _tsmTools_UserManagement;
-            }
-
-            set
-            {
-                if (_tsmTools_UserManagement != null)
-                {
-                    _tsmTools_UserManagement.Click -= tsmTools_UserManagement_Click;
-                }
-
-                _tsmTools_UserManagement = value;
-                if (_tsmTools_UserManagement != null)
-                {
-                    _tsmTools_UserManagement.Click += tsmTools_UserManagement_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmTools_UserManagement;
 
         internal System.Windows.Forms.ToolStripMenuItem tsmTools_LoginInfo;
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator6;
-        private System.Windows.Forms.ToolStripMenuItem _tsmTools_Options;
-        internal System.Windows.Forms.ToolStripMenuItem tsmTools_Options
-        {
-            get
-            {
-                return _tsmTools_Options;
-            }
-
-            set
-            {
-                if (_tsmTools_Options != null)
-                {
-                    _tsmTools_Options.Click -= tsbOptions_Click;
-                }
-
-                _tsmTools_Options = value;
-                if (_tsmTools_Options != null)
-                {
-                    _tsmTools_Options.Click += tsbOptions_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmTools_Options;
 
         internal System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem5;
         internal System.Windows.Forms.ToolStripSeparator ToolStripMenuItem6;
-        private System.Windows.Forms.ToolStripMenuItem _tsmBaseData_Subsidiaries;
-        internal System.Windows.Forms.ToolStripMenuItem tsmBaseData_Subsidiaries
-        {
-            get
-            {
-                return _tsmBaseData_Subsidiaries;
-            }
-
-            set
-            {
-                if (_tsmBaseData_Subsidiaries != null)
-                {
-                    _tsmBaseData_Subsidiaries.Click -= tsmBaseData_Subsidiaries_Click;
-                }
-
-                _tsmBaseData_Subsidiaries = value;
-                if (_tsmBaseData_Subsidiaries != null)
-                {
-                    _tsmBaseData_Subsidiaries.Click += tsmBaseData_Subsidiaries_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmBaseData_Subsidiaries;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripMenuItem4;
         internal System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem1;
         internal System.Windows.Forms.ToolStripSeparator ToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem _tsmAnalyses_AnalysisWizard;
-        internal System.Windows.Forms.ToolStripMenuItem tsmAnalyses_AnalysisWizard
-        {
-            get
-            {
-                return _tsmAnalyses_AnalysisWizard;
-            }
-
-            set
-            {
-                if (_tsmAnalyses_AnalysisWizard != null)
-                {
-                    _tsmAnalyses_AnalysisWizard.Click -= ProduktivSitesAuswertungToolStripMenuItem_Click;
-                }
-
-                _tsmAnalyses_AnalysisWizard = value;
-                if (_tsmAnalyses_AnalysisWizard != null)
-                {
-                    _tsmAnalyses_AnalysisWizard.Click += ProduktivSitesAuswertungToolStripMenuItem_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmAnalyses_AnalysisWizard;
 
         internal System.Windows.Forms.ToolStripMenuItem MitarbeiterToolStripMenuItem1;
         internal System.Windows.Forms.ToolStripMenuItem ProduktivSitesAnalyseToolStripMenuItem;
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator7;
         internal System.Windows.Forms.ToolStripContainer ToolStripContainer1;
         internal System.Windows.Forms.ToolStripButton ToolStripButton2;
-        private System.Windows.Forms.ToolStrip _ToolStripDateShiftSelector;
-        internal System.Windows.Forms.ToolStrip ToolStripDateShiftSelector
-        {
-            get
-            {
-                return _ToolStripDateShiftSelector;
-            }
-
-            set
-            {
-                if (_ToolStripDateShiftSelector != null)
-                {
-                    _ToolStripDateShiftSelector.MouseEnter -= ToolStripDateShiftSelector_MouseEnter;
-                }
-
-                _ToolStripDateShiftSelector = value;
-                if (_ToolStripDateShiftSelector != null)
-                {
-                    _ToolStripDateShiftSelector.MouseEnter += ToolStripDateShiftSelector_MouseEnter;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStrip ToolStripDateShiftSelector;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator8;
         internal System.Windows.Forms.ToolStripMenuItem tsmView_DockDateSelector;
@@ -1710,337 +1333,43 @@ namespace Facesso
         internal System.Windows.Forms.ToolStripStatusLabel tslAdminInfo;
         internal System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem8;
         internal System.Windows.Forms.ToolStripSeparator ToolStripMenuItem7;
-        private System.Windows.Forms.ToolStripMenuItem _BaseDataImportToolStripMenuItem;
-        internal System.Windows.Forms.ToolStripMenuItem BaseDataImportToolStripMenuItem
-        {
-            get
-            {
-                return _BaseDataImportToolStripMenuItem;
-            }
-
-            set
-            {
-                if (_BaseDataImportToolStripMenuItem != null)
-                {
-                    _BaseDataImportToolStripMenuItem.Click -= BaseDataImportToolStripMenuItem_Click;
-                }
-
-                _BaseDataImportToolStripMenuItem = value;
-                if (_BaseDataImportToolStripMenuItem != null)
-                {
-                    _BaseDataImportToolStripMenuItem.Click += BaseDataImportToolStripMenuItem_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem BaseDataImportToolStripMenuItem;
 
         internal System.Windows.Forms.BindingSource EmployeeInfoCollectionBindingSource;
-        private System.Windows.Forms.ToolStripMenuItem _tsmView_WorkGroupInfo;
-        internal System.Windows.Forms.ToolStripMenuItem tsmView_WorkGroupInfo
-        {
-            get
-            {
-                return _tsmView_WorkGroupInfo;
-            }
+        internal System.Windows.Forms.ToolStripMenuItem tsmView_WorkGroupInfo;
 
-            set
-            {
-                if (_tsmView_WorkGroupInfo != null)
-                {
-                    _tsmView_WorkGroupInfo.Click -= tsmView_WorkGroupInfo_Click;
-                }
-
-                _tsmView_WorkGroupInfo = value;
-                if (_tsmView_WorkGroupInfo != null)
-                {
-                    _tsmView_WorkGroupInfo.Click += tsmView_WorkGroupInfo_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmView_Employees;
-        internal System.Windows.Forms.ToolStripMenuItem tsmView_Employees
-        {
-            get
-            {
-                return _tsmView_Employees;
-            }
-
-            set
-            {
-                if (_tsmView_Employees != null)
-                {
-                    _tsmView_Employees.Click -= tsmView_Employees_Click;
-                }
-
-                _tsmView_Employees = value;
-                if (_tsmView_Employees != null)
-                {
-                    _tsmView_Employees.Click += tsmView_Employees_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmView_Employees;
 
         internal System.Windows.Forms.ToolStripMenuItem tsmEdit_EmployeeTimeBookings;
-        private System.Windows.Forms.ToolStripButton _tsbDataManager;
-        internal System.Windows.Forms.ToolStripButton tsbDataManager
-        {
-            get
-            {
-                return _tsbDataManager;
-            }
-
-            set
-            {
-                if (_tsbDataManager != null)
-                {
-                    _tsbDataManager.Click -= tsmEdit_ProductionDataCollection_Click;
-                }
-
-                _tsbDataManager = value;
-                if (_tsbDataManager != null)
-                {
-                    _tsbDataManager.Click += tsmEdit_ProductionDataCollection_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripButton tsbDataManager;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator10;
-        private System.Windows.Forms.ToolStripButton _tsbWorkGroupAnalysis;
-        internal System.Windows.Forms.ToolStripButton tsbWorkGroupAnalysis
-        {
-            get
-            {
-                return _tsbWorkGroupAnalysis;
-            }
+        internal System.Windows.Forms.ToolStripButton tsbWorkGroupAnalysis;
 
-            set
-            {
-                if (_tsbWorkGroupAnalysis != null)
-                {
-                    _tsbWorkGroupAnalysis.Click -= tsbWorkGroupAnalysis_Click;
-                }
-
-                _tsbWorkGroupAnalysis = value;
-                if (_tsbWorkGroupAnalysis != null)
-                {
-                    _tsbWorkGroupAnalysis.Click += tsbWorkGroupAnalysis_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripButton _tsbAnalysisIncentiveWage;
-        internal System.Windows.Forms.ToolStripButton tsbAnalysisIncentiveWage
-        {
-            get
-            {
-                return _tsbAnalysisIncentiveWage;
-            }
-
-            set
-            {
-                if (_tsbAnalysisIncentiveWage != null)
-                {
-                    _tsbAnalysisIncentiveWage.Click -= tsbAnalysisIncentiveWage_Click;
-                }
-
-                _tsbAnalysisIncentiveWage = value;
-                if (_tsbAnalysisIncentiveWage != null)
-                {
-                    _tsbAnalysisIncentiveWage.Click += tsbAnalysisIncentiveWage_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripButton tsbAnalysisIncentiveWage;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator11;
         internal System.Windows.Forms.ToolStripButton tsbNextWorkgroup;
         internal System.Windows.Forms.ToolStripButton tsbPrevWorkgroup;
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator12;
-        private System.Windows.Forms.ToolStripButton _tsbPrevWorkDay;
-        internal System.Windows.Forms.ToolStripButton tsbPrevWorkDay
-        {
-            get
-            {
-                return _tsbPrevWorkDay;
-            }
+        internal System.Windows.Forms.ToolStripButton tsbPrevWorkDay;
 
-            set
-            {
-                if (_tsbPrevWorkDay != null)
-                {
-                    _tsbPrevWorkDay.Click -= tsbPrevWorkDay_Click;
-                }
+        internal System.Windows.Forms.ToolStripButton tsbMyTodoList;
 
-                _tsbPrevWorkDay = value;
-                if (_tsbPrevWorkDay != null)
-                {
-                    _tsbPrevWorkDay.Click += tsbPrevWorkDay_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripButton _tsbMyTodoList;
-        internal System.Windows.Forms.ToolStripButton tsbMyTodoList
-        {
-            get
-            {
-                return _tsbMyTodoList;
-            }
-
-            set
-            {
-                if (_tsbMyTodoList != null)
-                {
-                    _tsbMyTodoList.Click -= tsbMyTodoList_Click;
-                }
-
-                _tsbMyTodoList = value;
-                if (_tsbMyTodoList != null)
-                {
-                    _tsbMyTodoList.Click += tsbMyTodoList_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripButton _tsbNextWorkDay;
-        internal System.Windows.Forms.ToolStripButton tsbNextWorkDay
-        {
-            get
-            {
-                return _tsbNextWorkDay;
-            }
-
-            set
-            {
-                if (_tsbNextWorkDay != null)
-                {
-                    _tsbNextWorkDay.Click -= tsbNextWorkDay_Click;
-                }
-
-                _tsbNextWorkDay = value;
-                if (_tsbNextWorkDay != null)
-                {
-                    _tsbNextWorkDay.Click += tsbNextWorkDay_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripButton tsbNextWorkDay;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator13;
-        private System.Windows.Forms.ToolStripButton _tsbBaseDataEmployee;
-        internal System.Windows.Forms.ToolStripButton tsbBaseDataEmployee
-        {
-            get
-            {
-                return _tsbBaseDataEmployee;
-            }
+        internal System.Windows.Forms.ToolStripButton tsbBaseDataEmployee;
 
-            set
-            {
-                if (_tsbBaseDataEmployee != null)
-                {
-                    _tsbBaseDataEmployee.Click -= tsbBaseDataEmployee_Click;
-                }
+        internal System.Windows.Forms.ToolStripButton tsbBaseDataWorkGroups;
 
-                _tsbBaseDataEmployee = value;
-                if (_tsbBaseDataEmployee != null)
-                {
-                    _tsbBaseDataEmployee.Click += tsbBaseDataEmployee_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripButton tsbBaseDataLabourValue;
 
-        private System.Windows.Forms.ToolStripButton _tsbBaseDataWorkGroups;
-        internal System.Windows.Forms.ToolStripButton tsbBaseDataWorkGroups
-        {
-            get
-            {
-                return _tsbBaseDataWorkGroups;
-            }
-
-            set
-            {
-                if (_tsbBaseDataWorkGroups != null)
-                {
-                    _tsbBaseDataWorkGroups.Click -= tsbBaseDataWorkGroups_Click;
-                }
-
-                _tsbBaseDataWorkGroups = value;
-                if (_tsbBaseDataWorkGroups != null)
-                {
-                    _tsbBaseDataWorkGroups.Click += tsbBaseDataWorkGroups_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripButton _tsbBaseDataLabourValue;
-        internal System.Windows.Forms.ToolStripButton tsbBaseDataLabourValue
-        {
-            get
-            {
-                return _tsbBaseDataLabourValue;
-            }
-
-            set
-            {
-                if (_tsbBaseDataLabourValue != null)
-                {
-                    _tsbBaseDataLabourValue.Click -= tsbBaseDataLabourValue_Click;
-                }
-
-                _tsbBaseDataLabourValue = value;
-                if (_tsbBaseDataLabourValue != null)
-                {
-                    _tsbBaseDataLabourValue.Click += tsbBaseDataLabourValue_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripButton _tsbBaseDataUser;
-        internal System.Windows.Forms.ToolStripButton tsbBaseDataUser
-        {
-            get
-            {
-                return _tsbBaseDataUser;
-            }
-
-            set
-            {
-                if (_tsbBaseDataUser != null)
-                {
-                    _tsbBaseDataUser.Click -= tsbBaseDataUser_Click;
-                }
-
-                _tsbBaseDataUser = value;
-                if (_tsbBaseDataUser != null)
-                {
-                    _tsbBaseDataUser.Click += tsbBaseDataUser_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripButton tsbBaseDataUser;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator14;
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator15;
-        private System.Windows.Forms.ToolStripButton _tsbOptions;
-        internal System.Windows.Forms.ToolStripButton tsbOptions
-        {
-            get
-            {
-                return _tsbOptions;
-            }
-
-            set
-            {
-                if (_tsbOptions != null)
-                {
-                    _tsbOptions.Click -= tsbOptions_Click;
-                }
-
-                _tsbOptions = value;
-                if (_tsbOptions != null)
-                {
-                    _tsbOptions.Click += tsbOptions_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripButton tsbOptions;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripMenuItem3;
         internal System.Windows.Forms.ToolStripMenuItem tsmEdit_SetMyReminder;
@@ -2048,122 +1377,17 @@ namespace Facesso
         internal System.Windows.Forms.ToolStripStatusLabel tslActiveEmployees;
         internal System.Windows.Forms.ToolStripStatusLabel tslActiveWorkgroups;
         internal System.Windows.Forms.ToolStripStatusLabel tslCurrentDateAndTime;
-        private System.Windows.Forms.Timer _TimerMain;
-        internal System.Windows.Forms.Timer TimerMain
-        {
-            get
-            {
-                return _TimerMain;
-            }
+        internal System.Windows.Forms.Timer TimerMain;
 
-            set
-            {
-                if (_TimerMain != null)
-                {
-                    _TimerMain.Tick -= TimerMain_Tick;
-                }
+        internal System.Windows.Forms.ToolStripMenuItem tsmAnalyses_AnalysisManager;
 
-                _TimerMain = value;
-                if (_TimerMain != null)
-                {
-                    _TimerMain.Tick += TimerMain_Tick;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmAnalyses_AnalysisManager;
-        internal System.Windows.Forms.ToolStripMenuItem tsmAnalyses_AnalysisManager
-        {
-            get
-            {
-                return _tsmAnalyses_AnalysisManager;
-            }
-
-            set
-            {
-                if (_tsmAnalyses_AnalysisManager != null)
-                {
-                    _tsmAnalyses_AnalysisManager.Click -= tsmAnalyses_AnalysisManager_Click;
-                }
-
-                _tsmAnalyses_AnalysisManager = value;
-                if (_tsmAnalyses_AnalysisManager != null)
-                {
-                    _tsmAnalyses_AnalysisManager.Click += tsmAnalyses_AnalysisManager_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmDataImport;
-        internal System.Windows.Forms.ToolStripMenuItem tsmDataImport
-        {
-            get
-            {
-                return _tsmDataImport;
-            }
-
-            set
-            {
-                if (_tsmDataImport != null)
-                {
-                    _tsmDataImport.Click -= tsmDataImport_Click;
-                }
-
-                _tsmDataImport = value;
-                if (_tsmDataImport != null)
-                {
-                    _tsmDataImport.Click += tsmDataImport_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmDataImport;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator9;
-        private System.Windows.Forms.ToolStripMenuItem _tsmArticleAmountAnalysis;
-        internal System.Windows.Forms.ToolStripMenuItem tsmArticleAmountAnalysis
-        {
-            get
-            {
-                return _tsmArticleAmountAnalysis;
-            }
-
-            set
-            {
-                if (_tsmArticleAmountAnalysis != null)
-                {
-                    _tsmArticleAmountAnalysis.Click -= tsmArticleAmountAnalysis_Click;
-                }
-
-                _tsmArticleAmountAnalysis = value;
-                if (_tsmArticleAmountAnalysis != null)
-                {
-                    _tsmArticleAmountAnalysis.Click += tsmArticleAmountAnalysis_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmArticleAmountAnalysis;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripMenuItem10;
-        private System.Windows.Forms.ToolStripMenuItem _AusfallzeitenAnalyseToolStripMenuItem;
-        internal System.Windows.Forms.ToolStripMenuItem AusfallzeitenAnalyseToolStripMenuItem
-        {
-            get
-            {
-                return _AusfallzeitenAnalyseToolStripMenuItem;
-            }
-
-            set
-            {
-                if (_AusfallzeitenAnalyseToolStripMenuItem != null)
-                {
-                    _AusfallzeitenAnalyseToolStripMenuItem.Click -= AusfallzeitenAnalyseToolStripMenuItem_Click;
-                }
-
-                _AusfallzeitenAnalyseToolStripMenuItem = value;
-                if (_AusfallzeitenAnalyseToolStripMenuItem != null)
-                {
-                    _AusfallzeitenAnalyseToolStripMenuItem.Click += AusfallzeitenAnalyseToolStripMenuItem_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem AusfallzeitenAnalyseToolStripMenuItem;
 
         internal System.Windows.Forms.TabControl TabControl1;
         internal System.Windows.Forms.TabPage TabPage1;
@@ -2174,56 +1398,12 @@ namespace Facesso
         internal System.Windows.Forms.SplitContainer SplitEmployeesWorkGroups;
         internal System.Windows.Forms.SplitContainer splitWorkGroups;
         internal System.Windows.Forms.GroupBox gbWorkGroups;
-        private Facesso.GenericControls.ucWorkGroupListView _wglWorkGroups;
-        internal Facesso.GenericControls.ucWorkGroupListView wglWorkGroups
-        {
-            get
-            {
-                return _wglWorkGroups;
-            }
-
-            set
-            {
-                if (_wglWorkGroups != null)
-                {
-                    _wglWorkGroups.DoubleClick -= wglWorkGroups_DoubleClick;
-                    _wglWorkGroups.ItemSelectionChanged -= wglWorkGroups_ItemSelectionChanged;
-                }
-
-                _wglWorkGroups = value;
-                if (_wglWorkGroups != null)
-                {
-                    _wglWorkGroups.DoubleClick += wglWorkGroups_DoubleClick;
-                    _wglWorkGroups.ItemSelectionChanged += wglWorkGroups_ItemSelectionChanged;
-                }
-            }
-        }
+        internal Facesso.GenericControls.ucWorkGroupListView wglWorkGroups;
 
         internal System.Windows.Forms.GroupBox GroupBox1;
         internal Facesso.GenericControls.ucWorkGroupItemDetailsView dgvWorkGroupResults;
         internal System.Windows.Forms.GroupBox gbEmployees;
-        private Facesso.GenericControls.ucEmployeeListView _elvEmployees;
-        internal Facesso.GenericControls.ucEmployeeListView elvEmployees
-        {
-            get
-            {
-                return _elvEmployees;
-            }
-
-            set
-            {
-                if (_elvEmployees != null)
-                {
-                    _elvEmployees.DoubleClick -= elvEmployees_DoubleClick;
-                }
-
-                _elvEmployees = value;
-                if (_elvEmployees != null)
-                {
-                    _elvEmployees.DoubleClick += elvEmployees_DoubleClick;
-                }
-            }
-        }
+        internal Facesso.GenericControls.ucEmployeeListView elvEmployees;
 
         internal System.Windows.Forms.TabPage TabPage2;
         internal System.Windows.Forms.SplitContainer SplitContainer1;
@@ -2231,28 +1411,7 @@ namespace Facesso
         internal Facesso.Functions.ucConfigurableWorkgroupChart mainChartOne;
         internal Facesso.Functions.ucConfigurableWorkgroupChart mainChartTwo;
         internal Facesso.Functions.ucConfigurableWorkgroupChart mainChartThree;
-        private System.Windows.Forms.ToolStripMenuItem _SupportToolStripMenuItem;
-        internal System.Windows.Forms.ToolStripMenuItem SupportToolStripMenuItem
-        {
-            get
-            {
-                return _SupportToolStripMenuItem;
-            }
-
-            set
-            {
-                if (_SupportToolStripMenuItem != null)
-                {
-                    _SupportToolStripMenuItem.Click -= SupportToolStripMenuItem_Click;
-                }
-
-                _SupportToolStripMenuItem = value;
-                if (_SupportToolStripMenuItem != null)
-                {
-                    _SupportToolStripMenuItem.Click += SupportToolStripMenuItem_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem SupportToolStripMenuItem;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator16;
     }

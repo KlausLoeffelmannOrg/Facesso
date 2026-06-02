@@ -45,6 +45,7 @@ namespace Facesso.Functions
             this.Label13 = new System.Windows.Forms.Label();
             this.nudAltShiftDays = new System.Windows.Forms.NumericUpDown();
             this.btnAllShifts = new System.Windows.Forms.Button();
+            this.btnAllShifts.Click += btnAllShifts_Click;
             this.Label9 = new System.Windows.Forms.Label();
             this.nudAltShift2 = new System.Windows.Forms.NumericUpDown();
             this.Label10 = new System.Windows.Forms.Label();
@@ -945,28 +946,7 @@ namespace Facesso.Functions
         internal System.Windows.Forms.CheckBox chkShift3;
         internal System.Windows.Forms.CheckBox chkShift2;
         internal System.Windows.Forms.CheckBox chkShift1;
-        private System.Windows.Forms.Button _btnAllShifts;
-        internal System.Windows.Forms.Button btnAllShifts
-        {
-            get
-            {
-                return _btnAllShifts;
-            }
-
-            set
-            {
-                if (_btnAllShifts != null)
-                {
-                    _btnAllShifts.Click -= btnAllShifts_Click;
-                }
-
-                _btnAllShifts = value;
-                if (_btnAllShifts != null)
-                {
-                    _btnAllShifts.Click += btnAllShifts_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnAllShifts;
 
         internal System.Windows.Forms.Label Label9;
         internal System.Windows.Forms.NumericUpDown nudAltShift2;

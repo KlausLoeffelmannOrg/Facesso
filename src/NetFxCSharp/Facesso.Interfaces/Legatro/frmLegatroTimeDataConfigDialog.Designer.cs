@@ -38,11 +38,14 @@ namespace Facesso.Interfaces
         private void InitializeComponent()
         {
             this.btnAdd = new System.Windows.Forms.Button();
+            this.btnAdd.Click += btnAdd_Click;
             this.btnRemove = new System.Windows.Forms.Button();
+            this.btnRemove.Click += btnRemove_Click;
             this.tvwAssignments = new System.Windows.Forms.TreeView();
             this.Label1 = new System.Windows.Forms.Label();
             this.txtSqlConnectionString = new System.Windows.Forms.TextBox();
             this.btnSelectSqlConnection = new System.Windows.Forms.Button();
+            this.btnSelectSqlConnection.Click += btnSelectSqlConnection_Click;
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lvwLegatroWorksitesOrProjects = new System.Windows.Forms.ListView();
@@ -190,77 +193,14 @@ namespace Facesso.Interfaces
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.Button _btnAdd;
-        internal System.Windows.Forms.Button btnAdd
-        {
-            get
-            {
-                return _btnAdd;
-            }
+        internal System.Windows.Forms.Button btnAdd;
 
-            set
-            {
-                if (_btnAdd != null)
-                {
-                    _btnAdd.Click -= btnAdd_Click;
-                }
-
-                _btnAdd = value;
-                if (_btnAdd != null)
-                {
-                    _btnAdd.Click += btnAdd_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnRemove;
-        internal System.Windows.Forms.Button btnRemove
-        {
-            get
-            {
-                return _btnRemove;
-            }
-
-            set
-            {
-                if (_btnRemove != null)
-                {
-                    _btnRemove.Click -= btnRemove_Click;
-                }
-
-                _btnRemove = value;
-                if (_btnRemove != null)
-                {
-                    _btnRemove.Click += btnRemove_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnRemove;
 
         internal System.Windows.Forms.TreeView tvwAssignments;
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.TextBox txtSqlConnectionString;
-        private System.Windows.Forms.Button _btnSelectSqlConnection;
-        internal System.Windows.Forms.Button btnSelectSqlConnection
-        {
-            get
-            {
-                return _btnSelectSqlConnection;
-            }
-
-            set
-            {
-                if (_btnSelectSqlConnection != null)
-                {
-                    _btnSelectSqlConnection.Click -= btnSelectSqlConnection_Click;
-                }
-
-                _btnSelectSqlConnection = value;
-                if (_btnSelectSqlConnection != null)
-                {
-                    _btnSelectSqlConnection.Click += btnSelectSqlConnection_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnSelectSqlConnection;
 
         internal System.Windows.Forms.Button btnOK;
         internal System.Windows.Forms.Button btnCancel;

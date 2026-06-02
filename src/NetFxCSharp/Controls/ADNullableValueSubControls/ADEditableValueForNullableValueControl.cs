@@ -14,6 +14,7 @@ namespace ActiveDev.Controls
     internal class ADEditableValueForNullableValueControl : ADEditableValueForNullableValueControlTemplate<string>
     {
         private TextBox _myTextBox;
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         protected TextBox myTextBox
         {
             get

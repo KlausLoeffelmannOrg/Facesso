@@ -38,8 +38,10 @@ namespace Facesso.GenericControls
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.txtSearchText = new System.Windows.Forms.TextBox();
+            this.txtSearchText.TextChanged += txtSearchText_TextChanged;
             this.Label1 = new System.Windows.Forms.Label();
             this.chkOnlyIncentiveEmployees = new System.Windows.Forms.CheckBox();
+            this.chkOnlyIncentiveEmployees.CheckedChanged += chkOnlyIncentiveEmployees_CheckedChanged;
             this.SplitContainer1 = new System.Windows.Forms.SplitContainer();
             this.elvMain = new Facesso.GenericControls.ucEmployeeListView();
             this.Panel1.SuspendLayout();
@@ -157,53 +159,11 @@ namespace Facesso.GenericControls
         }
 
         internal System.Windows.Forms.Panel Panel1;
-        private System.Windows.Forms.TextBox _txtSearchText;
-        internal System.Windows.Forms.TextBox txtSearchText
-        {
-            get
-            {
-                return _txtSearchText;
-            }
-
-            set
-            {
-                if (_txtSearchText != null)
-                {
-                    _txtSearchText.TextChanged -= txtSearchText_TextChanged;
-                }
-
-                _txtSearchText = value;
-                if (_txtSearchText != null)
-                {
-                    _txtSearchText.TextChanged += txtSearchText_TextChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.TextBox txtSearchText;
 
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.SplitContainer SplitContainer1;
-        private System.Windows.Forms.CheckBox _chkOnlyIncentiveEmployees;
-        internal System.Windows.Forms.CheckBox chkOnlyIncentiveEmployees
-        {
-            get
-            {
-                return _chkOnlyIncentiveEmployees;
-            }
-
-            set
-            {
-                if (_chkOnlyIncentiveEmployees != null)
-                {
-                    _chkOnlyIncentiveEmployees.CheckedChanged -= chkOnlyIncentiveEmployees_CheckedChanged;
-                }
-
-                _chkOnlyIncentiveEmployees = value;
-                if (_chkOnlyIncentiveEmployees != null)
-                {
-                    _chkOnlyIncentiveEmployees.CheckedChanged += chkOnlyIncentiveEmployees_CheckedChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.CheckBox chkOnlyIncentiveEmployees;
 
         public System.Windows.Forms.Button btnCancel;
         public System.Windows.Forms.Button btnOK;

@@ -14,6 +14,7 @@ namespace ActiveDev.Controls
     internal class ADEditableUpDownValueForNullableValueControl : ADEditableValueForNullableValueControlTemplate<int>
     {
         private NumericUpDown _myNumericUpDown;
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         protected NumericUpDown myNumericUpDown
         {
             get

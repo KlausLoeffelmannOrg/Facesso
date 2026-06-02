@@ -33,21 +33,30 @@ namespace Facesso.Functions
         private void InitializeComponent()
         {
             this.dgvEmployeeWages = new System.Windows.Forms.DataGridView();
+            this.dgvEmployeeWages.ColumnHeaderMouseClick += dgvEmployeeWages_ColumnHeaderMouseClick;
             this.lblIncentiveWageForMonth = new System.Windows.Forms.Label();
             this.lblIncentiveWageSum = new System.Windows.Forms.Label();
             this.MenuStrip1 = new System.Windows.Forms.MenuStrip();
             this.DateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmPrintWageList = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmPrintWageList.Click += tsmPrintWageList_Click;
             this.tsmPrintEmployeeWagesDetailed = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmPrintEmployeeWagesDetailed.Click += tsmPrintEmployeeWagesDetailed_Click;
             this.ToolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.TsmCsvExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.TsmCsvExport.Click += TsmCsvExport_Click;
             this.ToolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmQuit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmQuit.Click += tsmQuit_Click;
             this.BearbeitenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TsmSelectWithIncentiveWage = new System.Windows.Forms.ToolStripMenuItem();
+            this.TsmSelectWithIncentiveWage.Click += TsmSelectWithIncentiveWage_Click;
             this.tsmSelectWithData = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmSelectWithData.Click += tsmSelectWithData_Click;
             this.tsmSelectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmSelectAll.Click += tsmSelectAll_Click;
             this.tsmDeselectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmDeselectAll.Click += tsmDeselectAll_Click;
             this.SortierungToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmSortPersonellNo = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmSortAlphabetically = new System.Windows.Forms.ToolStripMenuItem();
@@ -224,219 +233,30 @@ namespace Facesso.Functions
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.DataGridView _dgvEmployeeWages;
-        internal System.Windows.Forms.DataGridView dgvEmployeeWages
-        {
-            get
-            {
-                return _dgvEmployeeWages;
-            }
-
-            set
-            {
-                if (_dgvEmployeeWages != null)
-                {
-                    _dgvEmployeeWages.ColumnHeaderMouseClick -= dgvEmployeeWages_ColumnHeaderMouseClick;
-                }
-
-                _dgvEmployeeWages = value;
-                if (_dgvEmployeeWages != null)
-                {
-                    _dgvEmployeeWages.ColumnHeaderMouseClick += dgvEmployeeWages_ColumnHeaderMouseClick;
-                }
-            }
-        }
+        internal System.Windows.Forms.DataGridView dgvEmployeeWages;
 
         internal System.Windows.Forms.Label lblIncentiveWageForMonth;
         internal System.Windows.Forms.Label lblIncentiveWageSum;
         internal System.Windows.Forms.MenuStrip MenuStrip1;
         internal System.Windows.Forms.ToolStripMenuItem DateiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem _tsmPrintWageList;
-        internal System.Windows.Forms.ToolStripMenuItem tsmPrintWageList
-        {
-            get
-            {
-                return _tsmPrintWageList;
-            }
+        internal System.Windows.Forms.ToolStripMenuItem tsmPrintWageList;
 
-            set
-            {
-                if (_tsmPrintWageList != null)
-                {
-                    _tsmPrintWageList.Click -= tsmPrintWageList_Click;
-                }
-
-                _tsmPrintWageList = value;
-                if (_tsmPrintWageList != null)
-                {
-                    _tsmPrintWageList.Click += tsmPrintWageList_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmPrintEmployeeWagesDetailed;
-        internal System.Windows.Forms.ToolStripMenuItem tsmPrintEmployeeWagesDetailed
-        {
-            get
-            {
-                return _tsmPrintEmployeeWagesDetailed;
-            }
-
-            set
-            {
-                if (_tsmPrintEmployeeWagesDetailed != null)
-                {
-                    _tsmPrintEmployeeWagesDetailed.Click -= tsmPrintEmployeeWagesDetailed_Click;
-                }
-
-                _tsmPrintEmployeeWagesDetailed = value;
-                if (_tsmPrintEmployeeWagesDetailed != null)
-                {
-                    _tsmPrintEmployeeWagesDetailed.Click += tsmPrintEmployeeWagesDetailed_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmPrintEmployeeWagesDetailed;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem _TsmCsvExport;
-        internal System.Windows.Forms.ToolStripMenuItem TsmCsvExport
-        {
-            get
-            {
-                return _TsmCsvExport;
-            }
-
-            set
-            {
-                if (_TsmCsvExport != null)
-                {
-                    _TsmCsvExport.Click -= TsmCsvExport_Click;
-                }
-
-                _TsmCsvExport = value;
-                if (_TsmCsvExport != null)
-                {
-                    _TsmCsvExport.Click += TsmCsvExport_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem TsmCsvExport;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem _tsmQuit;
-        internal System.Windows.Forms.ToolStripMenuItem tsmQuit
-        {
-            get
-            {
-                return _tsmQuit;
-            }
-
-            set
-            {
-                if (_tsmQuit != null)
-                {
-                    _tsmQuit.Click -= tsmQuit_Click;
-                }
-
-                _tsmQuit = value;
-                if (_tsmQuit != null)
-                {
-                    _tsmQuit.Click += tsmQuit_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmQuit;
 
         internal System.Windows.Forms.ToolStripMenuItem BearbeitenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem _TsmSelectWithIncentiveWage;
-        internal System.Windows.Forms.ToolStripMenuItem TsmSelectWithIncentiveWage
-        {
-            get
-            {
-                return _TsmSelectWithIncentiveWage;
-            }
+        internal System.Windows.Forms.ToolStripMenuItem TsmSelectWithIncentiveWage;
 
-            set
-            {
-                if (_TsmSelectWithIncentiveWage != null)
-                {
-                    _TsmSelectWithIncentiveWage.Click -= TsmSelectWithIncentiveWage_Click;
-                }
+        internal System.Windows.Forms.ToolStripMenuItem tsmSelectWithData;
 
-                _TsmSelectWithIncentiveWage = value;
-                if (_TsmSelectWithIncentiveWage != null)
-                {
-                    _TsmSelectWithIncentiveWage.Click += TsmSelectWithIncentiveWage_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmSelectAll;
 
-        private System.Windows.Forms.ToolStripMenuItem _tsmSelectWithData;
-        internal System.Windows.Forms.ToolStripMenuItem tsmSelectWithData
-        {
-            get
-            {
-                return _tsmSelectWithData;
-            }
-
-            set
-            {
-                if (_tsmSelectWithData != null)
-                {
-                    _tsmSelectWithData.Click -= tsmSelectWithData_Click;
-                }
-
-                _tsmSelectWithData = value;
-                if (_tsmSelectWithData != null)
-                {
-                    _tsmSelectWithData.Click += tsmSelectWithData_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmSelectAll;
-        internal System.Windows.Forms.ToolStripMenuItem tsmSelectAll
-        {
-            get
-            {
-                return _tsmSelectAll;
-            }
-
-            set
-            {
-                if (_tsmSelectAll != null)
-                {
-                    _tsmSelectAll.Click -= tsmSelectAll_Click;
-                }
-
-                _tsmSelectAll = value;
-                if (_tsmSelectAll != null)
-                {
-                    _tsmSelectAll.Click += tsmSelectAll_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmDeselectAll;
-        internal System.Windows.Forms.ToolStripMenuItem tsmDeselectAll
-        {
-            get
-            {
-                return _tsmDeselectAll;
-            }
-
-            set
-            {
-                if (_tsmDeselectAll != null)
-                {
-                    _tsmDeselectAll.Click -= tsmDeselectAll_Click;
-                }
-
-                _tsmDeselectAll = value;
-                if (_tsmDeselectAll != null)
-                {
-                    _tsmDeselectAll.Click += tsmDeselectAll_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmDeselectAll;
 
         internal System.Windows.Forms.ToolStripMenuItem SortierungToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem tsmSortPersonellNo;

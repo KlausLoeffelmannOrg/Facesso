@@ -36,12 +36,16 @@ namespace Facesso.Interfaces
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmImport));
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.lvwTaskList = new System.Windows.Forms.ListView();
+            this.lvwTaskList.SelectedIndexChanged += lvwTaskList_SelectedIndexChanged;
             this.ListViewImages = new System.Windows.Forms.ImageList(this.components);
             this.Label1 = new System.Windows.Forms.Label();
             this.btnImportNow = new System.Windows.Forms.Button();
+            this.btnImportNow.Click += btnImportNow_Click;
             this.Label2 = new System.Windows.Forms.Label();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
+            this.dtpFrom.ValueChanged += dtpFrom_ValueChanged;
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
+            this.dtpTo.ValueChanged += dtpTo_ValueChanged;
             this.chkShift1 = new System.Windows.Forms.CheckBox();
             this.chkShift2 = new System.Windows.Forms.CheckBox();
             this.chkShift3 = new System.Windows.Forms.CheckBox();
@@ -54,14 +58,21 @@ namespace Facesso.Interfaces
             this.tsmFileExportShiftmodel = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmQuitDialog = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmQuitDialog.Click += tsmQuitDialog_Click;
             this.BearbeitenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmEditNewImportTask = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmEditNewImportTask.Click += tsmEditNewImportTask_Click;
             this.tsmEditImportTask = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmEditImportTask.Click += tsmEditImportTask_Click;
             this.tsmEditDeleteImportTask = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmEditDeleteImportTask.Click += tsmEditDeleteImportTask_Click;
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.ucWorkGroups = new Facesso.GenericControls.ucWorkGroupListView();
             this.btnSelectAll = new System.Windows.Forms.Button();
+            this.btnSelectAll.Click += btnSelectAll_Click;
             this.btnDeselectAll = new System.Windows.Forms.Button();
+            this.btnDeselectAll.Click += btnDeselectAll_Click;
             this.lblWorkgroups = new System.Windows.Forms.Label();
             this.GroupBox1.SuspendLayout();
             this.MenuStrip1.SuspendLayout();
@@ -368,102 +379,18 @@ namespace Facesso.Interfaces
 
         internal System.Windows.Forms.GroupBox GroupBox1;
         internal System.Windows.Forms.Label Label1;
-        private System.Windows.Forms.Button _btnImportNow;
-        internal System.Windows.Forms.Button btnImportNow
-        {
-            get
-            {
-                return _btnImportNow;
-            }
-
-            set
-            {
-                if (_btnImportNow != null)
-                {
-                    _btnImportNow.Click -= btnImportNow_Click;
-                }
-
-                _btnImportNow = value;
-                if (_btnImportNow != null)
-                {
-                    _btnImportNow.Click += btnImportNow_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnImportNow;
 
         internal System.Windows.Forms.Label Label2;
-        private System.Windows.Forms.DateTimePicker _dtpFrom;
-        internal System.Windows.Forms.DateTimePicker dtpFrom
-        {
-            get
-            {
-                return _dtpFrom;
-            }
+        internal System.Windows.Forms.DateTimePicker dtpFrom;
 
-            set
-            {
-                if (_dtpFrom != null)
-                {
-                    _dtpFrom.ValueChanged -= dtpFrom_ValueChanged;
-                }
-
-                _dtpFrom = value;
-                if (_dtpFrom != null)
-                {
-                    _dtpFrom.ValueChanged += dtpFrom_ValueChanged;
-                }
-            }
-        }
-
-        private System.Windows.Forms.DateTimePicker _dtpTo;
-        internal System.Windows.Forms.DateTimePicker dtpTo
-        {
-            get
-            {
-                return _dtpTo;
-            }
-
-            set
-            {
-                if (_dtpTo != null)
-                {
-                    _dtpTo.ValueChanged -= dtpTo_ValueChanged;
-                }
-
-                _dtpTo = value;
-                if (_dtpTo != null)
-                {
-                    _dtpTo.ValueChanged += dtpTo_ValueChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.DateTimePicker dtpTo;
 
         internal System.Windows.Forms.CheckBox chkShift1;
         internal System.Windows.Forms.CheckBox chkShift2;
         internal System.Windows.Forms.CheckBox chkShift3;
         internal System.Windows.Forms.CheckBox chkShift4;
-        private System.Windows.Forms.ListView _lvwTaskList;
-        internal System.Windows.Forms.ListView lvwTaskList
-        {
-            get
-            {
-                return _lvwTaskList;
-            }
-
-            set
-            {
-                if (_lvwTaskList != null)
-                {
-                    _lvwTaskList.SelectedIndexChanged -= lvwTaskList_SelectedIndexChanged;
-                }
-
-                _lvwTaskList = value;
-                if (_lvwTaskList != null)
-                {
-                    _lvwTaskList.SelectedIndexChanged += lvwTaskList_SelectedIndexChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.ListView lvwTaskList;
 
         internal System.Windows.Forms.ImageList ListViewImages;
         internal System.Windows.Forms.Label lblImportStatus;
@@ -473,168 +400,21 @@ namespace Facesso.Interfaces
         internal System.Windows.Forms.ToolStripMenuItem tsmFileImportImportSettings;
         internal System.Windows.Forms.ToolStripMenuItem tsmFileExportShiftmodel;
         internal System.Windows.Forms.ToolStripSeparator ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem _tsmQuitDialog;
-        internal System.Windows.Forms.ToolStripMenuItem tsmQuitDialog
-        {
-            get
-            {
-                return _tsmQuitDialog;
-            }
-
-            set
-            {
-                if (_tsmQuitDialog != null)
-                {
-                    _tsmQuitDialog.Click -= tsmQuitDialog_Click;
-                }
-
-                _tsmQuitDialog = value;
-                if (_tsmQuitDialog != null)
-                {
-                    _tsmQuitDialog.Click += tsmQuitDialog_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmQuitDialog;
 
         internal System.Windows.Forms.ToolStripMenuItem BearbeitenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem _tsmEditNewImportTask;
-        internal System.Windows.Forms.ToolStripMenuItem tsmEditNewImportTask
-        {
-            get
-            {
-                return _tsmEditNewImportTask;
-            }
+        internal System.Windows.Forms.ToolStripMenuItem tsmEditNewImportTask;
 
-            set
-            {
-                if (_tsmEditNewImportTask != null)
-                {
-                    _tsmEditNewImportTask.Click -= tsmEditNewImportTask_Click;
-                }
+        internal System.Windows.Forms.ToolStripMenuItem tsmEditImportTask;
 
-                _tsmEditNewImportTask = value;
-                if (_tsmEditNewImportTask != null)
-                {
-                    _tsmEditNewImportTask.Click += tsmEditNewImportTask_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmEditDeleteImportTask;
 
-        private System.Windows.Forms.ToolStripMenuItem _tsmEditImportTask;
-        internal System.Windows.Forms.ToolStripMenuItem tsmEditImportTask
-        {
-            get
-            {
-                return _tsmEditImportTask;
-            }
-
-            set
-            {
-                if (_tsmEditImportTask != null)
-                {
-                    _tsmEditImportTask.Click -= tsmEditImportTask_Click;
-                }
-
-                _tsmEditImportTask = value;
-                if (_tsmEditImportTask != null)
-                {
-                    _tsmEditImportTask.Click += tsmEditImportTask_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmEditDeleteImportTask;
-        internal System.Windows.Forms.ToolStripMenuItem tsmEditDeleteImportTask
-        {
-            get
-            {
-                return _tsmEditDeleteImportTask;
-            }
-
-            set
-            {
-                if (_tsmEditDeleteImportTask != null)
-                {
-                    _tsmEditDeleteImportTask.Click -= tsmEditDeleteImportTask_Click;
-                }
-
-                _tsmEditDeleteImportTask = value;
-                if (_tsmEditDeleteImportTask != null)
-                {
-                    _tsmEditDeleteImportTask.Click += tsmEditDeleteImportTask_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
-
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
-
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnOK;
 
         internal Facesso.GenericControls.ucWorkGroupListView ucWorkGroups;
-        private System.Windows.Forms.Button _btnSelectAll;
-        internal System.Windows.Forms.Button btnSelectAll
-        {
-            get
-            {
-                return _btnSelectAll;
-            }
+        internal System.Windows.Forms.Button btnSelectAll;
 
-            set
-            {
-                if (_btnSelectAll != null)
-                {
-                    _btnSelectAll.Click -= btnSelectAll_Click;
-                }
-
-                _btnSelectAll = value;
-                if (_btnSelectAll != null)
-                {
-                    _btnSelectAll.Click += btnSelectAll_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnDeselectAll;
-        internal System.Windows.Forms.Button btnDeselectAll
-        {
-            get
-            {
-                return _btnDeselectAll;
-            }
-
-            set
-            {
-                if (_btnDeselectAll != null)
-                {
-                    _btnDeselectAll.Click -= btnDeselectAll_Click;
-                }
-
-                _btnDeselectAll = value;
-                if (_btnDeselectAll != null)
-                {
-                    _btnDeselectAll.Click += btnDeselectAll_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnDeselectAll;
 
         internal System.Windows.Forms.Label lblWorkgroups;
     }

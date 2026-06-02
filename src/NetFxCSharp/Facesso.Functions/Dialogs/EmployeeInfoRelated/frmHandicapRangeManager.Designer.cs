@@ -38,13 +38,20 @@ namespace Facesso.Functions
         private void InitializeComponent()
         {
             this.btnOk = new System.Windows.Forms.Button();
+            this.btnOk.Click += btnOk_Click;
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnCancel.Click += btnCancel_Click;
             this.ListView1 = new System.Windows.Forms.ListView();
+            this.ListView1.SelectedIndexChanged += ListView1_SelectedIndexChanged;
+            this.ListView1.DoubleClick += ListView1_DoubleClick;
             this.ColumnValidFrom = new System.Windows.Forms.ColumnHeader();
             this.ColumnHandicap = new System.Windows.Forms.ColumnHeader();
             this.btnNew = new System.Windows.Forms.Button();
+            this.btnNew.Click += btnNew_Click;
             this.btnEdit = new System.Windows.Forms.Button();
+            this.btnEdit.Click += btnEdit_Click;
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnDelete.Click += btnDelete_Click;
             this.lblEmployee = new System.Windows.Forms.Label();
             this.SuspendLayout();
             //
@@ -146,145 +153,17 @@ namespace Facesso.Functions
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.Button _btnOk;
-        internal System.Windows.Forms.Button btnOk
-        {
-            get
-            {
-                return _btnOk;
-            }
+        internal System.Windows.Forms.Button btnOk;
 
-            set
-            {
-                if (_btnOk != null)
-                {
-                    _btnOk.Click -= btnOk_Click;
-                }
+        internal System.Windows.Forms.Button btnCancel;
 
-                _btnOk = value;
-                if (_btnOk != null)
-                {
-                    _btnOk.Click += btnOk_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ListView ListView1;
 
-        private System.Windows.Forms.Button _btnCancel;
-        internal System.Windows.Forms.Button btnCancel
-        {
-            get
-            {
-                return _btnCancel;
-            }
+        internal System.Windows.Forms.Button btnNew;
 
-            set
-            {
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click -= btnCancel_Click;
-                }
+        internal System.Windows.Forms.Button btnEdit;
 
-                _btnCancel = value;
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click += btnCancel_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ListView _ListView1;
-        internal System.Windows.Forms.ListView ListView1
-        {
-            get
-            {
-                return _ListView1;
-            }
-
-            set
-            {
-                if (_ListView1 != null)
-                {
-                    _ListView1.SelectedIndexChanged -= ListView1_SelectedIndexChanged;
-                    _ListView1.DoubleClick -= ListView1_DoubleClick;
-                }
-
-                _ListView1 = value;
-                if (_ListView1 != null)
-                {
-                    _ListView1.SelectedIndexChanged += ListView1_SelectedIndexChanged;
-                    _ListView1.DoubleClick += ListView1_DoubleClick;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnNew;
-        internal System.Windows.Forms.Button btnNew
-        {
-            get
-            {
-                return _btnNew;
-            }
-
-            set
-            {
-                if (_btnNew != null)
-                {
-                    _btnNew.Click -= btnNew_Click;
-                }
-
-                _btnNew = value;
-                if (_btnNew != null)
-                {
-                    _btnNew.Click += btnNew_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnEdit;
-        internal System.Windows.Forms.Button btnEdit
-        {
-            get
-            {
-                return _btnEdit;
-            }
-
-            set
-            {
-                if (_btnEdit != null)
-                {
-                    _btnEdit.Click -= btnEdit_Click;
-                }
-
-                _btnEdit = value;
-                if (_btnEdit != null)
-                {
-                    _btnEdit.Click += btnEdit_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnDelete;
-        internal System.Windows.Forms.Button btnDelete
-        {
-            get
-            {
-                return _btnDelete;
-            }
-
-            set
-            {
-                if (_btnDelete != null)
-                {
-                    _btnDelete.Click -= btnDelete_Click;
-                }
-
-                _btnDelete = value;
-                if (_btnDelete != null)
-                {
-                    _btnDelete.Click += btnDelete_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnDelete;
 
         internal System.Windows.Forms.ColumnHeader ColumnValidFrom;
         internal System.Windows.Forms.ColumnHeader ColumnHandicap;

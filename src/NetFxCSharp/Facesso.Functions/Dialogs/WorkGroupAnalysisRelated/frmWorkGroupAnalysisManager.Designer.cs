@@ -34,9 +34,13 @@ namespace Facesso.Functions
         {
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.lstAnalysis = new System.Windows.Forms.ListBox();
+            this.lstAnalysis.SelectedIndexChanged += lstAnalysis_SelectedIndexChanged;
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.btnNewAnalysis = new System.Windows.Forms.Button();
+            this.btnNewAnalysis.Click += btnNewAnalysis_Click;
             this.btnUseAnalysis = new System.Windows.Forms.Button();
+            this.btnUseAnalysis.Click += btnUseAnalysis_Click;
             this.Label1 = new System.Windows.Forms.Label();
             this.txtAnalysisName = new System.Windows.Forms.TextBox();
             this.txtAnalysisMenuName = new System.Windows.Forms.TextBox();
@@ -44,7 +48,9 @@ namespace Facesso.Functions
             this.cmbMenuIndex = new System.Windows.Forms.ComboBox();
             this.Label3 = new System.Windows.Forms.Label();
             this.btnEditAnalysis = new System.Windows.Forms.Button();
+            this.btnEditAnalysis.Click += btnEditAnalysis_Click;
             this.btnDeleteAnalysis = new System.Windows.Forms.Button();
+            this.btnDeleteAnalysis.Click += btnDeleteAnalysis_Click;
             this.btnApply = new System.Windows.Forms.Button();
             this.GroupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -203,97 +209,13 @@ namespace Facesso.Functions
         }
 
         internal System.Windows.Forms.GroupBox GroupBox1;
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
+        internal System.Windows.Forms.Button btnOK;
 
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
+        internal System.Windows.Forms.Button btnNewAnalysis;
 
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnUseAnalysis;
 
-        private System.Windows.Forms.Button _btnNewAnalysis;
-        internal System.Windows.Forms.Button btnNewAnalysis
-        {
-            get
-            {
-                return _btnNewAnalysis;
-            }
-
-            set
-            {
-                if (_btnNewAnalysis != null)
-                {
-                    _btnNewAnalysis.Click -= btnNewAnalysis_Click;
-                }
-
-                _btnNewAnalysis = value;
-                if (_btnNewAnalysis != null)
-                {
-                    _btnNewAnalysis.Click += btnNewAnalysis_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnUseAnalysis;
-        internal System.Windows.Forms.Button btnUseAnalysis
-        {
-            get
-            {
-                return _btnUseAnalysis;
-            }
-
-            set
-            {
-                if (_btnUseAnalysis != null)
-                {
-                    _btnUseAnalysis.Click -= btnUseAnalysis_Click;
-                }
-
-                _btnUseAnalysis = value;
-                if (_btnUseAnalysis != null)
-                {
-                    _btnUseAnalysis.Click += btnUseAnalysis_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ListBox _lstAnalysis;
-        internal System.Windows.Forms.ListBox lstAnalysis
-        {
-            get
-            {
-                return _lstAnalysis;
-            }
-
-            set
-            {
-                if (_lstAnalysis != null)
-                {
-                    _lstAnalysis.SelectedIndexChanged -= lstAnalysis_SelectedIndexChanged;
-                }
-
-                _lstAnalysis = value;
-                if (_lstAnalysis != null)
-                {
-                    _lstAnalysis.SelectedIndexChanged += lstAnalysis_SelectedIndexChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.ListBox lstAnalysis;
 
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.TextBox txtAnalysisName;
@@ -301,51 +223,9 @@ namespace Facesso.Functions
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.ComboBox cmbMenuIndex;
         internal System.Windows.Forms.Label Label3;
-        private System.Windows.Forms.Button _btnEditAnalysis;
-        internal System.Windows.Forms.Button btnEditAnalysis
-        {
-            get
-            {
-                return _btnEditAnalysis;
-            }
+        internal System.Windows.Forms.Button btnEditAnalysis;
 
-            set
-            {
-                if (_btnEditAnalysis != null)
-                {
-                    _btnEditAnalysis.Click -= btnEditAnalysis_Click;
-                }
-
-                _btnEditAnalysis = value;
-                if (_btnEditAnalysis != null)
-                {
-                    _btnEditAnalysis.Click += btnEditAnalysis_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnDeleteAnalysis;
-        internal System.Windows.Forms.Button btnDeleteAnalysis
-        {
-            get
-            {
-                return _btnDeleteAnalysis;
-            }
-
-            set
-            {
-                if (_btnDeleteAnalysis != null)
-                {
-                    _btnDeleteAnalysis.Click -= btnDeleteAnalysis_Click;
-                }
-
-                _btnDeleteAnalysis = value;
-                if (_btnDeleteAnalysis != null)
-                {
-                    _btnDeleteAnalysis.Click += btnDeleteAnalysis_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnDeleteAnalysis;
 
         internal System.Windows.Forms.Button btnApply;
     }

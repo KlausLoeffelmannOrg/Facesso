@@ -17,6 +17,7 @@ namespace Facesso.Functions
     public partial class frmProductionDataCollector
     {
         private ShiftDateWorkResultInfo _mySdwResult;
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         private ShiftDateWorkResultInfo mySdwResult
         {
             get

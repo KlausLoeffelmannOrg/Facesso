@@ -36,44 +36,65 @@ namespace Facesso.Functions
             this.MenuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ProduktivSitesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmNewWorkgroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmNewWorkgroup.Click += btnNewWorkGroup_Click;
             this.tsmEditWorkgroupData = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmEditWorkgroupData.Click += tsmEditWorkgroupData_Click;
             this.tsmDeleteWorkgroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmDeleteWorkgroup.Click += tsmDeleteWorkgroup_Click;
             this.ToolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmPrintWorkGroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmPrintWorkGroup.Click += tsmPrintWorkGroup_Click;
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmAssignLabourValues = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmAssignLabourValues.Click += btnAssignToWorkGroup_Click;
             this.tsmUnAssignLabourValues = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmUnAssignLabourValues.Click += btnDeleteFromAssignment_Click;
             this.AnsichtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmShowQuickStartButtons = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmShowQuickStartButtons.Click += tsmShowQuickStartButtons_Click;
             this.tsmGroupLabourValues = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmGroupLabourValues.Click += tsmGroupLabourValues_Click;
             this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmGreyUsedLabourValues = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmOK = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmOK.Click += OKToolStripMenuItem_Click;
             this.ToolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.StatusStrip1 = new System.Windows.Forms.StatusStrip();
             this.SplitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitLabourValuesQuickButtons = new System.Windows.Forms.SplitContainer();
             this.lvlToAssign = new Facesso.GenericControls.ucLabourValueListView();
+            this.lvlToAssign.SelectedIndexChanged += lvlToAssign_SelectedIndexChanged;
             this.Label1 = new System.Windows.Forms.Label();
             this.TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnDeleteFromAssignment = new System.Windows.Forms.Button();
+            this.btnDeleteFromAssignment.Click += btnDeleteFromAssignment_Click;
             this.btnNewWorkGroup = new System.Windows.Forms.Button();
+            this.btnNewWorkGroup.Click += btnNewWorkGroup_Click;
             this.btnAssignToWorkGroup = new System.Windows.Forms.Button();
+            this.btnAssignToWorkGroup.Click += btnAssignToWorkGroup_Click;
             this.splitWorkGroupsAssignments = new System.Windows.Forms.SplitContainer();
             this.wglSetup = new Facesso.GenericControls.ucWorkGroupListView();
+            this.wglSetup.SelectedIndexChanged += wglSetup_SelectedIndexChanged;
             this.Label2 = new System.Windows.Forms.Label();
             this.lvlAssigned = new Facesso.GenericControls.ucLabourValueListView();
+            this.lvlAssigned.SelectedIndexChanged += lvlAssigned_SelectedIndexChanged;
             this.lblSelectedWorkgroup = new System.Windows.Forms.Label();
             this.Label3 = new System.Windows.Forms.Label();
             this.ToolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbNewWorkgroup = new System.Windows.Forms.ToolStripButton();
+            this.tsbNewWorkgroup.Click += btnNewWorkGroup_Click;
             this.tsbEditWorkgroup = new System.Windows.Forms.ToolStripButton();
+            this.tsbEditWorkgroup.Click += tsmEditWorkgroupData_Click;
             this.tsbDeleteWorkgroup = new System.Windows.Forms.ToolStripButton();
+            this.tsbDeleteWorkgroup.Click += tsbDeleteWorkgroup_Click;
             this.ToolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbPrintWorkGroupList = new System.Windows.Forms.ToolStripButton();
+            this.tsbPrintWorkGroupList.Click += tsmPrintWorkGroup_Click;
             this.ToolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbAssignLabourValues = new System.Windows.Forms.ToolStripButton();
+            this.tsbAssignLabourValues.Click += btnAssignToWorkGroup_Click;
             this.tsbUnassignLabourValues = new System.Windows.Forms.ToolStripButton();
+            this.tsbUnassignLabourValues.Click += btnDeleteFromAssignment_Click;
             this.MenuStrip1.SuspendLayout();
             this.ToolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.ToolStripContainer1.ContentPanel.SuspendLayout();
@@ -543,74 +564,11 @@ namespace Facesso.Functions
         internal System.Windows.Forms.StatusStrip StatusStrip1;
         internal System.Windows.Forms.ToolStrip ToolStrip1;
         internal System.Windows.Forms.ToolStripMenuItem ProduktivSitesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem _tsmNewWorkgroup;
-        internal System.Windows.Forms.ToolStripMenuItem tsmNewWorkgroup
-        {
-            get
-            {
-                return _tsmNewWorkgroup;
-            }
+        internal System.Windows.Forms.ToolStripMenuItem tsmNewWorkgroup;
 
-            set
-            {
-                if (_tsmNewWorkgroup != null)
-                {
-                    _tsmNewWorkgroup.Click -= btnNewWorkGroup_Click;
-                }
+        internal System.Windows.Forms.ToolStripMenuItem tsmDeleteWorkgroup;
 
-                _tsmNewWorkgroup = value;
-                if (_tsmNewWorkgroup != null)
-                {
-                    _tsmNewWorkgroup.Click += btnNewWorkGroup_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmDeleteWorkgroup;
-        internal System.Windows.Forms.ToolStripMenuItem tsmDeleteWorkgroup
-        {
-            get
-            {
-                return _tsmDeleteWorkgroup;
-            }
-
-            set
-            {
-                if (_tsmDeleteWorkgroup != null)
-                {
-                    _tsmDeleteWorkgroup.Click -= tsmDeleteWorkgroup_Click;
-                }
-
-                _tsmDeleteWorkgroup = value;
-                if (_tsmDeleteWorkgroup != null)
-                {
-                    _tsmDeleteWorkgroup.Click += tsmDeleteWorkgroup_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmOK;
-        internal System.Windows.Forms.ToolStripMenuItem tsmOK
-        {
-            get
-            {
-                return _tsmOK;
-            }
-
-            set
-            {
-                if (_tsmOK != null)
-                {
-                    _tsmOK.Click -= OKToolStripMenuItem_Click;
-                }
-
-                _tsmOK = value;
-                if (_tsmOK != null)
-                {
-                    _tsmOK.Click += OKToolStripMenuItem_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmOK;
 
         internal System.Windows.Forms.SplitContainer SplitContainer1;
         internal System.Windows.Forms.SplitContainer splitWorkGroupsAssignments;
@@ -620,425 +578,47 @@ namespace Facesso.Functions
         internal System.Windows.Forms.SplitContainer splitLabourValuesQuickButtons;
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;
-        private System.Windows.Forms.Button _btnDeleteFromAssignment;
-        internal System.Windows.Forms.Button btnDeleteFromAssignment
-        {
-            get
-            {
-                return _btnDeleteFromAssignment;
-            }
+        internal System.Windows.Forms.Button btnDeleteFromAssignment;
 
-            set
-            {
-                if (_btnDeleteFromAssignment != null)
-                {
-                    _btnDeleteFromAssignment.Click -= btnDeleteFromAssignment_Click;
-                }
+        internal System.Windows.Forms.Button btnNewWorkGroup;
 
-                _btnDeleteFromAssignment = value;
-                if (_btnDeleteFromAssignment != null)
-                {
-                    _btnDeleteFromAssignment.Click += btnDeleteFromAssignment_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnAssignToWorkGroup;
 
-        private System.Windows.Forms.Button _btnNewWorkGroup;
-        internal System.Windows.Forms.Button btnNewWorkGroup
-        {
-            get
-            {
-                return _btnNewWorkGroup;
-            }
+        internal Facesso.GenericControls.ucLabourValueListView lvlToAssign;
 
-            set
-            {
-                if (_btnNewWorkGroup != null)
-                {
-                    _btnNewWorkGroup.Click -= btnNewWorkGroup_Click;
-                }
+        internal Facesso.GenericControls.ucWorkGroupListView wglSetup;
 
-                _btnNewWorkGroup = value;
-                if (_btnNewWorkGroup != null)
-                {
-                    _btnNewWorkGroup.Click += btnNewWorkGroup_Click;
-                }
-            }
-        }
+        internal Facesso.GenericControls.ucLabourValueListView lvlAssigned;
 
-        private System.Windows.Forms.Button _btnAssignToWorkGroup;
-        internal System.Windows.Forms.Button btnAssignToWorkGroup
-        {
-            get
-            {
-                return _btnAssignToWorkGroup;
-            }
+        internal System.Windows.Forms.ToolStripButton tsbNewWorkgroup;
 
-            set
-            {
-                if (_btnAssignToWorkGroup != null)
-                {
-                    _btnAssignToWorkGroup.Click -= btnAssignToWorkGroup_Click;
-                }
-
-                _btnAssignToWorkGroup = value;
-                if (_btnAssignToWorkGroup != null)
-                {
-                    _btnAssignToWorkGroup.Click += btnAssignToWorkGroup_Click;
-                }
-            }
-        }
-
-        private Facesso.GenericControls.ucLabourValueListView _lvlToAssign;
-        internal Facesso.GenericControls.ucLabourValueListView lvlToAssign
-        {
-            get
-            {
-                return _lvlToAssign;
-            }
-
-            set
-            {
-                if (_lvlToAssign != null)
-                {
-                    _lvlToAssign.SelectedIndexChanged -= lvlToAssign_SelectedIndexChanged;
-                }
-
-                _lvlToAssign = value;
-                if (_lvlToAssign != null)
-                {
-                    _lvlToAssign.SelectedIndexChanged += lvlToAssign_SelectedIndexChanged;
-                }
-            }
-        }
-
-        private Facesso.GenericControls.ucWorkGroupListView _wglSetup;
-        internal Facesso.GenericControls.ucWorkGroupListView wglSetup
-        {
-            get
-            {
-                return _wglSetup;
-            }
-
-            set
-            {
-                if (_wglSetup != null)
-                {
-                    _wglSetup.SelectedIndexChanged -= wglSetup_SelectedIndexChanged;
-                }
-
-                _wglSetup = value;
-                if (_wglSetup != null)
-                {
-                    _wglSetup.SelectedIndexChanged += wglSetup_SelectedIndexChanged;
-                }
-            }
-        }
-
-        private Facesso.GenericControls.ucLabourValueListView _lvlAssigned;
-        internal Facesso.GenericControls.ucLabourValueListView lvlAssigned
-        {
-            get
-            {
-                return _lvlAssigned;
-            }
-
-            set
-            {
-                if (_lvlAssigned != null)
-                {
-                    _lvlAssigned.SelectedIndexChanged -= lvlAssigned_SelectedIndexChanged;
-                }
-
-                _lvlAssigned = value;
-                if (_lvlAssigned != null)
-                {
-                    _lvlAssigned.SelectedIndexChanged += lvlAssigned_SelectedIndexChanged;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripButton _tsbNewWorkgroup;
-        internal System.Windows.Forms.ToolStripButton tsbNewWorkgroup
-        {
-            get
-            {
-                return _tsbNewWorkgroup;
-            }
-
-            set
-            {
-                if (_tsbNewWorkgroup != null)
-                {
-                    _tsbNewWorkgroup.Click -= btnNewWorkGroup_Click;
-                }
-
-                _tsbNewWorkgroup = value;
-                if (_tsbNewWorkgroup != null)
-                {
-                    _tsbNewWorkgroup.Click += btnNewWorkGroup_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripButton _tsbEditWorkgroup;
-        internal System.Windows.Forms.ToolStripButton tsbEditWorkgroup
-        {
-            get
-            {
-                return _tsbEditWorkgroup;
-            }
-
-            set
-            {
-                if (_tsbEditWorkgroup != null)
-                {
-                    _tsbEditWorkgroup.Click -= tsmEditWorkgroupData_Click;
-                }
-
-                _tsbEditWorkgroup = value;
-                if (_tsbEditWorkgroup != null)
-                {
-                    _tsbEditWorkgroup.Click += tsmEditWorkgroupData_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripButton tsbEditWorkgroup;
 
         internal System.Windows.Forms.ToolStripMenuItem AnsichtToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem _tsmShowQuickStartButtons;
-        internal System.Windows.Forms.ToolStripMenuItem tsmShowQuickStartButtons
-        {
-            get
-            {
-                return _tsmShowQuickStartButtons;
-            }
+        internal System.Windows.Forms.ToolStripMenuItem tsmShowQuickStartButtons;
 
-            set
-            {
-                if (_tsmShowQuickStartButtons != null)
-                {
-                    _tsmShowQuickStartButtons.Click -= tsmShowQuickStartButtons_Click;
-                }
+        internal System.Windows.Forms.ToolStripMenuItem tsmGroupLabourValues;
 
-                _tsmShowQuickStartButtons = value;
-                if (_tsmShowQuickStartButtons != null)
-                {
-                    _tsmShowQuickStartButtons.Click += tsmShowQuickStartButtons_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmGroupLabourValues;
-        internal System.Windows.Forms.ToolStripMenuItem tsmGroupLabourValues
-        {
-            get
-            {
-                return _tsmGroupLabourValues;
-            }
-
-            set
-            {
-                if (_tsmGroupLabourValues != null)
-                {
-                    _tsmGroupLabourValues.Click -= tsmGroupLabourValues_Click;
-                }
-
-                _tsmGroupLabourValues = value;
-                if (_tsmGroupLabourValues != null)
-                {
-                    _tsmGroupLabourValues.Click += tsmGroupLabourValues_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmEditWorkgroupData;
-        internal System.Windows.Forms.ToolStripMenuItem tsmEditWorkgroupData
-        {
-            get
-            {
-                return _tsmEditWorkgroupData;
-            }
-
-            set
-            {
-                if (_tsmEditWorkgroupData != null)
-                {
-                    _tsmEditWorkgroupData.Click -= tsmEditWorkgroupData_Click;
-                }
-
-                _tsmEditWorkgroupData = value;
-                if (_tsmEditWorkgroupData != null)
-                {
-                    _tsmEditWorkgroupData.Click += tsmEditWorkgroupData_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmEditWorkgroupData;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem _tsmAssignLabourValues;
-        internal System.Windows.Forms.ToolStripMenuItem tsmAssignLabourValues
-        {
-            get
-            {
-                return _tsmAssignLabourValues;
-            }
+        internal System.Windows.Forms.ToolStripMenuItem tsmAssignLabourValues;
 
-            set
-            {
-                if (_tsmAssignLabourValues != null)
-                {
-                    _tsmAssignLabourValues.Click -= btnAssignToWorkGroup_Click;
-                }
-
-                _tsmAssignLabourValues = value;
-                if (_tsmAssignLabourValues != null)
-                {
-                    _tsmAssignLabourValues.Click += btnAssignToWorkGroup_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripMenuItem _tsmUnAssignLabourValues;
-        internal System.Windows.Forms.ToolStripMenuItem tsmUnAssignLabourValues
-        {
-            get
-            {
-                return _tsmUnAssignLabourValues;
-            }
-
-            set
-            {
-                if (_tsmUnAssignLabourValues != null)
-                {
-                    _tsmUnAssignLabourValues.Click -= btnDeleteFromAssignment_Click;
-                }
-
-                _tsmUnAssignLabourValues = value;
-                if (_tsmUnAssignLabourValues != null)
-                {
-                    _tsmUnAssignLabourValues.Click += btnDeleteFromAssignment_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmUnAssignLabourValues;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
         internal System.Windows.Forms.ToolStripMenuItem tsmGreyUsedLabourValues;
         internal System.Windows.Forms.ToolStripSeparator ToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem _tsmPrintWorkGroup;
-        internal System.Windows.Forms.ToolStripMenuItem tsmPrintWorkGroup
-        {
-            get
-            {
-                return _tsmPrintWorkGroup;
-            }
-
-            set
-            {
-                if (_tsmPrintWorkGroup != null)
-                {
-                    _tsmPrintWorkGroup.Click -= tsmPrintWorkGroup_Click;
-                }
-
-                _tsmPrintWorkGroup = value;
-                if (_tsmPrintWorkGroup != null)
-                {
-                    _tsmPrintWorkGroup.Click += tsmPrintWorkGroup_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem tsmPrintWorkGroup;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton _tsbPrintWorkGroupList;
-        internal System.Windows.Forms.ToolStripButton tsbPrintWorkGroupList
-        {
-            get
-            {
-                return _tsbPrintWorkGroupList;
-            }
-
-            set
-            {
-                if (_tsbPrintWorkGroupList != null)
-                {
-                    _tsbPrintWorkGroupList.Click -= tsmPrintWorkGroup_Click;
-                }
-
-                _tsbPrintWorkGroupList = value;
-                if (_tsbPrintWorkGroupList != null)
-                {
-                    _tsbPrintWorkGroupList.Click += tsmPrintWorkGroup_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripButton tsbPrintWorkGroupList;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator4;
-        private System.Windows.Forms.ToolStripButton _tsbAssignLabourValues;
-        internal System.Windows.Forms.ToolStripButton tsbAssignLabourValues
-        {
-            get
-            {
-                return _tsbAssignLabourValues;
-            }
+        internal System.Windows.Forms.ToolStripButton tsbAssignLabourValues;
 
-            set
-            {
-                if (_tsbAssignLabourValues != null)
-                {
-                    _tsbAssignLabourValues.Click -= btnAssignToWorkGroup_Click;
-                }
+        internal System.Windows.Forms.ToolStripButton tsbUnassignLabourValues;
 
-                _tsbAssignLabourValues = value;
-                if (_tsbAssignLabourValues != null)
-                {
-                    _tsbAssignLabourValues.Click += btnAssignToWorkGroup_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripButton _tsbUnassignLabourValues;
-        internal System.Windows.Forms.ToolStripButton tsbUnassignLabourValues
-        {
-            get
-            {
-                return _tsbUnassignLabourValues;
-            }
-
-            set
-            {
-                if (_tsbUnassignLabourValues != null)
-                {
-                    _tsbUnassignLabourValues.Click -= btnDeleteFromAssignment_Click;
-                }
-
-                _tsbUnassignLabourValues = value;
-                if (_tsbUnassignLabourValues != null)
-                {
-                    _tsbUnassignLabourValues.Click += btnDeleteFromAssignment_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.ToolStripButton _tsbDeleteWorkgroup;
-        internal System.Windows.Forms.ToolStripButton tsbDeleteWorkgroup
-        {
-            get
-            {
-                return _tsbDeleteWorkgroup;
-            }
-
-            set
-            {
-                if (_tsbDeleteWorkgroup != null)
-                {
-                    _tsbDeleteWorkgroup.Click -= tsbDeleteWorkgroup_Click;
-                }
-
-                _tsbDeleteWorkgroup = value;
-                if (_tsbDeleteWorkgroup != null)
-                {
-                    _tsbDeleteWorkgroup.Click += tsbDeleteWorkgroup_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripButton tsbDeleteWorkgroup;
     }
 }

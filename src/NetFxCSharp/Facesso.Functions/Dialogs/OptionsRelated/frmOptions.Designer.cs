@@ -50,16 +50,19 @@ namespace Facesso.Functions
             this.tpTimeSettingDefaults = new System.Windows.Forms.TabPage();
             this.Label4 = new System.Windows.Forms.Label();
             this.btnAssignToWorkgroups = new System.Windows.Forms.Button();
+            this.btnAssignToWorkgroups.Click += btnAssignToWorkgroups_Click;
             this.UcTimeDetailsSettings = new Facesso.GenericControls.ucTimeDetailsSettings();
             this.tpLayoutAndNumberformats = new System.Windows.Forms.TabPage();
             this.GroupBox3 = new System.Windows.Forms.GroupBox();
             this.btnPreView = new System.Windows.Forms.Button();
             this.cmbGridStyle = new System.Windows.Forms.ComboBox();
+            this.cmbGridStyle.SelectedIndexChanged += cmbGridStyle_SelectedIndexChanged;
             this.Label16 = new System.Windows.Forms.Label();
             this.GroupBox2 = new System.Windows.Forms.GroupBox();
             this.Label13 = new System.Windows.Forms.Label();
             this.Label12 = new System.Windows.Forms.Label();
             this.cmbHMinutesPrecision = new System.Windows.Forms.ComboBox();
+            this.cmbHMinutesPrecision.SelectedIndexChanged += cmbHMinutesPrecision_SelectedIndexChanged;
             this.Label11 = new System.Windows.Forms.Label();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.Label14 = new System.Windows.Forms.Label();
@@ -67,18 +70,23 @@ namespace Facesso.Functions
             this.pbxLogo = new System.Windows.Forms.PictureBox();
             this.Label10 = new System.Windows.Forms.Label();
             this.btnTextBodyAndTableBodyFont = new System.Windows.Forms.Button();
+            this.btnTextBodyAndTableBodyFont.Click += HandleFontButtons;
             this.lblTextAndTableBodyFont = new System.Windows.Forms.Label();
             this.Label9 = new System.Windows.Forms.Label();
             this.btnTableHeaderFont = new System.Windows.Forms.Button();
+            this.btnTableHeaderFont.Click += HandleFontButtons;
             this.lblTableHeaderFont = new System.Windows.Forms.Label();
             this.Label7 = new System.Windows.Forms.Label();
             this.btnU3Font = new System.Windows.Forms.Button();
+            this.btnU3Font.Click += HandleFontButtons;
             this.lblFontU3 = new System.Windows.Forms.Label();
             this.Label5 = new System.Windows.Forms.Label();
             this.btnU2Font = new System.Windows.Forms.Button();
+            this.btnU2Font.Click += HandleFontButtons;
             this.lblFontU2 = new System.Windows.Forms.Label();
             this.Label3 = new System.Windows.Forms.Label();
             this.btnU1Font = new System.Windows.Forms.Button();
+            this.btnU1Font.Click += HandleFontButtons;
             this.lblFontU1 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.tpThresholdValues = new System.Windows.Forms.TabPage();
@@ -88,7 +96,9 @@ namespace Facesso.Functions
             this.dtbFallBackTimeEnd = new ActiveDev.Controls.ADNullableDateTimeBox();
             this.dtbFallBackTimeStart = new ActiveDev.Controls.ADNullableDateTimeBox();
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnOK.Click += btnOK_Click;
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnCancel.Click += btnCancel_Click;
             this.GroupBox8 = new System.Windows.Forms.GroupBox();
             this.chkShowTimeLogPriorToImport = new System.Windows.Forms.CheckBox();
             this.chkShowIssueListPriorToImport = new System.Windows.Forms.CheckBox();
@@ -808,176 +818,29 @@ namespace Facesso.Functions
         internal System.Windows.Forms.TabControl tcMain;
         internal System.Windows.Forms.TabPage tpTimeSettingDefaults;
         internal System.Windows.Forms.TabPage tpLayoutAndNumberformats;
-        private System.Windows.Forms.Button _btnOK;
-        internal System.Windows.Forms.Button btnOK
-        {
-            get
-            {
-                return _btnOK;
-            }
+        internal System.Windows.Forms.Button btnOK;
 
-            set
-            {
-                if (_btnOK != null)
-                {
-                    _btnOK.Click -= btnOK_Click;
-                }
-
-                _btnOK = value;
-                if (_btnOK != null)
-                {
-                    _btnOK.Click += btnOK_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnCancel;
-        internal System.Windows.Forms.Button btnCancel
-        {
-            get
-            {
-                return _btnCancel;
-            }
-
-            set
-            {
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click -= btnCancel_Click;
-                }
-
-                _btnCancel = value;
-                if (_btnCancel != null)
-                {
-                    _btnCancel.Click += btnCancel_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnCancel;
 
         internal Facesso.GenericControls.ucTimeDetailsSettings UcTimeDetailsSettings;
         internal System.Windows.Forms.GroupBox GroupBox1;
         internal System.Windows.Forms.Label Label1;
-        private System.Windows.Forms.Button _btnU1Font;
-        internal System.Windows.Forms.Button btnU1Font
-        {
-            get
-            {
-                return _btnU1Font;
-            }
-
-            set
-            {
-                if (_btnU1Font != null)
-                {
-                    _btnU1Font.Click -= HandleFontButtons;
-                }
-
-                _btnU1Font = value;
-                if (_btnU1Font != null)
-                {
-                    _btnU1Font.Click += HandleFontButtons;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnU1Font;
 
         internal System.Windows.Forms.Label lblFontU1;
-        private System.Windows.Forms.Button _btnTextBodyAndTableBodyFont;
-        internal System.Windows.Forms.Button btnTextBodyAndTableBodyFont
-        {
-            get
-            {
-                return _btnTextBodyAndTableBodyFont;
-            }
-
-            set
-            {
-                if (_btnTextBodyAndTableBodyFont != null)
-                {
-                    _btnTextBodyAndTableBodyFont.Click -= HandleFontButtons;
-                }
-
-                _btnTextBodyAndTableBodyFont = value;
-                if (_btnTextBodyAndTableBodyFont != null)
-                {
-                    _btnTextBodyAndTableBodyFont.Click += HandleFontButtons;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnTextBodyAndTableBodyFont;
 
         internal System.Windows.Forms.Label lblTextAndTableBodyFont;
         internal System.Windows.Forms.Label Label9;
-        private System.Windows.Forms.Button _btnTableHeaderFont;
-        internal System.Windows.Forms.Button btnTableHeaderFont
-        {
-            get
-            {
-                return _btnTableHeaderFont;
-            }
-
-            set
-            {
-                if (_btnTableHeaderFont != null)
-                {
-                    _btnTableHeaderFont.Click -= HandleFontButtons;
-                }
-
-                _btnTableHeaderFont = value;
-                if (_btnTableHeaderFont != null)
-                {
-                    _btnTableHeaderFont.Click += HandleFontButtons;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnTableHeaderFont;
 
         internal System.Windows.Forms.Label lblTableHeaderFont;
         internal System.Windows.Forms.Label Label7;
-        private System.Windows.Forms.Button _btnU3Font;
-        internal System.Windows.Forms.Button btnU3Font
-        {
-            get
-            {
-                return _btnU3Font;
-            }
-
-            set
-            {
-                if (_btnU3Font != null)
-                {
-                    _btnU3Font.Click -= HandleFontButtons;
-                }
-
-                _btnU3Font = value;
-                if (_btnU3Font != null)
-                {
-                    _btnU3Font.Click += HandleFontButtons;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnU3Font;
 
         internal System.Windows.Forms.Label lblFontU3;
         internal System.Windows.Forms.Label Label5;
-        private System.Windows.Forms.Button _btnU2Font;
-        internal System.Windows.Forms.Button btnU2Font
-        {
-            get
-            {
-                return _btnU2Font;
-            }
-
-            set
-            {
-                if (_btnU2Font != null)
-                {
-                    _btnU2Font.Click -= HandleFontButtons;
-                }
-
-                _btnU2Font = value;
-                if (_btnU2Font != null)
-                {
-                    _btnU2Font.Click += HandleFontButtons;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnU2Font;
 
         internal System.Windows.Forms.Label lblFontU2;
         internal System.Windows.Forms.Label Label3;
@@ -988,52 +851,10 @@ namespace Facesso.Functions
         internal System.Windows.Forms.Label Label10;
         internal System.Windows.Forms.Label Label13;
         internal System.Windows.Forms.Label Label12;
-        private System.Windows.Forms.ComboBox _cmbHMinutesPrecision;
-        internal System.Windows.Forms.ComboBox cmbHMinutesPrecision
-        {
-            get
-            {
-                return _cmbHMinutesPrecision;
-            }
-
-            set
-            {
-                if (_cmbHMinutesPrecision != null)
-                {
-                    _cmbHMinutesPrecision.SelectedIndexChanged -= cmbHMinutesPrecision_SelectedIndexChanged;
-                }
-
-                _cmbHMinutesPrecision = value;
-                if (_cmbHMinutesPrecision != null)
-                {
-                    _cmbHMinutesPrecision.SelectedIndexChanged += cmbHMinutesPrecision_SelectedIndexChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.ComboBox cmbHMinutesPrecision;
 
         internal System.Windows.Forms.GroupBox GroupBox3;
-        private System.Windows.Forms.ComboBox _cmbGridStyle;
-        internal System.Windows.Forms.ComboBox cmbGridStyle
-        {
-            get
-            {
-                return _cmbGridStyle;
-            }
-
-            set
-            {
-                if (_cmbGridStyle != null)
-                {
-                    _cmbGridStyle.SelectedIndexChanged -= cmbGridStyle_SelectedIndexChanged;
-                }
-
-                _cmbGridStyle = value;
-                if (_cmbGridStyle != null)
-                {
-                    _cmbGridStyle.SelectedIndexChanged += cmbGridStyle_SelectedIndexChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.ComboBox cmbGridStyle;
 
         internal System.Windows.Forms.Label Label16;
         internal System.Windows.Forms.Button btnPreView;
@@ -1052,28 +873,7 @@ namespace Facesso.Functions
         internal System.Windows.Forms.Label Label17;
         internal Facesso.ucFacessoPathSettings FacessoPathSettings;
         internal System.Windows.Forms.Label Label4;
-        private System.Windows.Forms.Button _btnAssignToWorkgroups;
-        internal System.Windows.Forms.Button btnAssignToWorkgroups
-        {
-            get
-            {
-                return _btnAssignToWorkgroups;
-            }
-
-            set
-            {
-                if (_btnAssignToWorkgroups != null)
-                {
-                    _btnAssignToWorkgroups.Click -= btnAssignToWorkgroups_Click;
-                }
-
-                _btnAssignToWorkgroups = value;
-                if (_btnAssignToWorkgroups != null)
-                {
-                    _btnAssignToWorkgroups.Click += btnAssignToWorkgroups_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnAssignToWorkgroups;
 
         internal System.Windows.Forms.TabPage tpThresholdValues;
         internal System.Windows.Forms.GroupBox GroupBox7;

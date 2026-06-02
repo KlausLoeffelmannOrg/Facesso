@@ -36,36 +36,52 @@ namespace Facesso.GenericControls
         {
             this.Panel2 = new System.Windows.Forms.Panel();
             this.btnReset = new System.Windows.Forms.Button();
+            this.btnReset.Click += btnReset_Click;
             this.lblShiftInformer = new System.Windows.Forms.Label();
             this.Label7 = new System.Windows.Forms.Label();
             this.lblImportEndTimeDateDescription = new System.Windows.Forms.Label();
             this.ndbImportTimeStart = new ActiveDev.Controls.ADNullableDateTimeBox();
+            this.ndbImportTimeStart.Validated += ndbImportTimeStart_Validated;
             this.ndbImportTimeEnd = new ActiveDev.Controls.ADNullableDateTimeBox();
+            this.ndbImportTimeEnd.Validated += ndbImportTimeEnd_Validated;
             this.lbTimes = new System.Windows.Forms.ListBox();
             this.btnEndDate = new System.Windows.Forms.Button();
             this.btnStartDate = new System.Windows.Forms.Button();
             this.Label6 = new System.Windows.Forms.Label();
             this.btnWD_07_Sunday = new System.Windows.Forms.Button();
+            this.btnWD_07_Sunday.Click += btnGeneric_Click;
             this.btnWD_06_Saturday = new System.Windows.Forms.Button();
+            this.btnWD_06_Saturday.Click += btnGeneric_Click;
             this.btnWD_05_Friday = new System.Windows.Forms.Button();
+            this.btnWD_05_Friday.Click += btnGeneric_Click;
             this.btnWD_04_Thursday = new System.Windows.Forms.Button();
+            this.btnWD_04_Thursday.Click += btnGeneric_Click;
             this.btnWD_03_Wednesday = new System.Windows.Forms.Button();
+            this.btnWD_03_Wednesday.Click += btnGeneric_Click;
             this.btnWD_02_Tuesday = new System.Windows.Forms.Button();
+            this.btnWD_02_Tuesday.Click += btnGeneric_Click;
             this.btnWD_01_Monday = new System.Windows.Forms.Button();
+            this.btnWD_01_Monday.Click += btnGeneric_Click;
             this.Label5 = new System.Windows.Forms.Label();
             this.btnGeneric = new System.Windows.Forms.Button();
+            this.btnGeneric.Click += btnGeneric_Click;
             this.ncbForceToHavePause = new ActiveDev.Controls.ADNullableCheckBox();
             this.nibThreshold = new ActiveDev.Controls.ADNullableIntBox();
             this.Label4 = new System.Windows.Forms.Label();
             this.ndbRoundDownAfter = new ActiveDev.Controls.ADNullableDateTimeBox();
+            this.ndbRoundDownAfter.Validated += ndbRoundUpBefore_Validated;
             this.Label3 = new System.Windows.Forms.Label();
             this.ndbRoundUpBefore = new ActiveDev.Controls.ADNullableDateTimeBox();
+            this.ndbRoundUpBefore.Validated += ndbRoundUpBefore_Validated;
             this.nibPausetime = new ActiveDev.Controls.ADNullableIntBox();
             this.lblEndTimeDateDecription = new System.Windows.Forms.Label();
             this.Label2 = new System.Windows.Forms.Label();
             this.ndbCoreTimeStart = new ActiveDev.Controls.ADNullableDateTimeBox();
+            this.ndbCoreTimeStart.Validated += ndbCoreTimeStart_Validated;
             this.ndbCoreTimeEnd = new ActiveDev.Controls.ADNullableDateTimeBox();
+            this.ndbCoreTimeEnd.Validated += ndbCoreTimeEnd_Validated;
             this.tcShifts = new System.Windows.Forms.TabControl();
+            this.tcShifts.Selected += tcShifts_Selected;
             this.tpShift1 = new System.Windows.Forms.TabPage();
             this.tpShift2 = new System.Windows.Forms.TabPage();
             this.tpShift3 = new System.Windows.Forms.TabPage();
@@ -543,217 +559,28 @@ namespace Facesso.GenericControls
         internal System.Windows.Forms.Button btnEndDate;
         internal System.Windows.Forms.Button btnStartDate;
         internal System.Windows.Forms.Label Label6;
-        private System.Windows.Forms.Button _btnWD_07_Sunday;
-        internal System.Windows.Forms.Button btnWD_07_Sunday
-        {
-            get
-            {
-                return _btnWD_07_Sunday;
-            }
+        internal System.Windows.Forms.Button btnWD_07_Sunday;
 
-            set
-            {
-                if (_btnWD_07_Sunday != null)
-                {
-                    _btnWD_07_Sunday.Click -= btnGeneric_Click;
-                }
+        internal System.Windows.Forms.Button btnWD_06_Saturday;
 
-                _btnWD_07_Sunday = value;
-                if (_btnWD_07_Sunday != null)
-                {
-                    _btnWD_07_Sunday.Click += btnGeneric_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnWD_05_Friday;
 
-        private System.Windows.Forms.Button _btnWD_06_Saturday;
-        internal System.Windows.Forms.Button btnWD_06_Saturday
-        {
-            get
-            {
-                return _btnWD_06_Saturday;
-            }
+        internal System.Windows.Forms.Button btnWD_04_Thursday;
 
-            set
-            {
-                if (_btnWD_06_Saturday != null)
-                {
-                    _btnWD_06_Saturday.Click -= btnGeneric_Click;
-                }
+        internal System.Windows.Forms.Button btnWD_03_Wednesday;
 
-                _btnWD_06_Saturday = value;
-                if (_btnWD_06_Saturday != null)
-                {
-                    _btnWD_06_Saturday.Click += btnGeneric_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnWD_02_Tuesday;
 
-        private System.Windows.Forms.Button _btnWD_05_Friday;
-        internal System.Windows.Forms.Button btnWD_05_Friday
-        {
-            get
-            {
-                return _btnWD_05_Friday;
-            }
-
-            set
-            {
-                if (_btnWD_05_Friday != null)
-                {
-                    _btnWD_05_Friday.Click -= btnGeneric_Click;
-                }
-
-                _btnWD_05_Friday = value;
-                if (_btnWD_05_Friday != null)
-                {
-                    _btnWD_05_Friday.Click += btnGeneric_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnWD_04_Thursday;
-        internal System.Windows.Forms.Button btnWD_04_Thursday
-        {
-            get
-            {
-                return _btnWD_04_Thursday;
-            }
-
-            set
-            {
-                if (_btnWD_04_Thursday != null)
-                {
-                    _btnWD_04_Thursday.Click -= btnGeneric_Click;
-                }
-
-                _btnWD_04_Thursday = value;
-                if (_btnWD_04_Thursday != null)
-                {
-                    _btnWD_04_Thursday.Click += btnGeneric_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnWD_03_Wednesday;
-        internal System.Windows.Forms.Button btnWD_03_Wednesday
-        {
-            get
-            {
-                return _btnWD_03_Wednesday;
-            }
-
-            set
-            {
-                if (_btnWD_03_Wednesday != null)
-                {
-                    _btnWD_03_Wednesday.Click -= btnGeneric_Click;
-                }
-
-                _btnWD_03_Wednesday = value;
-                if (_btnWD_03_Wednesday != null)
-                {
-                    _btnWD_03_Wednesday.Click += btnGeneric_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnWD_02_Tuesday;
-        internal System.Windows.Forms.Button btnWD_02_Tuesday
-        {
-            get
-            {
-                return _btnWD_02_Tuesday;
-            }
-
-            set
-            {
-                if (_btnWD_02_Tuesday != null)
-                {
-                    _btnWD_02_Tuesday.Click -= btnGeneric_Click;
-                }
-
-                _btnWD_02_Tuesday = value;
-                if (_btnWD_02_Tuesday != null)
-                {
-                    _btnWD_02_Tuesday.Click += btnGeneric_Click;
-                }
-            }
-        }
-
-        private System.Windows.Forms.Button _btnWD_01_Monday;
-        internal System.Windows.Forms.Button btnWD_01_Monday
-        {
-            get
-            {
-                return _btnWD_01_Monday;
-            }
-
-            set
-            {
-                if (_btnWD_01_Monday != null)
-                {
-                    _btnWD_01_Monday.Click -= btnGeneric_Click;
-                }
-
-                _btnWD_01_Monday = value;
-                if (_btnWD_01_Monday != null)
-                {
-                    _btnWD_01_Monday.Click += btnGeneric_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnWD_01_Monday;
 
         internal System.Windows.Forms.Label Label5;
-        private System.Windows.Forms.Button _btnGeneric;
-        internal System.Windows.Forms.Button btnGeneric
-        {
-            get
-            {
-                return _btnGeneric;
-            }
-
-            set
-            {
-                if (_btnGeneric != null)
-                {
-                    _btnGeneric.Click -= btnGeneric_Click;
-                }
-
-                _btnGeneric = value;
-                if (_btnGeneric != null)
-                {
-                    _btnGeneric.Click += btnGeneric_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnGeneric;
 
         internal System.Windows.Forms.Label Label4;
         internal System.Windows.Forms.Label Label3;
         internal System.Windows.Forms.Label lblEndTimeDateDecription;
         internal System.Windows.Forms.Label Label2;
-        private System.Windows.Forms.TabControl _tcShifts;
-        internal System.Windows.Forms.TabControl tcShifts
-        {
-            get
-            {
-                return _tcShifts;
-            }
-
-            set
-            {
-                if (_tcShifts != null)
-                {
-                    _tcShifts.Selected -= tcShifts_Selected;
-                }
-
-                _tcShifts = value;
-                if (_tcShifts != null)
-                {
-                    _tcShifts.Selected += tcShifts_Selected;
-                }
-            }
-        }
+        internal System.Windows.Forms.TabControl tcShifts;
 
         internal System.Windows.Forms.TabPage tpShift1;
         internal System.Windows.Forms.TabPage tpShift2;
@@ -762,169 +589,22 @@ namespace Facesso.GenericControls
         internal System.Windows.Forms.ListBox lbTimes;
         internal ActiveDev.Controls.ADNullableCheckBox ncbForceToHavePause;
         internal ActiveDev.Controls.ADNullableIntBox nibThreshold;
-        private ActiveDev.Controls.ADNullableDateTimeBox _ndbRoundDownAfter;
-        internal ActiveDev.Controls.ADNullableDateTimeBox ndbRoundDownAfter
-        {
-            get
-            {
-                return _ndbRoundDownAfter;
-            }
+        internal ActiveDev.Controls.ADNullableDateTimeBox ndbRoundDownAfter;
 
-            set
-            {
-                if (_ndbRoundDownAfter != null)
-                {
-                    _ndbRoundDownAfter.Validated -= ndbRoundUpBefore_Validated;
-                }
-
-                _ndbRoundDownAfter = value;
-                if (_ndbRoundDownAfter != null)
-                {
-                    _ndbRoundDownAfter.Validated += ndbRoundUpBefore_Validated;
-                }
-            }
-        }
-
-        private ActiveDev.Controls.ADNullableDateTimeBox _ndbRoundUpBefore;
-        internal ActiveDev.Controls.ADNullableDateTimeBox ndbRoundUpBefore
-        {
-            get
-            {
-                return _ndbRoundUpBefore;
-            }
-
-            set
-            {
-                if (_ndbRoundUpBefore != null)
-                {
-                    _ndbRoundUpBefore.Validated -= ndbRoundUpBefore_Validated;
-                }
-
-                _ndbRoundUpBefore = value;
-                if (_ndbRoundUpBefore != null)
-                {
-                    _ndbRoundUpBefore.Validated += ndbRoundUpBefore_Validated;
-                }
-            }
-        }
+        internal ActiveDev.Controls.ADNullableDateTimeBox ndbRoundUpBefore;
 
         internal ActiveDev.Controls.ADNullableIntBox nibPausetime;
-        private ActiveDev.Controls.ADNullableDateTimeBox _ndbCoreTimeStart;
-        internal ActiveDev.Controls.ADNullableDateTimeBox ndbCoreTimeStart
-        {
-            get
-            {
-                return _ndbCoreTimeStart;
-            }
+        internal ActiveDev.Controls.ADNullableDateTimeBox ndbCoreTimeStart;
 
-            set
-            {
-                if (_ndbCoreTimeStart != null)
-                {
-                    _ndbCoreTimeStart.Validated -= ndbCoreTimeStart_Validated;
-                }
-
-                _ndbCoreTimeStart = value;
-                if (_ndbCoreTimeStart != null)
-                {
-                    _ndbCoreTimeStart.Validated += ndbCoreTimeStart_Validated;
-                }
-            }
-        }
-
-        private ActiveDev.Controls.ADNullableDateTimeBox _ndbCoreTimeEnd;
-        internal ActiveDev.Controls.ADNullableDateTimeBox ndbCoreTimeEnd
-        {
-            get
-            {
-                return _ndbCoreTimeEnd;
-            }
-
-            set
-            {
-                if (_ndbCoreTimeEnd != null)
-                {
-                    _ndbCoreTimeEnd.Validated -= ndbCoreTimeEnd_Validated;
-                }
-
-                _ndbCoreTimeEnd = value;
-                if (_ndbCoreTimeEnd != null)
-                {
-                    _ndbCoreTimeEnd.Validated += ndbCoreTimeEnd_Validated;
-                }
-            }
-        }
+        internal ActiveDev.Controls.ADNullableDateTimeBox ndbCoreTimeEnd;
 
         internal System.Windows.Forms.Label Label7;
         internal System.Windows.Forms.Label lblImportEndTimeDateDescription;
-        private ActiveDev.Controls.ADNullableDateTimeBox _ndbImportTimeStart;
-        internal ActiveDev.Controls.ADNullableDateTimeBox ndbImportTimeStart
-        {
-            get
-            {
-                return _ndbImportTimeStart;
-            }
+        internal ActiveDev.Controls.ADNullableDateTimeBox ndbImportTimeStart;
 
-            set
-            {
-                if (_ndbImportTimeStart != null)
-                {
-                    _ndbImportTimeStart.Validated -= ndbImportTimeStart_Validated;
-                }
-
-                _ndbImportTimeStart = value;
-                if (_ndbImportTimeStart != null)
-                {
-                    _ndbImportTimeStart.Validated += ndbImportTimeStart_Validated;
-                }
-            }
-        }
-
-        private ActiveDev.Controls.ADNullableDateTimeBox _ndbImportTimeEnd;
-        internal ActiveDev.Controls.ADNullableDateTimeBox ndbImportTimeEnd
-        {
-            get
-            {
-                return _ndbImportTimeEnd;
-            }
-
-            set
-            {
-                if (_ndbImportTimeEnd != null)
-                {
-                    _ndbImportTimeEnd.Validated -= ndbImportTimeEnd_Validated;
-                }
-
-                _ndbImportTimeEnd = value;
-                if (_ndbImportTimeEnd != null)
-                {
-                    _ndbImportTimeEnd.Validated += ndbImportTimeEnd_Validated;
-                }
-            }
-        }
+        internal ActiveDev.Controls.ADNullableDateTimeBox ndbImportTimeEnd;
 
         internal System.Windows.Forms.Label lblShiftInformer;
-        private System.Windows.Forms.Button _btnReset;
-        internal System.Windows.Forms.Button btnReset
-        {
-            get
-            {
-                return _btnReset;
-            }
-
-            set
-            {
-                if (_btnReset != null)
-                {
-                    _btnReset.Click -= btnReset_Click;
-                }
-
-                _btnReset = value;
-                if (_btnReset != null)
-                {
-                    _btnReset.Click += btnReset_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnReset;
     }
 }

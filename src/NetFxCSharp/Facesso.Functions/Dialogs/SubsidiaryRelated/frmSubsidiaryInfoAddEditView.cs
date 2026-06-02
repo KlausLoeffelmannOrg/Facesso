@@ -41,28 +41,7 @@ namespace Facesso.Functions
         internal ActiveDev.Controls.ADNullableTextBox ntbCountryCode;
         internal ActiveDev.Controls.ADNullableTextBox ntbCity;
         internal ActiveDev.Controls.ADNullableTextBox ntbZip;
-        private ActiveDev.Controls.ADNullableTextBox _ntbStreet;
-        internal ActiveDev.Controls.ADNullableTextBox ntbStreet
-        {
-            get
-            {
-                return _ntbStreet;
-            }
-
-            set
-            {
-                if (_ntbStreet != null)
-                {
-                    _ntbStreet.Click -= ntbStreet_Click;
-                }
-
-                _ntbStreet = value;
-                if (_ntbStreet != null)
-                {
-                    _ntbStreet.Click += ntbStreet_Click;
-                }
-            }
-        }
+        internal ActiveDev.Controls.ADNullableTextBox ntbStreet;
 
         internal ActiveDev.Controls.ADNullableTextBox ntbPrimaryPhone;
         //Required by the Windows Form Designer
@@ -79,6 +58,7 @@ namespace Facesso.Functions
             this.ntbCity = new ActiveDev.Controls.ADNullableTextBox();
             this.ntbZip = new ActiveDev.Controls.ADNullableTextBox();
             this.ntbStreet = new ActiveDev.Controls.ADNullableTextBox();
+            this.ntbStreet.Click += ntbStreet_Click;
             this.ntbPrimaryPhone = new ActiveDev.Controls.ADNullableTextBox();
             this.SuspendLayout();
             //

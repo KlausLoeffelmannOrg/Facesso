@@ -33,10 +33,12 @@ namespace Facesso.Interfaces
         private void InitializeComponent()
         {
             this.btnChoosePath = new System.Windows.Forms.Button();
+            this.btnChoosePath.Click += btnChoosePath_Click;
             this.Label1 = new System.Windows.Forms.Label();
             this.txtSqlConnectionString = new System.Windows.Forms.TextBox();
             this.lblDevice = new System.Windows.Forms.Label();
             this.cmbDevice = new System.Windows.Forms.ComboBox();
+            this.cmbDevice.SelectedIndexChanged += cmbJensenDevice_SelectedIndexChanged;
             this.SuspendLayout();
             //
             //lblTitel
@@ -135,53 +137,11 @@ namespace Facesso.Interfaces
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.Button _btnChoosePath;
-        internal System.Windows.Forms.Button btnChoosePath
-        {
-            get
-            {
-                return _btnChoosePath;
-            }
-
-            set
-            {
-                if (_btnChoosePath != null)
-                {
-                    _btnChoosePath.Click -= btnChoosePath_Click;
-                }
-
-                _btnChoosePath = value;
-                if (_btnChoosePath != null)
-                {
-                    _btnChoosePath.Click += btnChoosePath_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnChoosePath;
 
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.TextBox txtSqlConnectionString;
         internal System.Windows.Forms.Label lblDevice;
-        private System.Windows.Forms.ComboBox _cmbDevice;
-        internal System.Windows.Forms.ComboBox cmbDevice
-        {
-            get
-            {
-                return _cmbDevice;
-            }
-
-            set
-            {
-                if (_cmbDevice != null)
-                {
-                    _cmbDevice.SelectedIndexChanged -= cmbJensenDevice_SelectedIndexChanged;
-                }
-
-                _cmbDevice = value;
-                if (_cmbDevice != null)
-                {
-                    _cmbDevice.SelectedIndexChanged += cmbJensenDevice_SelectedIndexChanged;
-                }
-            }
-        }
+        internal System.Windows.Forms.ComboBox cmbDevice;
     }
 }

@@ -110,6 +110,7 @@ namespace ActiveDev.Controls
         //Das Control, das zur Werteermittlung herangezogen wird
         //Es muss die IADUVTControl-Schnittstelle einbinden
         private IADEditableValueForNullableValueControl _myValueControl;
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         protected IADEditableValueForNullableValueControl myValueControl
         {
             get

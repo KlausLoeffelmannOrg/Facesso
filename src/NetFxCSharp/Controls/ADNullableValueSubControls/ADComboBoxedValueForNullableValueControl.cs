@@ -14,6 +14,7 @@ namespace ActiveDev.Controls
     internal class ADComboBoxedValueForNullableValueControl : ADEditableValueForNullableValueControlTemplate<IComparable>
     {
         private ComboBox _myComboBox;
+        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
         protected ComboBox myComboBox
         {
             get

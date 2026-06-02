@@ -35,6 +35,8 @@ namespace Facesso.Functions
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInfoItemsManagerBase));
             this.ToolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.arvInfoItems = new ActiveDev.ADAutoReportView();
+            this.arvInfoItems.ColumnClick += arvInfoItems_ColumnClick;
+            this.arvInfoItems.DoubleClick += arvInfoItems_DoubleClick;
             this.MenuStripMainMenu = new System.Windows.Forms.MenuStrip();
             this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExportToXmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +48,7 @@ namespace Facesso.Functions
             this.ItemEditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ItemDeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OKToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OKToolStripMenuItem.Click += OKToolStripMenuItem_Click;
             this.ToolStrip1 = new System.Windows.Forms.ToolStrip();
             this.ItemAddToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ItemEditToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -336,57 +339,13 @@ namespace Facesso.Functions
         internal System.Windows.Forms.ToolStripButton ItemXmlImportStripButton;
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator4;
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem _OKToolStripMenuItem;
-        internal System.Windows.Forms.ToolStripMenuItem OKToolStripMenuItem
-        {
-            get
-            {
-                return _OKToolStripMenuItem;
-            }
-
-            set
-            {
-                if (_OKToolStripMenuItem != null)
-                {
-                    _OKToolStripMenuItem.Click -= OKToolStripMenuItem_Click;
-                }
-
-                _OKToolStripMenuItem = value;
-                if (_OKToolStripMenuItem != null)
-                {
-                    _OKToolStripMenuItem.Click += OKToolStripMenuItem_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.ToolStripMenuItem OKToolStripMenuItem;
 
         protected System.Windows.Forms.MenuStrip MenuStripMainMenu;
         protected System.Windows.Forms.ToolStrip ToolStrip1;
         internal System.Windows.Forms.ToolStripLabel tslCostcenters;
         internal System.Windows.Forms.ToolStripComboBox tscCostCenters;
-        private ActiveDev.ADAutoReportView _arvInfoItems;
-        internal ActiveDev.ADAutoReportView arvInfoItems
-        {
-            get
-            {
-                return _arvInfoItems;
-            }
-
-            set
-            {
-                if (_arvInfoItems != null)
-                {
-                    _arvInfoItems.ColumnClick -= arvInfoItems_ColumnClick;
-                    _arvInfoItems.DoubleClick -= arvInfoItems_DoubleClick;
-                }
-
-                _arvInfoItems = value;
-                if (_arvInfoItems != null)
-                {
-                    _arvInfoItems.ColumnClick += arvInfoItems_ColumnClick;
-                    _arvInfoItems.DoubleClick += arvInfoItems_DoubleClick;
-                }
-            }
-        }
+        internal ActiveDev.ADAutoReportView arvInfoItems;
 
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator5;
         internal System.Windows.Forms.ToolStripButton tsbAssignCostcenter;

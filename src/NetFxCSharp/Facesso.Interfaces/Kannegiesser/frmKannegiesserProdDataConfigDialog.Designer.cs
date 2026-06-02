@@ -33,6 +33,7 @@ namespace Facesso.Interfaces
         private void InitializeComponent()
         {
             this.btnChoosePath = new System.Windows.Forms.Button();
+            this.btnChoosePath.Click += btnChoosePath_Click;
             this.Label1 = new System.Windows.Forms.Label();
             this.txtPathToDeviceData = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -96,28 +97,7 @@ namespace Facesso.Interfaces
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.Button _btnChoosePath;
-        internal System.Windows.Forms.Button btnChoosePath
-        {
-            get
-            {
-                return _btnChoosePath;
-            }
-
-            set
-            {
-                if (_btnChoosePath != null)
-                {
-                    _btnChoosePath.Click -= btnChoosePath_Click;
-                }
-
-                _btnChoosePath = value;
-                if (_btnChoosePath != null)
-                {
-                    _btnChoosePath.Click += btnChoosePath_Click;
-                }
-            }
-        }
+        internal System.Windows.Forms.Button btnChoosePath;
 
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.TextBox txtPathToDeviceData;
