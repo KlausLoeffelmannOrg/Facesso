@@ -10,137 +10,17 @@ namespace Facesso
     public partial class frmFacessoShell
     {
         private ToolStripLabel myTsDateLabel;
-        private ToolStripMonthCalender _myTsmCalender;
-
-        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
-        private ToolStripMonthCalender myTsmCalender
-        {
-            get
-            {
-                return _myTsmCalender;
-            }
-
-            set
-            {
-                if (_myTsmCalender != null)
-                {
-                    _myTsmCalender.DateChanged -= myTsmCalender_DateChanged;
-                }
-
-                _myTsmCalender = value;
-                if (_myTsmCalender != null)
-                {
-                    _myTsmCalender.DateChanged += myTsmCalender_DateChanged;
-                }
-            }
-        }
-
         private ToolStripLabel myTsShiftLabel;
         private ShiftToolStripButton[] myTsShiftButtons;
-        private ToolStripButton _myTsNextWorkday;
-
-        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
-        private ToolStripButton myTsNextWorkday
-        {
-            get
-            {
-                return _myTsNextWorkday;
-            }
-
-            set
-            {
-                if (_myTsNextWorkday != null)
-                {
-                    _myTsNextWorkday.Click -= tsbNextWorkDay_Click;
-                }
-
-                _myTsNextWorkday = value;
-                if (_myTsNextWorkday != null)
-                {
-                    _myTsNextWorkday.Click += tsbNextWorkDay_Click;
-                }
-            }
-        }
-
-        private ToolStripButton _myTsPreviousWorkday;
-        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
-        private ToolStripButton myTsPreviousWorkday
-        {
-            get
-            {
-                return _myTsPreviousWorkday;
-            }
-
-            set
-            {
-                if (_myTsPreviousWorkday != null)
-                {
-                    _myTsPreviousWorkday.Click -= tsbPrevWorkDay_Click;
-                }
-
-                _myTsPreviousWorkday = value;
-                if (_myTsPreviousWorkday != null)
-                {
-                    _myTsPreviousWorkday.Click += tsbPrevWorkDay_Click;
-                }
-            }
-        }
-
-        private ToolStripButton _myTsTodoList;
-
-        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
-        private ToolStripButton myTsTodoList
-        {
-            get
-            {
-                return _myTsTodoList;
-            }
-
-            set
-            {
-                if (_myTsTodoList != null)
-                {
-                    _myTsTodoList.Click -= tsbMyTodoList_Click;
-                }
-
-                _myTsTodoList = value;
-                if (_myTsTodoList != null)
-                {
-                    _myTsTodoList.Click += tsbMyTodoList_Click;
-                }
-            }
-        }
-
         private ToolStripSeparator myTsSeparator;
         private Font myStandardFont;
         private Font myBoldFont;
         private bool myDoNothing;
 
-        private FacessoShellWindowsControl _myWindowsControl;
-
-        // TODO(vb-convert): WithEvents member is reassigned outside InitializeComponent; re-wiring retained.
-        private FacessoShellWindowsControl myWindowsControl
-        {
-            get
-            {
-                return _myWindowsControl;
-            }
-
-            set
-            {
-                if (_myWindowsControl != null)
-                {
-                    _myWindowsControl.WindowsControlSettingsChange -= myWindowsControl_WindowsControlSettingsChange;
-                }
-
-                _myWindowsControl = value;
-
-                if (_myWindowsControl != null)
-                {
-                    _myWindowsControl.WindowsControlSettingsChange += myWindowsControl_WindowsControlSettingsChange;
-                }
-            }
-        }
+        // Where are those backing fields?
+        // See frmFacessoShell_WithEventsBackingFields.cs for the WithEvents-style backing fields and
+        // their wrapping properties (_myTsmCalender, _myTsNextWorkday, _myTsPreviousWorkday,
+        // _myTsTodoList, _myWindowsControl). They were moved there to keep this file easier to read.
 
         private EmployeeInfoItems myEmployees;
         private WorkGroupInfoItems myWorkGroups;
