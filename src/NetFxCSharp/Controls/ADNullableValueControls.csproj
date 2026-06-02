@@ -1,0 +1,81 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ActiveDev.Controls</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <AssemblyOriginatorKeyFile>ActiveDev.pfx</AssemblyOriginatorKeyFile>
+    <LangVersion>latest</LangVersion>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Accessibility" />
+    <Reference Include="System.Design" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ADNullableValueControls\ADNullableIntBoxBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ADNullableValueControls\ADNullableControlTemplate.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ADNullableValueControls\ADNullableDateTimeBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ADNullableValueControls\ADNullableDoubleBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ADNullableValueControls\ADNullableTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ADNullableValueControls\ADNullableCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ADNullableValueControls\ADNullableComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="My Project\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="My Project\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="My Project\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ActiveDev.Controls.My.Resources</CustomToolNamespace>
+      <LogicalName>ActiveDev.Controls.Resources.resources</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ActiveDev.Controls.My</CustomToolNamespace>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AppDesigner Include="My Project\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ActiveDevelop.SqlTools\ActiveDevelop.SqlTools.csproj" />
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -47,7 +47,8 @@ internal sealed class ProjectConverter
         {
             if (document.FilePath is null
                 || !document.FilePath.EndsWith(".vb", StringComparison.OrdinalIgnoreCase)
-                || IsGeneratedPath(document.FilePath))
+                || IsGeneratedPath(document.FilePath)
+                || IsMyProjectScaffoldFile(document.FilePath))
             {
                 continue;
             }
@@ -66,7 +67,19 @@ internal sealed class ProjectConverter
             }
         }
 
+        List<string> projectWarnings = [];
+        if (_options.WriteFiles)
+        {
+            EmitProjectFile(rootNamespace, projectWarnings);
+        }
+
         string report = ReportBuilder.Build(_options.ProjectPath, conversions, _options.WriteFiles);
+        if (projectWarnings.Count > 0)
+        {
+            report += Environment.NewLine + "Project-file / My-namespace notes:" + Environment.NewLine
+                + string.Join(Environment.NewLine, projectWarnings.Select(static w => "  - " + w));
+        }
+
         Console.WriteLine(report);
 
         if (_options.ReportPath is not null)
@@ -121,6 +134,56 @@ internal sealed class ProjectConverter
         string normalized = path.Replace('/', '\\');
         return normalized.Contains("\\obj\\", StringComparison.OrdinalIgnoreCase)
             || normalized.Contains("\\bin\\", StringComparison.OrdinalIgnoreCase);
+    }
+
+    /// <summary>
+    ///  Identifies the Visual Basic <c>My Project</c> files that are regenerated from canonical
+    ///  C# templates by <see cref="MyProjectScaffolder"/> rather than translated literally.
+    /// </summary>
+    private static bool IsMyProjectScaffoldFile(string path)
+    {
+        string normalized = path.Replace('/', '\\');
+        if (!normalized.Contains("\\My Project\\", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        string fileName = Path.GetFileName(normalized);
+        return fileName.Equals("MyResources.Designer.vb", StringComparison.OrdinalIgnoreCase)
+            || fileName.Equals("MySettings.Designer.vb", StringComparison.OrdinalIgnoreCase)
+            || fileName.Equals("MyApplication.Designer.vb", StringComparison.OrdinalIgnoreCase)
+            || fileName.Equals("AssemblyInfo.vb", StringComparison.OrdinalIgnoreCase);
+    }
+
+    /// <summary>
+    ///  Scaffolds the converted <c>My Project</c> folder and writes the generated SDK-style
+    ///  <c>.csproj</c> beside (or under the output mirror of) the original project.
+    /// </summary>
+    private void EmitProjectFile(string? rootNamespace, List<string> warnings)
+    {
+        string projectDir = Path.GetDirectoryName(_options.ProjectPath)!;
+        string outputProjectDir = _options.OutputDirectory ?? projectDir;
+        string root = rootNamespace ?? Path.GetFileNameWithoutExtension(_options.ProjectPath);
+
+        MyProjectResult myProject = new();
+        string sourceMyProject = Path.Combine(projectDir, "My Project");
+        if (Directory.Exists(sourceMyProject))
+        {
+            myProject = new MyProjectScaffolder(
+                sourceMyProject,
+                Path.Combine(outputProjectDir, "My Project"),
+                root,
+                warnings).Run();
+        }
+
+        string csproj = CsprojGenerator.Generate(_options.ProjectPath, root, myProject);
+        string csprojPath = Path.Combine(
+            outputProjectDir,
+            Path.GetFileNameWithoutExtension(_options.ProjectPath) + ".csproj");
+
+        Directory.CreateDirectory(outputProjectDir);
+        File.WriteAllText(csprojPath, csproj);
+        Console.Error.WriteLine($"Generated project file: {csprojPath}");
     }
 
     private static (string? RootNamespace, IReadOnlyList<string> Imports) ReadVbProjectSettings(Project project)

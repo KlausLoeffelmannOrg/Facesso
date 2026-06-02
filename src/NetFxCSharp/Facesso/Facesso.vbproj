@@ -117,7 +117,7 @@
     <ProjectReference Include="..\ADLicenceManager\ADLicenceManager.csproj" />
     <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.csproj" />
     <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
-    <ProjectReference Include="..\Controls\ADNullableValueControls.vbproj" />
+    <ProjectReference Include="..\Controls\ADNullableValueControls.csproj" />
     <ProjectReference Include="..\Facesso.Data\Facesso.Data.csproj" />
     <ProjectReference Include="..\Facesso.Functions\Facesso.Functions.vbproj" />
     <ProjectReference Include="..\Facesso.GenericControls\Facesso.GenericControls.vbproj" />
