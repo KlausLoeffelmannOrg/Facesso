@@ -74,6 +74,7 @@ internal sealed class CsprojGenerator
         AppendReferences(sb, root);
         AppendComponentCompileItems(sb, root, myProject);
         AppendMyProjectResourceItems(sb, rootNamespace, myProject);
+        AppendEntityDeployItems(sb, root);
         AppendProjectReferences(sb, root);
 
         sb.AppendLine();
@@ -193,6 +194,34 @@ internal sealed class CsprojGenerator
             sb.AppendLine("    <AppDesigner Include=\"My Project\\\" />");
             sb.AppendLine("  </ItemGroup>");
         }
+    }
+
+    // EF6 EDMX projects deploy the model metadata (csdl/ssdl/msl) via <EntityDeploy>. The original VB
+    // project regenerated FacessoModel.Designer.vb from the .edmx with the legacy VB code generator;
+    // after conversion the .Designer.cs is a normal compiled source, so carry the .edmx over for its
+    // embedded metadata only and drop the code-generator hooks.
+    private static void AppendEntityDeployItems(StringBuilder sb, XElement root)
+    {
+        List<string> edmxFiles = root
+            .Descendants(None + "EntityDeploy")
+            .Select(static e => (string?)e.Attribute("Include"))
+            .Where(static include => !string.IsNullOrEmpty(include))
+            .Select(static include => include!)
+            .ToList();
+
+        if (edmxFiles.Count == 0)
+        {
+            return;
+        }
+
+        sb.AppendLine();
+        sb.AppendLine("  <ItemGroup>");
+        foreach (string edmx in edmxFiles)
+        {
+            sb.AppendLine($"    <EntityDeploy Include=\"{edmx}\" />");
+        }
+
+        sb.AppendLine("  </ItemGroup>");
     }
 
     private static void AppendProjectReferences(StringBuilder sb, XElement root)

@@ -212,7 +212,7 @@
     <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
     <ProjectReference Include="..\Controls\ADNullableValueControls.csproj" />
     <ProjectReference Include="..\Facesso.Data\Facesso.Data.csproj" />
-    <ProjectReference Include="..\Facesso.EntityModel\Facesso.EntityModel.vbproj" />
+    <ProjectReference Include="..\Facesso.EntityModel\Facesso.EntityModel.csproj" />
     <ProjectReference Include="..\Facesso.GenericControls\Facesso.GenericControls.vbproj" />
     <ProjectReference Include="..\Facesso.Generic\Facesso.Generic.csproj" />
   </ItemGroup>
