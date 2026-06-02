@@ -1,0 +1,110 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Facesso.GenericControls</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <AssemblyOriginatorKeyFile>ActiveDev.pfx</AssemblyOriginatorKeyFile>
+    <LangVersion>latest</LangVersion>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="frmBaseFacesso.Designer.cs">
+      <DependentUpon>frmBaseFacesso.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ucAnalysisDateRangePicker.Designer.cs">
+      <DependentUpon>ucAnalysisDateRangePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ucMonthRangePicker.Designer.cs">
+      <DependentUpon>ucMonthRangePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ucEmployeePicker.Designer.cs">
+      <DependentUpon>ucEmployeePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ucTimeDetailsSettings.Designer.cs">
+      <DependentUpon>ucTimeDetailsSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ucCostCenterListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ucAnalysisDateRangePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="ucMonthRangePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="ucObjectContentDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ucTimeLogItemsDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ucEmployeeListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ucEmployeePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="ucEnumFlagListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ucLabourValueListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ucProductionDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ucTimeDetailsSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="ucWorkGroupItemDetailsView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ucWorkGroupListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="frmBaseFacesso.resx">
+      <DependentUpon>frmBaseFacesso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ucAnalysisDateRangePicker.resx">
+      <DependentUpon>ucAnalysisDateRangePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ucMonthRangePicker.resx">
+      <DependentUpon>ucMonthRangePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ucEmployeePicker.resx">
+      <DependentUpon>ucEmployeePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ucTimeDetailsSettings.resx">
+      <DependentUpon>ucTimeDetailsSettings.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ADDataTypes\ADDataTypes.csproj" />
+    <ProjectReference Include="..\ADInfoItem\ADInfoItem.csproj" />
+    <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
+    <ProjectReference Include="..\Controls\ADNullableValueControls.csproj" />
+    <ProjectReference Include="..\Facesso.Data\Facesso.Data.csproj" />
+    <ProjectReference Include="..\Facesso.Generic\Facesso.Generic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
+  </ItemGroup>
+
+</Project>

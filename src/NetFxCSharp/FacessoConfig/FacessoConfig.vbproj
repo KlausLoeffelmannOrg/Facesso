@@ -88,7 +88,7 @@
     <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.csproj" />
     <ProjectReference Include="..\ADSundries\ADSundries.csproj" />
     <ProjectReference Include="..\Facesso.Data\Facesso.Data.csproj" />
-    <ProjectReference Include="..\Facesso.GenericControls\Facesso.GenericControls.vbproj" />
+    <ProjectReference Include="..\Facesso.GenericControls\Facesso.GenericControls.csproj" />
     <ProjectReference Include="..\Facesso.Generic\Facesso.Generic.csproj" />
   </ItemGroup>
 </Project>

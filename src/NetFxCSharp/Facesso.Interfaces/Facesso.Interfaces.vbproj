@@ -160,7 +160,7 @@
     <ProjectReference Include="..\ADInfoItem\ADInfoItem.csproj" />
     <ProjectReference Include="..\ADSqlSupportComponents\ADSqlSupportComponents.csproj" />
     <ProjectReference Include="..\Facesso.Data\Facesso.Data.csproj" />
-    <ProjectReference Include="..\Facesso.GenericControls\Facesso.GenericControls.vbproj" />
+    <ProjectReference Include="..\Facesso.GenericControls\Facesso.GenericControls.csproj" />
     <ProjectReference Include="..\Facesso.Generic\Facesso.Generic.csproj" />
   </ItemGroup>
   <ItemGroup>

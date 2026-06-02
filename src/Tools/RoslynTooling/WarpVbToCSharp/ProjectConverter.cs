@@ -41,6 +41,10 @@ internal sealed class ProjectConverter
         Console.Error.WriteLine($"RootNamespace: {rootNamespace ?? "(none)"}");
         Console.Error.WriteLine($"Project-level imports: {projectImports.Count}");
 
+        IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyList<WithEventsHandler>>> projectHandlers =
+            await CollectProjectHandlersAsync(project).ConfigureAwait(false);
+        Console.Error.WriteLine($"Types with cross-file WithEvents handlers: {projectHandlers.Count}");
+
         List<FileConversion> conversions = [];
 
         foreach (Document document in project.Documents)
@@ -56,7 +60,8 @@ internal sealed class ProjectConverter
             FileConversion conversion = await ConvertDocumentAsync(
                 document,
                 rootNamespace,
-                projectImports).ConfigureAwait(false);
+                projectImports,
+                projectHandlers).ConfigureAwait(false);
 
             conversions.Add(conversion);
 
@@ -93,7 +98,8 @@ internal sealed class ProjectConverter
     private async Task<FileConversion> ConvertDocumentAsync(
         Document document,
         string? rootNamespace,
-        IReadOnlyList<string> projectImports)
+        IReadOnlyList<string> projectImports,
+        IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyList<WithEventsHandler>>> projectHandlers)
     {
         SourceText text = await document.GetTextAsync().ConfigureAwait(false);
         SemanticModel? semanticModel = await document.GetSemanticModelAsync().ConfigureAwait(false);
@@ -103,6 +109,7 @@ internal sealed class ProjectConverter
             RootNamespace = rootNamespace,
             ProjectLevelImports = projectImports,
             FileName = Path.GetFileName(document.FilePath!),
+            ProjectWithEventsHandlers = projectHandlers,
         };
 
         ConversionResult result = VisualBasicConverter.ConvertText(text.ToString(), options, semanticModel);
@@ -113,6 +120,34 @@ internal sealed class ProjectConverter
             result.CSharpText,
             result.Diagnostics,
             result.Handlers);
+    }
+
+    /// <summary>
+    ///  Pre-pass that scans every Visual Basic document in the project and builds the project-wide
+    ///  <c>WithEvents</c> handler map, so that <c>Handles</c> clauses in a main <c>.vb</c> file wire the
+    ///  fields declared in the matching <c>.Designer.vb</c> file.
+    /// </summary>
+    private static async Task<IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyList<WithEventsHandler>>>> CollectProjectHandlersAsync(
+        Project project)
+    {
+        List<SyntaxNode> roots = [];
+
+        foreach (Document document in project.Documents)
+        {
+            if (document.FilePath is null
+                || !document.FilePath.EndsWith(".vb", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            SyntaxNode? root = await document.GetSyntaxRootAsync().ConfigureAwait(false);
+            if (root is not null)
+            {
+                roots.Add(root);
+            }
+        }
+
+        return VisualBasicConverter.CollectWithEventsHandlers(roots);
     }
 
     private string DetermineOutputPath(string vbPath)
